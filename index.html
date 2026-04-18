@@ -396,11 +396,8 @@ var sudoQueue=null, sudoInputMode=false;
 var sudoAuthed=false; // true after a successful sudo password in this session
 
 /* ── PDF BASE64 ──────────────────────────────────────────────────────────── */
-// Place your base64-encoded PDF string here (without the data URI prefix).
-// Leave empty ("") to use the plain-text download fallback instead.
-var RESUME_PDF_B64 = "";
-// Example (paste your base64 after generating it):
-// var RESUME_PDF_B64 = "JVBERi0xLj...";
+// resume.pdf must be placed in the same folder as index.html
+// The viewer and download both reference it by filename directly.
 
 /* ── FILESYSTEM ──────────────────────────────────────────────────────────── */
 var FS={
@@ -681,26 +678,20 @@ function openMousepad(filename,path){
     document.getElementById("mp-content").textContent="";
   }
 }
-var currentPdfB64="";
+var currentPdfFile="resume.pdf";
 function openPdfViewer(filename){
-  if(!RESUME_PDF_B64){
-    // No base64 set — fall back to showing info in terminal
-    tLine("<span class='t-warn'>PDF viewer: no PDF loaded. Use <span class='t-cmd'>get resume.pdf</span> to download.</span>");
-    return;
-  }
-  currentPdfB64=RESUME_PDF_B64;
-  var dataUri="data:application/pdf;base64,"+RESUME_PDF_B64;
+  currentPdfFile=filename||"resume.pdf";
   var w=document.getElementById("win-pdfview"); w.style.display="flex";
-  document.getElementById("pdfview-title").textContent=filename||"resume.pdf";
-  document.getElementById("pdf-title-lbl").textContent=filename||"resume.pdf";
-  document.getElementById("pdf-iframe").src=dataUri;
+  document.getElementById("pdfview-title").textContent=currentPdfFile;
+  document.getElementById("pdf-title-lbl").textContent=currentPdfFile;
+  document.getElementById("pdf-iframe").src=currentPdfFile;
   focusWin("win-pdfview"); updateTaskbar();
 }
 function downloadCurrentPdf(){
-  if(!currentPdfB64) return;
   var a=document.createElement("a");
-  a.href="data:application/pdf;base64,"+currentPdfB64;
-  a.download="resume.pdf"; document.body.appendChild(a); a.click(); a.remove();
+  a.href=currentPdfFile;
+  a.download=currentPdfFile;
+  document.body.appendChild(a); a.click(); a.remove();
 }
 
 /* ── FILE MANAGER ─────────────────────────────────────────────────────────── */
@@ -909,20 +900,19 @@ function execCmd(raw, isSudo){
       var fg=ng&&ng.children&&ng.children[args[0]];
       if(!fg||fg.type!=="file"){ tLine("<span class='t-warn'>get: "+esc(args[0])+": No such file</span>"); break; }
       tLine("<span class='t-muted'>Downloading </span><span class='t-pdf'>"+esc(args[0])+"</span><span class='t-muted'>...</span>");
-      if(fg.isPdf&&RESUME_PDF_B64){
-        // Download as real PDF
+      if(fg.isPdf){
         var a=document.createElement("a");
-        a.href="data:application/pdf;base64,"+RESUME_PDF_B64;
-        a.download=args[0]; document.body.appendChild(a); a.click(); a.remove();
-        tLine("<span class='t-ok'>✓ Download started: "+esc(args[0])+" (PDF)</span>");
+        a.href=args[0]; a.download=args[0];
+        document.body.appendChild(a); a.click(); a.remove();
+        tLine("<span class='t-ok'>✓ Download started: "+esc(args[0])+"</span>");
       } else {
-        var content=fg.isPdf?generateResume():fg.content.map(function(l){return l.replace(/<[^>]+>/g,"")}).join("\n");
+        var content=fg.content.map(function(l){return l.replace(/<[^>]+>/g,"")}).join("\n");
         var blob=new Blob([content],{type:"text/plain"});
         var url=URL.createObjectURL(blob);
         var a2=document.createElement("a"); a2.href=url; a2.download=args[0];
         document.body.appendChild(a2); a2.click();
         setTimeout(function(){URL.revokeObjectURL(url);a2.remove();},1000);
-        tLine("<span class='t-ok'>✓ Download started: "+esc(args[0])+(fg.isPdf?" (text fallback — add PDF base64 for real PDF)":"")+"</span>");
+        tLine("<span class='t-ok'>✓ Download started: "+esc(args[0])+"</span>");
       }
       break;
     }
