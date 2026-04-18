@@ -71,6 +71,7 @@ html,body{width:100%;height:100%;overflow:hidden;font-family:'Ubuntu','Segoe UI'
 .tb-user-chip{font-family:'JetBrains Mono',monospace;font-size:12px;color:#cc3333;font-weight:600}
 .desk-body{flex:1;display:flex;overflow:hidden;position:relative}
 #desk-canvas{flex:1;position:relative;overflow:hidden;padding:16px;display:flex;flex-direction:column;align-items:flex-start;gap:6px}
+.desk-icon-pinned{position:absolute;top:16px;right:16px}
 .desk-icon{display:flex;flex-direction:column;align-items:center;gap:4px;width:72px;cursor:pointer;padding:6px 4px;border-radius:5px;transition:background .15s}
 .desk-icon:hover{background:rgba(180,0,0,.2)}
 .desk-icon.selected{background:rgba(180,0,0,.3)}
@@ -548,10 +549,10 @@ function buildDesktopIcons(){
   var home=getNode("~");
   Object.keys(home.children).forEach(function(name){
     var node=home.children[name];
+    if(node.isPdf) return; // handled separately as pinned icon
     icons.push({label:name,icon:node.icon||(node.type==="dir"?"📁":"📄"),action:(function(n,nd){
       return function(){
         if(nd.type==="dir") openFiles("~/"+n);
-        else if(nd.isPdf) openPdfViewer(n);
         else openMousepad(n,"~");
       };
     })(name,node)});
@@ -566,6 +567,15 @@ function buildDesktopIcons(){
     });
     canvas.appendChild(div);
   });
+  // Pinned resume.pdf icon — top right
+  var pin=document.createElement("div"); pin.className="desk-icon desk-icon-pinned";
+  pin.innerHTML='<div class="desk-icon-img">📋</div><div class="desk-icon-label">resume.pdf</div>';
+  pin.addEventListener("dblclick",function(){ openPdfViewer("resume.pdf"); });
+  pin.addEventListener("click",function(){
+    document.querySelectorAll(".desk-icon").forEach(function(d){d.classList.remove("selected")});
+    pin.classList.add("selected");
+  });
+  canvas.appendChild(pin);
 }
 
 /* ── WINDOW MANAGEMENT ────────────────────────────────────────────────────── */
