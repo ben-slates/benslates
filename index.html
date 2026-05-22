@@ -457,6 +457,15 @@ var FS={
       "  Use <span class='t-cmd'>get resume.pdf</span>   — download to your device",
       "  Use <span class='t-cmd'>open resume.pdf</span>  — view in browser (if PDF set)"
     ]},
+    "certs":{type:"dir",icon:"📁",isDesktop:true,children:{
+      "Getting_Started_with_Cisco_Packet_Tracer.pdf":{type:"file",icon:"📜",isPdf:true,content:[
+        "<span class='t-section'>── Getting_Started_with_Cisco_Packet_Tracer.pdf ──</span>",
+        "",
+        "  Certification: Cisco Packet Tracer",
+        "  Use <span class='t-cmd'>get Getting_Started_with_Cisco_Packet_Tracer.pdf</span>   — download",
+        "  Use <span class='t-cmd'>open Getting_Started_with_Cisco_Packet_Tracer.pdf</span>  — view in browser"
+      ]}
+    }},
     "skills":{type:"dir",icon:"📁",children:{
       "tools.txt":{type:"file",icon:"🔧",content:[
         "<span class='t-section'>── TOOLS &amp; TECHNOLOGIES ──</span>",
@@ -552,7 +561,7 @@ function buildDesktopIcons(){
   var home=getNode("~");
   Object.keys(home.children).forEach(function(name){
     var node=home.children[name];
-    if(node.isPdf) return; // handled separately as pinned icon
+    if(node.isPdf||node.isDesktop) return; // handled separately as pinned icon
     icons.push({label:name,icon:node.icon||(node.type==="dir"?"📁":"📄"),action:(function(n,nd){
       return function(){
         if(nd.type==="dir") openFiles("~/"+n);
@@ -570,7 +579,7 @@ function buildDesktopIcons(){
     });
     canvas.appendChild(div);
   });
-  // Pinned resume.pdf icon — top right
+  // Pinned icons — top right
   var pin=document.createElement("div"); pin.className="desk-icon desk-icon-pinned";
   pin.innerHTML='<div class="desk-icon-img">📋</div><div class="desk-icon-label">resume.pdf</div>';
   pin.addEventListener("dblclick",function(){ openPdfViewer("resume.pdf"); });
@@ -579,6 +588,16 @@ function buildDesktopIcons(){
     pin.classList.add("selected");
   });
   canvas.appendChild(pin);
+  // Pinned certs folder icon (below resume)
+  var pinCerts=document.createElement("div"); pinCerts.className="desk-icon desk-icon-pinned";
+  pinCerts.style.top="100px";
+  pinCerts.innerHTML='<div class="desk-icon-img">📁</div><div class="desk-icon-label">certs</div>';
+  pinCerts.addEventListener("dblclick",function(){ openFiles("~/certs"); });
+  pinCerts.addEventListener("click",function(){
+    document.querySelectorAll(".desk-icon").forEach(function(d){d.classList.remove("selected")});
+    pinCerts.classList.add("selected");
+  });
+  canvas.appendChild(pinCerts);
 }
 
 /* ── WINDOW MANAGEMENT ────────────────────────────────────────────────────── */
@@ -695,9 +714,11 @@ var currentPdfFile="resume.pdf";
 function openPdfViewer(filename){
   currentPdfFile=filename||"resume.pdf";
   var w=document.getElementById("win-pdfview"); w.style.display="flex";
-  document.getElementById("pdfview-title").textContent=currentPdfFile;
-  document.getElementById("pdf-title-lbl").textContent=currentPdfFile;
-  document.getElementById("pdf-iframe").src=currentPdfFile;
+  var displayName=currentPdfFile.split("/").pop();
+  document.getElementById("pdfview-title").textContent=displayName;
+  document.getElementById("pdf-title-lbl").textContent=displayName;
+  var filePath=currentPdfFile.replace(/^~\/?/,"");
+  document.getElementById("pdf-iframe").src=filePath;
   focusWin("win-pdfview"); updateTaskbar();
 }
 function downloadCurrentPdf(){
@@ -732,11 +753,11 @@ function renderFM(path,fromBack){
     var el=document.createElement("div"); el.className="fm-file";
     el.innerHTML='<div class="fm-file-icon">'+ic+'</div><div class="fm-file-name '+cls+'">'+name+'</div>';
     el.onclick=function(){ document.querySelectorAll(".fm-file").forEach(function(f){f.classList.remove("selected")}); el.classList.add("selected"); };
-    el.ondblclick=(function(nm,nd){ return function(){
-      if(nd.type==="dir") renderFM(path+"/"+nm);
-      else if(nd.isPdf) openPdfViewer(nm);
-      else openMousepad(nm,path);
-    };})(name,n);
+    el.ondblclick=(function(nm,nd,p){ return function(){
+      if(nd.type==="dir") renderFM(p+"/"+nm);
+      else if(nd.isPdf) openPdfViewer(p+"/"+nm);
+      else openMousepad(nm,p);
+    };})(name,n,path);
     grid.appendChild(el);
   });
 }
