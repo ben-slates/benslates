@@ -399,6 +399,33 @@ var termPath="~", termCmdBuf="", termHistory=[], termHistIdx=-1;
 var sudoQueue=null, sudoInputMode=false;
 var sudoAuthed=false; // true after a successful sudo password in this session
 
+/* ── SESSION PERSISTENCE ──────────────────────────────────────────────────── */
+function saveSession(){
+  var session={username:USERNAME,sudoPass:SUDO_PASS,termPath:termPath,termHistory:termHistory,sudoAuthed:sudoAuthed};
+  localStorage.setItem("benslates_session",JSON.stringify(session));
+}
+
+function loadSession(){
+  var saved=localStorage.getItem("benslates_session");
+  if(saved){
+    try{
+      var session=JSON.parse(saved);
+      USERNAME=session.username||"user";
+      SUDO_PASS=session.sudoPass||"toor";
+      termPath=session.termPath||"~";
+      termHistory=session.termHistory||[];
+      termHistIdx=termHistory.length;
+      sudoAuthed=session.sudoAuthed||false;
+      return true;
+    }catch(e){ return false; }
+  }
+  return false;
+}
+
+function clearSession(){
+  localStorage.removeItem("benslates_session");
+}
+
 /* ── PDF BASE64 ──────────────────────────────────────────────────────────── */
 // resume.pdf must be placed in the same folder as index.html
 // The viewer and download both reference it by filename directly.
@@ -464,6 +491,13 @@ var FS={
         "  Certification: Cisco Packet Tracer",
         "  Use <span class='t-cmd'>get Getting_Started_with_Cisco_Packet_Tracer.pdf</span>   — download",
         "  Use <span class='t-cmd'>open Getting_Started_with_Cisco_Packet_Tracer.pdf</span>  — view in browser"
+      ]},
+      "Introduction_to_Cybersecurity.pdf":{type:"file",icon:"📜",isPdf:true,content:[
+        "<span class='t-section'>── Introduction_to_Cybersecurity.pdf ──</span>",
+        "",
+        "  Certification: Introduction to Cybersecurity",
+        "  Use <span class='t-cmd'>get Introduction_to_Cybersecurity.pdf</span>   — download",
+        "  Use <span class='t-cmd'>open Introduction_to_Cybersecurity.pdf</span>  — view in browser"
       ]}
     }},
     "skills":{type:"dir",icon:"📁",children:{
@@ -502,7 +536,11 @@ function getNode(path){
 document.getElementById("login-btn").addEventListener("click",doLogin);
 document.getElementById("inp-pass").addEventListener("keydown",function(e){ if(e.key==="Enter") doLogin(); });
 document.getElementById("inp-user").addEventListener("keydown",function(e){ if(e.key==="Enter") document.getElementById("inp-pass").focus(); });
-window.addEventListener("load",function(){ document.getElementById("inp-user").focus(); });
+window.addEventListener("load",function(){
+  loadSession();
+  document.getElementById("inp-user").value=USERNAME;
+  document.getElementById("inp-user").focus();
+});
 
 function doLogin(){
   var u=document.getElementById("inp-user").value.trim()||"root";
@@ -513,12 +551,14 @@ function doLogin(){
   document.getElementById("screen-login").style.display="none";
   var desk=document.getElementById("screen-desktop");
   desk.style.display="flex"; desk.style.flexDirection="column";
+  saveSession();
   initDesktop();
   setTimeout(openTerm,300);
 }
 
 function doLogout(){
   closeAllMenus();
+  clearSession();
   document.getElementById("screen-desktop").style.display="none";
   document.getElementById("screen-login").style.display="flex";
   document.getElementById("inp-user").value="";
@@ -996,13 +1036,14 @@ var cmdDisplay=document.getElementById("term-cmd-display");
 hiddenInput.addEventListener("input",function(e){
   if(sudoInputMode){ cmdDisplay.textContent=""; return; }
   termCmdBuf=e.target.value; cmdDisplay.textContent=termCmdBuf;
-});
+  saveSession();
+});;
 
 hiddenInput.addEventListener("keydown",function(e){
   if(e.key==="Enter"){
     e.preventDefault();
     var raw=sudoInputMode?hiddenInput.value:termCmdBuf;
-    if(!sudoInputMode&&raw.trim()){ termHistory.push(raw); termHistIdx=termHistory.length; }
+    if(!sudoInputMode&&raw.trim()){ termHistory.push(raw); termHistIdx=termHistory.length; saveSession(); }
     termCmdBuf=""; hiddenInput.value=""; cmdDisplay.textContent="";
     handleTermCmd(raw);
   } else if(e.key==="ArrowUp"){
