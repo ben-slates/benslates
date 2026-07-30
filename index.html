@@ -6,29 +6,82 @@
 <title>Benslates - Cybersecurity & Projects</title>
 <meta name="description" content="Personal website of Benslates featuring cybersecurity, Linux, and projects.">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
-<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;600;700&family=Ubuntu:wght@300;400;500;700&display=swap" rel="stylesheet">
+<link rel="preload" as="image" href="wallpaper1.png">
+<link rel="preload" as="image" href="wallpaper.png">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
 <style>
+:root {
+  --bg-dark: #060202;
+  --bg-card: rgba(15, 5, 5, 0.72);
+  --bg-card-hover: rgba(220, 30, 30, 0.12);
+  --border-color: rgba(220, 30, 30, 0.22);
+  --border-color-active: rgba(220, 30, 30, 0.45);
+  --glow-accent: #ff3333;
+  --glow-green: #00ff66;
+  --glow-blue: #00ccff;
+  --glow-yellow: #ffcc00;
+  --text-primary: #f5f5f5;
+  --text-muted: rgba(245, 245, 245, 0.5);
+  --font-ui: 'Outfit', 'Segoe UI', sans-serif;
+  --font-mono: 'JetBrains Mono', 'Courier New', monospace;
+}
+
 *{box-sizing:border-box;margin:0;padding:0}
-html,body{width:100%;height:100%;overflow:hidden;font-family:'Ubuntu','Segoe UI',sans-serif}
+html,body{width:100%;height:100%;overflow:hidden;font-family:var(--font-ui);background-color:var(--bg-dark);color:var(--text-primary)}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.3);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--border-color);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--glow-accent);
+}
 
 .kali-bg{
-  background:#0d0000;
+  background: #050101;
   background-image:
-    radial-gradient(ellipse 70% 60% at 60% 40%,rgba(130,0,0,.5) 0%,transparent 70%),
-    radial-gradient(ellipse 40% 50% at 15% 70%,rgba(80,0,0,.3) 0%,transparent 60%);
+    radial-gradient(ellipse 70% 60% at 60% 40%, rgba(130, 0, 0, 0.35) 0%, transparent 70%),
+    radial-gradient(ellipse 40% 50% at 15% 70%, rgba(80, 0, 0, 0.2) 0%, transparent 60%),
+    url('wallpaper.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
   position:relative;
+  width: 100%;
+  height: 100%;
 }
+.kali-bg::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: 
+    linear-gradient(rgba(220, 30, 30, 0.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(220, 30, 30, 0.02) 1px, transparent 1px);
+  background-size: 50px 50px;
+  pointer-events: none;
+  z-index: 1;
+}
+
 .dragon-wm{
   position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
-  pointer-events:none;opacity:.07;z-index:0;
+  pointer-events:none;opacity:.05;z-index:0;
 }
 .dragon-wm svg{width:min(65vw,65vh);height:min(65vw,65vh)}
 .kali-motto{
   position:absolute;bottom:14px;left:50%;transform:translateX(-50%);
-  color:rgba(200,0,0,.22);font-size:clamp(9px,1.3vw,12px);
-  letter-spacing:.1em;white-space:nowrap;pointer-events:none;z-index:1;
-  font-family:'JetBrains Mono',monospace;
+  color:rgba(220, 30, 30, 0.28);font-size:clamp(9px,1.3vw,12px);
+  letter-spacing:.15em;white-space:nowrap;pointer-events:none;z-index:1;
+  font-family:var(--font-mono);
+  text-transform: uppercase;
 }
 
 #screen-login,#screen-desktop{position:fixed;inset:0;z-index:10}
@@ -36,102 +89,228 @@ html,body{width:100%;height:100%;overflow:hidden;font-family:'Ubuntu','Segoe UI'
 
 /* LOGIN */
 #screen-login{display:flex;flex-direction:column;align-items:center;justify-content:center}
-.login-box{position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;width:min(340px,90vw);animation:bootIn .5s ease-out}
-@keyframes bootIn{0%{opacity:0;transform:scale(.97)}60%{opacity:1;transform:scale(1.01)}100%{opacity:1;transform:scale(1)}}
-.login-logo{margin-bottom:18px;display:flex;flex-direction:column;align-items:center;gap:6px}
-.login-logo svg{width:72px;height:72px;opacity:.9}
-.login-brand{font-family:'JetBrains Mono',monospace;font-size:clamp(18px,4vw,26px);font-weight:700;color:#fff;letter-spacing:.04em;text-align:center}
-.login-brand span{color:#cc0000}
-.login-version{font-family:'JetBrains Mono',monospace;font-size:11px;color:rgba(255,255,255,.35);letter-spacing:.08em;margin-top:2px}
-.login-card{background:rgba(8,0,0,.82);border:1px solid rgba(180,0,0,.35);border-radius:6px;padding:28px 30px 24px;width:100%;backdrop-filter:blur(8px)}
-.login-avatar{width:60px;height:60px;border-radius:50%;background:rgba(180,0,0,.25);border:2px solid rgba(180,0,0,.5);display:flex;align-items:center;justify-content:center;margin:0 auto 16px;font-size:26px;color:rgba(255,255,255,.5)}
-.login-field{position:relative;margin-bottom:14px}
-.login-field label{display:block;font-size:11px;color:rgba(255,255,255,.45);font-family:'JetBrains Mono',monospace;letter-spacing:.08em;margin-bottom:5px}
-.login-field input{width:100%;background:rgba(0,0,0,.6);border:1px solid rgba(180,0,0,.3);border-radius:4px;color:#e0e0e0;font-family:'JetBrains Mono',monospace;font-size:14px;padding:9px 12px;outline:none;transition:border-color .2s;letter-spacing:.04em}
-.login-field input:focus{border-color:rgba(220,0,0,.7)}
-.login-field input::placeholder{color:rgba(255,255,255,.18)}
-#login-error{font-size:12px;color:#e74c3c;font-family:'JetBrains Mono',monospace;min-height:16px;margin-bottom:10px;text-align:center;display:none}
-.login-btn{width:100%;padding:10px;background:rgba(150,0,0,.7);border:1px solid rgba(200,0,0,.5);border-radius:4px;color:#fff;font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:600;letter-spacing:.08em;cursor:pointer;transition:background .2s}
-.login-btn:hover{background:rgba(200,0,0,.85)}
-.login-hint{margin-top:10px;font-size:11px;color:rgba(255,255,255,.2);font-family:'JetBrains Mono',monospace;text-align:center;line-height:1.7}
+.login-box{position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;width:min(350px,90vw);animation:bootIn .6s cubic-bezier(0.16, 1, 0.3, 1)}
+@keyframes bootIn{0%{opacity:0;transform:scale(.95) translateY(10px)}100%{opacity:1;transform:scale(1) translateY(0)}}
+.login-logo{margin-bottom:20px;display:flex;flex-direction:column;align-items:center;gap:8px}
+.login-logo svg{width:80px;height:80px;opacity:.95;filter:drop-shadow(0 0 10px rgba(220, 30, 30, 0.45))}
+.login-brand{font-family:var(--font-mono);font-size:clamp(20px,4.5vw,28px);font-weight:700;color:#fff;letter-spacing:.04em;text-align:center}
+.login-brand span{color:var(--glow-accent);text-shadow: 0 0 8px rgba(255, 51, 51, 0.35)}
+.login-version{font-family:var(--font-mono);font-size:11px;color:rgba(255,255,255,.45);letter-spacing:.08em;margin-top:2px}
+.login-card{
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 10px;
+  padding: 30px;
+  width: 100%;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.8), 0 0 20px rgba(220, 30, 30, 0.08);
+}
+.login-avatar{width:64px;height:64px;border-radius:50%;background:rgba(220, 30, 30, 0.12);border:1px solid var(--border-color);display:flex;align-items:center;justify-content:center;margin:0 auto 20px;font-size:28px;color:rgba(255,255,255,.8);box-shadow: 0 0 15px rgba(220,30,30,0.15)}
+.login-field{position:relative;margin-bottom:18px}
+.login-field label{display:block;font-size:11px;color:rgba(255,255,255,.45);font-family:var(--font-mono);letter-spacing:.08em;margin-bottom:6px}
+.login-field input{width:100%;background:rgba(0,0,0,.6);border:1px solid rgba(220, 30, 30, 0.35);border-radius:6px;color:#e8e8e8;font-family:var(--font-mono);font-size:14px;padding:10px 14px;outline:none;transition:border-color .25s, box-shadow .25s;letter-spacing:.04em}
+.login-field input:focus{border-color:var(--glow-accent);box-shadow: 0 0 10px rgba(255, 51, 51, 0.15)}
+.login-field input::placeholder{color:rgba(255,255,255,.22)}
+#login-error{font-size:12px;color:var(--glow-accent);font-family:var(--font-mono);min-height:16px;margin-bottom:12px;text-align:center;display:none}
+.login-btn{width:100%;padding:11px;background:rgba(180, 0, 0, 0.75);border:1px solid var(--glow-accent);border-radius:6px;color:#fff;font-family:var(--font-mono);font-size:13px;font-weight:600;letter-spacing:.08em;cursor:pointer;transition:background .2s, box-shadow .2s;text-transform:uppercase;box-shadow: 0 4px 15px rgba(220, 30, 30, 0.2)}
+.login-btn:hover:not(:disabled){background:rgba(220,0,0,.9);box-shadow: 0 4px 20px rgba(255, 51, 51, 0.35)}
+.login-btn:disabled{opacity: 0.8; cursor: wait;}
+.login-hint{margin-top:14px;font-size:11px;color:rgba(255,255,255,.3);font-family:var(--font-mono);text-align:center;line-height:1.7}
 
 /* DESKTOP */
 #screen-desktop{flex-direction:column}
-.desk-topbar{height:30px;background:rgba(15,0,0,.97);border-bottom:1px solid rgba(160,0,0,.4);display:flex;align-items:center;padding:0 8px;gap:0;flex-shrink:0;z-index:100;position:relative;font-size:13px;color:#d0d0d0;user-select:none}
-.tb-apps-btn{padding:0 10px;height:100%;display:flex;align-items:center;gap:6px;cursor:pointer;color:#cc3333;font-weight:700;font-size:12px;letter-spacing:.04em;border-right:1px solid rgba(160,0,0,.2);transition:background .15s}
-.tb-apps-btn:hover{background:rgba(180,0,0,.2)}
-.tb-apps-btn svg{width:14px;height:14px;fill:#cc3333}
+.desk-topbar{
+  height:34px;
+  background: rgba(10, 2, 2, 0.85);
+  border-bottom:1px solid var(--border-color);
+  display:flex;
+  align-items:center;
+  padding:0 12px;
+  gap:0;
+  flex-shrink:0;
+  z-index:100;
+  position:relative;
+  font-size:13px;
+  color:#e0e0e0;
+  user-select:none;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+.tb-apps-btn{
+  padding:0 12px;
+  height:100%;
+  display:flex;
+  align-items:center;
+  gap:8px;
+  cursor:pointer;
+  color:var(--glow-accent);
+  font-weight:700;
+  font-size:12px;
+  letter-spacing:.05em;
+  border-right:1px solid rgba(220, 30, 30, 0.15);
+  transition:background .15s, color .15s;
+  text-transform: uppercase;
+}
+.tb-apps-btn:hover{background:rgba(220,30,30,.15);color:#fff}
+.tb-apps-btn svg{width:14px;height:14px;fill:currentColor}
 .tb-menus{display:flex;height:100%}
-.tb-menu{padding:0 10px;height:100%;display:flex;align-items:center;cursor:pointer;font-size:12px;color:rgba(220,220,220,.8);position:relative;transition:background .15s}
-.tb-menu:hover,.tb-menu.active{background:rgba(180,0,0,.25);color:#fff}
-.tb-dropdown{display:none;position:absolute;top:30px;left:0;background:rgba(12,0,0,.98);border:1px solid rgba(160,0,0,.4);border-radius:0 0 4px 4px;min-width:160px;z-index:999;box-shadow:0 8px 24px rgba(0,0,0,.6)}
+.tb-menu{padding:0 12px;height:100%;display:flex;align-items:center;cursor:pointer;font-size:12px;color:rgba(220,220,220,.85);position:relative;transition:background .15s, color .15s}
+.tb-menu:hover,.tb-menu.active{background:rgba(220,30,30,.12);color:#fff}
+.tb-dropdown{
+  display:none;position:absolute;top:34px;left:0;
+  background:rgba(12,3,3,.96);
+  border:1px solid var(--border-color);
+  border-radius:0 0 6px 6px;
+  min-width:180px;
+  z-index:999;
+  box-shadow:0 10px 30px rgba(0,0,0,.7);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  padding: 4px 0;
+}
 .tb-menu.active .tb-dropdown{display:block}
-.tb-dd-item{padding:8px 14px;font-size:12px;color:rgba(220,220,220,.8);cursor:pointer;transition:background .1s;white-space:nowrap;font-family:'JetBrains Mono',monospace}
-.tb-dd-item:hover{background:rgba(180,0,0,.3);color:#fff}
-.tb-dd-sep{height:1px;background:rgba(160,0,0,.2);margin:3px 0}
-.tb-right{margin-left:auto;display:flex;align-items:center;gap:14px;padding-right:4px}
-.tb-clock{font-family:'JetBrains Mono',monospace;font-size:12px;color:rgba(200,200,200,.8)}
-.tb-user-chip{font-family:'JetBrains Mono',monospace;font-size:12px;color:#cc3333;font-weight:600}
+.tb-dd-item{padding:8px 16px;font-size:12px;color:rgba(220,220,220,.85);cursor:pointer;transition:background .15s, color .15s;white-space:nowrap;font-family:var(--font-mono);display:flex;align-items:center;gap:8px}
+.tb-dd-item svg {
+  width: 13px;
+  height: 13px;
+  color: var(--glow-accent);
+  opacity: 0.85;
+  transition: transform 0.15s, opacity 0.15s;
+}
+.tb-dd-item:hover svg {
+  transform: scale(1.1);
+  opacity: 1;
+  color: #fff;
+}
+.tb-dd-item:hover{background:rgba(220,30,30,.2);color:#fff}
+.tb-dd-sep{height:1px;background:rgba(220,30,30,.15);margin:4px 0}
+.tb-right{margin-left:auto;display:flex;align-items:center;gap:16px;padding-right:4px}
+.tb-clock{font-family:var(--font-mono);font-size:12px;color:rgba(220,220,220,.85)}
+.tb-user-chip{
+  font-family:var(--font-mono);font-size:11px;
+  color:var(--glow-accent);
+  font-weight:600;
+  background: rgba(220, 30, 30, 0.12);
+  border: 1px solid rgba(220, 30, 30, 0.25);
+  padding: 2px 10px;
+  border-radius: 12px;
+  letter-spacing: 0.02em;
+}
 .desk-body{flex:1;display:flex;overflow:hidden;position:relative}
-#desk-canvas{flex:1;position:relative;overflow:hidden;padding:16px;display:flex;flex-direction:column;align-items:flex-start;gap:6px}
-.desk-icon-pinned{position:absolute;top:16px;right:16px}
-.desk-icon{display:flex;flex-direction:column;align-items:center;gap:4px;width:72px;cursor:pointer;padding:6px 4px;border-radius:5px;transition:background .15s}
-.desk-icon:hover{background:rgba(180,0,0,.2)}
-.desk-icon.selected{background:rgba(180,0,0,.3)}
-.desk-icon-img{width:40px;height:40px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:22px}
-.desk-icon-label{font-size:11px;color:#ddd;text-align:center;line-height:1.3;text-shadow:0 1px 3px rgba(0,0,0,.8);word-break:break-word;max-width:68px}
+#desk-canvas{flex:1;position:relative;overflow:hidden;padding:20px;display:flex;flex-direction:column;flex-wrap:wrap;align-content:flex-start;align-items:flex-start;gap:16px}
+
+/* DESKTOP ICONS */
+.desk-icon{display:flex;flex-direction:column;align-items:center;gap:6px;width:76px;cursor:pointer;padding:8px 6px;border-radius:8px;transition:background .2s, box-shadow .2s;z-index: 2;}
+.desk-icon:hover{background:rgba(220,30,30,.12);box-shadow: 0 0 10px rgba(220, 30, 30, 0.05);}
+.desk-icon.selected{background:rgba(220,30,30,.2);border: 1px solid rgba(220, 30, 30, 0.3);padding: 7px 5px;}
+.desk-icon-img{width:46px;height:46px;display:flex;align-items:center;justify-content:center;transition: transform 0.2s ease;}
+.desk-icon:hover .desk-icon-img { transform: scale(1.06); }
+.desk-icon-label{font-size:11px;color:#eee;text-align:center;line-height:1.3;text-shadow:0 1px 4px rgba(0,0,0,.95);word-break:break-word;max-width:70px;font-family:var(--font-ui);font-weight: 500;}
+.desk-icon-pinned{position:absolute;right:24px}
+.desk-icon-pinned:nth-of-type(1) { top: 24px; }
+.desk-icon-pinned:nth-of-type(2) { top: 120px; }
 
 /* WINDOWS */
-.win{position:absolute;background:rgba(8,2,2,.96);border:1px solid rgba(160,0,0,.4);border-radius:7px;box-shadow:0 8px 40px rgba(0,0,0,.8);display:flex;flex-direction:column;overflow:hidden;min-width:280px;min-height:200px}
-.win.focused{box-shadow:0 12px 50px rgba(0,0,0,.9),0 0 0 1px rgba(180,0,0,.3)}
-.win-header{background:rgba(18,0,0,.97);border-bottom:1px solid rgba(140,0,0,.35);padding:8px 12px;display:flex;align-items:center;gap:8px;cursor:grab;flex-shrink:0;user-select:none}
+.win{
+  position:absolute;
+  background: rgba(8, 2, 2, 0.88);
+  border: 1px solid var(--border-color);
+  border-radius: 10px;
+  box-shadow: 0 15px 45px rgba(0,0,0,.85), 0 0 25px rgba(220, 30, 30, 0.04);
+  display:flex;
+  flex-direction:column;
+  overflow:hidden;
+  min-width:300px;
+  min-height:220px;
+  z-index: 20;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  transition: opacity 0.2s cubic-bezier(0.16, 1, 0.3, 1), transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.win.focused{
+  border-color: var(--border-color-active);
+  box-shadow: 0 20px 55px rgba(0,0,0,.92), 0 0 30px rgba(220, 30, 30, 0.12);
+}
+.win.dragging {
+  transition: none !important;
+}
+.win-header{
+  background: rgba(22, 6, 6, 0.95);
+  border-bottom: 1px solid rgba(220, 30, 30, 0.2);
+  padding:10px 14px;
+  display:flex;
+  align-items:center;
+  gap:10px;
+  cursor:grab;
+  flex-shrink:0;
+  user-select:none;
+}
 .win-header:active{cursor:grabbing}
-.tl-group{display:flex;gap:6px;flex-shrink:0}
-.tl{width:12px;height:12px;border-radius:50%;cursor:pointer;transition:filter .15s;flex-shrink:0}
-.tl:hover{filter:brightness(1.4)}
-.tl.c{background:#e74c3c}.tl.m{background:#f1c40f}.tl.x{background:#2ecc71}
-.win-title{flex:1;text-align:center;font-family:'JetBrains Mono',monospace;font-size:11px;color:rgba(180,180,180,.7)}
-.win-title .wt-user{color:#2ecc71}.win-title .wt-path{color:#f1c40f}
+.tl-group{display:flex;gap:7px;flex-shrink:0}
+.tl{width:12px;height:12px;border-radius:50%;cursor:pointer;transition:transform .15s;flex-shrink:0;display:flex;align-items:center;justify-content:center;position:relative;}
+.tl:hover{transform: scale(1.15)}
+.tl.c{background:#ff5f56}
+.tl.m{background:#ffbd2e}
+.tl.x{background:#27c93f}
+.tl::after {
+  content: ''; font-size: 8px; font-weight: bold; opacity: 0; transition: opacity 0.15s ease; color: rgba(0,0,0,0.65);
+}
+.tl-group:hover .tl::after { opacity: 1; }
+.tl.c::after { content: '×'; }
+.tl.m::after { content: '−'; }
+.tl.x::after { content: '⤢'; font-size: 6px; }
 
-/* TERMINAL - improved layout */
+.win-title{flex:1;text-align:center;font-family:var(--font-mono);font-size:11px;color:rgba(200,200,200,.7);letter-spacing: 0.02em;}
+.win-title .wt-user{color:var(--glow-green)}.win-title .wt-path{color:var(--glow-yellow)}
+
+/* TERMINAL */
 #win-term{display:none;flex-direction:column}
 #win-term .win-body{
   flex:1;
   overflow-y:auto;
   overflow-x:hidden;
-  padding:10px 14px 4px;
+  padding:14px 16px 6px;
   scrollbar-width:thin;
-  scrollbar-color:rgba(160,0,0,.4) transparent;
-  font-family:'JetBrains Mono',monospace;
-  font-size:clamp(11px,1.5vw,13px);
-  line-height:1.6;
-  background:rgba(5,1,1,.98);
+  scrollbar-color:rgba(220,30,30,.3) transparent;
+  font-family:var(--font-mono);
+  font-size:clamp(11px, 1.4vw, 13px);
+  line-height:1.65;
+  background: url('wallpaper1.png') no-repeat center center / 100% 100%;
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: smooth;
+  position: relative;
 }
-#win-term .win-body::-webkit-scrollbar{width:4px}
-#win-term .win-body::-webkit-scrollbar-thumb{background:rgba(160,0,0,.4);border-radius:3px}
-.tline{line-height:1.65;white-space:pre-wrap;word-break:break-word;margin-bottom:0}
-.tgap{margin-bottom:4px}
-.t-user{color:#2ecc71;font-weight:700}.t-at{color:#555}.t-host{color:#2ecc71;font-weight:700}.t-colon{color:#444}.t-path{color:#f1c40f;font-weight:600}.t-dollar{color:#888}
-.t-dir{color:#5bc8f5;font-weight:600}.t-pdf{color:#ff9a5c;font-weight:600}.t-file{color:#f0f0f0}
-.t-cmd{color:#5bc8f5}.t-warn{color:#e74c3c}.t-ok{color:#2ecc71}.t-muted{color:#555}.t-red{color:#cc2200}.t-sudo{color:#f1c40f}
-.t-section{color:#cc3333;font-weight:700;letter-spacing:.05em}
-.t-key{color:#aaa}.t-val{color:#f0f0f0}
-#win-term .win-body{color:#f0f0f0}
+.term-scanlines {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.15) 50%);
+  background-size: 100% 4px;
+  z-index: 5;
+  pointer-events: none;
+}
+.tline{line-height:1.65;white-space:pre-wrap;word-break:break-word;margin-bottom:2px}
+.tgap{margin-bottom:6px}
+.t-user{color:var(--glow-green);font-weight:700}.t-at{color:#777}.t-host{color:var(--glow-green);font-weight:700}.t-colon{color:#555}.t-path{color:var(--glow-yellow);font-weight:600}.t-dollar{color:#aaa}
+.t-dir{color:var(--glow-blue);font-weight:600}.t-pdf{color:#ff9a5c;font-weight:600}.t-file{color:#f0f0f0}
+.t-cmd{color:var(--glow-blue);font-weight: 600}.t-warn{color:#ff5f56}.t-ok{color:var(--glow-green)}.t-muted{color:#666}.t-red{color:var(--glow-accent)}.t-sudo{color:var(--glow-yellow)}
+.t-section{color:var(--glow-accent);font-weight:700;letter-spacing:.05em}
+.t-key{color:#b0b0b0}.t-val{color:#f5f5f5}
+#win-term .win-body{color:#f0f0f0;text-shadow: 0 1px 4px rgba(0,0,0,0.9);}
 
-/* Improved terminal input line */
 #term-input-line{
   display:flex;
   align-items:center;
   flex-shrink:0;
-  padding:4px 14px 8px;
-  font-family:'JetBrains Mono',monospace;
-  font-size:clamp(11px,1.5vw,13px);
+  padding:6px 16px 12px;
+  font-family:var(--font-mono);
+  font-size:clamp(11px, 1.4vw, 13px);
   line-height:1.65;
-  background:rgba(5,1,1,.98);
-  border-top:1px solid rgba(80,0,0,.3);
+  background:rgba(4, 1, 1, 0.98);
+  border-top:1px solid rgba(220,30,30,.15);
 }
 #term-cmd-display{
-  color:#d1d1d1;
+  color:#e0e0e0;
   margin-left:2px;
   white-space:pre;
   flex:1;
@@ -139,63 +318,367 @@ html,body{width:100%;height:100%;overflow:hidden;font-family:'Ubuntu','Segoe UI'
 #term-cursor{
   display:inline-block;
   width:7px;
-  height:1em;
-  background:#2ecc71;
+  height:1.15em;
+  background:var(--glow-green);
   margin-left:1px;
   vertical-align:middle;
   animation:blink 1.1s step-end infinite;
   flex-shrink:0;
+  box-shadow: 0 0 6px var(--glow-green);
 }
 @keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
 
 /* FILE MANAGER */
 #win-files .win-body{flex:1;display:flex;flex-direction:column;overflow:hidden}
-.fm-toolbar{background:rgba(20,0,0,.8);border-bottom:1px solid rgba(140,0,0,.25);padding:6px 10px;display:flex;align-items:center;gap:6px;flex-shrink:0}
-.fm-nav-btn{background:none;border:1px solid rgba(140,0,0,.3);border-radius:3px;color:#aaa;font-size:14px;width:24px;height:24px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .15s;padding:0}
-.fm-nav-btn:hover{background:rgba(180,0,0,.3);color:#fff}
-.fm-path-bar{flex:1;background:rgba(0,0,0,.4);border:1px solid rgba(140,0,0,.25);border-radius:3px;padding:3px 8px;font-family:'JetBrains Mono',monospace;font-size:11px;color:#f1c40f}
+.fm-toolbar{background:rgba(24,6,6,.85);border-bottom:1px solid rgba(220, 30, 30, 0.15);padding:8px 12px;display:flex;align-items:center;gap:8px;flex-shrink:0}
+.fm-nav-btn{background:none;border:1px solid var(--border-color);border-radius:4px;color:#bbb;font-size:13px;width:26px;height:26px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .15s, color .15s;padding:0}
+.fm-nav-btn:hover{background:rgba(220,30,30,.2);color:#fff;border-color:var(--glow-accent)}
+.fm-path-bar{flex:1;background:rgba(0,0,0,.5);border:1px solid var(--border-color);border-radius:4px;padding:4px 10px;font-family:var(--font-mono);font-size:11px;color:var(--glow-yellow)}
 .fm-pane{flex:1;display:flex;overflow:hidden}
-.fm-sidebar{width:120px;background:rgba(12,0,0,.6);border-right:1px solid rgba(140,0,0,.2);padding:8px 0;overflow-y:auto;flex-shrink:0}
-.fm-side-item{padding:6px 12px;font-size:11px;color:rgba(200,200,200,.6);cursor:pointer;transition:background .1s;display:flex;align-items:center;gap:6px;font-family:'JetBrains Mono',monospace}
-.fm-side-item:hover,.fm-side-item.active{background:rgba(180,0,0,.25);color:#ddd}
-.fm-side-icon{font-size:13px}
-.fm-grid{flex:1;padding:10px;overflow-y:auto;display:flex;flex-wrap:wrap;align-content:flex-start;gap:4px}
-.fm-file{display:flex;flex-direction:column;align-items:center;gap:3px;width:70px;padding:8px 4px 6px;cursor:pointer;border-radius:4px;transition:background .15s}
-.fm-file:hover{background:rgba(180,0,0,.2)}
-.fm-file.selected{background:rgba(180,0,0,.35)}
-.fm-file-icon{font-size:28px;line-height:1}
-.fm-file-name{font-size:10px;color:#ccc;text-align:center;line-height:1.3;word-break:break-word;max-width:66px;font-family:'JetBrains Mono',monospace}
-.fm-file-name.is-dir{color:#5bc8f5}.fm-file-name.is-pdf{color:#ff9a5c}
+.fm-sidebar{width:130px;background:rgba(12,3,3,.75);border-right:1px solid rgba(220, 30, 30, 0.15);padding:10px 0;overflow-y:auto;flex-shrink:0}
+.fm-side-item{padding:8px 14px;font-size:11px;color:rgba(220,220,220,.7);cursor:pointer;transition:background .15s, color .15s;display:flex;align-items:center;gap:8px;font-family:var(--font-ui);font-weight: 500;}
+.fm-side-item:hover,.fm-side-item.active{background:rgba(220,30,30,.18);color:#fff}
+.fm-side-icon {
+  width: 14px;
+  height: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.fm-side-icon svg { width: 14px; height: 14px; }
+.fm-grid{flex:1;padding:12px;overflow-y:auto;display:flex;flex-wrap:wrap;align-content:flex-start;gap:6px}
+.fm-file{display:flex;flex-direction:column;align-items:center;gap:4px;width:76px;padding:8px 6px 6px;cursor:pointer;border-radius:6px;transition:background .15s}
+.fm-file:hover{background:rgba(220,30,30,.12)}
+.fm-file.selected{background:rgba(220,30,30,.22);border: 1px solid rgba(220, 30, 30, 0.25)}
+.fm-file-icon{width:36px;height:36px;display:flex;align-items:center;justify-content:center}
+.fm-file-icon svg{width:32px;height:32px}
+.fm-file-name{font-size:10px;color:#ddd;text-align:center;line-height:1.3;word-break:break-word;max-width:70px;font-family:var(--font-mono)}
+.fm-file-name.is-dir{color:#fff;font-weight:600}.fm-file-name.is-pdf{color:#ffaa88}
 
 /* MOUSEPAD */
 #win-mousepad .win-body{flex:1;display:flex;flex-direction:column;overflow:hidden}
-.mp-toolbar{background:rgba(20,0,0,.8);border-bottom:1px solid rgba(140,0,0,.25);padding:4px 8px;display:flex;gap:6px;flex-shrink:0;align-items:center}
-.mp-tb-btn{background:none;border:1px solid rgba(140,0,0,.3);border-radius:3px;color:#aaa;font-size:11px;padding:3px 8px;cursor:pointer;font-family:'JetBrains Mono',monospace;transition:background .15s}
-.mp-tb-btn:hover{background:rgba(180,0,0,.3);color:#fff}
-.mp-filename{font-family:'JetBrains Mono',monospace;font-size:11px;color:rgba(200,200,200,.5);margin-left:4px}
-#mp-content{flex:1;background:rgba(5,0,0,.9);color:#d1d1d1;font-family:'JetBrains Mono',monospace;font-size:12px;padding:12px;overflow-y:auto;line-height:1.7;border:none;outline:none;resize:none;white-space:pre-wrap;word-break:break-word}
+.mp-toolbar{background:rgba(24,6,6,.85);border-bottom:1px solid rgba(220, 30, 30, 0.15);padding:6px 12px;display:flex;gap:8px;flex-shrink:0;align-items:center}
+.mp-tb-btn{background:none;border:1px solid var(--border-color);border-radius:4px;color:#bbb;font-size:11px;padding:4px 10px;cursor:pointer;font-family:var(--font-mono);transition:background .15s, color .15s}
+.mp-tb-btn:hover{background:rgba(220,30,30,.2);color:#fff;border-color:var(--glow-accent)}
+.mp-filename{font-family:var(--font-mono);font-size:11px;color:rgba(220,220,220,.5);margin-left:6px}
+#mp-content{flex:1;background:rgba(5,1,1,.95);color:#dcdcdc;font-family:var(--font-mono);font-size:12.5px;padding:14px;overflow-y:auto;line-height:1.75;border:none;outline:none;resize:none;white-space:pre-wrap;word-break:break-word}
 
-.resize-handle{position:absolute;right:0;bottom:0;width:14px;height:14px;cursor:se-resize;z-index:10;opacity:.4}
-.resize-handle::after{content:'';display:block;width:8px;height:8px;border-right:2px solid #cc2200;border-bottom:2px solid #cc2200;margin:3px}
+.resize-handle{position:absolute;right:0;bottom:0;width:14px;height:14px;cursor:se-resize;z-index:10;opacity:.5;transition: opacity 0.2s;}
+.resize-handle:hover{opacity: 1;}
+.resize-handle::after{content:'';display:block;width:8px;height:8px;border-right:2px solid var(--glow-accent);border-bottom:2px solid var(--glow-accent);margin:3px}
 
-.desk-taskbar{height:34px;background:rgba(10,0,0,.97);border-top:1px solid rgba(160,0,0,.35);display:flex;align-items:center;padding:0 6px;gap:4px;flex-shrink:0;z-index:50}
-.tb-task{padding:0 10px;height:24px;border-radius:3px;font-size:11px;background:rgba(180,0,0,.25);border:1px solid rgba(160,0,0,.35);color:#ccc;cursor:pointer;display:flex;align-items:center;gap:5px;font-family:'JetBrains Mono',monospace;transition:background .15s;white-space:nowrap}
-.tb-task:hover{background:rgba(180,0,0,.45)}
-.tb-task.active{background:rgba(180,0,0,.5);border-color:rgba(220,0,0,.5);color:#fff}
-.tb-task-icon{font-size:13px}
+/* DOCK / TASKBAR */
+.desk-taskbar{
+  height:44px;
+  background: rgba(12, 3, 3, 0.85);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  display:flex;
+  align-items:center;
+  justify-content: center;
+  padding:0 8px;
+  gap:8px;
+  flex-shrink:0;
+  z-index:50;
+  margin: 0 auto 12px;
+  width: max-content;
+  max-width: 90vw;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.6), 0 0 15px rgba(220, 30, 30, 0.05);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+.tb-task{
+  padding:0 12px;
+  height:32px;
+  border-radius:6px;
+  font-size:11.5px;
+  background:rgba(220, 30, 30, 0.08);
+  border:1px solid rgba(220, 30, 30, 0.15);
+  color:#ccc;
+  cursor:pointer;
+  display:flex;
+  align-items:center;
+  gap:8px;
+  font-family:var(--font-ui);
+  font-weight: 500;
+  transition:background .2s, border-color .2s, color .2s, transform 0.15s;
+  white-space:nowrap;
+}
+.tb-task:hover{background:rgba(220, 30, 30, 0.18);color:#fff;transform: translateY(-1px);}
+.tb-task.active{background:rgba(220,30,30,.25);border-color:var(--glow-accent);color:#fff;box-shadow: 0 0 8px rgba(220, 30, 30, 0.15);}
+.tb-task-icon{display:flex;align-items:center;justify-content:center;width:14px;height:14px}
+/* ── TERMINAL TITLE BAR ─────────────────────────────────────────────────── */
+/* Title bar always visible */
+#wh-term { display: flex !important; }
+/* All 3 traffic-light buttons always visible in all states */
+#win-term .tl.c,
+#win-term .tl.m,
+#win-term .tl.x { visibility: visible !important; opacity: 1 !important; pointer-events: auto !important; }
+/* Maximized: borderless full-screen */
+#win-term[data-maximized="1"] { border: none !important; box-shadow: none !important; }
 
 #hidden-input{position:fixed;left:-9999px;opacity:0;font-size:16px}
-#mob-kb{display:none;position:fixed;bottom:12px;right:12px;z-index:999;background:rgba(180,0,0,.85);color:#fff;border:none;border-radius:50%;width:44px;height:44px;font-size:20px;cursor:pointer;align-items:center;justify-content:center;box-shadow:0 4px 16px rgba(0,0,0,.5)}
-@media(max-width:650px){#mob-kb{display:flex}.win{border-radius:0!important}}
+#mob-kb{display:none;position:fixed;bottom:16px;right:16px;z-index:999;background:rgba(220,30,30,.85);color:#fff;border:none;border-radius:50%;width:44px;height:44px;font-size:20px;cursor:pointer;align-items:center;justify-content:center;box-shadow:0 4px 16px rgba(0,0,0,.5);transition: transform 0.2s;}
+#mob-kb:hover{transform: scale(1.1);}
+@media(max-width:768px){
+  .desktop-widget {
+    display: none !important;
+  }
+  #desk-canvas {
+    display: grid !important;
+    grid-template-columns: repeat(auto-fill, minmax(76px, 1fr)) !important;
+    grid-auto-rows: max-content !important;
+    gap: 16px !important;
+    justify-items: center !important;
+    align-content: start !important;
+    overflow-y: auto !important;
+  }
+  .desk-icon-pinned {
+    position: static !important;
+    top: auto !important;
+    right: auto !important;
+  }
+}
+@media(max-width:650px){
+  #mob-kb{display:flex}
+  .win {
+    width: 100% !important;
+    height: calc(100% - 34px - 56px) !important;
+    top: 34px !important;
+    left: 0 !important;
+    transform: none !important;
+    border: none !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+  }
+  .win-header {
+    cursor: default !important;
+  }
+  .resize-handle {
+    display: none !important;
+  }
+}
 
 /* PDF viewer */
 #win-pdfview{display:none;flex-direction:column}
-#win-pdfview .win-body{flex:1;display:flex;flex-direction:column;overflow:hidden;background:#1a0000}
+
+/* ABOUT WINDOW */
+#win-about{display:none;flex-direction:column}
+#win-about .win-body{
+  flex:1; overflow-y:auto; padding:28px 32px;
+  background:rgba(8,2,2,0.97);
+  display:flex; flex-direction:column; align-items:center; gap:0;
+}
+.about-logo{
+  width:72px; height:72px; margin-bottom:18px;
+  background: radial-gradient(circle, rgba(220,30,30,0.25) 0%, transparent 70%);
+  border: 1.5px solid rgba(220,30,30,0.35);
+  border-radius:50%; display:flex; align-items:center; justify-content:center;
+  box-shadow: 0 0 24px rgba(220,30,30,0.18);
+}
+.about-os-name{
+  font-family:var(--font-ui); font-size:22px; font-weight:700;
+  color:#fff; letter-spacing:0.04em; margin-bottom:4px;
+}
+.about-os-sub{
+  font-family:var(--font-mono); font-size:12px; color:var(--glow-accent);
+  margin-bottom:22px; letter-spacing:0.08em;
+}
+.about-divider{
+  width:100%; height:1px;
+  background:linear-gradient(90deg,transparent,rgba(220,30,30,0.4),transparent);
+  margin-bottom:22px;
+}
+.about-rows{ width:100%; display:flex; flex-direction:column; gap:10px; }
+.about-row{
+  display:flex; justify-content:space-between; align-items:center;
+  font-family:var(--font-mono); font-size:12px;
+  padding:8px 14px; border-radius:6px;
+  background:rgba(220,30,30,0.05); border:1px solid rgba(220,30,30,0.1);
+}
+.about-row-key{ color:rgba(200,200,200,0.6); }
+.about-row-val{ color:#f0f0f0; font-weight:600; }
+.about-footer{
+  margin-top:24px; font-family:var(--font-mono); font-size:10px;
+  color:rgba(150,150,150,0.5); text-align:center;
+}
+#win-pdfview .win-body{flex:1;display:flex;flex-direction:column;overflow:hidden;background:#140101}
 #pdf-iframe{flex:1;border:none;width:100%;height:100%;background:#fff}
-.pdf-toolbar{background:rgba(20,0,0,.9);border-bottom:1px solid rgba(140,0,0,.25);padding:5px 10px;display:flex;gap:8px;flex-shrink:0;align-items:center}
-.pdf-tb-btn{background:none;border:1px solid rgba(140,0,0,.4);border-radius:3px;color:#aaa;font-size:11px;padding:3px 10px;cursor:pointer;font-family:'JetBrains Mono',monospace;transition:background .15s}
-.pdf-tb-btn:hover{background:rgba(180,0,0,.35);color:#fff}
-#pdf-title-lbl{font-family:'JetBrains Mono',monospace;font-size:11px;color:rgba(200,200,200,.5);margin-left:4px}
+.pdf-toolbar{background:rgba(24,6,6,.92);border-bottom:1px solid rgba(220, 30, 30, 0.15);padding:6px 12px;display:flex;gap:10px;flex-shrink:0;align-items:center}
+.pdf-tb-btn{background:none;border:1px solid var(--border-color);border-radius:4px;color:#bbb;font-size:11px;padding:4px 12px;cursor:pointer;font-family:var(--font-mono);transition:background .15s, color .15s}
+.pdf-tb-btn:hover{background:rgba(220,30,30,.22);color:#fff;border-color:var(--glow-accent)}
+#pdf-title-lbl{font-family:var(--font-mono);font-size:11px;color:rgba(220,220,220,.5);margin-left:6px}
+
+/* SYSTEM HUD WIDGET */
+.desktop-widget {
+  position: absolute;
+  top: 54px;
+  right: 24px;
+  width: 230px;
+  background: rgba(10, 2, 2, 0.45);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(220, 30, 30, 0.12);
+  border-radius: 8px;
+  padding: 14px;
+  color: rgba(230, 230, 230, 0.85);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  pointer-events: none;
+  z-index: 1;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+  animation: widgetFadeIn 0.8s ease-out;
+}
+@keyframes widgetFadeIn { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
+.widget-title {
+  font-family: var(--font-ui);
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--glow-accent);
+  margin-bottom: 10px;
+  border-bottom: 1px solid rgba(220, 30, 30, 0.2);
+  padding-bottom: 4px;
+  letter-spacing: 0.05em;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.widget-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 6px;
+}
+.widget-label { color: rgba(255,255,255,0.45); }
+.widget-value { color: #fff; font-weight: 500; }
+.widget-bar {
+  height: 4px;
+  background: rgba(255,255,255,0.08);
+  border-radius: 2px;
+  margin-top: 3px;
+  overflow: hidden;
+}
+.widget-bar-fill {
+  height: 100%;
+  background: var(--glow-accent);
+  width: 15%;
+  box-shadow: 0 0 6px var(--glow-accent);
+  transition: width 0.8s ease;
+}
+
+/* APPLICATIONS MENU LAUNCHER */
+#app-launcher {
+  display: none;
+  position: absolute;
+  top: 34px;
+  left: 12px;
+  width: 320px;
+  background: rgba(10, 2, 2, 0.96);
+  backdrop-filter: blur(25px);
+  -webkit-backdrop-filter: blur(25px);
+  border: 1px solid var(--border-color);
+  border-radius: 0 0 8px 8px;
+  z-index: 9999;
+  box-shadow: 0 15px 40px rgba(0,0,0,0.85), 0 0 20px rgba(220,30,30,0.1);
+  padding: 16px;
+  font-family: var(--font-ui);
+  animation: launcherSlideDown 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+}
+@keyframes launcherSlideDown {
+  from { opacity: 0; transform: translateY(-8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.launcher-search {
+  width: 100%;
+  background: rgba(0,0,0,0.4);
+  border: 1px solid rgba(220,30,30,0.22);
+  border-radius: 6px;
+  color: #fff;
+  padding: 8px 12px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  margin-bottom: 14px;
+  outline: none;
+  transition: border-color 0.2s;
+}
+.launcher-search:focus {
+  border-color: var(--glow-accent);
+}
+.launcher-sec-title {
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.4);
+  margin-bottom: 6px;
+  letter-spacing: 0.05em;
+  border-bottom: 1px solid rgba(220,30,30,0.1);
+  padding-bottom: 2px;
+}
+.launcher-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px;
+  margin-bottom: 14px;
+}
+.launcher-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.15s, transform 0.1s;
+}
+.launcher-item:hover {
+  background: rgba(220,30,30,0.15);
+  transform: translateX(2px);
+}
+.launcher-item-icon {
+  width: 16px;
+  height: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.launcher-item-icon svg {
+  width: 16px;
+  height: 16px;
+}
+.launcher-item-label {
+  font-size: 12px;
+  color: #ddd;
+  font-weight: 500;
+}
+.launcher-profile {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border-top: 1px solid rgba(220,30,30,0.15);
+  padding-top: 12px;
+  margin-top: 8px;
+}
+.launcher-avatar {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: rgba(220,30,30,0.12);
+  border: 1px solid rgba(220,30,30,0.25);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.launcher-profile-info {
+  display: flex;
+  flex-direction: column;
+}
+.launcher-profile-name {
+  font-size: 12.5px;
+  font-weight: 600;
+  color: #fff;
+}
+.launcher-profile-role {
+  font-size: 10px;
+  color: rgba(255,255,255,0.4);
+}
 </style>
 </head>
 <body>
@@ -225,7 +708,9 @@ html,body{width:100%;height:100%;overflow:hidden;font-family:'Ubuntu','Segoe UI'
       <div class="login-version">Kali GNU/Linux Rolling — kernel 6.11.2-amd64</div>
     </div>
     <div class="login-card">
-      <div class="login-avatar">🐉</div>
+      <div class="login-avatar">
+        <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: var(--glow-accent);"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      </div>
       <div class="login-field">
         <label>USERNAME</label>
         <input id="inp-user" type="text" placeholder="root" autocomplete="off" autocorrect="off" autocapitalize="none" spellcheck="false">
@@ -261,24 +746,48 @@ html,body{width:100%;height:100%;overflow:hidden;font-family:'Ubuntu','Segoe UI'
     <div class="tb-menus">
       <div class="tb-menu" data-menu="places">Places
         <div class="tb-dropdown">
-          <div class="tb-dd-item" onclick="openFiles('~')">🏠 Home Folder</div>
-          <div class="tb-dd-item" onclick="openFiles('~/skills')">📁 skills</div>
+          <div class="tb-dd-item" onclick="openFiles('~')">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+            <span>Home Folder</span>
+          </div>
+          <div class="tb-dd-item" onclick="openFiles('~/skills')">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
+            <span>skills</span>
+          </div>
           <div class="tb-dd-sep"></div>
-          <div class="tb-dd-item" onclick="closeAllMenus();openTerm()">💻 Open Terminal</div>
+          <div class="tb-dd-item" onclick="closeAllMenus();openTerm()">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="18" rx="2" ry="2"/><path d="M8 11l3 3-3 3"/></svg>
+            <span>Open Terminal</span>
+          </div>
         </div>
       </div>
       <div class="tb-menu" data-menu="tools">Tools
         <div class="tb-dropdown">
-          <div class="tb-dd-item" onclick="closeAllMenus();openTerm()">💻 Terminal</div>
-          <div class="tb-dd-item" onclick="openFiles('~')">📁 File Manager</div>
-          <div class="tb-dd-item" onclick="closeAllMenus();openMousepad(null,null)">📝 Mousepad</div>
+          <div class="tb-dd-item" onclick="closeAllMenus();openTerm()">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="18" rx="2" ry="2"/><path d="M8 11l3 3-3 3"/></svg>
+            <span>Terminal</span>
+          </div>
+          <div class="tb-dd-item" onclick="openFiles('~')">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
+            <span>File Manager</span>
+          </div>
+          <div class="tb-dd-item" onclick="closeAllMenus();openMousepad(null,null)">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 1 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+            <span>Mousepad</span>
+          </div>
         </div>
       </div>
       <div class="tb-menu" data-menu="sys">System
         <div class="tb-dropdown">
-          <div class="tb-dd-item" onclick="closeAllMenus();showAbout()">ℹ️ About</div>
+          <div class="tb-dd-item" onclick="closeAllMenus();showAbout()">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+            <span>About</span>
+          </div>
           <div class="tb-dd-sep"></div>
-          <div class="tb-dd-item" onclick="doLogout()">⏻ Log Out</div>
+          <div class="tb-dd-item" onclick="doLogout()">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18.36 6.64a9 9 0 1 1-12.73 0"/><line x1="12" y1="2" x2="12" y2="12"/></svg>
+            <span>Log Out</span>
+          </div>
         </div>
       </div>
     </div>
@@ -286,6 +795,69 @@ html,body{width:100%;height:100%;overflow:hidden;font-family:'Ubuntu','Segoe UI'
       <div class="tb-clock" id="tb-clock">--:--</div>
       <div class="tb-user-chip" id="tb-username">user@kali</div>
     </div>
+  </div>
+
+  <!-- APPLICATIONS LAUNCHER HUD -->
+  <div id="app-launcher">
+    <input type="text" class="launcher-search" id="launcher-search-input" placeholder="Search applications or documents..." autocomplete="off">
+    
+    <div class="launcher-sec-title">Core Applications</div>
+    <div class="launcher-grid">
+      <div class="launcher-item" onclick="openLauncherApp('term')">
+        <div class="launcher-item-icon" id="icon-l-term"></div>
+        <div class="launcher-item-label">Terminal</div>
+      </div>
+      <div class="launcher-item" onclick="openLauncherApp('files')">
+        <div class="launcher-item-icon" id="icon-l-files"></div>
+        <div class="launcher-item-label">File Manager</div>
+      </div>
+      <div class="launcher-item" onclick="openLauncherApp('mousepad')">
+        <div class="launcher-item-icon" id="icon-l-editor"></div>
+        <div class="launcher-item-label">Mousepad Editor</div>
+      </div>
+      <div class="launcher-item" onclick="openLauncherApp('resume')">
+        <div class="launcher-item-icon" id="icon-l-resume"></div>
+        <div class="launcher-item-label">My Resume</div>
+      </div>
+    </div>
+
+    <div class="launcher-sec-title">Quick Places</div>
+    <div class="launcher-grid" style="margin-bottom: 0;">
+      <div class="launcher-item" onclick="openLauncherApp('certs')">
+        <div class="launcher-item-icon" id="icon-l-certs"></div>
+        <div class="launcher-item-label">Certificates</div>
+      </div>
+      <div class="launcher-item" onclick="openLauncherApp('skills')">
+        <div class="launcher-item-icon" id="icon-l-skills"></div>
+        <div class="launcher-item-label">Skills Folder</div>
+      </div>
+    </div>
+
+    <div class="launcher-profile">
+      <div class="launcher-avatar">
+        <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="color: var(--glow-accent);"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      </div>
+      <div class="launcher-profile-info">
+        <span class="launcher-profile-name">Muhammad Umer Farooq</span>
+        <span class="launcher-profile-role">Aspiring Red Teamer / Cybersec Student</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- SYSTEM HUD WIDGET -->
+  <div class="desktop-widget" id="conky-widget">
+    <div class="widget-title">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color:var(--glow-accent)"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+      SYSTEM STATUS
+    </div>
+    <div class="widget-row"><span class="widget-label">Uptime:</span><span class="widget-value" id="widget-uptime">0h 0m 0s</span></div>
+    <div class="widget-row"><span class="widget-label">OS Name:</span><span class="widget-value">Kali GNU/Linux</span></div>
+    <div class="widget-row"><span class="widget-label">Kernel:</span><span class="widget-value">6.11.2-amd64</span></div>
+    <div class="widget-row"><span class="widget-label">Network:</span><span class="widget-value" style="color:var(--glow-green)">Online</span></div>
+    <div style="margin: 10px 0 4px;"><span class="widget-label">CPU Activity:</span> <span class="widget-value" id="cpu-percent">8%</span></div>
+    <div class="widget-bar"><div class="widget-bar-fill" id="cpu-bar" style="width: 8%;"></div></div>
+    <div style="margin: 8px 0 4px;"><span class="widget-label">RAM Active:</span> <span class="widget-value" id="ram-value">2.4 GB / 16 GB</span></div>
+    <div class="widget-bar"><div class="widget-bar-fill" id="ram-bar" style="width: 15%;"></div></div>
   </div>
 
   <div class="desk-body">
@@ -300,12 +872,14 @@ html,body{width:100%;height:100%;overflow:hidden;font-family:'Ubuntu','Segoe UI'
           <div class="tl x" onclick="maximizeWin('win-term')"></div>
         </div>
         <div class="win-title">
-          <span class="wt-user" id="wt-user">user</span><span style="color:#444">@</span><span class="wt-user">kali</span><span style="color:#444">:</span><span class="wt-path" id="wt-path">~</span>
-          <span style="color:#444"> — bash</span>
+          <span class="wt-user" id="wt-user">user</span><span style="color:#777">@</span><span class="wt-user">kali</span><span style="color:#555">:</span><span class="wt-path" id="wt-path">~</span>
+          <span style="color:#555"> — bash</span>
         </div>
         <div style="width:46px"></div>
       </div>
-      <div class="win-body" id="term-output"></div>
+      <div class="win-body" id="term-output">
+        <div class="term-scanlines"></div>
+      </div>
       <div id="term-input-line">
         <span><span class="t-user" id="tp-user">user</span><span class="t-at">@</span><span class="t-host">kali</span><span class="t-colon">:</span><span class="t-path" id="tp-path">~</span><span class="t-dollar">$ </span></span><span id="term-cmd-display"></span><span id="term-cursor"></span>
       </div>
@@ -313,7 +887,7 @@ html,body{width:100%;height:100%;overflow:hidden;font-family:'Ubuntu','Segoe UI'
     </div>
 
     <!-- FILE MANAGER -->
-    <div class="win" id="win-files" style="width:min(600px,92vw);height:min(420px,70vh);top:60px;left:120px;display:none">
+    <div class="win" id="win-files" style="width:min(620px,92vw);height:min(440px,70vh);top:60px;left:120px;display:none">
       <div class="win-header" id="wh-files">
         <div class="tl-group">
           <div class="tl c" onclick="closeWin('win-files')"></div>
@@ -325,14 +899,25 @@ html,body{width:100%;height:100%;overflow:hidden;font-family:'Ubuntu','Segoe UI'
       </div>
       <div class="win-body">
         <div class="fm-toolbar">
-          <button class="fm-nav-btn" id="fm-back-btn" title="Back">←</button>
-          <button class="fm-nav-btn" onclick="renderFM('~')" title="Home">⌂</button>
+          <button class="fm-nav-btn" id="fm-back-btn" title="Back">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+          </button>
+          <button class="fm-nav-btn" onclick="renderFM('~')" title="Home">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+          </button>
           <div class="fm-path-bar" id="fm-path-bar">~</div>
         </div>
         <div class="fm-pane">
           <div class="fm-sidebar">
-            <div class="fm-side-item active" id="fms-home" onclick="renderFM('~')"><span class="fm-side-icon">🏠</span>Home</div>
-            <div class="fm-side-item" id="fms-skills" onclick="renderFM('~/skills')"><span class="fm-side-icon">📁</span>skills</div>
+            <div class="fm-side-item active" id="fms-home" onclick="renderFM('~')">
+              <span class="fm-side-icon" id="fmsi-home"></span>Home
+            </div>
+            <div class="fm-side-item" id="fms-skills" onclick="renderFM('~/skills')">
+              <span class="fm-side-icon" id="fmsi-skills"></span>skills
+            </div>
+            <div class="fm-side-item" id="fms-certs" onclick="renderFM('~/certs')">
+              <span class="fm-side-icon" id="fmsi-certs"></span>certs
+            </div>
           </div>
           <div class="fm-grid" id="fm-grid"></div>
         </div>
@@ -341,7 +926,7 @@ html,body{width:100%;height:100%;overflow:hidden;font-family:'Ubuntu','Segoe UI'
     </div>
 
     <!-- MOUSEPAD -->
-    <div class="win" id="win-mousepad" style="width:min(560px,92vw);height:min(400px,70vh);top:80px;left:160px;display:none">
+    <div class="win" id="win-mousepad" style="width:min(580px,92vw);height:min(420px,70vh);top:80px;left:160px;display:none">
       <div class="win-header" id="wh-mousepad">
         <div class="tl-group">
           <div class="tl c" onclick="closeWin('win-mousepad')"></div>
@@ -364,7 +949,7 @@ html,body{width:100%;height:100%;overflow:hidden;font-family:'Ubuntu','Segoe UI'
     </div>
 
     <!-- PDF VIEWER -->
-    <div class="win" id="win-pdfview" style="width:min(700px,94vw);height:min(520px,80vh);top:50px;left:80px;display:none">
+    <div class="win" id="win-pdfview" style="width:min(720px,94vw);height:min(540px,80vh);top:50px;left:80px;display:none">
       <div class="win-header" id="wh-pdfview">
         <div class="tl-group">
           <div class="tl c" onclick="closeWin('win-pdfview')"></div>
@@ -376,12 +961,49 @@ html,body{width:100%;height:100%;overflow:hidden;font-family:'Ubuntu','Segoe UI'
       </div>
       <div class="win-body">
         <div class="pdf-toolbar">
-          <button class="pdf-tb-btn" onclick="downloadCurrentPdf()">⬇ Download</button>
+          <button class="pdf-tb-btn" onclick="downloadCurrentPdf()">⬇ Download PDF</button>
           <span id="pdf-title-lbl">resume.pdf</span>
         </div>
         <iframe id="pdf-iframe" title="PDF Viewer"></iframe>
       </div>
       <div class="resize-handle" id="rh-pdfview"></div>
+    </div>
+
+    <!-- ABOUT WINDOW -->
+    <div class="win" id="win-about" style="position:fixed;width:min(460px,92vw);height:min(520px,80vh);top:50%;left:50%;transform:translate(-50%,-50%);display:none">
+      <div class="win-header" id="wh-about">
+        <div class="tl-group">
+          <div class="tl c" onclick="closeWin('win-about')"></div>
+          <div class="tl m" onclick="minimizeWin('win-about')"></div>
+          <div class="tl x" onclick="maximizeWin('win-about')"></div>
+        </div>
+        <div class="win-title">System — About This Computer</div>
+        <div style="width:46px"></div>
+      </div>
+      <div class="win-body" id="about-body">
+        <div class="about-logo">
+          <svg viewBox="0 0 48 48" width="44" height="44" fill="none">
+            <circle cx="24" cy="24" r="20" stroke="#dc1e1e" stroke-width="1.5" fill="rgba(220,30,30,0.08)"/>
+            <path d="M24 14 L28 22 L37 22 L30 28 L33 37 L24 31 L15 37 L18 28 L11 22 L20 22 Z" fill="rgba(220,30,30,0.6)" stroke="#dc1e1e" stroke-width="1"/>
+          </svg>
+        </div>
+        <div class="about-os-name">Kali GNU/Linux</div>
+        <div class="about-os-sub">Rolling Release — Offensive Security</div>
+        <div class="about-divider"></div>
+        <div class="about-rows">
+          <div class="about-row"><span class="about-row-key">OS</span><span class="about-row-val">Kali Linux 2024.4</span></div>
+          <div class="about-row"><span class="about-row-key">Kernel</span><span class="about-row-val">6.11.2-amd64</span></div>
+          <div class="about-row"><span class="about-row-key">Shell</span><span class="about-row-val">/bin/bash 5.2.21</span></div>
+          <div class="about-row"><span class="about-row-key">Desktop</span><span class="about-row-val">XFCE 4.18</span></div>
+          <div class="about-row"><span class="about-row-key">Processor</span><span class="about-row-val">Intel Core i7-12700H</span></div>
+          <div class="about-row"><span class="about-row-key">Memory</span><span class="about-row-val">16 GB DDR5</span></div>
+          <div class="about-row"><span class="about-row-key">Architecture</span><span class="about-row-val">x86_64</span></div>
+          <div class="about-row"><span class="about-row-key">User</span><span class="about-row-val" id="about-username">user@kali</span></div>
+          <div class="about-row"><span class="about-row-key">Uptime</span><span class="about-row-val" id="about-uptime">0h 0m 0s</span></div>
+        </div>
+        <div class="about-footer">Kali Linux is a registered trademark of Offensive Security</div>
+      </div>
+      <div class="resize-handle" id="rh-about"></div>
     </div>
 
   </div>
@@ -390,7 +1012,7 @@ html,body{width:100%;height:100%;overflow:hidden;font-family:'Ubuntu','Segoe UI'
   <div class="kali-motto">the quieter you become, the more you are able to hear</div>
 </div>
 
-<button id="mob-kb" title="Keyboard">⌨</button>
+<button id="mob-kb" title="Keyboard"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2" ry="2"/><line x1="6" y1="8" x2="6.01" y2="8"/><line x1="10" y1="8" x2="10.01" y2="8"/><line x1="14" y1="8" x2="14.01" y2="8"/><line x1="18" y1="8" x2="18.01" y2="8"/><line x1="6" y1="12" x2="6.01" y2="12"/><line x1="10" y1="12" x2="10.01" y2="12"/><line x1="14" y1="12" x2="14.01" y2="12"/><line x1="18" y1="12" x2="18.01" y2="12"/><line x1="7" y1="16" x2="17" y2="16"/></svg></button>
 <input id="hidden-input" type="text" autocomplete="off" autocorrect="off" autocapitalize="none" spellcheck="false">
 
 <script>
@@ -399,14 +1021,29 @@ var termPath="~", termCmdBuf="", termHistory=[], termHistIdx=-1;
 var sudoQueue=null, sudoInputMode=false;
 var sudoAuthed=false; // true after a successful sudo password in this session
 
-/* ── SESSION PERSISTENCE ──────────────────────────────────────────────────── */
-function saveSession(){
-  var session={username:USERNAME,sudoPass:SUDO_PASS,termPath:termPath,termHistory:termHistory,sudoAuthed:sudoAuthed};
-  localStorage.setItem("benslates_session",JSON.stringify(session));
+/* ── VECTOR SVG ICONS ──────────────────────────────────────────────────────── */
+var ICONS = {
+  terminal: `<svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="var(--glow-accent)" stroke-width="1.5"><rect x="2" y="3" width="20" height="18" rx="3" fill="rgba(255, 51, 51, 0.04)"/><path d="M7 9l3 3-3 3M12 15h5" stroke-linecap="round" stroke-linejoin="round"/></svg>`,
+  folder: `<svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="var(--glow-blue)" stroke-width="1.5"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z" fill="rgba(0, 204, 255, 0.04)"/></svg>`,
+  file: `<svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="var(--glow-yellow)" stroke-width="1.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" fill="rgba(255, 204, 0, 0.04)"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>`,
+  pdf: `<svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="var(--glow-accent)" stroke-width="1.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" fill="rgba(255, 51, 51, 0.04)"/><polyline points="14 2 14 8 20 8"/><text x="5.5" y="18" fill="var(--glow-accent)" font-family="var(--font-ui)" font-size="5" font-weight="bold">PDF</text></svg>`,
+  home: `<svg class="svg-icon" viewBox="0 0 24 24" fill="none" stroke="var(--glow-green)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>`
+};
+
+function saveSession(isLoggedIn){
+  var session={
+    username:USERNAME,
+    sudoPass:SUDO_PASS,
+    termPath:termPath,
+    termHistory:termHistory,
+    sudoAuthed:sudoAuthed,
+    isLoggedIn:isLoggedIn !== undefined ? isLoggedIn : (sessionStorage.getItem("benslates_session") ? JSON.parse(sessionStorage.getItem("benslates_session")).isLoggedIn : false)
+  };
+  sessionStorage.setItem("benslates_session",JSON.stringify(session));
 }
 
 function loadSession(){
-  var saved=localStorage.getItem("benslates_session");
+  var saved=sessionStorage.getItem("benslates_session");
   if(saved){
     try{
       var session=JSON.parse(saved);
@@ -416,19 +1053,15 @@ function loadSession(){
       termHistory=session.termHistory||[];
       termHistIdx=termHistory.length;
       sudoAuthed=session.sudoAuthed||false;
-      return true;
-    }catch(e){ return false; }
+      return session;
+    }catch(e){ return null; }
   }
-  return false;
+  return null;
 }
 
 function clearSession(){
-  localStorage.removeItem("benslates_session");
+  sessionStorage.removeItem("benslates_session");
 }
-
-/* ── PDF BASE64 ──────────────────────────────────────────────────────────── */
-// resume.pdf must be placed in the same folder as index.html
-// The viewer and download both reference it by filename directly.
 
 /* ── FILESYSTEM ──────────────────────────────────────────────────────────── */
 var FS={
@@ -482,7 +1115,7 @@ var FS={
       "<span class='t-section'>── resume.pdf ──</span>",
       "",
       "  Use <span class='t-cmd'>get resume.pdf</span>   — download to your device",
-      "  Use <span class='t-cmd'>open resume.pdf</span>  — view in browser (if PDF set)"
+      "  Use <span class='t-cmd'>open resume.pdf</span>  — view in browser"
     ]},
     "certs":{type:"dir",icon:"📁",isDesktop:true,children:{
       "Getting_Started_with_Cisco_Packet_Tracer.pdf":{type:"file",icon:"📜",isPdf:true,content:[
@@ -498,6 +1131,24 @@ var FS={
         "  Certification: Introduction to Cybersecurity",
         "  Use <span class='t-cmd'>get Introduction_to_Cybersecurity.pdf</span>   — download",
         "  Use <span class='t-cmd'>open Introduction_to_Cybersecurity.pdf</span>  — view in browser"
+      ]},
+      "Mythical.pdf":{type:"file",icon:"📜",isPdf:true,content:[
+        "<span class='t-section'>── Mythical.pdf ──</span>",
+        "",
+        "  Certification: Hack The Box - Mythical Machine",
+        "  Certificate ID: HTBCERT-3620BFA7E0",
+        "  Date: 04 Jun 2026",
+        "  Use <span class='t-cmd'>get Mythical.pdf</span>   — download",
+        "  Use <span class='t-cmd'>open Mythical.pdf</span>  — view in browser"
+      ]},
+      "Puppet.pdf":{type:"file",icon:"📜",isPdf:true,content:[
+        "<span class='t-section'>── Puppet.pdf ──</span>",
+        "",
+        "  Certification: Hack The Box - Puppet Machine",
+        "  Certificate ID: HTBCERT-D149A5DFAD",
+        "  Date: 31 May 2026",
+        "  Use <span class='t-cmd'>get Puppet.pdf</span>   — download",
+        "  Use <span class='t-cmd'>open Puppet.pdf</span>  — view in browser"
       ]}
     }},
     "skills":{type:"dir",icon:"📁",children:{
@@ -532,14 +1183,118 @@ function getNode(path){
   return n;
 }
 
+function getIconHtml(node, name) {
+  if (node.type === "dir") {
+    return ICONS.folder;
+  } else if (node.isPdf || (name && name.endsWith(".pdf"))) {
+    return ICONS.pdf;
+  } else {
+    return ICONS.file;
+  }
+}
+
+/* ── BACKGROUND PARTICLES ────────────────────────────────────────────────── */
+function initBackgroundParticles() {
+  const canvas = document.createElement('canvas');
+  canvas.id = 'canvas-particles';
+  canvas.style.position = 'fixed';
+  canvas.style.inset = '0';
+  canvas.style.zIndex = '0';
+  canvas.style.pointerEvents = 'none';
+  document.body.prepend(canvas);
+  
+  const ctx = canvas.getContext('2d');
+  let width = canvas.width = window.innerWidth;
+  let height = canvas.height = window.innerHeight;
+  
+  const particles = [];
+  const particleCount = Math.min(60, Math.floor((width * height) / 22000));
+  
+  window.addEventListener('resize', () => {
+    width = canvas.width = window.innerWidth;
+    height = canvas.height = window.innerHeight;
+  });
+  
+  class Particle {
+    constructor() {
+      this.x = Math.random() * width;
+      this.y = Math.random() * height;
+      this.vx = (Math.random() - 0.5) * 0.45;
+      this.vy = (Math.random() - 0.5) * 0.45;
+      this.radius = Math.random() * 2 + 1;
+    }
+    update() {
+      this.x += this.vx;
+      this.y += this.vy;
+      if (this.x < 0 || this.x > width) this.vx *= -1;
+      if (this.y < 0 || this.y > height) this.vy *= -1;
+    }
+    draw() {
+      ctx.beginPath();
+      ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+      ctx.fillStyle = 'rgba(255, 51, 51, 0.35)';
+      ctx.fill();
+    }
+  }
+  
+  for (let i = 0; i < particleCount; i++) {
+    particles.push(new Particle());
+  }
+  
+  function animate() {
+    ctx.clearRect(0, 0, width, height);
+    for (let i = 0; i < particles.length; i++) {
+      particles[i].update();
+      particles[i].draw();
+      for (let j = i + 1; j < particles.length; j++) {
+        const dx = particles[i].x - particles[j].x;
+        const dy = particles[i].y - particles[j].y;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+        if (dist < 110) {
+          ctx.beginPath();
+          ctx.moveTo(particles[i].x, particles[i].y);
+          ctx.lineTo(particles[j].x, particles[j].y);
+          ctx.strokeStyle = `rgba(255, 51, 51, ${0.18 * (1 - dist / 110)})`;
+          ctx.lineWidth = 0.85;
+          ctx.stroke();
+        }
+      }
+    }
+    requestAnimationFrame(animate);
+  }
+  animate();
+}
+
 /* ── LOGIN ────────────────────────────────────────────────────────────────── */
-document.getElementById("login-btn").addEventListener("click",doLogin);
+document.getElementById("login-btn").addEventListener("click", doLogin);
 document.getElementById("inp-pass").addEventListener("keydown",function(e){ if(e.key==="Enter") doLogin(); });
 document.getElementById("inp-user").addEventListener("keydown",function(e){ if(e.key==="Enter") document.getElementById("inp-pass").focus(); });
 window.addEventListener("load",function(){
-  loadSession();
-  document.getElementById("inp-user").value=USERNAME;
-  document.getElementById("inp-user").focus();
+  initBackgroundParticles();
+  var session = loadSession();
+  
+  // Set up launcher static icons
+  document.getElementById("icon-l-term").innerHTML = ICONS.terminal;
+  document.getElementById("icon-l-files").innerHTML = ICONS.folder;
+  document.getElementById("icon-l-editor").innerHTML = ICONS.file;
+  document.getElementById("icon-l-resume").innerHTML = ICONS.pdf;
+  document.getElementById("icon-l-certs").innerHTML = ICONS.folder;
+  document.getElementById("icon-l-skills").innerHTML = ICONS.folder;
+
+  // Set up file manager sidebar icons
+  document.getElementById("fmsi-home").innerHTML = ICONS.home;
+  document.getElementById("fmsi-skills").innerHTML = ICONS.folder;
+  document.getElementById("fmsi-certs").innerHTML = ICONS.folder;
+
+  if (session && session.isLoggedIn) {
+    document.getElementById("screen-login").style.display="none";
+    var desk=document.getElementById("screen-desktop");
+    desk.style.display="flex"; desk.style.flexDirection="column";
+    initDesktop();
+  } else {
+    document.getElementById("inp-user").value=USERNAME;
+    document.getElementById("inp-user").focus();
+  }
 });
 
 function doLogin(){
@@ -548,22 +1303,48 @@ function doLogin(){
   USERNAME=u.replace(/[^a-zA-Z0-9_\-]/g,"").toLowerCase()||"root";
   SUDO_PASS=p||"toor";
   document.getElementById("login-error").style.display="none";
-  document.getElementById("screen-login").style.display="none";
-  var desk=document.getElementById("screen-desktop");
-  desk.style.display="flex"; desk.style.flexDirection="column";
-  saveSession();
-  initDesktop();
-  setTimeout(openTerm,300);
+  
+  // Fancy cracking decryption micro-animation
+  const btn = document.getElementById("login-btn");
+  btn.disabled = true;
+  let progress = 0;
+  
+  const crackInterval = setInterval(() => {
+    progress += Math.floor(Math.random() * 12) + 4;
+    if (progress >= 100) {
+      progress = 100;
+      clearInterval(crackInterval);
+      
+      // Complete login
+      document.getElementById("screen-login").style.transition = "opacity 0.4s ease";
+      document.getElementById("screen-login").style.opacity = "0";
+      setTimeout(function() {
+        document.getElementById("screen-login").style.display="none";
+        var desk=document.getElementById("screen-desktop");
+        desk.style.display="flex"; desk.style.flexDirection="column";
+        saveSession(true);
+        initDesktop();
+      }, 400);
+    }
+    const randHex = Math.random().toString(16).substring(2, 6).toUpperCase();
+    btn.innerHTML = `DECRYPTING: ${progress}% [0x${randHex}]`;
+  }, 75);
 }
 
 function doLogout(){
   closeAllMenus();
   clearSession();
+  
+  const loginScreen = document.getElementById("screen-login");
+  loginScreen.style.opacity = "1";
+  loginScreen.style.display = "flex";
   document.getElementById("screen-desktop").style.display="none";
-  document.getElementById("screen-login").style.display="flex";
+  
   document.getElementById("inp-user").value="";
   document.getElementById("inp-pass").value="";
-  document.getElementById("term-output").innerHTML="";
+  document.getElementById("login-btn").innerHTML = "LOGIN  →";
+  document.getElementById("login-btn").disabled = false;
+  document.getElementById("term-output").innerHTML="<div class='term-scanlines'></div>";
   termPath="~"; termCmdBuf=""; termHistory=[]; termHistIdx=-1; sudoQueue=null; sudoInputMode=false; sudoAuthed=false;
   ["win-term","win-files","win-mousepad","win-pdfview"].forEach(function(id){
     var w=document.getElementById(id); w.style.display="none";
@@ -574,16 +1355,42 @@ function doLogout(){
 
 function showAbout(){
   closeAllMenus();
-  alert("Kali GNU/Linux Rolling\nKernel: 6.11.2-amd64\nUser: "+USERNAME+"\nShell: /bin/bash\n\nKali Linux Portfolio Terminal");
+  var w = document.getElementById("win-about");
+  w.style.display = "flex";
+  document.getElementById("about-username").textContent = USERNAME + "@kali";
+  // sync uptime
+  var u = document.getElementById("widget-uptime");
+  if(u) document.getElementById("about-uptime").textContent = u.textContent;
+  focusWin("win-about"); updateTaskbar();
 }
 
 /* ── DESKTOP ──────────────────────────────────────────────────────────────── */
+var uptimeSec = 0;
 function initDesktop(){
   document.getElementById("tb-username").textContent=USERNAME+"@kali";
   document.getElementById("wt-user").textContent=USERNAME;
   document.getElementById("tp-user").textContent=USERNAME;
-  updateClock(); setInterval(updateClock,1000);
-  buildDesktopIcons(); updateTaskbar();
+  updateClock(); 
+  setInterval(updateClock,1000);
+  buildDesktopIcons(); 
+  // Ensure terminal is always closed/hidden on init
+  document.getElementById("win-term").style.display="none";
+  updateTaskbar();
+  
+  // Start Conky HUD widget updates
+  uptimeSec = 0;
+  setInterval(() => {
+    uptimeSec++;
+    const h = Math.floor(uptimeSec / 3600);
+    const m = Math.floor((uptimeSec % 3600) / 60);
+    const s = uptimeSec % 60;
+    document.getElementById("widget-uptime").textContent = `${h}h ${m}m ${s}s`;
+    
+    // CPU fluctuation
+    const cpu = Math.floor(Math.random() * 18) + 4;
+    document.getElementById("cpu-percent").textContent = `${cpu}%`;
+    document.getElementById("cpu-bar").style.width = `${cpu}%`;
+  }, 1000);
 }
 
 function updateClock(){
@@ -593,52 +1400,132 @@ function updateClock(){
 
 function buildDesktopIcons(){
   var canvas=document.getElementById("desk-canvas"); canvas.innerHTML="";
-  var icons=[
-    {label:"Terminal",icon:"💻",action:function(){openTerm()}},
-    {label:"Files",icon:"📁",action:function(){openFiles("~")}},
-    {label:"Mousepad",icon:"📝",action:function(){openMousepad(null,null)}}
-  ];
+  
+  var terminalIcon = {label:"Terminal",icon:ICONS.terminal,action:function(){openTerm()}};
+  var filesIcon = {label:"Files",icon:ICONS.folder,action:function(){openFiles("~")}};
+  var mousepadIcon = {label:"Mousepad",icon:ICONS.file,action:function(){openMousepad(null,null)}};
+
+  var folders = [filesIcon];
+  var files = [mousepadIcon];
+  
   var home=getNode("~");
   Object.keys(home.children).forEach(function(name){
     var node=home.children[name];
-    if(node.isPdf||node.isDesktop) return; // handled separately as pinned icon
-    icons.push({label:name,icon:node.icon||(node.type==="dir"?"📁":"📄"),action:(function(n,nd){
-      return function(){
-        if(nd.type==="dir") openFiles("~/"+n);
-        else openMousepad(n,"~");
-      };
-    })(name,node)});
+    
+    var iconItem = {
+      label: name,
+      icon: getIconHtml(node, name),
+      action: (function(n,nd){
+        return function(){
+          if(nd.type==="dir") openFiles("~/"+n);
+          else if(nd.isPdf) openPdfViewer(n);
+          else openMousepad(n,"~");
+        };
+      })(name,node)
+    };
+    
+    if(node.type === "dir") {
+      folders.push(iconItem);
+    } else {
+      files.push(iconItem);
+    }
   });
+  
+  // Combine: Terminal first, then folders, then files
+  var icons = [terminalIcon].concat(folders, files);
+
   icons.forEach(function(ic){
     var div=document.createElement("div"); div.className="desk-icon";
     div.innerHTML='<div class="desk-icon-img">'+ic.icon+'</div><div class="desk-icon-label">'+ic.label+'</div>';
+    makeIconDraggable(div, canvas);
     div.addEventListener("dblclick",ic.action);
-    div.addEventListener("click",function(){
+    div.addEventListener("click",function(e){
+      e.stopPropagation();
       document.querySelectorAll(".desk-icon").forEach(function(d){d.classList.remove("selected")});
       div.classList.add("selected");
     });
     canvas.appendChild(div);
   });
-  // Pinned icons — top right
-  var pin=document.createElement("div"); pin.className="desk-icon desk-icon-pinned";
-  pin.innerHTML='<div class="desk-icon-img">📋</div><div class="desk-icon-label">resume.pdf</div>';
-  pin.addEventListener("dblclick",function(){ openPdfViewer("resume.pdf"); });
-  pin.addEventListener("click",function(){
-    document.querySelectorAll(".desk-icon").forEach(function(d){d.classList.remove("selected")});
-    pin.classList.add("selected");
-  });
-  canvas.appendChild(pin);
-  // Pinned certs folder icon (below resume)
-  var pinCerts=document.createElement("div"); pinCerts.className="desk-icon desk-icon-pinned";
-  pinCerts.style.top="100px";
-  pinCerts.innerHTML='<div class="desk-icon-img">📁</div><div class="desk-icon-label">certs</div>';
-  pinCerts.addEventListener("dblclick",function(){ openFiles("~/certs"); });
-  pinCerts.addEventListener("click",function(){
-    document.querySelectorAll(".desk-icon").forEach(function(d){d.classList.remove("selected")});
-    pinCerts.classList.add("selected");
-  });
-  canvas.appendChild(pinCerts);
 }
+
+function makeIconDraggable(el, container) {
+  let isDragging = false;
+  let startX = 0, startY = 0;
+  let initialLeft = 0, initialTop = 0;
+
+  function onStart(e) {
+    if (e.type === "mousedown" && e.button !== 0) return;
+    
+    const clientX = e.type === "touchstart" ? e.touches[0].clientX : e.clientX;
+    const clientY = e.type === "touchstart" ? e.touches[0].clientY : e.clientY;
+
+    initialLeft = el.offsetLeft;
+    initialTop = el.offsetTop;
+    
+    startX = clientX;
+    startY = clientY;
+    
+    isDragging = false;
+
+    function onMove(e) {
+      const currentX = e.type === "touchmove" ? e.touches[0].clientX : e.clientX;
+      const currentY = e.type === "touchmove" ? e.touches[0].clientY : e.clientY;
+
+      const dx = currentX - startX;
+      const dy = currentY - startY;
+
+      if (!isDragging && (Math.abs(dx) > 4 || Math.abs(dy) > 4)) {
+        isDragging = true;
+        el.style.position = "absolute";
+        el.style.margin = "0";
+        el.style.zIndex = "100";
+      }
+
+      if (isDragging) {
+        let newLeft = initialLeft + dx;
+        let newTop = initialTop + dy;
+
+        const maxLeft = container.clientWidth - el.offsetWidth;
+        const maxTop = container.clientHeight - el.offsetHeight;
+        newLeft = Math.max(0, Math.min(newLeft, maxLeft));
+        newTop = Math.max(0, Math.min(newTop, maxTop));
+
+        el.style.left = newLeft + "px";
+        el.style.top = newTop + "px";
+      }
+    }
+
+    function onEnd() {
+      if (e.type === "touchstart") {
+        document.removeEventListener("touchmove", onMove);
+        document.removeEventListener("touchend", onEnd);
+      } else {
+        document.removeEventListener("mousemove", onMove);
+        document.removeEventListener("mouseup", onEnd);
+      }
+      if (isDragging) {
+        el.style.zIndex = "";
+        isDragging = false;
+      }
+    }
+
+    if (e.type === "touchstart") {
+      document.addEventListener("touchmove", onMove, { passive: false });
+      document.addEventListener("touchend", onEnd);
+    } else {
+      document.addEventListener("mousemove", onMove);
+      document.addEventListener("mouseup", onEnd);
+    }
+  }
+
+  el.addEventListener("mousedown", onStart);
+  el.addEventListener("touchstart", onStart, { passive: true });
+}
+
+// Global click to deselect desktop icons
+document.addEventListener("click", function() {
+  document.querySelectorAll(".desk-icon").forEach(function(d){d.classList.remove("selected")});
+});
 
 /* ── WINDOW MANAGEMENT ────────────────────────────────────────────────────── */
 var winOrder=[];
@@ -660,23 +1547,42 @@ function closeWin(id){
 function minimizeWin(id){ document.getElementById(id).style.display="none"; updateTaskbar(); }
 function maximizeWin(id){
   var w=document.getElementById(id);
-  if(w.dataset.maximized==="1"){ w.style.cssText=w.dataset.prevStyle||""; w.dataset.maximized=""; }
-  else{ w.dataset.prevStyle=w.style.cssText; w.style.top="0";w.style.left="0";w.style.width="100%";w.style.height="calc(100% - 34px)";w.style.borderRadius="0"; w.dataset.maximized="1"; }
+  if(w.dataset.maximized==="1"){
+    w.style.cssText=w.dataset.prevStyle||""; w.dataset.maximized="";
+  } else {
+    w.dataset.prevStyle=w.style.cssText;
+    w.style.top="34px"; w.style.left="0"; w.style.width="100%";
+    w.style.height="calc(100% - 34px)"; w.style.borderRadius="0";
+    w.style.transform="none"; w.dataset.maximized="1";
+  }
 }
 function updateTaskbar(){
   var tb=document.getElementById("desk-taskbar"); tb.innerHTML="";
   var tasks=[
-    {id:"win-term",label:"Terminal",icon:"💻"},
-    {id:"win-files",label:"Files",icon:"📁"},
-    {id:"win-mousepad",label:"Mousepad",icon:"📝"},
-    {id:"win-pdfview",label:"PDF Viewer",icon:"📋"}
+    {id:"win-term",label:"Terminal",icon:ICONS.terminal},
+    {id:"win-files",label:"Files",icon:ICONS.folder},
+    {id:"win-mousepad",label:"Mousepad",icon:ICONS.file},
+    {id:"win-pdfview",label:"PDF Viewer",icon:ICONS.pdf},
+    {id:"win-about",label:"About",icon:`<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="var(--glow-green)" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="8"/><line x1="12" y1="12" x2="12" y2="16"/></svg>`}
   ];
+  // Map each window id to its open function
+  var openFns = {
+    "win-term":     function(){ openTerm(); },
+    "win-files":    function(){ openFiles(fmPath||"~"); },
+    "win-mousepad": function(){ openMousepad(null,null); },
+    "win-pdfview":  function(){ document.getElementById("win-pdfview").style.display="flex"; focusWin("win-pdfview"); },
+    "win-about":    function(){ showAbout(); }
+  };
   tasks.forEach(function(t){
     var w=document.getElementById(t.id);
     var btn=document.createElement("div"); btn.className="tb-task"+(w.style.display!=="none"?" active":"");
     btn.innerHTML='<span class="tb-task-icon">'+t.icon+'</span>'+t.label;
     btn.onclick=(function(tid,tw){return function(){
-      if(tw.style.display==="none"){ tw.style.display="flex"; focusWin(tid); }
+      if(tw.style.display==="none"){
+        // Use dedicated open function so boot sequences run correctly
+        if(openFns[tid]) openFns[tid]();
+        else { tw.style.display="flex"; focusWin(tid); }
+      }
       else if(tw.classList.contains("focused")){ minimizeWin(tid); }
       else { focusWin(tid); }
       updateTaskbar();
@@ -692,12 +1598,17 @@ function makeDraggable(hdr,win){
     if(win.dataset.maximized==="1") return;
     var ox=e.clientX-win.offsetLeft, oy=e.clientY-win.offsetTop;
     focusWin(win.id); updateTaskbar();
+    win.classList.add("dragging");
     function mm(e){
       var nx=e.clientX-ox, ny=e.clientY-oy;
       win.style.left=Math.max(0,Math.min(nx,window.innerWidth-100))+"px";
-      win.style.top=Math.max(30,Math.min(ny,window.innerHeight-50))+"px";
+      win.style.top=Math.max(34,Math.min(ny,window.innerHeight-50))+"px";
     }
-    function mu(){ document.removeEventListener("mousemove",mm); document.removeEventListener("mouseup",mu); }
+    function mu(){ 
+      win.classList.remove("dragging");
+      document.removeEventListener("mousemove",mm); 
+      document.removeEventListener("mouseup",mu); 
+    }
     document.addEventListener("mousemove",mm); document.addEventListener("mouseup",mu);
   });
   win.addEventListener("mousedown",function(){ focusWin(win.id); updateTaskbar(); });
@@ -705,8 +1616,13 @@ function makeDraggable(hdr,win){
 function makeResizable(handle,win){
   handle.addEventListener("mousedown",function(e){
     e.preventDefault(); var sx=e.clientX,sy=e.clientY,sw=win.offsetWidth,sh=win.offsetHeight;
+    win.classList.add("dragging");
     function mm(e){ win.style.width=Math.max(280,sw+e.clientX-sx)+"px"; win.style.height=Math.max(200,sh+e.clientY-sy)+"px"; }
-    function mu(){ document.removeEventListener("mousemove",mm); document.removeEventListener("mouseup",mu); }
+    function mu(){ 
+      win.classList.remove("dragging");
+      document.removeEventListener("mousemove",mm); 
+      document.removeEventListener("mouseup",mu); 
+    }
     document.addEventListener("mousemove",mm); document.addEventListener("mouseup",mu);
   });
 }
@@ -722,7 +1638,10 @@ ALL_WINS.forEach(function(id){
 /* ── OPEN WINDOWS ─────────────────────────────────────────────────────────── */
 function openTerm(){
   var w=document.getElementById("win-term");
-  if(w.style.display==="none"||!w.style.display){ w.style.display="flex"; if(!document.getElementById("term-output").children.length) bootTerm(); }
+  if(w.style.display==="none"||!w.style.display){ 
+    w.style.display="flex"; 
+    if(document.getElementById("term-output").children.length <= 1) bootTerm(); 
+  }
   focusWin("win-term"); updateTaskbar();
   document.getElementById("hidden-input").focus();
 }
@@ -737,7 +1656,11 @@ function openMousepad(filename,path){
   var node=filename?getNode(path||termPath):null;
   var f=node&&node.children&&node.children[filename];
   // If it's a PDF, redirect to PDF viewer
-  if(f&&f.isPdf){ openPdfViewer(filename); return; }
+  if(f&&f.isPdf){ 
+    var resolvedPath = (path || termPath) === "~" ? filename : (path || termPath) + "/" + filename;
+    openPdfViewer(resolvedPath); 
+    return; 
+  }
   var w=document.getElementById("win-mousepad"); w.style.display="flex";
   focusWin("win-mousepad"); updateTaskbar();
   if(filename&&f&&f.type==="file"){
@@ -751,8 +1674,8 @@ function openMousepad(filename,path){
   }
 }
 var currentPdfFile="resume.pdf";
-function openPdfViewer(filename){
-  currentPdfFile=filename||"resume.pdf";
+function openPdfViewer(filepath){
+  currentPdfFile=filepath||"resume.pdf";
   var w=document.getElementById("win-pdfview"); w.style.display="flex";
   var displayName=currentPdfFile.split("/").pop();
   document.getElementById("pdfview-title").textContent=displayName;
@@ -763,8 +1686,9 @@ function openPdfViewer(filename){
 }
 function downloadCurrentPdf(){
   var a=document.createElement("a");
-  a.href=currentPdfFile;
-  a.download=currentPdfFile;
+  var resolved = currentPdfFile.replace(/^~\/?/,"");
+  a.href=resolved;
+  a.download=resolved.split("/").pop();
   document.body.appendChild(a); a.click(); a.remove();
 }
 
@@ -777,22 +1701,27 @@ function renderFM(path,fromBack){
   document.getElementById("fm-title-path").textContent=path;
   document.getElementById("fms-home").classList.toggle("active",path==="~");
   document.getElementById("fms-skills").classList.toggle("active",path==="~/skills");
+  document.getElementById("fms-certs").classList.toggle("active",path==="~/certs");
   var grid=document.getElementById("fm-grid"); grid.innerHTML="";
   var node=getNode(path);
   if(!node||node.type!=="dir"){ grid.innerHTML="<span style='color:#666;font-size:12px;padding:10px'>Empty</span>"; return; }
   if(path!=="~"){
     var up=document.createElement("div"); up.className="fm-file";
-    up.innerHTML='<div class="fm-file-icon">📁</div><div class="fm-file-name is-dir">..</div>';
+    up.innerHTML='<div class="fm-file-icon">'+ICONS.folder+'</div><div class="fm-file-name is-dir">..</div>';
     up.ondblclick=function(){ var p=path.split("/"); p.pop(); renderFM(p.join("/")||"~"); };
     grid.appendChild(up);
   }
   Object.keys(node.children).forEach(function(name){
     var n=node.children[name];
-    var ic=n.icon||(n.type==="dir"?"📁":(name.endsWith(".pdf")?"📋":"📄"));
+    var ic=getIconHtml(n, name);
     var cls=n.type==="dir"?"is-dir":(name.endsWith(".pdf")?"is-pdf":"");
     var el=document.createElement("div"); el.className="fm-file";
     el.innerHTML='<div class="fm-file-icon">'+ic+'</div><div class="fm-file-name '+cls+'">'+name+'</div>';
-    el.onclick=function(){ document.querySelectorAll(".fm-file").forEach(function(f){f.classList.remove("selected")}); el.classList.add("selected"); };
+    el.onclick=function(e){ 
+      e.stopPropagation();
+      document.querySelectorAll(".fm-file").forEach(function(f){f.classList.remove("selected")}); 
+      el.classList.add("selected"); 
+    };
     el.ondblclick=(function(nm,nd,p){ return function(){
       if(nd.type==="dir") renderFM(p+"/"+nm);
       else if(nd.isPdf) openPdfViewer(p+"/"+nm);
@@ -801,8 +1730,11 @@ function renderFM(path,fromBack){
     grid.appendChild(el);
   });
 }
+document.addEventListener("click", function() {
+  document.querySelectorAll(".fm-file").forEach(function(f){f.classList.remove("selected")});
+});
 
-/* ── TOP BAR MENUS ────────────────────────────────────────────────────────── */
+/* ── APPLICATIONS MENU & TOP BAR ──────────────────────────────────────────── */
 document.querySelectorAll(".tb-menu").forEach(function(menu){
   menu.addEventListener("click",function(e){
     e.stopPropagation();
@@ -811,27 +1743,70 @@ document.querySelectorAll(".tb-menu").forEach(function(menu){
     if(!isActive) menu.classList.add("active");
   });
 });
-document.addEventListener("click",closeAllMenus);
-function closeAllMenus(){ document.querySelectorAll(".tb-menu").forEach(function(m){m.classList.remove("active")}); }
+
+document.querySelector(".tb-apps-btn").addEventListener("click", function(e) {
+  e.stopPropagation();
+  var launcher = document.getElementById("app-launcher");
+  var isVisible = launcher.style.display === "block";
+  closeAllMenus();
+  if (!isVisible) {
+    launcher.style.display = "block";
+    document.getElementById("launcher-search-input").value = "";
+    filterLauncherItems("");
+    document.getElementById("launcher-search-input").focus();
+  }
+});
+
+document.getElementById("launcher-search-input").addEventListener("input", function(e) {
+  filterLauncherItems(e.target.value);
+});
+
+function filterLauncherItems(query) {
+  query = query.toLowerCase();
+  document.querySelectorAll(".launcher-item").forEach(function(item) {
+    const label = item.querySelector(".launcher-item-label").textContent.toLowerCase();
+    if (label.includes(query)) {
+      item.style.display = "flex";
+    } else {
+      item.style.display = "none";
+    }
+  });
+}
+
+function openLauncherApp(appKey) {
+  closeAllMenus();
+  if (appKey === 'term') openTerm();
+  else if (appKey === 'files') openFiles('~');
+  else if (appKey === 'mousepad') openMousepad(null, null);
+  else if (appKey === 'resume') openPdfViewer('resume.pdf');
+  else if (appKey === 'certs') openFiles('~/certs');
+  else if (appKey === 'skills') openFiles('~/skills');
+}
+
+document.addEventListener("click", closeAllMenus);
+function closeAllMenus(){ 
+  document.querySelectorAll(".tb-menu").forEach(function(m){m.classList.remove("active")}); 
+  document.getElementById("app-launcher").style.display = "none";
+}
 
 /* ── TERMINAL ─────────────────────────────────────────────────────────────── */
 function bootTerm(){
-  tLine('<span style="color:#cc2200;font-weight:600">Linux kali 6.11.2-amd64 #1 SMP PREEMPT_DYNAMIC Kali 6.11.2-1kali1</span>');
-  tLine('<span style="color:#555">The programs included with the Kali GNU/Linux system are free software.</span>');
+  tLine('<span style="color:var(--glow-accent);font-weight:600">Linux kali 6.11.2-amd64 #1 SMP PREEMPT_DYNAMIC Kali 6.11.2-1kali1</span>');
+  tLine('<span style="color:#777">The programs included with the Kali GNU/Linux system are free software.</span>');
   
   tBlank();
 
-  // 🔥 ASCII LOGO
-  tLine('<span style="color:#cc0000;text-shadow:0 0 8px #cc0000">██████╗ ███████╗███╗   ██╗███████╗██╗      █████╗ ████████╗███████╗███████╗</span>');
-  tLine('<span style="color:#cc0000;text-shadow:0 0 8px #cc0000">██╔══██╗██╔════╝████╗  ██║██╔════╝██║     ██╔══██╗╚══██╔══╝██╔════╝██╔════╝</span>');
-  tLine('<span style="color:#cc0000;text-shadow:0 0 8px #cc0000">██████╔╝█████╗  ██╔██╗ ██║███████╗██║     ███████║   ██║   █████╗  ███████╗</span>');
-  tLine('<span style="color:#cc0000;text-shadow:0 0 8px #cc0000">██╔══██╗██╔══╝  ██║╚██╗██║╚════██║██║     ██╔══██║   ██║   ██╔══╝  ╚════██║</span>');
-  tLine('<span style="color:#cc0000;text-shadow:0 0 8px #cc0000">██████╔╝███████╗██║ ╚████║███████║███████╗██║  ██║   ██║   ███████╗███████║</span>');
-  tLine('<span style="color:#cc0000;text-shadow:0 0 8px #cc0000">╚═════╝ ╚══════╝╚═╝  ╚═══╝╚══════╝╚══════╝╚═╝  ╚═╝   ╚═╝   ╚══════╝╚══════╝</span>');
+  // 🔥 ASCII LOGO (Spells BENSLATES)
+  tLine('<span style="color:var(--glow-accent);text-shadow:0 0 8px var(--glow-accent)">██████╗ ███████╗███╗   ██╗███████╗██╗      █████╗ ████████╗███████╗███████╗</span>');
+  tLine('<span style="color:var(--glow-accent);text-shadow:0 0 8px var(--glow-accent)">██╔══██╗██╔════╝████╗  ██║██╔════╝██║     ██╔══██╗╚══██╔══╝██╔════╝██╔════╝</span>');
+  tLine('<span style="color:var(--glow-accent);text-shadow:0 0 8px var(--glow-accent)">██████╔╝█████╗  ██╔██╗ ██║███████╗██║     ███████║   ██║   █████╗  ███████╗</span>');
+  tLine('<span style="color:var(--glow-accent);text-shadow:0 0 8px var(--glow-accent)">██╔══██╗██╔══╝  ██║╚██╗██║╚════██║██║     ██╔══██║   ██║   ██╔══╝  ╚════██║</span>');
+  tLine('<span style="color:var(--glow-accent);text-shadow:0 0 8px var(--glow-accent)">██████╔╝███████╗██║ ╚████║███████║███████╗██║  ██║   ██║   ███████╗███████║</span>');
+  tLine('<span style="color:var(--glow-accent);text-shadow:0 0 8px var(--glow-accent)">╚═════╝ ╚══════╝╚═╝  ╚═══╝╚══════╝╚══════╝╚═╝  ╚═╝   ╚═╝   ╚══════╝╚══════╝</span>');
 
   tBlank();
 
-  tLine('<span style="color:#555">Last login: '+new Date().toDateString()+' from 127.0.0.1</span>');
+  tLine('<span style="color:#666">Last login: '+new Date().toDateString()+' from 127.0.0.1</span>');
   tLine("Welcome <span class='t-ok'>"+esc(USERNAME)+"</span>! Type <span class='t-cmd'>help</span> for commands.");
   
   tBlank(); 
@@ -932,9 +1907,15 @@ function execCmd(raw, isSudo){
       tLine("  <span class='t-cmd'>date</span>            Current date &amp; time");
       tLine("  <span class='t-cmd'>echo &lt;text&gt;</span>    Print text");
       tLine("  <span class='t-cmd'>clear</span>           Clear terminal");
+      tLine("  <span class='t-cmd'>exit</span>            Close terminal window");
+      tLine("  <span class='t-cmd'>logout</span>          Log out of system");
       break;
     case "clear": case "cls":
-      document.getElementById("term-output").innerHTML=""; return;
+      document.getElementById("term-output").innerHTML="<div class='term-scanlines'></div>"; return;
+    case "exit":
+      closeWin("win-term"); break;
+    case "logout":
+      doLogout(); break;
     case "ls": case "dir":
       lsDir(args[0]?(termPath==="~"?"~/"+args[0]:termPath+"/"+args[0]):termPath); break;
     case "pwd":
@@ -959,7 +1940,7 @@ function execCmd(raw, isSudo){
       var fc=nc&&nc.children&&nc.children[args[0]];
       if(!fc){ tLine("<span class='t-warn'>cat: "+esc(args[0])+": No such file or directory</span>"); break; }
       if(fc.type==="dir"){ tLine("<span class='t-warn'>cat: "+esc(args[0])+": Is a directory</span>"); break; }
-      if(fc.isPdf){ tLine("<span class='t-warn'>cat: "+esc(args[0])+": binary file — use <span class='t-cmd'>get "+esc(args[0])+"</span> to download</span>"); break; }
+      if(fc.isPdf){ tLine("<span class='t-warn'>cat: "+esc(args[0])+": binary file — use <span class='t-cmd'>get "+esc(args[0])+"</span> to download or <span class='t-cmd'>open "+esc(args[0])+"</span> to view</span>"); break; }
       fc.content.forEach(function(l){tLine(l)}); break;
     }
     case "open":{
@@ -968,12 +1949,10 @@ function execCmd(raw, isSudo){
       var fo=no&&no.children&&no.children[args[0]];
       if(!fo||fo.type!=="file"){ tLine("<span class='t-warn'>open: "+esc(args[0])+": Not found</span>"); break; }
       if(fo.isPdf){
-        if(RESUME_PDF_B64){
-          openPdfViewer(args[0]);
-          tLine("<span class='t-ok'>Opening "+esc(args[0])+" in Document Viewer...</span>");
-        } else {
-          tLine("<span class='t-warn'>No PDF loaded. Use <span class='t-cmd'>get "+esc(args[0])+"</span> to download instead.</span>");
-        }
+        // Compute full relative path for the pdf iframe
+        var resolvedPath = termPath === "~" ? args[0] : termPath.replace(/^~\/?/, "") + "/" + args[0];
+        openPdfViewer(resolvedPath);
+        tLine("<span class='t-ok'>Opening "+esc(args[0])+" in Document Viewer...</span>");
       } else {
         openMousepad(args[0],termPath);
         tLine("<span class='t-ok'>Opening "+esc(args[0])+" in Mousepad...</span>");
@@ -988,9 +1967,11 @@ function execCmd(raw, isSudo){
       var fg=ng&&ng.children&&ng.children[args[0]];
       if(!fg||fg.type!=="file"){ tLine("<span class='t-warn'>get: "+esc(args[0])+": No such file</span>"); break; }
       tLine("<span class='t-muted'>Downloading </span><span class='t-pdf'>"+esc(args[0])+"</span><span class='t-muted'>...</span>");
+      
+      var resolvedPath = termPath === "~" ? args[0] : termPath.replace(/^~\/?/, "") + "/" + args[0];
       if(fg.isPdf){
         var a=document.createElement("a");
-        a.href=args[0]; a.download=args[0];
+        a.href=resolvedPath; a.download=args[0];
         document.body.appendChild(a); a.click(); a.remove();
         tLine("<span class='t-ok'>✓ Download started: "+esc(args[0])+"</span>");
       } else {
@@ -1025,10 +2006,6 @@ function execCmd(raw, isSudo){
   tBlank(); tScroll();
 }
 
-function generateResume(){
-  return "Muhammad Umer Farooq — Resume\n================================\nEmail:    hello@benslates.xyz\nPhone:    +92-321-9400902\nGitHub:   github.com/ben-slates\nLocation: Shahkot, Punjab, Pakistan\n\nEDUCATION\n---------\nBSc Computer Science — Agriculture University (6th Semester)\n\nSKILLS\n------\nSecurity: Kali Linux, Burp Suite, Nmap, Metasploit, Wireshark\nProgramming: Python, Bash, SQL\n\nGOALS\n-----\nShort: eJPT, HTB labs, GitHub writeups\nLong:  OSCP certified Red Teamer, Bug Bounty\n";
-}
-
 /* ── TERMINAL INPUT ───────────────────────────────────────────────────────── */
 var hiddenInput=document.getElementById("hidden-input");
 var cmdDisplay=document.getElementById("term-cmd-display");
@@ -1037,7 +2014,7 @@ hiddenInput.addEventListener("input",function(e){
   if(sudoInputMode){ cmdDisplay.textContent=""; return; }
   termCmdBuf=e.target.value; cmdDisplay.textContent=termCmdBuf;
   saveSession();
-});;
+});
 
 hiddenInput.addEventListener("keydown",function(e){
   if(e.key==="Enter"){
@@ -1077,13 +2054,36 @@ hiddenInput.addEventListener("keydown",function(e){
     tBlank(); tScroll();
   } else if(e.key==="l"&&e.ctrlKey){
     e.preventDefault();
-    document.getElementById("term-output").innerHTML="";
+    document.getElementById("term-output").innerHTML="<div class='term-scanlines'></div>";
   }
 });
 
 document.getElementById("win-term").addEventListener("click",function(){ hiddenInput.focus(); });
 document.getElementById("mob-kb").addEventListener("click",function(){ hiddenInput.focus(); });
 document.addEventListener("dblclick",function(e){e.preventDefault()},{passive:false});
+
+/* ── DISABLE COPY & DEV TOOLS ────────────────────────────────────────────── */
+document.addEventListener("contextmenu", function(e) { e.preventDefault(); });
+document.addEventListener("copy", function(e) { e.preventDefault(); });
+document.addEventListener("cut", function(e) { e.preventDefault(); });
+document.addEventListener("keydown", function(e) {
+  // F12
+  if (e.keyCode === 123) {
+    e.preventDefault();
+  }
+  // Ctrl+Shift+I, Ctrl+Shift+J, Ctrl+Shift+C
+  if (e.ctrlKey && e.shiftKey && (e.key === "I" || e.key === "i" || e.key === "J" || e.key === "j" || e.key === "C" || e.key === "c")) {
+    e.preventDefault();
+  }
+  // Ctrl+U (View Source)
+  if (e.ctrlKey && (e.key === "U" || e.key === "u")) {
+    e.preventDefault();
+  }
+  // Ctrl+S (Save Page)
+  if (e.ctrlKey && (e.key === "S" || e.key === "s")) {
+    e.preventDefault();
+  }
+});
 </script>
 </body>
 </html>
