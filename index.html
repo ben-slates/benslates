@@ -3,11 +3,18 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>Benslates - Cybersecurity & Projects</title>
+<title>Benslates - Cybersecurity &amp; Projects</title>
 <meta name="description" content="Personal website of Benslates featuring cybersecurity, Linux, and projects.">
+
+<!-- Favicons for Desktop & Mobile devices -->
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="icon.png">
+<link rel="apple-touch-icon" sizes="180x180" href="icon.png">
+<link rel="shortcut icon" href="favicon.svg">
+
 <link rel="preload" as="image" href="wallpaper1.png">
 <link rel="preload" as="image" href="wallpaper.png">
+<link rel="preload" as="image" href="mobile_bg.jpg">
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
 <style>
@@ -357,11 +364,22 @@ html,body{width:100%;height:100%;overflow:hidden;font-family:var(--font-ui);back
 
 /* MOUSEPAD */
 #win-mousepad .win-body{flex:1;display:flex;flex-direction:column;overflow:hidden}
-.mp-toolbar{background:rgba(24,6,6,.85);border-bottom:1px solid rgba(220, 30, 30, 0.15);padding:6px 12px;display:flex;gap:8px;flex-shrink:0;align-items:center}
+.mp-toolbar{background:rgba(24,6,6,.92);border-bottom:1px solid rgba(220, 30, 30, 0.15);padding:6px 12px;display:flex;gap:8px;flex-shrink:0;align-items:center;flex-wrap:wrap}
 .mp-tb-btn{background:none;border:1px solid var(--border-color);border-radius:4px;color:#bbb;font-size:11px;padding:4px 10px;cursor:pointer;font-family:var(--font-mono);transition:background .15s, color .15s}
 .mp-tb-btn:hover{background:rgba(220,30,30,.2);color:#fff;border-color:var(--glow-accent)}
-.mp-filename{font-family:var(--font-mono);font-size:11px;color:rgba(220,220,220,.5);margin-left:6px}
-#mp-content{flex:1;background:rgba(5,1,1,.95);color:#dcdcdc;font-family:var(--font-mono);font-size:12.5px;padding:14px;overflow-y:auto;line-height:1.75;border:none;outline:none;resize:none;white-space:pre-wrap;word-break:break-word}
+.mp-save-btn{background:rgba(220,30,30,0.2) !important;color:#fff !important;border-color:rgba(220,30,30,0.4) !important;font-weight:600}
+.mp-save-btn:hover{background:rgba(220,30,30,0.4) !important;box-shadow:0 0 8px rgba(220,30,30,0.3)}
+.mp-path-inp{background:rgba(10,2,2,0.8);border:1px solid var(--border-color);border-radius:4px;color:#fff;font-family:var(--font-mono);font-size:11px;padding:3px 8px;width:180px;outline:none;transition:border-color .15s, box-shadow .15s}
+.mp-path-inp:focus{border-color:var(--glow-accent);box-shadow:0 0 6px rgba(220,30,30,0.35)}
+.mp-status{font-family:var(--font-mono);font-size:11px;color:var(--glow-green);margin-left:auto;opacity:0;transition:opacity 0.3s ease;font-weight:600}
+.mp-status.show{opacity:1}
+#mp-content{flex:1;background:rgba(5,1,1,.97);color:#00ffaa;font-family:var(--font-mono);font-size:13px;padding:14px;overflow-y:auto;line-height:1.6;border:none;outline:none;resize:none;white-space:pre-wrap;word-break:break-word;caret-color:var(--glow-accent)}
+
+/* TERMINAL MOBILE QUICK BAR */
+.term-mob-bar{display:none;background:rgba(18,4,4,0.95);border-top:1px solid rgba(220,30,30,0.18);padding:4px 8px;gap:6px;overflow-x:auto;flex-shrink:0;scrollbar-width:none}
+.term-mob-bar::-webkit-scrollbar{display:none}
+.tmb-btn{background:rgba(220,30,30,0.12);border:1px solid rgba(220,30,30,0.25);border-radius:4px;color:#eee;font-family:var(--font-mono);font-size:11px;padding:4px 10px;cursor:pointer;white-space:nowrap;transition:background .15s}
+.tmb-btn:active{background:rgba(220,30,30,0.4);color:#fff}
 
 .resize-handle{position:absolute;right:0;bottom:0;width:14px;height:14px;cursor:se-resize;z-index:10;opacity:.5;transition: opacity 0.2s;}
 .resize-handle:hover{opacity: 1;}
@@ -420,6 +438,7 @@ html,body{width:100%;height:100%;overflow:hidden;font-family:var(--font-ui);back
 #hidden-input{position:fixed;left:-9999px;opacity:0;font-size:16px}
 #mob-kb{display:none;position:fixed;bottom:16px;right:16px;z-index:999;background:rgba(220,30,30,.85);color:#fff;border:none;border-radius:50%;width:44px;height:44px;font-size:20px;cursor:pointer;align-items:center;justify-content:center;box-shadow:0 4px 16px rgba(0,0,0,.5);transition: transform 0.2s;}
 #mob-kb:hover{transform: scale(1.1);}
+
 @media(max-width:768px){
   .desktop-widget {
     display: none !important;
@@ -679,6 +698,347 @@ html,body{width:100%;height:100%;overflow:hidden;font-family:var(--font-ui);back
   font-size: 10px;
   color: rgba(255,255,255,0.4);
 }
+
+
+
+/* ── ULTRA-PREMIUM MOBILE PORTFOLIO STYLING ── */
+#mobile-portfolio-site { display: none; }
+
+@media (min-width: 769px) {
+  #mobile-portfolio-site { display: none !important; }
+  #screen-login { display: flex; }
+}
+
+@media (max-width: 768px) {
+  html, body { overflow-y: auto !important; height: auto !important; background: #050101 !important; }
+  #screen-login, #screen-desktop, #canvas-particles, #mob-kb { display: none !important; }
+  
+  #mobile-portfolio-site {
+    display: flex !important;
+    flex-direction: column;
+    min-height: 100vh;
+    width: 100vw;
+    background: #050101;
+    color: #fff;
+    font-family: var(--font-ui);
+    padding-bottom: 0;
+    position: relative;
+    z-index: 999999;
+  }
+  
+  /* STRETCHED MOBILE BACKGROUND WITH DOWNLOADED IMAGE */
+  #mobile-portfolio-site::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    background-image:
+      radial-gradient(ellipse 90% 60% at 50% -10%, rgba(220, 30, 30, 0.45) 0%, transparent 80%),
+      radial-gradient(ellipse 70% 50% at 85% 90%, rgba(160, 0, 0, 0.25) 0%, transparent 70%),
+      url('mobile_bg.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    image-rendering: smooth;
+    pointer-events: none;
+  }
+
+  /* TOP SYSTEM STATUS TRAY */
+  .mport-sys-bar {
+    background: rgba(6, 1, 1, 0.96);
+    border-bottom: 1px solid rgba(220, 30, 30, 0.25);
+    padding: 7px 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-family: var(--font-mono);
+    font-size: 10.5px;
+    color: rgba(220, 220, 220, 0.8);
+    backdrop-filter: blur(16px);
+    letter-spacing: 0.04em;
+  }
+  .mport-sys-item { display: flex; align-items: center; gap: 6px; }
+  .mport-sys-val { color: var(--glow-accent); font-weight: 600; }
+  .mport-online { color: var(--glow-green); font-weight: 700; text-shadow: 0 0 8px var(--glow-green); }
+
+  /* HEADER BRAND BAR */
+  .mport-header {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    background: rgba(10, 2, 2, 0.94);
+    border-bottom: 1px solid var(--border-color);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    padding: 14px 18px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0 6px 25px rgba(0,0,0,0.85);
+  }
+  .mport-bs-logo { display: flex; align-items: center; justify-content: center; filter: drop-shadow(0 0 6px rgba(255, 51, 51, 0.4)); }
+  .mport-brand {
+    font-family: var(--font-mono);
+    font-size: 18px;
+    font-weight: 800;
+    color: #fff;
+    letter-spacing: 0.04em;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .mport-brand span { color: var(--glow-accent); text-shadow: 0 0 12px rgba(255, 51, 51, 0.6); }
+  .mport-user-chip {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--glow-green);
+    background: rgba(0, 255, 102, 0.1);
+    border: 1px solid rgba(0, 255, 102, 0.3);
+    padding: 4px 12px;
+    border-radius: 14px;
+    box-shadow: 0 0 12px rgba(0, 255, 102, 0.15);
+  }
+
+  .mport-container {
+    flex: 1;
+    width: 100%;
+    padding: 22px 16px 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+    max-width: 580px;
+    margin: 0 auto;
+  }
+
+  /* PREMIUM HERO CARD */
+  .mport-hero {
+    background: rgba(18, 5, 5, 0.88);
+    border: 1px solid var(--border-color-active);
+    border-radius: 18px;
+    padding: 26px 22px;
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    box-shadow: 0 18px 40px rgba(0,0,0,0.85), 0 0 30px rgba(220, 30, 30, 0.15);
+    position: relative;
+    overflow: hidden;
+  }
+  .mport-hero::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; height: 3px;
+    background: linear-gradient(90deg, transparent, var(--glow-accent), transparent);
+  }
+  .mport-avatar-wrap {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 18px;
+  }
+  .mport-avatar {
+    width: 64px; height: 64px; border-radius: 50%;
+    background: rgba(220, 30, 30, 0.16);
+    border: 2px solid var(--glow-accent);
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 0 24px rgba(220, 30, 30, 0.4);
+    flex-shrink: 0;
+  }
+  .mport-avatar svg { width: 34px; height: 34px; color: var(--glow-accent); }
+  .mport-hero-title-box { display: flex; flex-direction: column; }
+  .mport-hero-tag {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    color: var(--glow-accent);
+    letter-spacing: 0.14em;
+    font-weight: 700;
+    text-transform: uppercase;
+    margin-bottom: 3px;
+  }
+  .mport-hero-name {
+    font-size: 25px;
+    font-weight: 800;
+    color: #fff;
+    letter-spacing: 0.02em;
+    line-height: 1.2;
+  }
+  .mport-hero-sub {
+    font-size: 14px;
+    color: rgba(245, 245, 245, 0.88);
+    line-height: 1.6;
+    margin-bottom: 20px;
+  }
+  .mport-hero-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+  .mport-ib {
+    background: rgba(220, 30, 30, 0.09);
+    border: 1px solid rgba(220, 30, 30, 0.22);
+    border-radius: 12px;
+    padding: 11px 14px;
+    box-shadow: inset 0 0 15px rgba(220, 30, 30, 0.05);
+  }
+  .mport-ib-lbl {
+    font-family: var(--font-mono);
+    font-size: 9.5px;
+    color: rgba(255,255,255,0.48);
+    text-transform: uppercase;
+    margin-bottom: 3px;
+    letter-spacing: 0.05em;
+  }
+  .mport-ib-val {
+    font-family: var(--font-mono);
+    font-size: 12.5px;
+    color: #fff;
+    font-weight: 700;
+  }
+
+  /* PREMIUM CARDS */
+  .mport-card {
+    background: rgba(18, 5, 5, 0.88);
+    border: 1px solid var(--border-color);
+    border-radius: 18px;
+    padding: 22px;
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    box-shadow: 0 14px 35px rgba(0,0,0,0.75), 0 0 20px rgba(220, 30, 30, 0.06);
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .mport-title {
+    font-family: var(--font-mono);
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--glow-accent);
+    letter-spacing: 0.06em;
+    margin-bottom: 18px;
+    border-bottom: 1px solid rgba(220,30,30,0.2);
+    padding-bottom: 10px;
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  /* SKILL TAGS */
+  .mport-skill-group { margin-bottom: 16px; }
+  .mport-sg-title {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: rgba(255,255,255,0.52);
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  .mport-skill-tags { display: flex; flex-wrap: wrap; gap: 8px; }
+  .mport-stag {
+    font-family: var(--font-mono);
+    font-size: 11.5px;
+    background: rgba(220,30,30,0.12);
+    border: 1px solid rgba(220,30,30,0.25);
+    color: #f5f5f5;
+    padding: 6px 14px;
+    border-radius: 10px;
+    transition: background 0.15s, border-color 0.15s;
+  }
+
+  /* CERTIFICATIONS LIST */
+  .mport-cert-item {
+    background: rgba(220,30,30,0.07);
+    border: 1px solid rgba(220,30,30,0.18);
+    border-radius: 12px;
+    padding: 15px;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+  }
+  .mport-cert-name {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    color: #fff;
+    font-weight: 700;
+  }
+  .mport-cert-sub {
+    font-size: 10.5px;
+    color: rgba(255,255,255,0.48);
+    font-family: var(--font-mono);
+    margin-top: 4px;
+  }
+  .mport-cert-btn {
+    font-family: var(--font-mono);
+    font-size: 11.5px;
+    padding: 8px 16px;
+    background: rgba(220,30,30,0.28);
+    border: 1px solid rgba(220,30,30,0.5);
+    border-radius: 8px;
+    color: #fff;
+    text-decoration: none;
+    white-space: nowrap;
+    font-weight: 700;
+    box-shadow: 0 4px 14px rgba(220,30,30,0.2);
+    transition: background 0.15s, transform 0.1s;
+  }
+  .mport-cert-btn:active { background: rgba(220,30,30,0.5); transform: scale(0.98); }
+
+  /* CONTACT LIST */
+  .mport-contact-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 16px;
+    background: rgba(220,30,30,0.07);
+    border: 1px solid rgba(220,30,30,0.18);
+    border-radius: 12px;
+    margin-bottom: 10px;
+    font-family: var(--font-mono);
+    font-size: 13px;
+  }
+  .mport-cr-lbl { color: rgba(255,255,255,0.52); font-weight: 500; }
+  .mport-cr-val { color: var(--glow-green); font-weight: 600; }
+  .mport-cr-val a { color: var(--glow-blue); text-decoration: none; }
+
+  /* PREMIUM MOBILE FOOTER */
+  .mport-footer {
+    margin-top: auto;
+    width: 100%;
+    padding: 24px 16px;
+    border-top: 1px solid rgba(220, 30, 30, 0.2);
+    background: rgba(8, 2, 2, 0.95);
+    backdrop-filter: blur(16px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    text-align: center;
+  }
+  .mport-motto {
+    font-family: var(--font-mono);
+    font-size: 10.5px;
+    color: rgba(220, 30, 30, 0.55);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+  }
+  .mport-copyright {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: rgba(240, 240, 240, 0.45);
+  }
+  .mport-top-btn {
+    margin-top: 4px;
+    background: rgba(220, 30, 30, 0.15);
+    border: 1px solid rgba(220, 30, 30, 0.3);
+    color: #fff;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    padding: 6px 16px;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: background 0.15s;
+  }
+  .mport-top-btn:active { background: rgba(220, 30, 30, 0.4); }
+}
+
 </style>
 </head>
 <body>
@@ -788,6 +1148,7 @@ html,body{width:100%;height:100%;overflow:hidden;font-family:var(--font-ui);back
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18.36 6.64a9 9 0 1 1-12.73 0"/><line x1="12" y1="2" x2="12" y2="12"/></svg>
             <span>Log Out</span>
           </div>
+          
         </div>
       </div>
     </div>
@@ -880,6 +1241,15 @@ html,body{width:100%;height:100%;overflow:hidden;font-family:var(--font-ui);back
       <div class="win-body" id="term-output">
         <div class="term-scanlines"></div>
       </div>
+      <div class="term-mob-bar" id="term-mob-bar">
+        <button class="tmb-btn" onclick="sendMobileKey('Tab')">Tab</button>
+        <button class="tmb-btn" onclick="sendMobileKey('ArrowUp')">▲</button>
+        <button class="tmb-btn" onclick="sendMobileKey('ArrowDown')">▼</button>
+        <button class="tmb-btn" onclick="sendMobileKey('CtrlC')">Ctrl+C</button>
+        <button class="tmb-btn" onclick="sendMobileCmd('ls')">ls</button>
+        <button class="tmb-btn" onclick="sendMobileCmd('clear')">clear</button>
+        <button class="tmb-btn" onclick="sendMobileCmd('help')">help</button>
+      </div>
       <div id="term-input-line">
         <span><span class="t-user" id="tp-user">user</span><span class="t-at">@</span><span class="t-host">kali</span><span class="t-colon">:</span><span class="t-path" id="tp-path">~</span><span class="t-dollar">$ </span></span><span id="term-cmd-display"></span><span id="term-cursor"></span>
       </div>
@@ -938,12 +1308,12 @@ html,body{width:100%;height:100%;overflow:hidden;font-family:var(--font-ui);back
       </div>
       <div class="win-body">
         <div class="mp-toolbar">
-          <button class="mp-tb-btn">File</button>
-          <button class="mp-tb-btn">Edit</button>
-          <button class="mp-tb-btn">View</button>
-          <span class="mp-filename" id="mp-filename-lbl"></span>
+          <button class="mp-tb-btn mp-save-btn" onclick="saveMousepadFile()">💾 Save</button>
+          <button class="mp-tb-btn" onclick="newMousepadFile()">📄 New</button>
+          <input type="text" id="mp-filepath-inp" class="mp-path-inp" placeholder="~/filename.txt" />
+          <span class="mp-status" id="mp-status-lbl"></span>
         </div>
-        <pre id="mp-content"></pre>
+        <textarea id="mp-content" class="mp-editor" placeholder="Type content here... (Press Ctrl+S to save to file system)" spellcheck="false"></textarea>
       </div>
       <div class="resize-handle" id="rh-mousepad"></div>
     </div>
@@ -1080,7 +1450,7 @@ var FS={
       "",
       "<span class='t-key'>Degree  </span> BSc Computer Science",
       "<span class='t-key'>Uni     </span> Agriculture University, Punjab",
-      "<span class='t-key'>Semester</span> 6th (In Progress)",
+      "<span class='t-key'>Semester</span> 7th (In Progress)",
       "",
       "<span class='t-key'>Subjects</span> Networks • OS • Databases"
     ]},
@@ -1092,10 +1462,19 @@ var FS={
       "  <span class='t-red'>•</span> Web App Security",
       "  <span class='t-red'>•</span> Network Security &amp; Exploitation"
     ]},
+        "rynexsecurity.txt":{type:"file",icon:"🛡️",content:[
+      "<span class='t-section'>── CURRENT ROLE / WORK ──</span>",
+      "",
+      "<span class='t-key'>Company </span> <span class='t-ok'>Rynex Security</span>",
+      "<span class='t-key'>Role    </span> Cybersecurity / Red Teamer",
+      "<span class='t-key'>Status  </span> Currently Working",
+      "<span class='t-key'>Website </span> <span class='t-dir'>rynexsecurity.com</span>",
+      "<span class='t-key'>Email   </span> <span class='t-ok'>umerfarooq@rynexsecurity.com</span>"
+    ]},
     "contact.txt":{type:"file",icon:"📧",content:[
       "<span class='t-section'>── CONTACT ──</span>",
       "",
-      "<span class='t-key'>Email </span> <span class='t-dir'>hello@benslates.xyz</span>",
+      "<span class='t-key'>Email </span> <span class='t-dir'>umerfarooq@rynexsecurity.com</span>",
       "<span class='t-key'>Phone </span> <span class='t-ok'>+92-321-9400902</span>",
       "<span class='t-key'>GitHub</span> <span class='t-dir'>github.com/ben-slates</span>"
     ]},
@@ -1181,6 +1560,87 @@ function getNode(path){
   var n=FS["~"];
   for(var i=0;i<parts.length;i++){ if(n.children&&n.children[parts[i]]) n=n.children[parts[i]]; else return null; }
   return n;
+}
+
+function saveFS(){
+  try {
+    sessionStorage.setItem("kali_vfs_data", JSON.stringify(FS));
+  } catch(e){}
+}
+
+function loadFS(){
+  try {
+    // Clear any persistent localStorage data so user-created files are wiped on tab close
+    localStorage.removeItem("kali_vfs_data");
+    
+    var saved = sessionStorage.getItem("kali_vfs_data");
+    if(saved){
+      var parsed = JSON.parse(saved);
+      if(parsed && parsed["~"]) FS = parsed;
+    }
+  } catch(e){}
+}
+loadFS();
+
+// Auto-clean VFS on tab unload/close
+window.addEventListener("beforeunload", function(){
+  try {
+    sessionStorage.removeItem("kali_vfs_data");
+    localStorage.removeItem("kali_vfs_data");
+  } catch(e){}
+});
+
+function setNodeFile(fullPath, content){
+  if(!fullPath) fullPath = "~/untitled.txt";
+  if(!fullPath.startsWith("~") && !fullPath.startsWith("/")) fullPath = (termPath === "~" ? "~/" : termPath + "/") + fullPath;
+  var cleanPath = fullPath.replace(/^\/home\/[^\/]+/, "~");
+  var parts = cleanPath.replace(/^~\/?/,"").split("/").filter(Boolean);
+  var filename = parts.pop();
+  if(!filename) return false;
+  
+  var curr = FS["~"];
+  for(var i = 0; i < parts.length; i++){
+    var p = parts[i];
+    if(!curr.children[p]) {
+      curr.children[p] = { type: "dir", children: {} };
+    }
+    curr = curr.children[p];
+  }
+  
+  var lines = Array.isArray(content) ? content : String(content).split("\n");
+  curr.children[filename] = {
+    type: "file",
+    icon: "📄",
+    content: lines
+  };
+  saveFS();
+  var wf = document.getElementById("win-files");
+  if(wf && wf.style.display !== "none"){
+    renderFM(fmPath);
+  }
+  return true;
+}
+
+function deleteNodeFile(fullPath){
+  if(!fullPath.startsWith("~") && !fullPath.startsWith("/")) fullPath = (termPath === "~" ? "~/" : termPath + "/") + fullPath;
+  var cleanPath = fullPath.replace(/^\/home\/[^\/]+/, "~");
+  var parts = cleanPath.replace(/^~\/?/,"").split("/").filter(Boolean);
+  var filename = parts.pop();
+  var curr = FS["~"];
+  for(var i = 0; i < parts.length; i++){
+    if(!curr.children[parts[i]]) return false;
+    curr = curr.children[parts[i]];
+  }
+  if(curr.children && curr.children[filename]){
+    delete curr.children[filename];
+    saveFS();
+    var wf = document.getElementById("win-files");
+    if(wf && wf.style.display !== "none"){
+      renderFM(fmPath);
+    }
+    return true;
+  }
+  return false;
 }
 
 function getIconHtml(node, name) {
@@ -1270,30 +1730,39 @@ document.getElementById("login-btn").addEventListener("click", doLogin);
 document.getElementById("inp-pass").addEventListener("keydown",function(e){ if(e.key==="Enter") doLogin(); });
 document.getElementById("inp-user").addEventListener("keydown",function(e){ if(e.key==="Enter") document.getElementById("inp-pass").focus(); });
 window.addEventListener("load",function(){
-  initBackgroundParticles();
-  var session = loadSession();
-  
+  // If user on mobile phone explicitly requested "Desktop Site", width > 768px, load Desktop OS!
+  var isMobile = window.innerWidth <= 768;
+
   // Set up launcher static icons
-  document.getElementById("icon-l-term").innerHTML = ICONS.terminal;
-  document.getElementById("icon-l-files").innerHTML = ICONS.folder;
-  document.getElementById("icon-l-editor").innerHTML = ICONS.file;
-  document.getElementById("icon-l-resume").innerHTML = ICONS.pdf;
-  document.getElementById("icon-l-certs").innerHTML = ICONS.folder;
-  document.getElementById("icon-l-skills").innerHTML = ICONS.folder;
+  var iconLTerm = document.getElementById("icon-l-term"); if(iconLTerm) iconLTerm.innerHTML = ICONS.terminal;
+  var iconLFiles = document.getElementById("icon-l-files"); if(iconLFiles) iconLFiles.innerHTML = ICONS.folder;
+  var iconLEditor = document.getElementById("icon-l-editor"); if(iconLEditor) iconLEditor.innerHTML = ICONS.file;
+  var iconLResume = document.getElementById("icon-l-resume"); if(iconLResume) iconLResume.innerHTML = ICONS.pdf;
+  var iconLCerts = document.getElementById("icon-l-certs"); if(iconLCerts) iconLCerts.innerHTML = ICONS.folder;
+  var iconLSkills = document.getElementById("icon-l-skills"); if(iconLSkills) iconLSkills.innerHTML = ICONS.folder;
 
   // Set up file manager sidebar icons
-  document.getElementById("fmsi-home").innerHTML = ICONS.home;
-  document.getElementById("fmsi-skills").innerHTML = ICONS.folder;
-  document.getElementById("fmsi-certs").innerHTML = ICONS.folder;
+  var fmsiH = document.getElementById("fmsi-home"); if(fmsiH) fmsiH.innerHTML = ICONS.home;
+  var fmsiS = document.getElementById("fmsi-skills"); if(fmsiS) fmsiS.innerHTML = ICONS.folder;
+  var fmsiC = document.getElementById("fmsi-certs"); if(fmsiC) fmsiC.innerHTML = ICONS.folder;
 
-  if (session && session.isLoggedIn) {
-    document.getElementById("screen-login").style.display="none";
-    var desk=document.getElementById("screen-desktop");
-    desk.style.display="flex"; desk.style.flexDirection="column";
-    initDesktop();
+  if(isMobile){
+    // Mobile View: Hide Desktop screens and do NOT focus login input
+    var sl = document.getElementById("screen-login"); if(sl) sl.style.setProperty("display", "none", "important");
+    var sd = document.getElementById("screen-desktop"); if(sd) sd.style.setProperty("display", "none", "important");
+    var ms = document.getElementById("mobile-portfolio-site"); if(ms) ms.style.setProperty("display", "block", "important");
+    
   } else {
-    document.getElementById("inp-user").value=USERNAME;
-    document.getElementById("inp-user").focus();
+    initBackgroundParticles();
+    var session = loadSession();
+    if (session && session.isLoggedIn) {
+      var sl = document.getElementById("screen-login"); if(sl) sl.style.display="none";
+      var desk = document.getElementById("screen-desktop"); if(desk) { desk.style.display="flex"; desk.style.flexDirection="column"; }
+      initDesktop();
+    } else {
+      var inpU = document.getElementById("inp-user");
+      if(inpU) { inpU.value = USERNAME; inpU.focus(); }
+    }
   }
 });
 
@@ -1346,7 +1815,7 @@ function doLogout(){
   document.getElementById("login-btn").disabled = false;
   document.getElementById("term-output").innerHTML="<div class='term-scanlines'></div>";
   termPath="~"; termCmdBuf=""; termHistory=[]; termHistIdx=-1; sudoQueue=null; sudoInputMode=false; sudoAuthed=false;
-  ["win-term","win-files","win-mousepad","win-pdfview"].forEach(function(id){
+  ["win-term","win-files","win-mousepad","win-pdfview","win-about"].forEach(function(id){
     var w=document.getElementById(id); w.style.display="none";
   });
   updateTaskbar();
@@ -1390,6 +1859,14 @@ function initDesktop(){
     const cpu = Math.floor(Math.random() * 18) + 4;
     document.getElementById("cpu-percent").textContent = `${cpu}%`;
     document.getElementById("cpu-bar").style.width = `${cpu}%`;
+
+    // RAM fluctuation
+    const ramGb = (2.1 + (Math.random() * 0.9)).toFixed(1);
+    const ramPct = Math.round((ramGb / 16.0) * 100);
+    var ramVal = document.getElementById("ram-value");
+    var ramBar = document.getElementById("ram-bar");
+    if(ramVal) ramVal.textContent = `${ramGb} GB / 16 GB`;
+    if(ramBar) ramBar.style.width = `${ramPct}%`;
   }, 1000);
 }
 
@@ -1529,7 +2006,7 @@ document.addEventListener("click", function() {
 
 /* ── WINDOW MANAGEMENT ────────────────────────────────────────────────────── */
 var winOrder=[];
-var ALL_WINS=["win-term","win-files","win-mousepad","win-pdfview"];
+var ALL_WINS=["win-term","win-files","win-mousepad","win-pdfview","win-about"];
 
 function focusWin(id){
   var w=document.getElementById(id);
@@ -1651,28 +2128,91 @@ function openFiles(path){
   var w=document.getElementById("win-files"); w.style.display="flex";
   focusWin("win-files"); updateTaskbar(); renderFM(path||"~");
 }
+
+var currentMpPath = "~/untitled.txt";
+
 function openMousepad(filename,path){
   closeAllMenus();
-  var node=filename?getNode(path||termPath):null;
-  var f=node&&node.children&&node.children[filename];
-  // If it's a PDF, redirect to PDF viewer
-  if(f&&f.isPdf){ 
-    var resolvedPath = (path || termPath) === "~" ? filename : (path || termPath) + "/" + filename;
+  var targetDir = path || termPath || "~";
+  var node = filename ? getNode(targetDir) : null;
+  var f = node && node.children && node.children[filename];
+  
+  if(f && f.isPdf){ 
+    var resolvedPath = targetDir === "~" ? filename : targetDir + "/" + filename;
     openPdfViewer(resolvedPath); 
     return; 
   }
-  var w=document.getElementById("win-mousepad"); w.style.display="flex";
-  focusWin("win-mousepad"); updateTaskbar();
-  if(filename&&f&&f.type==="file"){
-    document.getElementById("mp-title-file").textContent=filename;
-    document.getElementById("mp-filename-lbl").textContent=filename;
-    document.getElementById("mp-content").textContent=f.content.map(function(l){return l.replace(/<[^>]+>/g,"")}).join("\n");
+  var w = document.getElementById("win-mousepad"); 
+  w.style.display = "flex";
+  focusWin("win-mousepad"); 
+  updateTaskbar();
+  
+  var inp = document.getElementById("mp-filepath-inp");
+  var area = document.getElementById("mp-content");
+  var title = document.getElementById("mp-title-file");
+  
+  if(filename && f && f.type === "file"){
+    var fullPath = targetDir === "~" ? "~/" + filename : targetDir + "/" + filename;
+    currentMpPath = fullPath;
+    title.textContent = filename;
+    inp.value = fullPath;
+    area.value = Array.isArray(f.content) ? f.content.map(function(l){ return l.replace(/<[^>]+>/g, ""); }).join("\n") : String(f.content || "");
+  } else if (filename) {
+    var fullPath = targetDir === "~" ? "~/" + filename : targetDir + "/" + filename;
+    currentMpPath = fullPath;
+    title.textContent = filename;
+    inp.value = fullPath;
+    area.value = "";
   } else {
-    document.getElementById("mp-title-file").textContent="Untitled";
-    document.getElementById("mp-filename-lbl").textContent="";
-    document.getElementById("mp-content").textContent="";
+    currentMpPath = "~/untitled.txt";
+    title.textContent = "Untitled";
+    inp.value = "~/untitled.txt";
+    area.value = "";
+  }
+  setTimeout(function(){ area.focus(); }, 100);
+}
+
+function saveMousepadFile(){
+  var inp = document.getElementById("mp-filepath-inp");
+  var area = document.getElementById("mp-content");
+  var path = inp.value.trim() || "~/untitled.txt";
+  var text = area.value;
+  
+  var ok = setNodeFile(path, text);
+  if(ok){
+    var fname = path.split("/").pop();
+    document.getElementById("mp-title-file").textContent = fname;
+    showMpStatus("Saved ✓", false);
+  } else {
+    showMpStatus("Error saving", true);
   }
 }
+
+function newMousepadFile(){
+  openMousepad(null, null);
+}
+
+function showMpStatus(msg, isErr){
+  var st = document.getElementById("mp-status-lbl");
+  if(!st) return;
+  st.textContent = msg;
+  st.style.color = isErr ? "var(--glow-accent)" : "var(--glow-green)";
+  st.classList.add("show");
+  setTimeout(function(){ st.classList.remove("show"); }, 2200);
+}
+
+document.addEventListener("DOMContentLoaded", function(){
+  var area = document.getElementById("mp-content");
+  if(area){
+    area.addEventListener("keydown", function(e){
+      if((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === "s"){
+        e.preventDefault();
+        saveMousepadFile();
+      }
+    });
+  }
+});
+
 var currentPdfFile="resume.pdf";
 function openPdfViewer(filepath){
   currentPdfFile=filepath||"resume.pdf";
@@ -1796,7 +2336,7 @@ function bootTerm(){
   
   tBlank();
 
-  // 🔥 ASCII LOGO (Spells BENSLATES)
+  // ASCII LOGO (Spells BENSLATES)
   tLine('<span style="color:var(--glow-accent);text-shadow:0 0 8px var(--glow-accent)">██████╗ ███████╗███╗   ██╗███████╗██╗      █████╗ ████████╗███████╗███████╗</span>');
   tLine('<span style="color:var(--glow-accent);text-shadow:0 0 8px var(--glow-accent)">██╔══██╗██╔════╝████╗  ██║██╔════╝██║     ██╔══██╗╚══██╔══╝██╔════╝██╔════╝</span>');
   tLine('<span style="color:var(--glow-accent);text-shadow:0 0 8px var(--glow-accent)">██████╔╝█████╗  ██╔██╗ ██║███████╗██║     ███████║   ██║   █████╗  ███████╗</span>');
@@ -1896,6 +2436,10 @@ function execCmd(raw, isSudo){
       tLine("  <span class='t-cmd'>ls</span>              List directory contents");
       tLine("  <span class='t-cmd'>cd &lt;dir&gt;</span>        Change directory");
       tLine("  <span class='t-cmd'>cat &lt;file&gt;</span>      Read file contents");
+      tLine("  <span class='t-cmd'>touch &lt;file&gt;</span>    Create file");
+      tLine("  <span class='t-cmd'>mkdir &lt;dir&gt;</span>     Create directory");
+      tLine("  <span class='t-cmd'>rm &lt;file&gt;</span>       Delete file or directory");
+      tLine("  <span class='t-cmd'>nano &lt;file&gt;</span>     Edit file in Mousepad");
       tLine("  <span class='t-cmd'>get &lt;file&gt;</span>      Download file to your device");
       tLine("  <span class='t-cmd'>open &lt;file&gt;</span>     Open file in viewer");
       tLine("  <span class='t-cmd'>files</span>           Open File Manager");
@@ -1943,13 +2487,48 @@ function execCmd(raw, isSudo){
       if(fc.isPdf){ tLine("<span class='t-warn'>cat: "+esc(args[0])+": binary file — use <span class='t-cmd'>get "+esc(args[0])+"</span> to download or <span class='t-cmd'>open "+esc(args[0])+"</span> to view</span>"); break; }
       fc.content.forEach(function(l){tLine(l)}); break;
     }
+    case "nano":{
+      openMousepad(args[0]||null, termPath);
+      tLine("<span class='t-ok'>Opening "+esc(args[0]||"new file")+" in Mousepad...</span>");
+      break;
+    }
+    case "touch":{
+      if(!args[0]){ tLine("<span class='t-warn'>Usage: touch &lt;filename&gt;</span>"); break; }
+      var targetPath = termPath === "~" ? "~/" + args[0] : termPath + "/" + args[0];
+      setNodeFile(targetPath, "");
+      tLine("<span class='t-ok'>Created file: "+esc(args[0])+"</span>");
+      break;
+    }
+    case "mkdir":{
+      if(!args[0]){ tLine("<span class='t-warn'>Usage: mkdir &lt;dirname&gt;</span>"); break; }
+      var targetDirPath = termPath === "~" ? "~/" + args[0] : termPath + "/" + args[0];
+      var cleanPath = targetDirPath.replace(/^~\/?/,"");
+      var curr = FS["~"];
+      var parts = cleanPath.split("/").filter(Boolean);
+      for(var i=0; i<parts.length; i++){
+        if(!curr.children[parts[i]]) curr.children[parts[i]] = {type:"dir", children:{}};
+        curr = curr.children[parts[i]];
+      }
+      saveFS();
+      var wf = document.getElementById("win-files");
+      if(wf && wf.style.display !== "none") renderFM(fmPath);
+      tLine("<span class='t-ok'>Created directory: "+esc(args[0])+"</span>");
+      break;
+    }
+    case "rm":{
+      if(!args[0]){ tLine("<span class='t-warn'>Usage: rm &lt;filename&gt;</span>"); break; }
+      var targetRmPath = termPath === "~" ? "~/" + args[0] : termPath + "/" + args[0];
+      var deleted = deleteNodeFile(targetRmPath);
+      if(deleted) tLine("<span class='t-ok'>Removed: "+esc(args[0])+"</span>");
+      else tLine("<span class='t-warn'>rm: "+esc(args[0])+": No such file or directory</span>");
+      break;
+    }
     case "open":{
       if(!args[0]){ tLine("<span class='t-warn'>Usage: open &lt;file&gt;</span>"); break; }
       var no=getNode(termPath);
       var fo=no&&no.children&&no.children[args[0]];
       if(!fo||fo.type!=="file"){ tLine("<span class='t-warn'>open: "+esc(args[0])+": Not found</span>"); break; }
       if(fo.isPdf){
-        // Compute full relative path for the pdf iframe
         var resolvedPath = termPath === "~" ? args[0] : termPath.replace(/^~\/?/, "") + "/" + args[0];
         openPdfViewer(resolvedPath);
         tLine("<span class='t-ok'>Opening "+esc(args[0])+" in Document Viewer...</span>");
@@ -2058,9 +2637,40 @@ hiddenInput.addEventListener("keydown",function(e){
   }
 });
 
+function sendMobileKey(key){
+  var inp = document.getElementById("hidden-input");
+  var disp = document.getElementById("term-cmd-display");
+  inp.focus();
+  if(key === "Tab"){
+    var event = new KeyboardEvent("keydown", { key: "Tab", bubbles: true });
+    inp.dispatchEvent(event);
+  } else if(key === "ArrowUp"){
+    var event = new KeyboardEvent("keydown", { key: "ArrowUp", bubbles: true });
+    inp.dispatchEvent(event);
+  } else if(key === "ArrowDown"){
+    var event = new KeyboardEvent("keydown", { key: "ArrowDown", bubbles: true });
+    inp.dispatchEvent(event);
+  } else if(key === "CtrlC"){
+    termCmdBuf = "";
+    inp.value = "";
+    disp.textContent = "";
+    tLine(promptHTML(termPath, "^C"));
+    tScroll();
+  }
+}
+
+function sendMobileCmd(cmd){
+  var inp = document.getElementById("hidden-input");
+  inp.focus();
+  termCmdBuf = cmd;
+  inp.value = cmd;
+  document.getElementById("term-cmd-display").textContent = cmd;
+  var event = new KeyboardEvent("keydown", { key: "Enter", bubbles: true });
+  inp.dispatchEvent(event);
+}
+
 document.getElementById("win-term").addEventListener("click",function(){ hiddenInput.focus(); });
 document.getElementById("mob-kb").addEventListener("click",function(){ hiddenInput.focus(); });
-document.addEventListener("dblclick",function(e){e.preventDefault()},{passive:false});
 
 /* ── DISABLE COPY & DEV TOOLS ────────────────────────────────────────────── */
 document.addEventListener("contextmenu", function(e) { e.preventDefault(); });
@@ -2079,11 +2689,220 @@ document.addEventListener("keydown", function(e) {
   if (e.ctrlKey && (e.key === "U" || e.key === "u")) {
     e.preventDefault();
   }
-  // Ctrl+S (Save Page)
+  // Ctrl+S (Save Page, unless in Mousepad)
   if (e.ctrlKey && (e.key === "S" || e.key === "s")) {
+    if (e.target && (e.target.id === "mp-content" || e.target.id === "mp-filepath-inp")) return;
     e.preventDefault();
   }
 });
+
+/* LIVE MOBILE CPU & RAM FLUCTUATION TICKER */
+function startMobileTicker(){
+  setInterval(function(){
+    var c = document.getElementById("mport-cpu");
+    if(c){
+      var val = Math.floor(Math.random() * 16) + 4;
+      c.textContent = val + "%";
+    }
+    var r = document.getElementById("mport-ram");
+    if(r){
+      var ramGb = (2.1 + (Math.random() * 0.9)).toFixed(1);
+      r.textContent = ramGb + "GB";
+    }
+  }, 1000);
+}
+document.addEventListener("DOMContentLoaded", startMobileTicker);
+
 </script>
+<div id="mobile-portfolio-site">
+  <!-- TOP DESKTOP SYSTEM STATUS TRAY -->
+  <div class="mport-sys-bar">
+    <div class="mport-sys-item">
+      <span>OS:</span> <span class="mport-sys-val">Kali</span>
+    </div>
+    <div class="mport-sys-item">
+      <span>CPU:</span> <span class="mport-sys-val" id="mport-cpu">12%</span>
+    </div>
+    <div class="mport-sys-item">
+      <span>RAM:</span> <span class="mport-sys-val" id="mport-ram">2.4GB</span>
+    </div>
+    <div class="mport-sys-item">
+      <span>STATUS:</span> <span class="mport-online">ONLINE ●</span>
+    </div>
+  </div>
+
+  <!-- STICKY HEADER -->
+  <div class="mport-header">
+    <div class="mport-brand">
+      <div class="mport-bs-logo">
+        <svg viewBox="0 0 32 32" width="22" height="22" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="2" y="2" width="28" height="28" rx="6" fill="rgba(220, 30, 30, 0.12)" stroke="var(--glow-accent)" stroke-width="1.5"/>
+          <text x="7" y="21" font-family="var(--font-mono)" font-size="14" font-weight="900" fill="#ffffff" letter-spacing="-1">B</text>
+          <text x="17" y="21" font-family="var(--font-mono)" font-size="14" font-weight="900" fill="var(--glow-accent)" letter-spacing="-1">S</text>
+        </svg>
+      </div>
+      <span>benslates</span>
+    </div>
+    <div class="mport-user-chip">root@kali:~#</div>
+  </div>
+
+  <div class="mport-container">
+    
+        </div>
+
+    <!-- HERO CARD -->
+    <div class="mport-hero">
+      <div class="mport-avatar-wrap">
+        <div class="mport-avatar">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </div>
+        <div class="mport-hero-title-box">
+          <div class="mport-hero-tag">[ RED TEAM / ETHICAL HACKING ]</div>
+          <div class="mport-hero-name">Muhammad Umer Farooq</div>
+        </div>
+      </div>
+      <div class="mport-hero-sub">Aspiring Red Teamer &amp; Cybersecurity Student specializing in Offensive Security, Penetration Testing, Network Exploitation, and Web Security.</div>
+      
+      <div class="mport-hero-grid">
+        <div class="mport-ib">
+          <div class="mport-ib-lbl">Degree</div>
+          <div class="mport-ib-val">BSc Computer Science</div>
+        </div>
+        <div class="mport-ib">
+          <div class="mport-ib-lbl">Semester</div>
+          <div class="mport-ib-val">7th (In Progress)</div>
+        </div>
+        <div class="mport-ib">
+          <div class="mport-ib-lbl">Location</div>
+          <div class="mport-ib-val">Shahkot, Pakistan</div>
+        </div>
+        <div class="mport-ib">
+          <div class="mport-ib-lbl">Age</div>
+          <div class="mport-ib-val">22 Years</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SKILLS & TOOLS -->
+    <div class="mport-card">
+      <div class="mport-title">
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+        Offensive Security Arsenal
+      </div>
+      
+      <div class="mport-skill-group">
+        <div class="mport-sg-title">Tools &amp; Frameworks</div>
+        <div class="mport-skill-tags">
+          <span class="mport-stag">Kali Linux</span>
+          <span class="mport-stag">Burp Suite Pro</span>
+          <span class="mport-stag">Nmap</span>
+          <span class="mport-stag">Metasploit</span>
+          <span class="mport-stag">Wireshark</span>
+          <span class="mport-stag">Gobuster</span>
+          <span class="mport-stag">Hashcat</span>
+        </div>
+      </div>
+
+      <div class="mport-skill-group" style="margin-bottom:0;">
+        <div class="mport-sg-title">Core Competencies</div>
+        <div class="mport-skill-tags">
+          <span class="mport-stag">Recon &amp; Enumeration</span>
+          <span class="mport-stag">Linux &amp; Windows PrivEsc</span>
+          <span class="mport-stag">Web Security (SQLi, XSS, CSRF)</span>
+          <span class="mport-stag">Python</span>
+          <span class="mport-stag">Bash</span>
+          <span class="mport-stag">SQL</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- CERTIFICATIONS & LABS -->
+    <div class="mport-card">
+      <div class="mport-title">
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/></svg>
+        Certifications &amp; Labs
+      </div>
+      
+      <div class="mport-cert-item">
+        <div>
+          <div class="mport-cert-name">Hack The Box — Mythical Machine</div>
+          <div class="mport-cert-sub">HTBCERT-3620BFA7E0</div>
+        </div>
+        <a href="certs/Mythical.pdf" download class="mport-cert-btn">PDF</a>
+      </div>
+
+      <div class="mport-cert-item">
+        <div>
+          <div class="mport-cert-name">Hack The Box — Puppet Machine</div>
+          <div class="mport-cert-sub">HTBCERT-D149A5DFAD</div>
+        </div>
+        <a href="certs/Puppet.pdf" download class="mport-cert-btn">PDF</a>
+      </div>
+
+      <div class="mport-cert-item">
+        <div>
+          <div class="mport-cert-name">Cisco Packet Tracer</div>
+          <div class="mport-cert-sub">Networking Fundamentals</div>
+        </div>
+        <a href="certs/Getting_Started_with_Cisco_Packet_Tracer.pdf" download class="mport-cert-btn">PDF</a>
+      </div>
+
+      <div class="mport-cert-item">
+        <div>
+          <div class="mport-cert-name">Introduction to Cybersecurity</div>
+          <div class="mport-cert-sub">Cisco Networking Academy</div>
+        </div>
+        <a href="certs/Introduction_to_Cybersecurity.pdf" download class="mport-cert-btn">PDF</a>
+      </div>
+
+      <div style="margin-top:16px;display:flex;justify-content:center;">
+        <a href="resume.pdf" download class="mport-cert-btn" style="padding:10px 24px;font-size:12px;background:rgba(220,30,30,0.35);border-color:var(--glow-accent);">Download Resume (PDF)</a>
+      </div>
+    </div>
+
+    <!-- CURRENT WORK SECTION -->
+    <div class="mport-card">
+      <div class="mport-title">
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+        Current Role &amp; Work
+      </div>
+      <div style="background:rgba(220,30,30,0.08);border:1px solid rgba(220,30,30,0.22);border-radius:12px;padding:16px;margin-bottom:10px;">
+        <div style="font-family:var(--font-mono);font-size:10px;color:var(--glow-accent);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:4px;font-weight:700;">[ ACTIVE EMPLOYMENT ]</div>
+        <div style="font-size:17px;font-weight:800;color:#fff;margin-bottom:4px;">Rynex Security</div>
+        <div style="font-family:var(--font-mono);font-size:12.5px;color:var(--glow-green);margin-bottom:12px;font-weight:600;">Cybersecurity &amp; Red Teaming Specialist</div>
+        <div style="font-size:13px;color:rgba(240,240,240,0.85);line-height:1.6;margin-bottom:14px;">Currently working at Rynex Security performing offensive security assessments, vulnerability research, and penetration testing.</div>
+        <div style="display:flex;align-items:center;justify-content:space-between;padding-top:10px;border-top:1px solid rgba(220,30,30,0.15);">
+          <span style="font-family:var(--font-mono);font-size:11px;color:rgba(255,255,255,0.5);">OFFICIAL WEBSITE</span>
+          <a href="https://rynexsecurity.com" target="_blank" class="mport-cert-btn" style="padding:6px 14px;font-size:11.5px;">rynexsecurity.com ↗</a>
+        </div>
+      </div>
+    <!-- CONTACT CARD -->
+    <div class="mport-card">
+      <div class="mport-title">
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        Contact Information
+      </div>
+      <div class="mport-contact-row">
+        <span class="mport-cr-lbl">EMAIL</span>
+        <span class="mport-cr-val"><a href="mailto:umerfarooq@rynexsecurity.com">umerfarooq@rynexsecurity.com</a></span>
+      </div>
+      <div class="mport-contact-row">
+        <span class="mport-cr-lbl">GITHUB</span>
+        <span class="mport-cr-val"><a href="https://github.com/ben-slates" target="_blank">github.com/ben-slates</a></span>
+      </div>
+      <div class="mport-contact-row">
+        <span class="mport-cr-lbl">PHONE</span>
+        <span class="mport-cr-val">+92-321-9400902</span>
+      </div>
+    </div>
+    </div>
+
+  <!-- PREMIUM MOBILE FOOTER -->
+  <div class="mport-footer">
+    <div class="mport-motto">the quieter you become, the more you are able to hear</div>
+    <div class="mport-copyright">&copy; 2026 Muhammad Umer Farooq. All rights reserved.</div>
+    <button class="mport-top-btn" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">▲ Back to Top</button>
+  </div>
+</div>
 </body>
 </html>
