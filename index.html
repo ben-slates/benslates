@@ -710,115 +710,177 @@ html,body{width:100%;height:100%;overflow:hidden;font-family:var(--font-ui);back
 }
 
 @media (max-width: 768px) {
-  html, body { overflow-y: auto !important; height: auto !important; background: #050101 !important; }
-  #screen-login, #screen-desktop, #canvas-particles, #mob-kb { display: none !important; }
-  
+  html, body {
+    overflow-y: auto !important;
+    height: auto !important;
+    background: #050203 !important;
+    font-family: var(--font-ui) !important;
+    -webkit-tap-highlight-color: transparent;
+  }
+  #screen-login, #screen-desktop, #canvas-particles, #mob-kb {
+    display: none !important;
+  }
+
+  /* ── ULTRA-PREMIUM CYBER-GLASS MOBILE CONTAINER ── */
   #mobile-portfolio-site {
     display: flex !important;
     flex-direction: column;
     min-height: 100vh;
     width: 100vw;
-    background: #050101;
-    color: #fff;
-    font-family: var(--font-ui);
-    padding-bottom: 0;
+    background: #050203;
+    color: #f5f5f5;
     position: relative;
     z-index: 999999;
+    overflow-x: hidden;
   }
-  
-  /* STRETCHED MOBILE BACKGROUND WITH DOWNLOADED IMAGE */
+
+  /* Ambient glowing backdrop with wallpaper */
   #mobile-portfolio-site::before {
     content: '';
     position: fixed;
     inset: 0;
     z-index: -1;
     background-image:
-      radial-gradient(ellipse 90% 60% at 50% -10%, rgba(220, 30, 30, 0.45) 0%, transparent 80%),
-      radial-gradient(ellipse 70% 50% at 85% 90%, rgba(160, 0, 0, 0.25) 0%, transparent 70%),
+      radial-gradient(ellipse 90% 50% at 50% 0%, rgba(255, 45, 45, 0.22) 0%, transparent 75%),
+      radial-gradient(ellipse 70% 60% at 85% 85%, rgba(180, 0, 0, 0.16) 0%, transparent 70%),
+      radial-gradient(ellipse 60% 40% at 15% 50%, rgba(20, 2, 5, 0.8) 0%, transparent 60%),
       url('mobile_bg.jpg');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    image-rendering: smooth;
     pointer-events: none;
   }
 
-  /* TOP SYSTEM STATUS TRAY */
+  /* TOP TELEMETRY SYSTEM TRAY */
   .mport-sys-bar {
-    background: rgba(6, 1, 1, 0.96);
-    border-bottom: 1px solid rgba(220, 30, 30, 0.25);
-    padding: 7px 16px;
+    background: rgba(8, 2, 3, 0.88);
+    border-bottom: 1px solid rgba(255, 45, 45, 0.2);
+    padding: 8px 16px;
     display: flex;
     align-items: center;
     justify-content: space-between;
     font-family: var(--font-mono);
-    font-size: 10.5px;
-    color: rgba(220, 220, 220, 0.8);
-    backdrop-filter: blur(16px);
+    font-size: 11px;
+    color: rgba(230, 230, 230, 0.75);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
     letter-spacing: 0.04em;
   }
-  .mport-sys-item { display: flex; align-items: center; gap: 6px; }
-  .mport-sys-val { color: var(--glow-accent); font-weight: 600; }
-  .mport-online { color: var(--glow-green); font-weight: 700; text-shadow: 0 0 8px var(--glow-green); }
+  .mport-sys-item { display: flex; align-items: center; gap: 5px; }
+  .mport-sys-lbl { color: rgba(255, 255, 255, 0.45); font-size: 10px; }
+  .mport-sys-val { color: var(--glow-accent); font-weight: 700; font-size: 11px; }
+  .mport-online {
+    color: var(--glow-green);
+    font-weight: 700;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    text-shadow: 0 0 10px rgba(0, 255, 102, 0.6);
+  }
+  .mport-online-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--glow-green);
+    box-shadow: 0 0 8px var(--glow-green);
+    animation: livePulse 2s infinite ease-in-out;
+  }
 
-  /* HEADER BRAND BAR */
+  /* STICKY CYBER-GLASS HEADER */
   .mport-header {
     position: sticky;
     top: 0;
     z-index: 1000;
-    background: rgba(10, 2, 2, 0.94);
-    border-bottom: 1px solid var(--border-color);
-    backdrop-filter: blur(24px);
-    -webkit-backdrop-filter: blur(24px);
-    padding: 14px 18px;
+    background: rgba(10, 3, 4, 0.82);
+    border-bottom: 1px solid rgba(255, 45, 45, 0.22);
+    backdrop-filter: blur(24px) saturate(180%);
+    -webkit-backdrop-filter: blur(24px) saturate(180%);
+    padding: 12px 16px;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    box-shadow: 0 6px 25px rgba(0,0,0,0.85);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.7);
   }
-  .mport-bs-logo { display: flex; align-items: center; justify-content: center; filter: drop-shadow(0 0 6px rgba(255, 51, 51, 0.4)); }
   .mport-brand {
     font-family: var(--font-mono);
-    font-size: 18px;
+    font-size: 17px;
     font-weight: 800;
     color: #fff;
-    letter-spacing: 0.04em;
+    letter-spacing: 0.02em;
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 9px;
   }
-  .mport-brand span { color: var(--glow-accent); text-shadow: 0 0 12px rgba(255, 51, 51, 0.6); }
+  .mport-brand span {
+    color: var(--glow-accent);
+    text-shadow: 0 0 12px rgba(255, 51, 51, 0.7);
+  }
   .mport-user-chip {
     font-family: var(--font-mono);
     font-size: 11px;
     color: var(--glow-green);
-    background: rgba(0, 255, 102, 0.1);
-    border: 1px solid rgba(0, 255, 102, 0.3);
-    padding: 4px 12px;
-    border-radius: 14px;
-    box-shadow: 0 0 12px rgba(0, 255, 102, 0.15);
+    background: rgba(0, 255, 102, 0.08);
+    border: 1px solid rgba(0, 255, 102, 0.28);
+    padding: 5px 12px;
+    border-radius: 16px;
+    box-shadow: 0 0 14px rgba(0, 255, 102, 0.12);
   }
 
+  /* HORIZONTAL QUICK NAV BAR */
+  .mport-quicknav {
+    display: flex;
+    gap: 8px;
+    overflow-x: auto;
+    padding: 10px 16px;
+    background: rgba(6, 1, 2, 0.65);
+    border-bottom: 1px solid rgba(255, 45, 45, 0.12);
+    scrollbar-width: none;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+  }
+  .mport-quicknav::-webkit-scrollbar { display: none; }
+  .mport-qlink {
+    font-family: var(--font-mono);
+    font-size: 11.5px;
+    color: rgba(240, 240, 240, 0.7);
+    text-decoration: none;
+    padding: 6px 14px;
+    border-radius: 20px;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 45, 45, 0.15);
+    white-space: nowrap;
+    transition: all 0.2s;
+  }
+  .mport-qlink:active, .mport-qlink:hover {
+    background: rgba(255, 45, 45, 0.15);
+    border-color: var(--glow-accent);
+    color: #fff;
+  }
+
+  /* MAIN CONTENT WRAPPER */
   .mport-container {
     flex: 1;
     width: 100%;
-    padding: 22px 16px 30px;
+    padding: 20px 14px 35px;
     display: flex;
     flex-direction: column;
-    gap: 22px;
-    max-width: 580px;
+    gap: 20px;
+    max-width: 600px;
     margin: 0 auto;
   }
 
-  /* PREMIUM HERO CARD */
+  /* ── ULTRA-PREMIUM CYBER HERO CARD ── */
   .mport-hero {
-    background: rgba(18, 5, 5, 0.88);
-    border: 1px solid var(--border-color-active);
-    border-radius: 18px;
-    padding: 26px 22px;
-    backdrop-filter: blur(24px);
-    -webkit-backdrop-filter: blur(24px);
-    box-shadow: 0 18px 40px rgba(0,0,0,0.85), 0 0 30px rgba(220, 30, 30, 0.15);
+    background: rgba(16, 4, 6, 0.72);
+    border: 1px solid rgba(255, 51, 51, 0.32);
+    border-radius: 24px;
+    padding: 24px 20px;
+    backdrop-filter: blur(28px) saturate(190%);
+    -webkit-backdrop-filter: blur(28px) saturate(190%);
+    box-shadow:
+      0 20px 50px rgba(0, 0, 0, 0.75),
+      inset 0 1px 1px rgba(255, 255, 255, 0.2),
+      inset 0 0 20px rgba(255, 51, 51, 0.06);
     position: relative;
     overflow: hidden;
   }
@@ -828,63 +890,85 @@ html,body{width:100%;height:100%;overflow:hidden;font-family:var(--font-ui);back
     top: 0; left: 0; right: 0; height: 3px;
     background: linear-gradient(90deg, transparent, var(--glow-accent), transparent);
   }
+  .mport-hero::after {
+    content: '';
+    position: absolute;
+    top: -80px; right: -60px; width: 220px; height: 220px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(255, 51, 51, 0.18) 0%, transparent 70%);
+    pointer-events: none;
+    filter: blur(45px);
+  }
+
   .mport-avatar-wrap {
     display: flex;
     align-items: center;
     gap: 16px;
-    margin-bottom: 18px;
+    margin-bottom: 16px;
+    position: relative;
+    z-index: 2;
   }
   .mport-avatar {
-    width: 64px; height: 64px; border-radius: 50%;
-    background: rgba(220, 30, 30, 0.16);
+    width: 68px; height: 68px; border-radius: 50%;
+    background: rgba(255, 45, 45, 0.12);
     border: 2px solid var(--glow-accent);
     display: flex; align-items: center; justify-content: center;
-    box-shadow: 0 0 24px rgba(220, 30, 30, 0.4);
+    box-shadow: 0 0 28px rgba(255, 51, 51, 0.45);
     flex-shrink: 0;
   }
-  .mport-avatar svg { width: 34px; height: 34px; color: var(--glow-accent); }
+  .mport-avatar svg { width: 36px; height: 36px; color: var(--glow-accent); }
+
   .mport-hero-title-box { display: flex; flex-direction: column; }
   .mport-hero-tag {
     font-family: var(--font-mono);
     font-size: 10px;
     color: var(--glow-accent);
-    letter-spacing: 0.14em;
+    letter-spacing: 0.12em;
     font-weight: 700;
     text-transform: uppercase;
     margin-bottom: 3px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
   }
   .mport-hero-name {
-    font-size: 25px;
+    font-size: 24px;
     font-weight: 800;
     color: #fff;
-    letter-spacing: 0.02em;
+    letter-spacing: 0.01em;
     line-height: 1.2;
   }
   .mport-hero-sub {
-    font-size: 14px;
-    color: rgba(245, 245, 245, 0.88);
+    font-size: 13.5px;
+    color: rgba(240, 240, 240, 0.85);
     line-height: 1.6;
-    margin-bottom: 20px;
+    margin-bottom: 18px;
+    position: relative;
+    z-index: 2;
   }
+
   .mport-hero-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 10px;
+    position: relative;
+    z-index: 2;
   }
   .mport-ib {
-    background: rgba(220, 30, 30, 0.09);
-    border: 1px solid rgba(220, 30, 30, 0.22);
-    border-radius: 12px;
-    padding: 11px 14px;
-    box-shadow: inset 0 0 15px rgba(220, 30, 30, 0.05);
+    background: rgba(255, 45, 45, 0.08);
+    border: 1px solid rgba(255, 45, 45, 0.2);
+    border-radius: 14px;
+    padding: 12px 14px;
+    backdrop-filter: blur(10px);
+    box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.1);
   }
   .mport-ib-lbl {
     font-family: var(--font-mono);
     font-size: 9.5px;
-    color: rgba(255,255,255,0.48);
+    color: rgba(255, 255, 255, 0.5);
     text-transform: uppercase;
-    margin-bottom: 3px;
-    letter-spacing: 0.05em;
+    margin-bottom: 4px;
+    letter-spacing: 0.06em;
   }
   .mport-ib-val {
     font-family: var(--font-mono);
@@ -893,38 +977,49 @@ html,body{width:100%;height:100%;overflow:hidden;font-family:var(--font-ui);back
     font-weight: 700;
   }
 
-  /* PREMIUM CARDS */
+  /* ── GLASS BENTO SECTION CARDS ── */
   .mport-card {
-    background: rgba(18, 5, 5, 0.88);
-    border: 1px solid var(--border-color);
-    border-radius: 18px;
-    padding: 22px;
-    backdrop-filter: blur(24px);
-    -webkit-backdrop-filter: blur(24px);
-    box-shadow: 0 14px 35px rgba(0,0,0,0.75), 0 0 20px rgba(220, 30, 30, 0.06);
-    transition: transform 0.2s, box-shadow 0.2s;
+    background: rgba(15, 4, 6, 0.72);
+    border: 1px solid rgba(255, 45, 45, 0.22);
+    border-radius: 22px;
+    padding: 22px 18px;
+    backdrop-filter: blur(28px) saturate(190%);
+    -webkit-backdrop-filter: blur(28px) saturate(190%);
+    box-shadow:
+      0 16px 40px rgba(0, 0, 0, 0.65),
+      inset 0 1px 1px rgba(255, 255, 255, 0.15);
+    position: relative;
+    overflow: hidden;
   }
+  .mport-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; height: 2px;
+    background: linear-gradient(90deg, transparent, rgba(255, 51, 51, 0.4), transparent);
+  }
+
   .mport-title {
     font-family: var(--font-mono);
-    font-size: 14px;
+    font-size: 13.5px;
     font-weight: 700;
     color: var(--glow-accent);
-    letter-spacing: 0.06em;
-    margin-bottom: 18px;
-    border-bottom: 1px solid rgba(220,30,30,0.2);
+    letter-spacing: 0.05em;
+    margin-bottom: 16px;
+    border-bottom: 1px solid rgba(255, 45, 45, 0.18);
     padding-bottom: 10px;
     text-transform: uppercase;
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 9px;
   }
+  .mport-title svg { color: var(--glow-accent); flex-shrink: 0; }
 
   /* SKILL TAGS */
   .mport-skill-group { margin-bottom: 16px; }
   .mport-sg-title {
     font-family: var(--font-mono);
     font-size: 11px;
-    color: rgba(255,255,255,0.52);
+    color: rgba(255, 255, 255, 0.55);
     margin-bottom: 10px;
     text-transform: uppercase;
     letter-spacing: 0.05em;
@@ -933,110 +1028,271 @@ html,body{width:100%;height:100%;overflow:hidden;font-family:var(--font-ui);back
   .mport-stag {
     font-family: var(--font-mono);
     font-size: 11.5px;
-    background: rgba(220,30,30,0.12);
-    border: 1px solid rgba(220,30,30,0.25);
+    background: rgba(255, 45, 45, 0.09);
+    border: 1px solid rgba(255, 45, 45, 0.24);
     color: #f5f5f5;
-    padding: 6px 14px;
-    border-radius: 10px;
-    transition: background 0.15s, border-color 0.15s;
+    padding: 7px 13px;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .mport-stag::before {
+    content: '❯';
+    color: var(--glow-accent);
+    font-size: 9px;
   }
 
   /* CERTIFICATIONS LIST */
   .mport-cert-item {
-    background: rgba(220,30,30,0.07);
-    border: 1px solid rgba(220,30,30,0.18);
-    border-radius: 12px;
-    padding: 15px;
-    margin-bottom: 12px;
+    background: rgba(255, 45, 45, 0.06);
+    border: 1px solid rgba(255, 45, 45, 0.18);
+    border-radius: 14px;
+    padding: 14px;
+    margin-bottom: 10px;
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: 12px;
+    transition: all 0.2s;
+  }
+  .mport-cert-item:active {
+    background: rgba(255, 45, 45, 0.12);
+    border-color: var(--glow-accent);
   }
   .mport-cert-name {
     font-family: var(--font-mono);
-    font-size: 13px;
-    color: #fff;
+    font-size: 12.5px;
+    color: #ffffff;
     font-weight: 700;
   }
   .mport-cert-sub {
     font-size: 10.5px;
-    color: rgba(255,255,255,0.48);
+    color: rgba(255, 255, 255, 0.5);
     font-family: var(--font-mono);
-    margin-top: 4px;
+    margin-top: 3px;
   }
   .mport-cert-btn {
     font-family: var(--font-mono);
     font-size: 11.5px;
-    padding: 8px 16px;
-    background: rgba(220,30,30,0.28);
-    border: 1px solid rgba(220,30,30,0.5);
-    border-radius: 8px;
-    color: #fff;
+    padding: 8px 14px;
+    background: rgba(255, 45, 45, 0.25);
+    border: 1px solid rgba(255, 45, 45, 0.5);
+    border-radius: 10px;
+    color: #ffffff;
     text-decoration: none;
     white-space: nowrap;
     font-weight: 700;
-    box-shadow: 0 4px 14px rgba(220,30,30,0.2);
-    transition: background 0.15s, transform 0.1s;
+    box-shadow: 0 4px 12px rgba(255, 45, 45, 0.2);
+    transition: all 0.15s;
+    min-height: 34px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
   }
-  .mport-cert-btn:active { background: rgba(220,30,30,0.5); transform: scale(0.98); }
+  .mport-cert-btn:active {
+    background: var(--glow-accent);
+    color: #0c0204;
+    transform: scale(0.96);
+  }
 
-  /* CONTACT LIST */
+  /* CURRENT WORK BADGE */
+  .mport-work-box {
+    background: rgba(255, 45, 45, 0.08);
+    border: 1px solid rgba(255, 45, 45, 0.26);
+    border-radius: 16px;
+    padding: 16px;
+    position: relative;
+    overflow: hidden;
+  }
+  .mport-work-box::after {
+    content: '';
+    position: absolute;
+    bottom: -50px; right: -50px;
+    width: 140px; height: 140px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(0, 255, 102, 0.12) 0%, transparent 70%);
+    filter: blur(30px);
+    pointer-events: none;
+  }
+
+  /* CONTACT ROWS */
   .mport-contact-row {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 14px 16px;
-    background: rgba(220,30,30,0.07);
-    border: 1px solid rgba(220,30,30,0.18);
+    padding: 12px 14px;
+    background: rgba(255, 45, 45, 0.06);
+    border: 1px solid rgba(255, 45, 45, 0.18);
     border-radius: 12px;
-    margin-bottom: 10px;
+    margin-bottom: 8px;
     font-family: var(--font-mono);
-    font-size: 13px;
+    font-size: 12.5px;
+    text-decoration: none;
+    color: inherit;
   }
-  .mport-cr-lbl { color: rgba(255,255,255,0.52); font-weight: 500; }
+  .mport-cr-lbl { color: rgba(255, 255, 255, 0.5); font-weight: 500; font-size: 11px; }
   .mport-cr-val { color: var(--glow-green); font-weight: 600; }
   .mport-cr-val a { color: var(--glow-blue); text-decoration: none; }
 
-  /* PREMIUM MOBILE FOOTER */
-  .mport-footer {
-    margin-top: auto;
+  /* ── SIGNATURE GLASSY LIQUID FOOTER (RESTYLED FOR BENSLATES) ── */
+  .mport-glassy-footer {
     width: 100%;
-    padding: 24px 16px;
-    border-top: 1px solid rgba(220, 30, 30, 0.2);
-    background: rgba(8, 2, 2, 0.95);
-    backdrop-filter: blur(16px);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 12px;
-    text-align: center;
+    margin-top: 15px;
+    padding: 30px 18px 24px;
+    border-radius: 26px 26px 0 0;
+    background: rgba(14, 3, 5, 0.85);
+    backdrop-filter: blur(30px) saturate(200%);
+    -webkit-backdrop-filter: blur(30px) saturate(200%);
+    border-top: 1px solid rgba(255, 51, 51, 0.35);
+    box-shadow:
+      0 -15px 45px rgba(0, 0, 0, 0.8),
+      inset 0 1px 1px rgba(255, 255, 255, 0.2);
+    position: relative;
+    overflow: hidden;
   }
+  .mport-glassy-footer::before {
+    content: '';
+    position: absolute;
+    top: -100px; left: -60px;
+    width: 260px; height: 180px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(255, 51, 51, 0.22) 0%, transparent 70%);
+    filter: blur(55px);
+    pointer-events: none;
+  }
+
+  .mport-foot-brand {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 12px;
+  }
+  .mport-foot-title {
+    font-size: 20px;
+    font-weight: 800;
+    color: #fff;
+    line-height: 1.25;
+    margin-bottom: 16px;
+    letter-spacing: -0.5px;
+  }
+  .mport-foot-title span { color: rgba(255, 255, 255, 0.5); }
+
+  /* FOOTER NEWSLETTER / ADVISORY FORM */
+  .mport-newsletter {
+    display: flex;
+    align-items: center;
+    background: rgba(0, 0, 0, 0.55);
+    border: 1px solid rgba(255, 51, 51, 0.35);
+    border-radius: 20px;
+    padding: 5px;
+    margin-bottom: 18px;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4);
+  }
+  .mport-newsletter input {
+    flex: 1;
+    min-width: 0;
+    background: transparent;
+    border: none;
+    outline: none;
+    color: #fff;
+    font-size: 13.5px;
+    padding: 8px 12px;
+    font-family: inherit;
+  }
+  .mport-newsletter button {
+    border: none;
+    background: var(--glow-accent);
+    color: #0b0203;
+    font-size: 12px;
+    font-weight: 700;
+    padding: 9px 16px;
+    border-radius: 15px;
+    cursor: pointer;
+    font-family: var(--font-mono);
+  }
+  .mport-newsletter button:active { transform: scale(0.96); }
+
+  /* FOOTER SOCIAL ROW */
+  .mport-social-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    padding: 8px 12px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 51, 51, 0.18);
+    border-radius: 22px;
+    margin-bottom: 16px;
+  }
+  .mport-soc-links { display: flex; align-items: center; gap: 8px; }
+  .mport-soc-btn {
+    width: 34px; height: 34px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    color: #fff;
+    text-decoration: none;
+    font-size: 13px;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+  }
+  .mport-soc-btn:active { background: rgba(255, 51, 51, 0.3); color: var(--glow-accent); }
+
   .mport-motto {
     font-family: var(--font-mono);
     font-size: 10.5px;
-    color: rgba(220, 30, 30, 0.55);
-    letter-spacing: 0.15em;
+    color: rgba(255, 75, 75, 0.65);
+    letter-spacing: 0.12em;
     text-transform: uppercase;
+    text-align: center;
+    margin-bottom: 10px;
   }
   .mport-copyright {
     font-family: var(--font-mono);
     font-size: 11px;
     color: rgba(240, 240, 240, 0.45);
+    text-align: center;
+    margin-bottom: 14px;
   }
+
   .mport-top-btn {
-    margin-top: 4px;
-    background: rgba(220, 30, 30, 0.15);
-    border: 1px solid rgba(220, 30, 30, 0.3);
+    width: 100%;
+    background: rgba(255, 45, 45, 0.12);
+    border: 1px solid rgba(255, 45, 45, 0.3);
     color: #fff;
     font-family: var(--font-mono);
-    font-size: 11px;
-    padding: 6px 16px;
-    border-radius: 20px;
+    font-size: 11.5px;
+    padding: 10px 16px;
+    border-radius: 14px;
     cursor: pointer;
     transition: background 0.15s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
   }
-  .mport-top-btn:active { background: rgba(220, 30, 30, 0.4); }
+  .mport-top-btn:active { background: rgba(255, 45, 45, 0.35); }
+
+  .mport-wm-text {
+    position: absolute;
+    bottom: -15px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 58px;
+    font-weight: 900;
+    letter-spacing: -3px;
+    color: rgba(255, 255, 255, 0.03);
+    pointer-events: none;
+    white-space: nowrap;
+    user-select: none;
+    font-family: var(--font-mono);
+  }
+
+  @keyframes livePulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.4; transform: scale(0.85); }
+  }
 }
 
 </style>
@@ -2714,28 +2970,28 @@ document.addEventListener("DOMContentLoaded", startMobileTicker);
 
 </script>
 <div id="mobile-portfolio-site">
-  <!-- TOP DESKTOP SYSTEM STATUS TRAY -->
+  <!-- TOP TELEMETRY SYSTEM STATUS TRAY -->
   <div class="mport-sys-bar">
     <div class="mport-sys-item">
-      <span>OS:</span> <span class="mport-sys-val">Kali</span>
+      <span class="mport-sys-lbl">SYS:</span> <span class="mport-sys-val">Kali-Rolling</span>
     </div>
     <div class="mport-sys-item">
-      <span>CPU:</span> <span class="mport-sys-val" id="mport-cpu">12%</span>
+      <span class="mport-sys-lbl">CPU:</span> <span class="mport-sys-val" id="mport-cpu">12%</span>
     </div>
     <div class="mport-sys-item">
-      <span>RAM:</span> <span class="mport-sys-val" id="mport-ram">2.4GB</span>
+      <span class="mport-sys-lbl">RAM:</span> <span class="mport-sys-val" id="mport-ram">2.4GB</span>
     </div>
     <div class="mport-sys-item">
-      <span>STATUS:</span> <span class="mport-online">ONLINE ●</span>
+      <span class="mport-online"><span class="mport-online-dot"></span>ONLINE</span>
     </div>
   </div>
 
-  <!-- STICKY HEADER -->
-  <div class="mport-header">
+  <!-- STICKY CYBER-GLASS HEADER -->
+  <header class="mport-header">
     <div class="mport-brand">
       <div class="mport-bs-logo">
         <svg viewBox="0 0 32 32" width="22" height="22" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <rect x="2" y="2" width="28" height="28" rx="6" fill="rgba(220, 30, 30, 0.12)" stroke="var(--glow-accent)" stroke-width="1.5"/>
+          <rect x="2" y="2" width="28" height="28" rx="6" fill="rgba(220, 30, 30, 0.14)" stroke="var(--glow-accent)" stroke-width="1.5"/>
           <text x="7" y="21" font-family="var(--font-mono)" font-size="14" font-weight="900" fill="#ffffff" letter-spacing="-1">B</text>
           <text x="17" y="21" font-family="var(--font-mono)" font-size="14" font-weight="900" fill="var(--glow-accent)" letter-spacing="-1">S</text>
         </svg>
@@ -2743,24 +2999,35 @@ document.addEventListener("DOMContentLoaded", startMobileTicker);
       <span>benslates</span>
     </div>
     <div class="mport-user-chip">root@kali:~#</div>
-  </div>
+  </header>
 
-  <div class="mport-container">
-    
-        </div>
+  <!-- QUICK ANCHOR NAVIGATION BAR -->
+  <nav class="mport-quicknav" aria-label="Mobile Sections">
+    <a href="#m-about" class="mport-qlink">[ About ]</a>
+    <a href="#m-skills" class="mport-qlink">[ Arsenal ]</a>
+    <a href="#m-certs" class="mport-qlink">[ Certs &amp; Labs ]</a>
+    <a href="#m-work" class="mport-qlink">[ Experience ]</a>
+    <a href="#m-contact" class="mport-qlink">[ Contact ]</a>
+  </nav>
+
+  <!-- MAIN SCROLL CONTAINER -->
+  <main class="mport-container">
 
     <!-- HERO CARD -->
-    <div class="mport-hero">
+    <section class="mport-hero" id="m-about">
       <div class="mport-avatar-wrap">
         <div class="mport-avatar">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
         </div>
         <div class="mport-hero-title-box">
-          <div class="mport-hero-tag">[ RED TEAM / ETHICAL HACKING ]</div>
-          <div class="mport-hero-name">ᴍᴜʜᴀᴍᴍᴀᴅ ᴜᴍᴇʀ ꜰᴀʀᴏᴏQ</div>
+          <div class="mport-hero-tag">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><path d="m4.93 4.93 4.24 4.24"/></svg>
+            OFFENSIVE SECURITY &amp; RED TEAM
+          </div>
+          <h1 class="mport-hero-name">ᴍᴜʜᴀᴍᴍᴀᴅ ᴜᴍᴇʀ ꜰᴀʀᴏᴏQ</h1>
         </div>
       </div>
-      <div class="mport-hero-sub">Aspiring Red Teamer &amp; Cybersecurity Student specializing in Offensive Security, Penetration Testing, Network Exploitation, and Web Security.</div>
+      <p class="mport-hero-sub">Aspiring Red Teamer &amp; Cybersecurity Student specializing in Offensive Security, Penetration Testing, Network Exploitation, and Web Security.</p>
       
       <div class="mport-hero-grid">
         <div class="mport-ib">
@@ -2773,17 +3040,17 @@ document.addEventListener("DOMContentLoaded", startMobileTicker);
         </div>
         <div class="mport-ib">
           <div class="mport-ib-lbl">Location</div>
-          <div class="mport-ib-val">Pakistan</div>
+          <div class="mport-ib-val">Pakistan 🇵🇰</div>
         </div>
         <div class="mport-ib">
           <div class="mport-ib-lbl">Age</div>
           <div class="mport-ib-val">22 Years</div>
         </div>
       </div>
-    </div>
+    </section>
 
-    <!-- SKILLS & TOOLS -->
-    <div class="mport-card">
+    <!-- SKILLS & ARSENAL -->
+    <section class="mport-card" id="m-skills">
       <div class="mport-title">
         <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
         Offensive Security Arsenal
@@ -2813,10 +3080,10 @@ document.addEventListener("DOMContentLoaded", startMobileTicker);
           <span class="mport-stag">SQL</span>
         </div>
       </div>
-    </div>
+    </section>
 
     <!-- CERTIFICATIONS & LABS -->
-    <div class="mport-card">
+    <section class="mport-card" id="m-certs">
       <div class="mport-title">
         <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/></svg>
         Certifications &amp; Labs
@@ -2827,7 +3094,7 @@ document.addEventListener("DOMContentLoaded", startMobileTicker);
           <div class="mport-cert-name">Hack The Box — Mythical Machine</div>
           <div class="mport-cert-sub">HTBCERT-3620BFA7E0</div>
         </div>
-        <a href="certs/Mythical.pdf" download class="mport-cert-btn">PDF</a>
+        <a href="certs/Mythical.pdf" download class="mport-cert-btn">PDF ↗</a>
       </div>
 
       <div class="mport-cert-item">
@@ -2835,7 +3102,7 @@ document.addEventListener("DOMContentLoaded", startMobileTicker);
           <div class="mport-cert-name">Hack The Box — Puppet Machine</div>
           <div class="mport-cert-sub">HTBCERT-D149A5DFAD</div>
         </div>
-        <a href="certs/Puppet.pdf" download class="mport-cert-btn">PDF</a>
+        <a href="certs/Puppet.pdf" download class="mport-cert-btn">PDF ↗</a>
       </div>
 
       <div class="mport-cert-item">
@@ -2843,7 +3110,7 @@ document.addEventListener("DOMContentLoaded", startMobileTicker);
           <div class="mport-cert-name">Cisco Packet Tracer</div>
           <div class="mport-cert-sub">Networking Fundamentals</div>
         </div>
-        <a href="certs/Getting_Started_with_Cisco_Packet_Tracer.pdf" download class="mport-cert-btn">PDF</a>
+        <a href="certs/Getting_Started_with_Cisco_Packet_Tracer.pdf" download class="mport-cert-btn">PDF ↗</a>
       </div>
 
       <div class="mport-cert-item">
@@ -2851,57 +3118,106 @@ document.addEventListener("DOMContentLoaded", startMobileTicker);
           <div class="mport-cert-name">Introduction to Cybersecurity</div>
           <div class="mport-cert-sub">Cisco Networking Academy</div>
         </div>
-        <a href="certs/Introduction_to_Cybersecurity.pdf" download class="mport-cert-btn">PDF</a>
+        <a href="certs/Introduction_to_Cybersecurity.pdf" download class="mport-cert-btn">PDF ↗</a>
       </div>
 
       <div style="margin-top:16px;display:flex;justify-content:center;">
-        <a href="resume.pdf" download class="mport-cert-btn" style="padding:10px 24px;font-size:12px;background:rgba(220,30,30,0.35);border-color:var(--glow-accent);">Download Resume (PDF)</a>
+        <a href="resume.pdf" download class="mport-cert-btn" style="padding:11px 26px;font-size:12.5px;background:rgba(255,51,51,0.3);border-color:var(--glow-accent);width:100%;text-align:center;">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="margin-right:6px;"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          Download Official Resume (PDF)
+        </a>
       </div>
-    </div>
+    </section>
 
-    <!-- CURRENT WORK SECTION -->
-    <div class="mport-card">
+    <!-- CURRENT ROLE & WORK SECTION -->
+    <section class="mport-card" id="m-work">
       <div class="mport-title">
         <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
         Current Role &amp; Work
       </div>
-      <div style="background:rgba(220,30,30,0.08);border:1px solid rgba(220,30,30,0.22);border-radius:12px;padding:16px;margin-bottom:10px;">
-        <div style="font-family:var(--font-mono);font-size:10px;color:var(--glow-accent);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:4px;font-weight:700;">[ ACTIVE EMPLOYMENT ]</div>
-        <div style="font-size:17px;font-weight:800;color:#fff;margin-bottom:4px;">Rynex Security</div>
-        <div style="font-family:var(--font-mono);font-size:12.5px;color:var(--glow-green);margin-bottom:12px;font-weight:600;">Cybersecurity &amp; Red Teaming Specialist</div>
-        <div style="font-size:13px;color:rgba(240,240,240,0.85);line-height:1.6;margin-bottom:14px;">Currently working at Rynex Security performing offensive security assessments, vulnerability research, and penetration testing.</div>
-        <div style="display:flex;align-items:center;justify-content:space-between;padding-top:10px;border-top:1px solid rgba(220,30,30,0.15);">
+      <div class="mport-work-box">
+        <div style="font-family:var(--font-mono);font-size:10px;color:var(--glow-accent);letter-spacing:0.12em;text-transform:uppercase;margin-bottom:6px;font-weight:700;display:flex;align-items:center;gap:6px;">
+          <span style="display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--glow-green);box-shadow:0 0 8px var(--glow-green);"></span>
+          [ ACTIVE EMPLOYMENT ]
+        </div>
+        <div style="font-size:18px;font-weight:800;color:#fff;margin-bottom:4px;">Rynex Security</div>
+        <div style="font-family:var(--font-mono);font-size:13px;color:var(--glow-green);margin-bottom:12px;font-weight:600;">Cybersecurity &amp; Red Teaming Specialist</div>
+        <p style="font-size:13.5px;color:rgba(240,240,240,0.85);line-height:1.6;margin-bottom:14px;">Currently working at Rynex Security performing offensive security assessments, vulnerability research, and penetration testing.</p>
+        <div style="display:flex;align-items:center;justify-content:space-between;padding-top:10px;border-top:1px solid rgba(255,51,51,0.18);">
           <span style="font-family:var(--font-mono);font-size:11px;color:rgba(255,255,255,0.5);">OFFICIAL WEBSITE</span>
-          <a href="https://rynexsecurity.com" target="_blank" class="mport-cert-btn" style="padding:6px 14px;font-size:11.5px;">rynexsecurity.com ↗</a>
+          <a href="https://rynexsecurity.com" target="_blank" class="mport-cert-btn" style="padding:7px 15px;font-size:11.5px;">rynexsecurity.com ↗</a>
         </div>
       </div>
+    </section>
+
     <!-- CONTACT CARD -->
-    <div class="mport-card">
+    <section class="mport-card" id="m-contact">
       <div class="mport-title">
         <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-        Contact Information
+        Direct Contact &amp; Channels
       </div>
-      <div class="mport-contact-row">
+      <a href="mailto:hello@benslates.xyz" class="mport-contact-row">
         <span class="mport-cr-lbl">EMAIL</span>
-        <span class="mport-cr-val"><a href="mailto:hello@benslates.xyz">hello@benslates.xyz</a></span>
-      </div>
-      <div class="mport-contact-row">
+        <span class="mport-cr-val" style="color:var(--glow-blue);">hello@benslates.xyz</span>
+      </a>
+      <a href="https://github.com/ben-slates" target="_blank" class="mport-contact-row">
         <span class="mport-cr-lbl">GITHUB</span>
-        <span class="mport-cr-val"><a href="https://github.com/ben-slates" target="_blank">github.com/ben-slates</a></span>
-      </div>
-      <div class="mport-contact-row">
+        <span class="mport-cr-val" style="color:var(--glow-green);">github.com/ben-slates ↗</span>
+      </a>
+      <a href="tel:+923219400902" class="mport-contact-row">
         <span class="mport-cr-lbl">PHONE</span>
         <span class="mport-cr-val">+92-321-9400902</span>
+      </a>
+    </section>
+
+  </main>
+
+  <!-- ── PREMIUM GLASSY LIQUID FOOTER (INTEGRATED) ── -->
+  <footer class="mport-glassy-footer">
+    <div class="mport-foot-brand">
+      <div class="mport-bs-logo">
+        <svg viewBox="0 0 32 32" width="18" height="18" fill="none">
+          <rect x="2" y="2" width="28" height="28" rx="6" fill="rgba(220, 30, 30, 0.14)" stroke="var(--glow-accent)" stroke-width="1.5"/>
+          <text x="7" y="21" font-family="var(--font-mono)" font-size="14" font-weight="900" fill="#ffffff" letter-spacing="-1">B</text>
+          <text x="17" y="21" font-family="var(--font-mono)" font-size="14" font-weight="900" fill="var(--glow-accent)" letter-spacing="-1">S</text>
+        </svg>
       </div>
-    </div>
+      <span style="font-family:var(--font-mono);font-size:14px;font-weight:700;color:#fff;">benslates</span>
     </div>
 
-  <!-- PREMIUM MOBILE FOOTER -->
-  <div class="mport-footer">
+    <div class="mport-foot-title">
+      Offensive Security<br>
+      <span>Research &amp; Operations.</span>
+    </div>
+
+    <!-- Security Advisories & Newsletter -->
+    <form class="mport-newsletter" onsubmit="event.preventDefault(); alert('Subscribed to Benslates Security Updates: ' + this.querySelector('input').value); this.reset();">
+      <input type="email" placeholder="Get security research updates..." required autocomplete="email">
+      <button type="submit">Join</button>
+    </form>
+
+    <!-- Social Links Bar -->
+    <div class="mport-social-bar">
+      <div class="mport-soc-links">
+        <a href="https://github.com/ben-slates" target="_blank" class="mport-soc-btn" aria-label="GitHub">◉</a>
+        <a href="mailto:hello@benslates.xyz" class="mport-soc-btn" aria-label="Email">✉</a>
+        <a href="https://rynexsecurity.com" target="_blank" class="mport-soc-btn" aria-label="Rynex Security">⚔</a>
+      </div>
+      <div style="font-family:var(--font-mono);font-size:10px;color:rgba(255,255,255,0.6);display:flex;align-items:center;gap:5px;">
+        <span style="width:6px;height:6px;border-radius:50%;background:var(--glow-green);box-shadow:0 0 6px var(--glow-green);"></span>
+        <span>Systems Verified</span>
+      </div>
+    </div>
+
     <div class="mport-motto">the quieter you become, the more you are able to hear</div>
     <div class="mport-copyright">&copy; 2026 ᴍᴜʜᴀᴍᴍᴀᴅ ᴜᴍᴇʀ ꜰᴀʀᴏᴏQ. All rights reserved.</div>
-    <button class="mport-top-btn" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">▲ Back to Top</button>
-  </div>
+    <button class="mport-top-btn" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="18 15 12 9 6 15"/></svg>
+      Back to Top
+    </button>
+
+    <div class="mport-wm-text">BENSLATES</div>
+  </footer>
 </div>
 </body>
 </html>
