@@ -2,10 +2,12 @@
 
 # ⚔️ benslates — Cyberdeck Portfolio OS
 
-[![Live Website](https://img.shields.io/badge/Live%20Site-benslates.xyz-ff2a6d?style=for-the-badge&logo=google-chrome&logoColor=white)](https://benslates.xyz)
-[![Offensive Security](https://img.shields.io/badge/Specialization-Red%20Teaming-9d4edd?style=for-the-badge&logo=kalilinux&logoColor=white)](https://benslates.xyz)
-[![License: MIT](https://img.shields.io/badge/License-MIT-00f5a0?style=for-the-badge)](./LICENSE)
-[![GitHub](https://img.shields.io/badge/GitHub-ben--slates-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/ben-slates)
+<p align="center">
+  <a href="https://benslates.xyz"><img src="https://img.shields.io/badge/Live_Site-benslates.xyz-ff2a6d?style=for-the-badge&logo=googlechrome&logoColor=white" alt="Live Website"></a>
+  <a href="https://benslates.xyz"><img src="https://img.shields.io/badge/Specialization-Red_Teaming-9d4edd?style=for-the-badge&logo=kalilinux&logoColor=white" alt="Offensive Security"></a>
+  <a href="./LICENSE"><img src="https://img.shields.io/badge/License-MIT-00f5a0?style=for-the-badge" alt="License: MIT"></a>
+  <a href="https://github.com/ben-slates"><img src="https://img.shields.io/badge/GitHub-ben--slates-181717?style=for-the-badge&logo=github&logoColor=white" alt="GitHub"></a>
+</p>
 
 <p align="center">
   <b>A single-page cybersecurity portfolio featuring an interactive Kali Linux desktop simulation on desktop and an ultra-premium cyber-glassmorphic HUD interface on mobile.</b>
