@@ -18,7 +18,7 @@
 </p>
 
 <p align="center">
-  <a href="#activity--github-metrics">Metrics</a> •
+  <a href="#built-security-tools--repositories">Tools &amp; Repositories</a> •
   <a href="#executive-profile">Profile</a> •
   <a href="#core-specializations">Specializations</a> •
   <a href="#featured-engineering--research-projects">Projects</a> •
@@ -41,21 +41,7 @@ Access the production deployment directly at:
 
 ---
 
-## Activity & GitHub Metrics
 
-<div align="center">
-
-| Performance Metrics | Current Streak |
-| :---: | :---: |
-| <img src="https://github-readme-stats.vercel.app/api?username=ben-slates&show_icons=true&theme=radical&hide_border=true&count_private=true" width="410" alt="GitHub Stats" /> | <img src="https://github-readme-streak-stats.herokuapp.com/?user=ben-slates&theme=radical&hide_border=true" width="410" alt="Streak Stats" /> |
-
-<br/>
-
-<img src="https://github-readme-stats.vercel.app/api/top-langs/?username=ben-slates&layout=compact&theme=radical&hide_border=true" width="410" alt="Top Languages" />
-
-</div>
-
----
 
 ## Executive Profile
 
@@ -84,18 +70,22 @@ I build offensive security tools from the ground up, dissect and recreate advers
 
 ---
 
-## Featured Engineering & Research Projects
+## Built Security Tools & Repositories
 
 | Project | Domain | Architecture & Highlights |
 | :--- | :--- | :--- |
-| **[discord-voice-notes](https://github.com/ben-slates/discord-voice-notes)** | Client Modding & Audio DSP | Native Opus 64kbps recording engine, Base64 waveform generation, 83 Full HD glass themes, real-time theme search, and large file bypass |
+| **[mdread](https://github.com/ben-slates/mdread)** | CLI & Markdown Tooling | Fast, clutter-free CLI Markdown reader with instant one-click command copying to your system clipboard |
 | **[BEN_C2](https://github.com/ben-slates/BEN_C2)** | Command & Control | Asynchronous post-exploitation C2 server engineered with Rust performance core and Python API orchestration |
+| **[discord-voice-notes](https://github.com/ben-slates/discord-voice-notes)** | Client Modding & Audio DSP | Native Opus 64kbps recording engine, Base64 waveform generation, 83 Full HD glass themes, real-time theme search, and large file bypass |
 | **[CVE-2026-31431-Exploit](https://github.com/ben-slates/CVE-2026-31431-Exploit)** | Exploit Development | Vulnerability research, memory analysis, and weaponized proof-of-concept exploitation suite |
 | **[CVE-2024-37054](https://github.com/ben-slates/CVE-2024-37054)** | Vulnerability Research | Technical analysis, payload structuring, and environment reproductive attack demonstration |
 | **[gmsa-aes-key-extractor](https://github.com/ben-slates/gmsa-aes-key-extractor)** | Active Directory Security | Group Managed Service Account (gMSA) cryptographic AES key extraction and offline ticket forged decryption |
-| **[CVE-FINDER](https://github.com/ben-slates/CVE-FINDER)** | Threat Intelligence & ML | Automated CVE ingestion pipeline evaluating real-time zero-day chatter and CVSS severity scoring |
-| **[uploadserver2](https://github.com/ben-slates/uploadserver2)** | Network Systems | Secure, self-hosted HTTP/2 file transport server featuring authenticated streaming and remote shell sync |
+| **[CVE-FINDER](https://github.com/ben-slates/CVE-FINDER)** | Threat Intelligence & ML | ML-powered CVE vulnerability intelligence platform with 15+ years of NVD historical records & real-time security chatter analysis |
+| **[uploadserver2](https://github.com/ben-slates/uploadserver2)** | Network Systems | Secure, self-hosted HTTP/2 file transport server featuring authenticated streaming, remote console sync, and Cloudflare Tunnel support |
 | **[esp32_NAT_router](https://github.com/ben-slates/esp32_NAT_router)** | Embedded & Hardware Security | ESP32-based portable micro-router firmware facilitating covert field deployment and packet redirection |
+| **[Crypto_Guard](https://github.com/ben-slates/Crypto_Guard)** | Cryptography & Security | Security toolkit providing cryptographic validation, file hashing, cipher operations, and payload protection |
+| **[CNN_EMNIST_VISUALIZATION](https://github.com/ben-slates/CNN_EMNIST_VISUALIZATION)** | Deep Learning & AI | Deep learning CNN models on MNIST/EMNIST with interactive Streamlit drawing and real-time prediction web app |
+| **[language-encrypter](https://github.com/ben-slates/language-encrypter)** | Cryptographic Obfuscation | Text encryption and algorithmic cipher encoding tool for secure communication |
 
 ---
 

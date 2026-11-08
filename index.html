@@ -1978,6 +1978,13 @@ var FS={
       "    └── Security Automation: ML-powered CVE Triaging, Custom Protocol Dissectors, Automated Threat Auditing"
     ]},
     "projects":{type:"dir",icon:"[DIR]",isDesktop:true,children:{
+      "mdread.txt":{type:"file",icon:"[TXT]",content:[
+        "<span class='t-section'>-- mdread --</span>",
+        "<span class='t-key'>Domain      </span> CLI &amp; Developer Tooling",
+        "<span class='t-key'>Architecture</span> Fast, clutter-free CLI Markdown reader with instant one-click",
+        "              command copying to your system clipboard (Python)",
+        "<span class='t-key'>Repository  </span> <span class='t-dir'>https://github.com/ben-slates/mdread</span>"
+      ]},
       "discord-voice-notes.txt":{type:"file",icon:"[TXT]",content:[
         "<span class='t-section'>-- discord-voice-notes --</span>",
         "<span class='t-key'>Domain      </span> Client Modding & Audio DSP",
@@ -3117,8 +3124,9 @@ function execCmd(raw, isSudo){
       break;
     }
     case "projects":{
-      tLine("<span class='t-section'>── FEATURED ENGINEERING &amp; RESEARCH PROJECTS ──</span>");
+      tLine("<span class='t-section'>── BUILT TOOLS &amp; RESEARCH REPOSITORIES ──</span>");
       tBlank();
+      tLine("  <span class='t-cmd'>mdread</span>                 CLI Tooling (Fast, clutter-free CLI Markdown reader with instant clipboard copy)");
       tLine("  <span class='t-cmd'>discord-voice-notes</span>    Client Modding &amp; Audio DSP (Opus, Base64 waveforms, 83 glass themes)");
       tLine("  <span class='t-cmd'>BEN_C2</span>                 Command &amp; Control (Asynchronous C2, Rust core, Python orchestration)");
       tLine("  <span class='t-cmd'>CVE-2026-31431-Exploit</span> Exploit Development (Vulnerability PoC &amp; memory analysis suite)");
@@ -3127,6 +3135,7 @@ function execCmd(raw, isSudo){
       tLine("  <span class='t-cmd'>CVE-FINDER</span>             Threat Intel &amp; ML (Automated CVE pipeline &amp; zero-day triage)");
       tLine("  <span class='t-cmd'>uploadserver2</span>          Network Systems (Secure HTTP/2 file transport with shell sync)");
       tLine("  <span class='t-cmd'>esp32_NAT_router</span>       Hardware Security (Covert field deployment micro-router)");
+      tLine("  <span class='t-cmd'>Crypto_Guard</span>           Cryptography &amp; Security (Validation, hashing &amp; payload protection)");
       tBlank();
       tLine("<span class='t-muted'>Type <span class='t-cmd'>cat projects/&lt;name&gt;.txt</span> or visit <span class='t-dir'>https://github.com/ben-slates</span></span>");
       break;
@@ -3343,9 +3352,8 @@ document.addEventListener("DOMContentLoaded", startMobileTicker);
   <nav class="mport-quicknav" aria-label="Mobile Sections">
     <a href="#m-about" class="mport-qlink">[ ABOUT ]</a>
     <a href="#m-profile" class="mport-qlink">[ PROFILE ]</a>
-    <a href="#m-projects" class="mport-qlink">[ PROJECTS ]</a>
+    <a href="#m-projects" class="mport-qlink">[ TOOLS &amp; REPOSITORIES ]</a>
     <a href="#m-specializations" class="mport-qlink">[ SPECIALIZATIONS ]</a>
-    <a href="#m-metrics" class="mport-qlink">[ METRICS ]</a>
     <a href="#m-skills" class="mport-qlink">[ ARSENAL ]</a>
     <a href="#m-certs" class="mport-qlink">[ CERTS &amp; LABS ]</a>
     <a href="#m-work" class="mport-qlink">[ EXPERIENCE ]</a>
@@ -3447,23 +3455,26 @@ document.addEventListener("DOMContentLoaded", startMobileTicker);
     └── Security Automation: ML-powered CVE Triaging, Custom Protocol Dissectors, Automated Threat Auditing</div>
     </section>
 
-    <!-- FEATURED ENGINEERING & RESEARCH PROJECTS -->
+    <!-- BUILT SECURITY TOOLS & REPOSITORIES -->
     <section class="mport-card" id="m-projects">
       <div class="mport-title">
         <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
-        Featured Projects &amp; Research
+        Built Tools &amp; Repositories
       </div>
 
-      <!-- 1. discord-voice-notes -->
+      <!-- 1. mdread -->
       <div class="mport-proj-card">
         <div class="mport-proj-top">
-          <div class="mport-proj-name">discord-voice-notes</div>
-          <span class="mport-proj-domain">Client Modding &amp; Audio DSP</span>
+          <div class="mport-proj-name">mdread</div>
+          <span class="mport-proj-domain" style="border-color:rgba(0,240,255,0.4); color:#00f0ff;">CLI &amp; Markdown Tooling</span>
         </div>
-        <p class="mport-proj-desc">Native Opus 64kbps recording engine, Base64 waveform generation, 83 Full HD glass themes, real-time theme search, and large file bypass.</p>
-        <a href="https://github.com/ben-slates/discord-voice-notes" target="_blank" class="mport-proj-btn">
-          <span>github.com/ben-slates/discord-voice-notes</span> ↗
-        </a>
+        <p class="mport-proj-desc">Fast, clutter-free CLI Markdown reader featuring instant one-click command copying straight to your system clipboard.</p>
+        <div style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:8px;">
+          <span style="font-family:var(--font-mono); font-size:10.5px; color:#c77dff;">Python • CLI • Clipboard Sync</span>
+          <a href="https://github.com/ben-slates/mdread" target="_blank" class="mport-proj-btn">
+            <span>github.com/ben-slates/mdread</span> ↗
+          </a>
+        </div>
       </div>
 
       <!-- 2. BEN_C2 -->
@@ -3473,94 +3484,155 @@ document.addEventListener("DOMContentLoaded", startMobileTicker);
           <span class="mport-proj-domain" style="border-color:rgba(255,42,109,0.4); color:#ff88a3;">Command &amp; Control</span>
         </div>
         <p class="mport-proj-desc">Asynchronous post-exploitation C2 server engineered with Rust performance core and Python API orchestration.</p>
-        <a href="https://github.com/ben-slates/BEN_C2" target="_blank" class="mport-proj-btn">
-          <span>github.com/ben-slates/BEN_C2</span> ↗
-        </a>
+        <div style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:8px;">
+          <span style="font-family:var(--font-mono); font-size:10.5px; color:#ff88a3;">Rust • Python • Async C2</span>
+          <a href="https://github.com/ben-slates/BEN_C2" target="_blank" class="mport-proj-btn">
+            <span>github.com/ben-slates/BEN_C2</span> ↗
+          </a>
+        </div>
       </div>
 
-      <!-- 3. CVE-2026-31431-Exploit -->
+      <!-- 3. discord-voice-notes -->
+      <div class="mport-proj-card">
+        <div class="mport-proj-top">
+          <div class="mport-proj-name">discord-voice-notes</div>
+          <span class="mport-proj-domain">Client Modding &amp; Audio DSP</span>
+        </div>
+        <p class="mport-proj-desc">Native Opus 64kbps recording engine, Base64 waveform generation, 83 Full HD glass themes, real-time theme search, and large file bypass.</p>
+        <div style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:8px;">
+          <span style="font-family:var(--font-mono); font-size:10.5px; color:#70f3ff;">CSS • JavaScript • Audio DSP</span>
+          <a href="https://github.com/ben-slates/discord-voice-notes" target="_blank" class="mport-proj-btn">
+            <span>github.com/ben-slates/discord-voice-notes</span> ↗
+          </a>
+        </div>
+      </div>
+
+      <!-- 4. CVE-2026-31431-Exploit -->
       <div class="mport-proj-card">
         <div class="mport-proj-top">
           <div class="mport-proj-name">CVE-2026-31431-Exploit</div>
           <span class="mport-proj-domain" style="border-color:rgba(157,78,221,0.4); color:#c77dff;">Exploit Development</span>
         </div>
         <p class="mport-proj-desc">Vulnerability research, memory analysis, and weaponized proof-of-concept exploitation suite.</p>
-        <a href="https://github.com/ben-slates/CVE-2026-31431-Exploit" target="_blank" class="mport-proj-btn">
-          <span>github.com/ben-slates/CVE-2026-31431-Exploit</span> ↗
-        </a>
+        <div style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:8px;">
+          <span style="font-family:var(--font-mono); font-size:10.5px; color:#c77dff;">Python • Exploit PoC</span>
+          <a href="https://github.com/ben-slates/CVE-2026-31431-Exploit" target="_blank" class="mport-proj-btn">
+            <span>github.com/ben-slates/CVE-2026-31431-Exploit</span> ↗
+          </a>
+        </div>
       </div>
 
-      <!-- 4. CVE-2024-37054 -->
+      <!-- 5. CVE-2024-37054 -->
       <div class="mport-proj-card">
         <div class="mport-proj-top">
           <div class="mport-proj-name">CVE-2024-37054</div>
           <span class="mport-proj-domain" style="border-color:rgba(157,78,221,0.4); color:#c77dff;">Vulnerability Research</span>
         </div>
         <p class="mport-proj-desc">Technical analysis, payload structuring, and environment reproductive attack demonstration.</p>
-        <a href="https://github.com/ben-slates/CVE-2024-37054" target="_blank" class="mport-proj-btn">
-          <span>github.com/ben-slates/CVE-2024-37054</span> ↗
-        </a>
+        <div style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:8px;">
+          <span style="font-family:var(--font-mono); font-size:10.5px; color:#c77dff;">Python • Threat Analysis</span>
+          <a href="https://github.com/ben-slates/CVE-2024-37054" target="_blank" class="mport-proj-btn">
+            <span>github.com/ben-slates/CVE-2024-37054</span> ↗
+          </a>
+        </div>
       </div>
 
-      <!-- 5. gmsa-aes-key-extractor -->
+      <!-- 6. gmsa-aes-key-extractor -->
       <div class="mport-proj-card">
         <div class="mport-proj-top">
           <div class="mport-proj-name">gmsa-aes-key-extractor</div>
           <span class="mport-proj-domain" style="border-color:rgba(0,245,160,0.4); color:#00f5a0;">Active Directory Security</span>
         </div>
         <p class="mport-proj-desc">Group Managed Service Account (gMSA) cryptographic AES key extraction and offline ticket forged decryption.</p>
-        <a href="https://github.com/ben-slates/gmsa-aes-key-extractor" target="_blank" class="mport-proj-btn">
-          <span>github.com/ben-slates/gmsa-aes-key-extractor</span> ↗
-        </a>
+        <div style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:8px;">
+          <span style="font-family:var(--font-mono); font-size:10.5px; color:#00f5a0;">Python • Kerberos • AES</span>
+          <a href="https://github.com/ben-slates/gmsa-aes-key-extractor" target="_blank" class="mport-proj-btn">
+            <span>github.com/ben-slates/gmsa-aes-key-extractor</span> ↗
+          </a>
+        </div>
       </div>
 
-      <!-- 6. CVE-FINDER -->
+      <!-- 7. CVE-FINDER -->
       <div class="mport-proj-card">
         <div class="mport-proj-top">
           <div class="mport-proj-name">CVE-FINDER</div>
           <span class="mport-proj-domain">Threat Intelligence &amp; ML</span>
         </div>
-        <p class="mport-proj-desc">Automated CVE ingestion pipeline evaluating real-time zero-day chatter and CVSS severity scoring.</p>
-        <a href="https://github.com/ben-slates/CVE-FINDER" target="_blank" class="mport-proj-btn">
-          <span>github.com/ben-slates/CVE-FINDER</span> ↗
-        </a>
+        <p class="mport-proj-desc">ML-powered CVE vulnerability intelligence platform with 15+ years of NVD historical records &amp; real-time security chatter analysis.</p>
+        <div style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:8px;">
+          <span style="font-family:var(--font-mono); font-size:10.5px; color:#70f3ff;">Python • HTML • ML Pipeline</span>
+          <a href="https://github.com/ben-slates/CVE-FINDER" target="_blank" class="mport-proj-btn">
+            <span>github.com/ben-slates/CVE-FINDER</span> ↗
+          </a>
+        </div>
       </div>
 
-      <!-- 7. uploadserver2 -->
+      <!-- 8. uploadserver2 -->
       <div class="mport-proj-card">
         <div class="mport-proj-top">
           <div class="mport-proj-name">uploadserver2</div>
           <span class="mport-proj-domain">Network Systems</span>
         </div>
-        <p class="mport-proj-desc">Secure, self-hosted HTTP/2 file transport server featuring authenticated streaming and remote shell sync.</p>
-        <a href="https://github.com/ben-slates/uploadserver2" target="_blank" class="mport-proj-btn">
-          <span>github.com/ben-slates/uploadserver2</span> ↗
-        </a>
+        <p class="mport-proj-desc">Self-hosted HTTP/2 file transport server featuring recursive browsing, streamed uploads/downloads, remote console clients, and Cloudflare Tunnel support.</p>
+        <div style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:8px;">
+          <span style="font-family:var(--font-mono); font-size:10.5px; color:#70f3ff;">Python • HTTP/2 • Web Interface</span>
+          <a href="https://github.com/ben-slates/uploadserver2" target="_blank" class="mport-proj-btn">
+            <span>github.com/ben-slates/uploadserver2</span> ↗
+          </a>
+        </div>
       </div>
 
-      <!-- 8. esp32_NAT_router -->
-      <div class="mport-proj-card" style="margin-bottom:0;">
+      <!-- 9. esp32_NAT_router -->
+      <div class="mport-proj-card">
         <div class="mport-proj-top">
           <div class="mport-proj-name">esp32_NAT_router</div>
           <span class="mport-proj-domain" style="border-color:rgba(255,140,0,0.4); color:#ffb366;">Embedded &amp; Hardware</span>
         </div>
-        <p class="mport-proj-desc">ESP32-based portable micro-router firmware facilitating covert field deployment and packet redirection.</p>
-        <a href="https://github.com/ben-slates/esp32_NAT_router" target="_blank" class="mport-proj-btn">
-          <span>github.com/ben-slates/esp32_NAT_router</span> ↗
-        </a>
+        <p class="mport-proj-desc">Portable ESP32-based Wi-Fi router and IoT gateway facilitating NAT routing, DHCP services, hotspot management, and packet redirection.</p>
+        <div style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:8px;">
+          <span style="font-family:var(--font-mono); font-size:10.5px; color:#ffb366;">C • ESP32 • Networking</span>
+          <a href="https://github.com/ben-slates/esp32_NAT_router" target="_blank" class="mport-proj-btn">
+            <span>github.com/ben-slates/esp32_NAT_router</span> ↗
+          </a>
+        </div>
       </div>
-    </section>
 
-    <!-- ACTIVITY & GITHUB METRICS -->
-    <section class="mport-card" id="m-metrics">
-      <div class="mport-title">
-        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
-        Activity &amp; GitHub Metrics
+      <!-- 10. Crypto_Guard -->
+      <div class="mport-proj-card">
+        <div class="mport-proj-top">
+          <div class="mport-proj-name">Crypto_Guard</div>
+          <span class="mport-proj-domain" style="border-color:rgba(0,245,160,0.4); color:#00f5a0;">Cryptography &amp; Security</span>
+        </div>
+        <p class="mport-proj-desc">Security toolkit providing cryptographic validation, file hashing, cipher operations, and payload protection.</p>
+        <div style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:8px;">
+          <span style="font-family:var(--font-mono); font-size:10.5px; color:#00f5a0;">Python • Ciphers • Hashes</span>
+          <a href="https://github.com/ben-slates/Crypto_Guard" target="_blank" class="mport-proj-btn">
+            <span>github.com/ben-slates/Crypto_Guard</span> ↗
+          </a>
+        </div>
       </div>
-      <div class="mport-metrics-grid">
-        <img src="https://github-readme-stats.vercel.app/api?username=ben-slates&show_icons=true&theme=radical&hide_border=true&count_private=true" alt="GitHub Performance Metrics" class="mport-stat-img" loading="lazy">
-        <img src="https://github-readme-streak-stats.herokuapp.com/?user=ben-slates&theme=radical&hide_border=true" alt="GitHub Streak Stats" class="mport-stat-img" loading="lazy">
-        <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=ben-slates&layout=compact&theme=radical&hide_border=true" alt="Top Languages" class="mport-stat-img" loading="lazy">
+
+      <!-- 11. CNN_EMNIST_VISUALIZATION -->
+      <div class="mport-proj-card">
+        <div class="mport-proj-top">
+          <div class="mport-proj-name">CNN_EMNIST_VISUALIZATION</div>
+          <span class="mport-proj-domain" style="border-color:rgba(157,78,221,0.4); color:#c77dff;">Deep Learning &amp; AI</span>
+        </div>
+        <p class="mport-proj-desc">Deep learning CNN models trained on MNIST digits and EMNIST letters with interactive Streamlit drawing canvas and real-time inference predictions.</p>
+        <div style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:8px;">
+          <span style="font-family:var(--font-mono); font-size:10.5px; color:#c77dff;">Python • PyTorch • Streamlit</span>
+          <a href="https://github.com/ben-slates/CNN_EMNIST_VISUALIZATION" target="_blank" class="mport-proj-btn">
+            <span>github.com/ben-slates/CNN_EMNIST_VISUALIZATION</span> ↗
+          </a>
+        </div>
+      </div>
+
+      <!-- GitHub Explorer CTA -->
+      <div style="margin-top:14px; text-align:center;">
+        <a href="https://github.com/ben-slates?tab=repositories" target="_blank" class="mport-resume-btn" style="background:linear-gradient(135deg, rgba(255,42,109,0.3) 0%, rgba(157,78,221,0.3) 100%); border-color:rgba(255,42,109,0.5);">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+          Explore All 29+ Repositories on GitHub ↗
+        </a>
       </div>
     </section>
 
@@ -3756,10 +3828,21 @@ document.addEventListener("DOMContentLoaded", startMobileTicker);
     <!-- Social Links Bar -->
     <div class="mport-social-bar">
       <div class="mport-soc-links">
-        <a href="https://github.com/ben-slates" target="_blank" class="mport-soc-btn" aria-label="GitHub">GH</a>
-        <a href="https://linkedin.com/in/m-umer-farooq-a2a0b721" target="_blank" class="mport-soc-btn" aria-label="LinkedIn">IN</a>
-        <a href="mailto:hello@benslates.xyz" class="mport-soc-btn" aria-label="Email">EM</a>
-        <a href="https://rynexsecurity.com" target="_blank" class="mport-soc-btn" aria-label="Rynex Security">RS</a>
+        <a href="https://github.com/ben-slates" target="_blank" class="mport-soc-btn" aria-label="GitHub" title="GitHub">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+        </a>
+        <a href="https://linkedin.com/in/m-umer-farooq-a2a0b721" target="_blank" class="mport-soc-btn" aria-label="LinkedIn" title="LinkedIn">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+        </a>
+        <a href="mailto:hello@benslates.xyz" class="mport-soc-btn" aria-label="Email" title="Email">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        </a>
+        <a href="https://rynexsecurity.com" target="_blank" class="mport-soc-btn" aria-label="Rynex Security" title="Rynex Security">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </a>
+        <a href="https://benslates.xyz" target="_blank" class="mport-soc-btn" aria-label="Website" title="Website">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+        </a>
       </div>
       <div style="font-family:var(--font-mono);font-size:10px;color:rgba(255,255,255,0.7);display:flex;align-items:center;gap:6px;">
         <span style="width:6px;height:6px;border-radius:50%;background:#00f5a0;box-shadow:0 0 8px #00f5a0;"></span>
