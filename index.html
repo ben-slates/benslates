@@ -713,7 +713,7 @@ html,body{width:100%;height:100%;overflow:hidden;font-family:var(--font-ui);back
   html, body {
     overflow-y: auto !important;
     height: auto !important;
-    background: #050203 !important;
+    background: #060308 !important;
     font-family: var(--font-ui) !important;
     -webkit-tap-highlight-color: transparent;
   }
@@ -721,29 +721,29 @@ html,body{width:100%;height:100%;overflow:hidden;font-family:var(--font-ui);back
     display: none !important;
   }
 
-  /* ── ULTRA-PREMIUM CYBER-GLASS MOBILE CONTAINER ── */
+  /* ── ULTRA-SEXY CYBER-GLASS MOBILE CONTAINER ── */
   #mobile-portfolio-site {
     display: flex !important;
     flex-direction: column;
     min-height: 100vh;
     width: 100vw;
-    background: #050203;
+    background: #060308;
     color: #f5f5f5;
     position: relative;
     z-index: 999999;
     overflow-x: hidden;
   }
 
-  /* Ambient glowing backdrop with wallpaper */
+  /* Multi-color ambient liquid backdrop */
   #mobile-portfolio-site::before {
     content: '';
     position: fixed;
     inset: 0;
     z-index: -1;
     background-image:
-      radial-gradient(ellipse 90% 50% at 50% 0%, rgba(255, 45, 45, 0.22) 0%, transparent 75%),
-      radial-gradient(ellipse 70% 60% at 85% 85%, rgba(180, 0, 0, 0.16) 0%, transparent 70%),
-      radial-gradient(ellipse 60% 40% at 15% 50%, rgba(20, 2, 5, 0.8) 0%, transparent 60%),
+      radial-gradient(ellipse 90% 50% at 50% 0%, rgba(255, 42, 109, 0.25) 0%, transparent 75%),
+      radial-gradient(ellipse 80% 60% at 90% 85%, rgba(157, 78, 221, 0.22) 0%, transparent 70%),
+      radial-gradient(ellipse 60% 45% at 10% 50%, rgba(0, 240, 255, 0.1) 0%, transparent 65%),
       url('mobile_bg.jpg');
     background-size: cover;
     background-position: center;
@@ -751,55 +751,55 @@ html,body{width:100%;height:100%;overflow:hidden;font-family:var(--font-ui);back
     pointer-events: none;
   }
 
-  /* TOP TELEMETRY SYSTEM TRAY */
+  /* TOP HUD TELEMETRY TRAY */
   .mport-sys-bar {
-    background: rgba(8, 2, 3, 0.88);
-    border-bottom: 1px solid rgba(255, 45, 45, 0.2);
+    background: rgba(8, 4, 10, 0.85);
+    border-bottom: 1px solid rgba(255, 42, 109, 0.22);
     padding: 8px 16px;
     display: flex;
     align-items: center;
     justify-content: space-between;
     font-family: var(--font-mono);
     font-size: 11px;
-    color: rgba(230, 230, 230, 0.75);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
+    color: rgba(240, 240, 240, 0.75);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
     letter-spacing: 0.04em;
   }
   .mport-sys-item { display: flex; align-items: center; gap: 5px; }
   .mport-sys-lbl { color: rgba(255, 255, 255, 0.45); font-size: 10px; }
-  .mport-sys-val { color: var(--glow-accent); font-weight: 700; font-size: 11px; }
+  .mport-sys-val { color: #ff2a6d; font-weight: 700; font-size: 11px; }
   .mport-online {
-    color: var(--glow-green);
+    color: #00f5a0;
     font-weight: 700;
     display: inline-flex;
     align-items: center;
-    gap: 5px;
-    text-shadow: 0 0 10px rgba(0, 255, 102, 0.6);
+    gap: 6px;
+    text-shadow: 0 0 10px rgba(0, 245, 160, 0.7);
   }
   .mport-online-dot {
-    width: 6px;
-    height: 6px;
+    width: 7px;
+    height: 7px;
     border-radius: 50%;
-    background: var(--glow-green);
-    box-shadow: 0 0 8px var(--glow-green);
+    background: #00f5a0;
+    box-shadow: 0 0 10px #00f5a0;
     animation: livePulse 2s infinite ease-in-out;
   }
 
-  /* STICKY CYBER-GLASS HEADER */
+  /* STICKY GLASS HEADER */
   .mport-header {
     position: sticky;
     top: 0;
     z-index: 1000;
-    background: rgba(10, 3, 4, 0.82);
-    border-bottom: 1px solid rgba(255, 45, 45, 0.22);
-    backdrop-filter: blur(24px) saturate(180%);
-    -webkit-backdrop-filter: blur(24px) saturate(180%);
+    background: rgba(9, 4, 12, 0.82);
+    border-bottom: 1px solid rgba(255, 42, 109, 0.22);
+    backdrop-filter: blur(28px) saturate(200%);
+    -webkit-backdrop-filter: blur(28px) saturate(200%);
     padding: 12px 16px;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.7);
+    box-shadow: 0 10px 35px rgba(0,0,0,0.75);
   }
   .mport-brand {
     font-family: var(--font-mono);
@@ -812,18 +812,20 @@ html,body{width:100%;height:100%;overflow:hidden;font-family:var(--font-ui);back
     gap: 9px;
   }
   .mport-brand span {
-    color: var(--glow-accent);
-    text-shadow: 0 0 12px rgba(255, 51, 51, 0.7);
+    background: linear-gradient(135deg, #ff2a6d, #9d4edd);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: drop-shadow(0 0 10px rgba(255, 42, 109, 0.6));
   }
   .mport-user-chip {
     font-family: var(--font-mono);
     font-size: 11px;
-    color: var(--glow-green);
-    background: rgba(0, 255, 102, 0.08);
-    border: 1px solid rgba(0, 255, 102, 0.28);
+    color: #00f5a0;
+    background: rgba(0, 245, 160, 0.08);
+    border: 1px solid rgba(0, 245, 160, 0.3);
     padding: 5px 12px;
     border-radius: 16px;
-    box-shadow: 0 0 14px rgba(0, 255, 102, 0.12);
+    box-shadow: 0 0 14px rgba(0, 245, 160, 0.15);
   }
 
   /* HORIZONTAL QUICK NAV BAR */
@@ -832,29 +834,30 @@ html,body{width:100%;height:100%;overflow:hidden;font-family:var(--font-ui);back
     gap: 8px;
     overflow-x: auto;
     padding: 10px 16px;
-    background: rgba(6, 1, 2, 0.65);
-    border-bottom: 1px solid rgba(255, 45, 45, 0.12);
+    background: rgba(8, 3, 10, 0.65);
+    border-bottom: 1px solid rgba(255, 42, 109, 0.12);
     scrollbar-width: none;
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
   }
   .mport-quicknav::-webkit-scrollbar { display: none; }
   .mport-qlink {
     font-family: var(--font-mono);
     font-size: 11.5px;
-    color: rgba(240, 240, 240, 0.7);
+    color: rgba(240, 240, 240, 0.75);
     text-decoration: none;
     padding: 6px 14px;
     border-radius: 20px;
     background: rgba(255, 255, 255, 0.04);
-    border: 1px solid rgba(255, 45, 45, 0.15);
+    border: 1px solid rgba(255, 42, 109, 0.18);
     white-space: nowrap;
     transition: all 0.2s;
   }
   .mport-qlink:active, .mport-qlink:hover {
-    background: rgba(255, 45, 45, 0.15);
-    border-color: var(--glow-accent);
+    background: linear-gradient(135deg, rgba(255, 42, 109, 0.2), rgba(157, 78, 221, 0.2));
+    border-color: #ff2a6d;
     color: #fff;
+    transform: translateY(-1px);
   }
 
   /* MAIN CONTENT WRAPPER */
@@ -865,22 +868,22 @@ html,body{width:100%;height:100%;overflow:hidden;font-family:var(--font-ui);back
     display: flex;
     flex-direction: column;
     gap: 20px;
-    max-width: 600px;
+    max-width: 620px;
     margin: 0 auto;
   }
 
-  /* ── ULTRA-PREMIUM CYBER HERO CARD ── */
+  /* ── ULTRA-SEXY HERO CARD WITH ME.JPG ── */
   .mport-hero {
-    background: rgba(16, 4, 6, 0.72);
-    border: 1px solid rgba(255, 51, 51, 0.32);
-    border-radius: 24px;
+    background: rgba(16, 8, 18, 0.75);
+    border: 1px solid rgba(255, 42, 109, 0.35);
+    border-radius: 26px;
     padding: 24px 20px;
-    backdrop-filter: blur(28px) saturate(190%);
-    -webkit-backdrop-filter: blur(28px) saturate(190%);
+    backdrop-filter: blur(32px) saturate(210%);
+    -webkit-backdrop-filter: blur(32px) saturate(210%);
     box-shadow:
-      0 20px 50px rgba(0, 0, 0, 0.75),
-      inset 0 1px 1px rgba(255, 255, 255, 0.2),
-      inset 0 0 20px rgba(255, 51, 51, 0.06);
+      0 22px 55px rgba(0, 0, 0, 0.8),
+      inset 0 1px 1px rgba(255, 255, 255, 0.22),
+      0 0 35px rgba(255, 42, 109, 0.12);
     position: relative;
     overflow: hidden;
   }
@@ -888,16 +891,16 @@ html,body{width:100%;height:100%;overflow:hidden;font-family:var(--font-ui);back
     content: '';
     position: absolute;
     top: 0; left: 0; right: 0; height: 3px;
-    background: linear-gradient(90deg, transparent, var(--glow-accent), transparent);
+    background: linear-gradient(90deg, transparent, #ff2a6d, #9d4edd, #00f0ff, transparent);
   }
   .mport-hero::after {
     content: '';
     position: absolute;
-    top: -80px; right: -60px; width: 220px; height: 220px;
+    top: -90px; right: -70px; width: 240px; height: 240px;
     border-radius: 50%;
-    background: radial-gradient(circle, rgba(255, 51, 51, 0.18) 0%, transparent 70%);
+    background: radial-gradient(circle, rgba(157, 78, 221, 0.22) 0%, rgba(255, 42, 109, 0.15) 50%, transparent 70%);
     pointer-events: none;
-    filter: blur(45px);
+    filter: blur(50px);
   }
 
   .mport-avatar-wrap {
@@ -908,25 +911,49 @@ html,body{width:100%;height:100%;overflow:hidden;font-family:var(--font-ui);back
     position: relative;
     z-index: 2;
   }
-  .mport-avatar {
-    width: 68px; height: 68px; border-radius: 50%;
-    background: rgba(255, 45, 45, 0.12);
-    border: 2px solid var(--glow-accent);
-    display: flex; align-items: center; justify-content: center;
-    box-shadow: 0 0 28px rgba(255, 51, 51, 0.45);
+
+  /* PHOTO AVATAR FRAME FOR ME.JPG */
+  .mport-avatar-ring {
+    position: relative;
+    width: 78px;
+    height: 78px;
+    border-radius: 50%;
+    padding: 3px;
+    background: linear-gradient(135deg, #ff2a6d, #9d4edd, #00f0ff);
+    box-shadow: 0 0 24px rgba(255, 42, 109, 0.55), 0 0 35px rgba(157, 78, 221, 0.3);
     flex-shrink: 0;
+    animation: ringPulse 4s ease-in-out infinite alternate;
   }
-  .mport-avatar svg { width: 36px; height: 36px; color: var(--glow-accent); }
+  .mport-avatar-img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+    display: block;
+    background: #0f040b;
+  }
+  .mport-status-beacon {
+    position: absolute;
+    bottom: 2px;
+    right: 2px;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    background: #00f5a0;
+    border: 2.5px solid #060308;
+    box-shadow: 0 0 10px #00f5a0;
+    animation: beaconBlink 2s infinite ease-in-out;
+  }
 
   .mport-hero-title-box { display: flex; flex-direction: column; }
   .mport-hero-tag {
     font-family: var(--font-mono);
     font-size: 10px;
-    color: var(--glow-accent);
+    color: #ff2a6d;
     letter-spacing: 0.12em;
     font-weight: 700;
     text-transform: uppercase;
-    margin-bottom: 3px;
+    margin-bottom: 4px;
     display: flex;
     align-items: center;
     gap: 6px;
@@ -937,16 +964,39 @@ html,body{width:100%;height:100%;overflow:hidden;font-family:var(--font-ui);back
     color: #fff;
     letter-spacing: 0.01em;
     line-height: 1.2;
+    background: linear-gradient(135deg, #ffffff 30%, #ff88a3 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .mport-hero-alias {
+    font-family: var(--font-mono);
+    font-size: 11.5px;
+    color: rgba(255, 255, 255, 0.65);
+    margin-top: 2px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .mport-alias-tag {
+    font-size: 9px;
+    padding: 2px 7px;
+    border-radius: 12px;
+    background: rgba(157, 78, 221, 0.2);
+    border: 1px solid rgba(157, 78, 221, 0.4);
+    color: #c77dff;
+    font-weight: 700;
+    letter-spacing: 0.05em;
   }
   .mport-hero-sub {
     font-size: 13.5px;
-    color: rgba(240, 240, 240, 0.85);
+    color: rgba(240, 240, 240, 0.88);
     line-height: 1.6;
     margin-bottom: 18px;
     position: relative;
     z-index: 2;
   }
 
+  /* BENTO QUICK STATS */
   .mport-hero-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -955,12 +1005,17 @@ html,body{width:100%;height:100%;overflow:hidden;font-family:var(--font-ui);back
     z-index: 2;
   }
   .mport-ib {
-    background: rgba(255, 45, 45, 0.08);
-    border: 1px solid rgba(255, 45, 45, 0.2);
-    border-radius: 14px;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 42, 109, 0.22);
+    border-radius: 16px;
     padding: 12px 14px;
-    backdrop-filter: blur(10px);
-    box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(12px);
+    box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.12);
+    transition: all 0.2s;
+  }
+  .mport-ib:hover {
+    border-color: rgba(157, 78, 221, 0.5);
+    background: rgba(255, 255, 255, 0.06);
   }
   .mport-ib-lbl {
     font-family: var(--font-mono);
@@ -979,15 +1034,15 @@ html,body{width:100%;height:100%;overflow:hidden;font-family:var(--font-ui);back
 
   /* ── GLASS BENTO SECTION CARDS ── */
   .mport-card {
-    background: rgba(15, 4, 6, 0.72);
-    border: 1px solid rgba(255, 45, 45, 0.22);
-    border-radius: 22px;
+    background: rgba(15, 7, 18, 0.75);
+    border: 1px solid rgba(255, 42, 109, 0.24);
+    border-radius: 24px;
     padding: 22px 18px;
-    backdrop-filter: blur(28px) saturate(190%);
-    -webkit-backdrop-filter: blur(28px) saturate(190%);
+    backdrop-filter: blur(32px) saturate(200%);
+    -webkit-backdrop-filter: blur(32px) saturate(200%);
     box-shadow:
-      0 16px 40px rgba(0, 0, 0, 0.65),
-      inset 0 1px 1px rgba(255, 255, 255, 0.15);
+      0 18px 45px rgba(0, 0, 0, 0.7),
+      inset 0 1px 1px rgba(255, 255, 255, 0.16);
     position: relative;
     overflow: hidden;
   }
@@ -995,26 +1050,26 @@ html,body{width:100%;height:100%;overflow:hidden;font-family:var(--font-ui);back
     content: '';
     position: absolute;
     top: 0; left: 0; right: 0; height: 2px;
-    background: linear-gradient(90deg, transparent, rgba(255, 51, 51, 0.4), transparent);
+    background: linear-gradient(90deg, transparent, rgba(255, 42, 109, 0.5), rgba(157, 78, 221, 0.5), transparent);
   }
 
   .mport-title {
     font-family: var(--font-mono);
     font-size: 13.5px;
     font-weight: 700;
-    color: var(--glow-accent);
+    color: #ff2a6d;
     letter-spacing: 0.05em;
     margin-bottom: 16px;
-    border-bottom: 1px solid rgba(255, 45, 45, 0.18);
+    border-bottom: 1px solid rgba(255, 42, 109, 0.18);
     padding-bottom: 10px;
     text-transform: uppercase;
     display: flex;
     align-items: center;
     gap: 9px;
   }
-  .mport-title svg { color: var(--glow-accent); flex-shrink: 0; }
+  .mport-title svg { color: #ff2a6d; flex-shrink: 0; }
 
-  /* SKILL TAGS */
+  /* SKILL TAGS (MULTI-COLOR CATEGORIZED) */
   .mport-skill-group { margin-bottom: 16px; }
   .mport-sg-title {
     font-family: var(--font-mono);
@@ -1028,28 +1083,41 @@ html,body{width:100%;height:100%;overflow:hidden;font-family:var(--font-ui);back
   .mport-stag {
     font-family: var(--font-mono);
     font-size: 11.5px;
-    background: rgba(255, 45, 45, 0.09);
-    border: 1px solid rgba(255, 45, 45, 0.24);
+    background: rgba(255, 42, 109, 0.08);
+    border: 1px solid rgba(255, 42, 109, 0.25);
     color: #f5f5f5;
     padding: 7px 13px;
     border-radius: 12px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
     display: inline-flex;
     align-items: center;
     gap: 6px;
+    transition: all 0.2s;
   }
+  .mport-stag:active { transform: scale(0.96); }
+  .mport-stag.stag-purple {
+    background: rgba(157, 78, 221, 0.1);
+    border-color: rgba(157, 78, 221, 0.3);
+  }
+  .mport-stag.stag-purple::before { color: #c77dff !important; }
+  .mport-stag.stag-cyan {
+    background: rgba(0, 240, 255, 0.08);
+    border-color: rgba(0, 240, 255, 0.28);
+  }
+  .mport-stag.stag-cyan::before { color: #00f0ff !important; }
   .mport-stag::before {
     content: '❯';
-    color: var(--glow-accent);
+    color: #ff2a6d;
     font-size: 9px;
+    font-weight: 900;
   }
 
   /* CERTIFICATIONS LIST */
   .mport-cert-item {
-    background: rgba(255, 45, 45, 0.06);
-    border: 1px solid rgba(255, 45, 45, 0.18);
-    border-radius: 14px;
-    padding: 14px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 42, 109, 0.2);
+    border-radius: 16px;
+    padding: 14px 16px;
     margin-bottom: 10px;
     display: flex;
     align-items: center;
@@ -1058,8 +1126,8 @@ html,body{width:100%;height:100%;overflow:hidden;font-family:var(--font-ui);back
     transition: all 0.2s;
   }
   .mport-cert-item:active {
-    background: rgba(255, 45, 45, 0.12);
-    border-color: var(--glow-accent);
+    background: rgba(255, 42, 109, 0.12);
+    border-color: #ff2a6d;
   }
   .mport-cert-name {
     font-family: var(--font-mono);
@@ -1069,7 +1137,7 @@ html,body{width:100%;height:100%;overflow:hidden;font-family:var(--font-ui);back
   }
   .mport-cert-sub {
     font-size: 10.5px;
-    color: rgba(255, 255, 255, 0.5);
+    color: rgba(255, 255, 255, 0.52);
     font-family: var(--font-mono);
     margin-top: 3px;
   }
@@ -1077,14 +1145,14 @@ html,body{width:100%;height:100%;overflow:hidden;font-family:var(--font-ui);back
     font-family: var(--font-mono);
     font-size: 11.5px;
     padding: 8px 14px;
-    background: rgba(255, 45, 45, 0.25);
-    border: 1px solid rgba(255, 45, 45, 0.5);
-    border-radius: 10px;
+    background: linear-gradient(135deg, rgba(255, 42, 109, 0.3), rgba(157, 78, 221, 0.3));
+    border: 1px solid rgba(255, 42, 109, 0.5);
+    border-radius: 12px;
     color: #ffffff;
     text-decoration: none;
     white-space: nowrap;
     font-weight: 700;
-    box-shadow: 0 4px 12px rgba(255, 45, 45, 0.2);
+    box-shadow: 0 4px 14px rgba(255, 42, 109, 0.25);
     transition: all 0.15s;
     min-height: 34px;
     display: inline-flex;
@@ -1092,16 +1160,37 @@ html,body{width:100%;height:100%;overflow:hidden;font-family:var(--font-ui);back
     justify-content: center;
   }
   .mport-cert-btn:active {
-    background: var(--glow-accent);
-    color: #0c0204;
+    background: #ff2a6d;
+    color: #0b0204;
     transform: scale(0.96);
   }
 
+  /* RESUME CTA BUTTON (SMEXY GRADIENT) */
+  .mport-resume-btn {
+    width: 100%;
+    padding: 13px 20px;
+    font-size: 13px;
+    font-weight: 700;
+    font-family: var(--font-mono);
+    color: #fff;
+    text-decoration: none;
+    background: linear-gradient(135deg, #ff2a6d 0%, #9d4edd 100%);
+    border-radius: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 0 8px 25px rgba(255, 42, 109, 0.4), inset 0 1px 1px rgba(255, 255, 255, 0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: all 0.2s;
+  }
+  .mport-resume-btn:active { transform: scale(0.97); }
+
   /* CURRENT WORK BADGE */
   .mport-work-box {
-    background: rgba(255, 45, 45, 0.08);
-    border: 1px solid rgba(255, 45, 45, 0.26);
-    border-radius: 16px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 42, 109, 0.28);
+    border-radius: 18px;
     padding: 16px;
     position: relative;
     overflow: hidden;
@@ -1112,7 +1201,7 @@ html,body{width:100%;height:100%;overflow:hidden;font-family:var(--font-ui);back
     bottom: -50px; right: -50px;
     width: 140px; height: 140px;
     border-radius: 50%;
-    background: radial-gradient(circle, rgba(0, 255, 102, 0.12) 0%, transparent 70%);
+    background: radial-gradient(circle, rgba(0, 245, 160, 0.15) 0%, transparent 70%);
     filter: blur(30px);
     pointer-events: none;
   }
@@ -1122,44 +1211,59 @@ html,body{width:100%;height:100%;overflow:hidden;font-family:var(--font-ui);back
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 12px 14px;
-    background: rgba(255, 45, 45, 0.06);
-    border: 1px solid rgba(255, 45, 45, 0.18);
-    border-radius: 12px;
+    padding: 13px 16px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 42, 109, 0.2);
+    border-radius: 14px;
     margin-bottom: 8px;
     font-family: var(--font-mono);
     font-size: 12.5px;
     text-decoration: none;
     color: inherit;
+    transition: all 0.2s;
+  }
+  .mport-contact-row:active {
+    background: rgba(255, 42, 109, 0.1);
+    border-color: #ff2a6d;
   }
   .mport-cr-lbl { color: rgba(255, 255, 255, 0.5); font-weight: 500; font-size: 11px; }
-  .mport-cr-val { color: var(--glow-green); font-weight: 600; }
-  .mport-cr-val a { color: var(--glow-blue); text-decoration: none; }
+  .mport-cr-val { color: #00f5a0; font-weight: 600; }
+  .mport-cr-val a { color: #00f0ff; text-decoration: none; }
 
-  /* ── SIGNATURE GLASSY LIQUID FOOTER (RESTYLED FOR BENSLATES) ── */
+  /* ── SIGNATURE LIQUID GLASSY FOOTER ── */
   .mport-glassy-footer {
     width: 100%;
-    margin-top: 15px;
-    padding: 30px 18px 24px;
-    border-radius: 26px 26px 0 0;
-    background: rgba(14, 3, 5, 0.85);
-    backdrop-filter: blur(30px) saturate(200%);
-    -webkit-backdrop-filter: blur(30px) saturate(200%);
-    border-top: 1px solid rgba(255, 51, 51, 0.35);
+    margin-top: 20px;
+    padding: 32px 18px 26px;
+    border-radius: 28px 28px 0 0;
+    background: rgba(13, 5, 16, 0.88);
+    backdrop-filter: blur(32px) saturate(210%);
+    -webkit-backdrop-filter: blur(32px) saturate(210%);
+    border-top: 1px solid rgba(255, 42, 109, 0.4);
     box-shadow:
-      0 -15px 45px rgba(0, 0, 0, 0.8),
-      inset 0 1px 1px rgba(255, 255, 255, 0.2);
+      0 -18px 50px rgba(0, 0, 0, 0.85),
+      inset 0 1px 1px rgba(255, 255, 255, 0.25);
     position: relative;
     overflow: hidden;
   }
   .mport-glassy-footer::before {
     content: '';
     position: absolute;
-    top: -100px; left: -60px;
+    top: -110px; left: -60px;
+    width: 280px; height: 200px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(255, 42, 109, 0.26) 0%, transparent 70%);
+    filter: blur(60px);
+    pointer-events: none;
+  }
+  .mport-glassy-footer::after {
+    content: '';
+    position: absolute;
+    bottom: -90px; right: -50px;
     width: 260px; height: 180px;
     border-radius: 50%;
-    background: radial-gradient(circle, rgba(255, 51, 51, 0.22) 0%, transparent 70%);
-    filter: blur(55px);
+    background: radial-gradient(circle, rgba(157, 78, 221, 0.22) 0%, transparent 70%);
+    filter: blur(60px);
     pointer-events: none;
   }
 
@@ -1170,25 +1274,27 @@ html,body{width:100%;height:100%;overflow:hidden;font-family:var(--font-ui);back
     margin-bottom: 12px;
   }
   .mport-foot-title {
-    font-size: 20px;
+    font-size: 21px;
     font-weight: 800;
     color: #fff;
     line-height: 1.25;
     margin-bottom: 16px;
     letter-spacing: -0.5px;
   }
-  .mport-foot-title span { color: rgba(255, 255, 255, 0.5); }
+  .mport-foot-title span { color: rgba(255, 255, 255, 0.5); font-weight: 500; }
 
-  /* FOOTER NEWSLETTER / ADVISORY FORM */
+  /* NEWSLETTER FORM */
   .mport-newsletter {
     display: flex;
     align-items: center;
-    background: rgba(0, 0, 0, 0.55);
-    border: 1px solid rgba(255, 51, 51, 0.35);
-    border-radius: 20px;
+    background: rgba(0, 0, 0, 0.6);
+    border: 1px solid rgba(255, 42, 109, 0.4);
+    border-radius: 22px;
     padding: 5px;
     margin-bottom: 18px;
-    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.45);
+    position: relative;
+    z-index: 2;
   }
   .mport-newsletter input {
     flex: 1;
@@ -1198,55 +1304,65 @@ html,body{width:100%;height:100%;overflow:hidden;font-family:var(--font-ui);back
     outline: none;
     color: #fff;
     font-size: 13.5px;
-    padding: 8px 12px;
+    padding: 9px 12px;
     font-family: inherit;
   }
   .mport-newsletter button {
     border: none;
-    background: var(--glow-accent);
-    color: #0b0203;
+    background: linear-gradient(135deg, #ff2a6d, #9d4edd);
+    color: #fff;
     font-size: 12px;
     font-weight: 700;
-    padding: 9px 16px;
-    border-radius: 15px;
+    padding: 10px 18px;
+    border-radius: 17px;
     cursor: pointer;
     font-family: var(--font-mono);
+    box-shadow: 0 4px 14px rgba(255, 42, 109, 0.4);
   }
   .mport-newsletter button:active { transform: scale(0.96); }
 
-  /* FOOTER SOCIAL ROW */
+  /* SOCIAL LINKS BAR */
   .mport-social-bar {
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: 8px;
-    padding: 8px 12px;
+    padding: 8px 14px;
     background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 51, 51, 0.18);
-    border-radius: 22px;
+    border: 1px solid rgba(255, 42, 109, 0.2);
+    border-radius: 24px;
     margin-bottom: 16px;
+    position: relative;
+    z-index: 2;
   }
   .mport-soc-links { display: flex; align-items: center; gap: 8px; }
   .mport-soc-btn {
-    width: 34px; height: 34px;
+    width: 36px; height: 36px;
     border-radius: 50%;
     display: flex; align-items: center; justify-content: center;
     color: #fff;
     text-decoration: none;
-    font-size: 13px;
+    font-size: 14px;
     background: rgba(255, 255, 255, 0.06);
-    border: 1px solid rgba(255, 255, 255, 0.12);
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    transition: all 0.2s;
   }
-  .mport-soc-btn:active { background: rgba(255, 51, 51, 0.3); color: var(--glow-accent); }
+  .mport-soc-btn:active {
+    background: #ff2a6d;
+    color: #0b0204;
+    transform: scale(0.92);
+  }
 
   .mport-motto {
     font-family: var(--font-mono);
     font-size: 10.5px;
-    color: rgba(255, 75, 75, 0.65);
+    color: rgba(255, 120, 150, 0.75);
     letter-spacing: 0.12em;
     text-transform: uppercase;
     text-align: center;
     margin-bottom: 10px;
+    position: relative;
+    z-index: 2;
   }
   .mport-copyright {
     font-family: var(--font-mono);
@@ -1254,35 +1370,39 @@ html,body{width:100%;height:100%;overflow:hidden;font-family:var(--font-ui);back
     color: rgba(240, 240, 240, 0.45);
     text-align: center;
     margin-bottom: 14px;
+    position: relative;
+    z-index: 2;
   }
 
   .mport-top-btn {
     width: 100%;
-    background: rgba(255, 45, 45, 0.12);
-    border: 1px solid rgba(255, 45, 45, 0.3);
+    background: linear-gradient(135deg, rgba(255, 42, 109, 0.15), rgba(157, 78, 221, 0.15));
+    border: 1px solid rgba(255, 42, 109, 0.35);
     color: #fff;
     font-family: var(--font-mono);
     font-size: 11.5px;
-    padding: 10px 16px;
-    border-radius: 14px;
+    padding: 11px 16px;
+    border-radius: 16px;
     cursor: pointer;
     transition: background 0.15s;
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 6px;
+    position: relative;
+    z-index: 2;
   }
-  .mport-top-btn:active { background: rgba(255, 45, 45, 0.35); }
+  .mport-top-btn:active { background: rgba(255, 42, 109, 0.4); }
 
   .mport-wm-text {
     position: absolute;
     bottom: -15px;
     left: 50%;
     transform: translateX(-50%);
-    font-size: 58px;
+    font-size: 60px;
     font-weight: 900;
     letter-spacing: -3px;
-    color: rgba(255, 255, 255, 0.03);
+    color: rgba(255, 255, 255, 0.035);
     pointer-events: none;
     white-space: nowrap;
     user-select: none;
@@ -1291,7 +1411,15 @@ html,body{width:100%;height:100%;overflow:hidden;font-family:var(--font-ui);back
 
   @keyframes livePulse {
     0%, 100% { opacity: 1; transform: scale(1); }
-    50% { opacity: 0.4; transform: scale(0.85); }
+    50% { opacity: 0.35; transform: scale(0.8); }
+  }
+  @keyframes ringPulse {
+    0% { box-shadow: 0 0 20px rgba(255, 42, 109, 0.5), 0 0 35px rgba(157, 78, 221, 0.25); }
+    100% { box-shadow: 0 0 30px rgba(255, 42, 109, 0.75), 0 0 50px rgba(0, 240, 255, 0.35); }
+  }
+  @keyframes beaconBlink {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(0.85); }
   }
 }
 
@@ -2991,9 +3119,9 @@ document.addEventListener("DOMContentLoaded", startMobileTicker);
     <div class="mport-brand">
       <div class="mport-bs-logo">
         <svg viewBox="0 0 32 32" width="22" height="22" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <rect x="2" y="2" width="28" height="28" rx="6" fill="rgba(220, 30, 30, 0.14)" stroke="var(--glow-accent)" stroke-width="1.5"/>
+          <rect x="2" y="2" width="28" height="28" rx="6" fill="rgba(255, 42, 109, 0.16)" stroke="#ff2a6d" stroke-width="1.5"/>
           <text x="7" y="21" font-family="var(--font-mono)" font-size="14" font-weight="900" fill="#ffffff" letter-spacing="-1">B</text>
-          <text x="17" y="21" font-family="var(--font-mono)" font-size="14" font-weight="900" fill="var(--glow-accent)" letter-spacing="-1">S</text>
+          <text x="17" y="21" font-family="var(--font-mono)" font-size="14" font-weight="900" fill="#ff2a6d" letter-spacing="-1">S</text>
         </svg>
       </div>
       <span>benslates</span>
@@ -3003,31 +3131,33 @@ document.addEventListener("DOMContentLoaded", startMobileTicker);
 
   <!-- QUICK ANCHOR NAVIGATION BAR -->
   <nav class="mport-quicknav" aria-label="Mobile Sections">
-    <a href="#m-about" class="mport-qlink">[ About ]</a>
-    <a href="#m-skills" class="mport-qlink">[ Arsenal ]</a>
-    <a href="#m-certs" class="mport-qlink">[ Certs &amp; Labs ]</a>
-    <a href="#m-work" class="mport-qlink">[ Experience ]</a>
-    <a href="#m-contact" class="mport-qlink">[ Contact ]</a>
+    <a href="#m-about" class="mport-qlink">[ 👤 About ]</a>
+    <a href="#m-skills" class="mport-qlink">[ ⚔️ Arsenal ]</a>
+    <a href="#m-certs" class="mport-qlink">[ 📜 Certs &amp; Labs ]</a>
+    <a href="#m-work" class="mport-qlink">[ 💼 Experience ]</a>
+    <a href="#m-contact" class="mport-qlink">[ 📬 Contact ]</a>
   </nav>
 
   <!-- MAIN SCROLL CONTAINER -->
   <main class="mport-container">
 
-    <!-- HERO CARD -->
+    <!-- HERO CARD WITH ME.JPG -->
     <section class="mport-hero" id="m-about">
       <div class="mport-avatar-wrap">
-        <div class="mport-avatar">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        <div class="mport-avatar-ring">
+          <img src="me.jpg" alt="Muhammad Umer Farooq" class="mport-avatar-img">
+          <span class="mport-status-beacon" title="Active &amp; Ready for Engagements"></span>
         </div>
         <div class="mport-hero-title-box">
           <div class="mport-hero-tag">
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><path d="m4.93 4.93 4.24 4.24"/></svg>
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><path d="m4.93 4.93 4.24 4.24"/></svg>
             OFFENSIVE SECURITY &amp; RED TEAM
           </div>
           <h1 class="mport-hero-name">ᴍᴜʜᴀᴍᴍᴀᴅ ᴜᴍᴇʀ ꜰᴀʀᴏᴏQ</h1>
+          <div class="mport-hero-alias">@benslates <span class="mport-alias-tag">VERIFIED RESEARCHER</span></div>
         </div>
       </div>
-      <p class="mport-hero-sub">Aspiring Red Teamer &amp; Cybersecurity Student specializing in Offensive Security, Penetration Testing, Network Exploitation, and Web Security.</p>
+      <p class="mport-hero-sub">Aspiring Red Teamer &amp; Cybersecurity Specialist focused on Offensive Security, Network Exploitation, Web Pentesting, and Threat Adversary Emulation.</p>
       
       <div class="mport-hero-grid">
         <div class="mport-ib">
@@ -3043,13 +3173,13 @@ document.addEventListener("DOMContentLoaded", startMobileTicker);
           <div class="mport-ib-val">Pakistan 🇵🇰</div>
         </div>
         <div class="mport-ib">
-          <div class="mport-ib-lbl">Age</div>
-          <div class="mport-ib-val">22 Years</div>
+          <div class="mport-ib-lbl">Specialization</div>
+          <div class="mport-ib-val" style="color:#00f5a0;">Red Teaming ⚔️</div>
         </div>
       </div>
     </section>
 
-    <!-- SKILLS & ARSENAL -->
+    <!-- SKILLS & ARSENAL (SMEXY BENTO) -->
     <section class="mport-card" id="m-skills">
       <div class="mport-title">
         <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
@@ -3057,27 +3187,35 @@ document.addEventListener("DOMContentLoaded", startMobileTicker);
       </div>
       
       <div class="mport-skill-group">
-        <div class="mport-sg-title">Tools &amp; Frameworks</div>
+        <div class="mport-sg-title">Exploitation &amp; Red Team Tools</div>
         <div class="mport-skill-tags">
           <span class="mport-stag">Kali Linux</span>
           <span class="mport-stag">Burp Suite Pro</span>
-          <span class="mport-stag">Nmap</span>
           <span class="mport-stag">Metasploit</span>
-          <span class="mport-stag">Wireshark</span>
-          <span class="mport-stag">Gobuster</span>
           <span class="mport-stag">Hashcat</span>
+          <span class="mport-stag stag-cyan">Nmap</span>
+          <span class="mport-stag stag-cyan">Wireshark</span>
+          <span class="mport-stag stag-cyan">Gobuster</span>
+        </div>
+      </div>
+
+      <div class="mport-skill-group">
+        <div class="mport-sg-title">Scripting &amp; Automation</div>
+        <div class="mport-skill-tags">
+          <span class="mport-stag stag-purple">Python</span>
+          <span class="mport-stag stag-purple">Bash</span>
+          <span class="mport-stag stag-purple">SQL</span>
+          <span class="mport-stag stag-purple">PowerShell</span>
         </div>
       </div>
 
       <div class="mport-skill-group" style="margin-bottom:0;">
-        <div class="mport-sg-title">Core Competencies</div>
+        <div class="mport-sg-title">Tactics &amp; Domains</div>
         <div class="mport-skill-tags">
-          <span class="mport-stag">Recon &amp; Enumeration</span>
+          <span class="mport-stag">Recon &amp; OSINT</span>
           <span class="mport-stag">Linux &amp; Windows PrivEsc</span>
           <span class="mport-stag">Web Security (SQLi, XSS, CSRF)</span>
-          <span class="mport-stag">Python</span>
-          <span class="mport-stag">Bash</span>
-          <span class="mport-stag">SQL</span>
+          <span class="mport-stag">Network Pivoting</span>
         </div>
       </div>
     </section>
@@ -3086,7 +3224,7 @@ document.addEventListener("DOMContentLoaded", startMobileTicker);
     <section class="mport-card" id="m-certs">
       <div class="mport-title">
         <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/></svg>
-        Certifications &amp; Labs
+        Certifications &amp; Machine Labs
       </div>
       
       <div class="mport-cert-item">
@@ -3094,7 +3232,7 @@ document.addEventListener("DOMContentLoaded", startMobileTicker);
           <div class="mport-cert-name">Hack The Box — Mythical Machine</div>
           <div class="mport-cert-sub">HTBCERT-3620BFA7E0</div>
         </div>
-        <a href="certs/Mythical.pdf" download class="mport-cert-btn">PDF ↗</a>
+        <a href="certs/Mythical.pdf" download class="mport-cert-btn">View PDF ↗</a>
       </div>
 
       <div class="mport-cert-item">
@@ -3102,7 +3240,7 @@ document.addEventListener("DOMContentLoaded", startMobileTicker);
           <div class="mport-cert-name">Hack The Box — Puppet Machine</div>
           <div class="mport-cert-sub">HTBCERT-D149A5DFAD</div>
         </div>
-        <a href="certs/Puppet.pdf" download class="mport-cert-btn">PDF ↗</a>
+        <a href="certs/Puppet.pdf" download class="mport-cert-btn">View PDF ↗</a>
       </div>
 
       <div class="mport-cert-item">
@@ -3110,7 +3248,7 @@ document.addEventListener("DOMContentLoaded", startMobileTicker);
           <div class="mport-cert-name">Cisco Packet Tracer</div>
           <div class="mport-cert-sub">Networking Fundamentals</div>
         </div>
-        <a href="certs/Getting_Started_with_Cisco_Packet_Tracer.pdf" download class="mport-cert-btn">PDF ↗</a>
+        <a href="certs/Getting_Started_with_Cisco_Packet_Tracer.pdf" download class="mport-cert-btn">View PDF ↗</a>
       </div>
 
       <div class="mport-cert-item">
@@ -3118,12 +3256,12 @@ document.addEventListener("DOMContentLoaded", startMobileTicker);
           <div class="mport-cert-name">Introduction to Cybersecurity</div>
           <div class="mport-cert-sub">Cisco Networking Academy</div>
         </div>
-        <a href="certs/Introduction_to_Cybersecurity.pdf" download class="mport-cert-btn">PDF ↗</a>
+        <a href="certs/Introduction_to_Cybersecurity.pdf" download class="mport-cert-btn">View PDF ↗</a>
       </div>
 
-      <div style="margin-top:16px;display:flex;justify-content:center;">
-        <a href="resume.pdf" download class="mport-cert-btn" style="padding:11px 26px;font-size:12.5px;background:rgba(255,51,51,0.3);border-color:var(--glow-accent);width:100%;text-align:center;">
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="margin-right:6px;"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+      <div style="margin-top:16px;">
+        <a href="resume.pdf" download class="mport-resume-btn">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
           Download Official Resume (PDF)
         </a>
       </div>
@@ -3133,18 +3271,18 @@ document.addEventListener("DOMContentLoaded", startMobileTicker);
     <section class="mport-card" id="m-work">
       <div class="mport-title">
         <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
-        Current Role &amp; Work
+        Current Role &amp; Engagements
       </div>
       <div class="mport-work-box">
-        <div style="font-family:var(--font-mono);font-size:10px;color:var(--glow-accent);letter-spacing:0.12em;text-transform:uppercase;margin-bottom:6px;font-weight:700;display:flex;align-items:center;gap:6px;">
-          <span style="display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--glow-green);box-shadow:0 0 8px var(--glow-green);"></span>
+        <div style="font-family:var(--font-mono);font-size:10px;color:#ff2a6d;letter-spacing:0.12em;text-transform:uppercase;margin-bottom:6px;font-weight:700;display:flex;align-items:center;gap:6px;">
+          <span style="display:inline-block;width:6px;height:6px;border-radius:50%;background:#00f5a0;box-shadow:0 0 8px #00f5a0;"></span>
           [ ACTIVE EMPLOYMENT ]
         </div>
         <div style="font-size:18px;font-weight:800;color:#fff;margin-bottom:4px;">Rynex Security</div>
-        <div style="font-family:var(--font-mono);font-size:13px;color:var(--glow-green);margin-bottom:12px;font-weight:600;">Cybersecurity &amp; Red Teaming Specialist</div>
-        <p style="font-size:13.5px;color:rgba(240,240,240,0.85);line-height:1.6;margin-bottom:14px;">Currently working at Rynex Security performing offensive security assessments, vulnerability research, and penetration testing.</p>
-        <div style="display:flex;align-items:center;justify-content:space-between;padding-top:10px;border-top:1px solid rgba(255,51,51,0.18);">
-          <span style="font-family:var(--font-mono);font-size:11px;color:rgba(255,255,255,0.5);">OFFICIAL WEBSITE</span>
+        <div style="font-family:var(--font-mono);font-size:13px;color:#00f5a0;margin-bottom:12px;font-weight:600;">Cybersecurity &amp; Red Teaming Specialist</div>
+        <p style="font-size:13.5px;color:rgba(240,240,240,0.88);line-height:1.6;margin-bottom:14px;">Performing offensive penetration testing, adversarial vulnerability research, and security architecture assessments.</p>
+        <div style="display:flex;align-items:center;justify-content:space-between;padding-top:10px;border-top:1px solid rgba(255,42,109,0.2);">
+          <span style="font-family:var(--font-mono);font-size:11px;color:rgba(255,255,255,0.5);">OFFICIAL FIRM</span>
           <a href="https://rynexsecurity.com" target="_blank" class="mport-cert-btn" style="padding:7px 15px;font-size:11.5px;">rynexsecurity.com ↗</a>
         </div>
       </div>
@@ -3157,29 +3295,29 @@ document.addEventListener("DOMContentLoaded", startMobileTicker);
         Direct Contact &amp; Channels
       </div>
       <a href="mailto:hello@benslates.xyz" class="mport-contact-row">
-        <span class="mport-cr-lbl">EMAIL</span>
-        <span class="mport-cr-val" style="color:var(--glow-blue);">hello@benslates.xyz</span>
+        <span class="mport-cr-lbl">✉️ EMAIL</span>
+        <span class="mport-cr-val" style="color:#00f0ff;">hello@benslates.xyz</span>
       </a>
       <a href="https://github.com/ben-slates" target="_blank" class="mport-contact-row">
-        <span class="mport-cr-lbl">GITHUB</span>
-        <span class="mport-cr-val" style="color:var(--glow-green);">github.com/ben-slates ↗</span>
+        <span class="mport-cr-lbl">🐙 GITHUB</span>
+        <span class="mport-cr-val" style="color:#00f5a0;">github.com/ben-slates ↗</span>
       </a>
       <a href="tel:+923219400902" class="mport-contact-row">
-        <span class="mport-cr-lbl">PHONE</span>
+        <span class="mport-cr-lbl">📞 PHONE</span>
         <span class="mport-cr-val">+92-321-9400902</span>
       </a>
     </section>
 
   </main>
 
-  <!-- ── PREMIUM GLASSY LIQUID FOOTER (INTEGRATED) ── -->
+  <!-- ── ULTRA-SEXY SIGNATURE GLASSY LIQUID FOOTER ── -->
   <footer class="mport-glassy-footer">
     <div class="mport-foot-brand">
       <div class="mport-bs-logo">
         <svg viewBox="0 0 32 32" width="18" height="18" fill="none">
-          <rect x="2" y="2" width="28" height="28" rx="6" fill="rgba(220, 30, 30, 0.14)" stroke="var(--glow-accent)" stroke-width="1.5"/>
+          <rect x="2" y="2" width="28" height="28" rx="6" fill="rgba(255, 42, 109, 0.16)" stroke="#ff2a6d" stroke-width="1.5"/>
           <text x="7" y="21" font-family="var(--font-mono)" font-size="14" font-weight="900" fill="#ffffff" letter-spacing="-1">B</text>
-          <text x="17" y="21" font-family="var(--font-mono)" font-size="14" font-weight="900" fill="var(--glow-accent)" letter-spacing="-1">S</text>
+          <text x="17" y="21" font-family="var(--font-mono)" font-size="14" font-weight="900" fill="#ff2a6d" letter-spacing="-1">S</text>
         </svg>
       </div>
       <span style="font-family:var(--font-mono);font-size:14px;font-weight:700;color:#fff;">benslates</span>
@@ -3193,7 +3331,7 @@ document.addEventListener("DOMContentLoaded", startMobileTicker);
     <!-- Security Advisories & Newsletter -->
     <form class="mport-newsletter" onsubmit="event.preventDefault(); alert('Subscribed to Benslates Security Updates: ' + this.querySelector('input').value); this.reset();">
       <input type="email" placeholder="Get security research updates..." required autocomplete="email">
-      <button type="submit">Join</button>
+      <button type=submit>Join</button>
     </form>
 
     <!-- Social Links Bar -->
@@ -3203,8 +3341,8 @@ document.addEventListener("DOMContentLoaded", startMobileTicker);
         <a href="mailto:hello@benslates.xyz" class="mport-soc-btn" aria-label="Email">✉</a>
         <a href="https://rynexsecurity.com" target="_blank" class="mport-soc-btn" aria-label="Rynex Security">⚔</a>
       </div>
-      <div style="font-family:var(--font-mono);font-size:10px;color:rgba(255,255,255,0.6);display:flex;align-items:center;gap:5px;">
-        <span style="width:6px;height:6px;border-radius:50%;background:var(--glow-green);box-shadow:0 0 6px var(--glow-green);"></span>
+      <div style="font-family:var(--font-mono);font-size:10px;color:rgba(255,255,255,0.7);display:flex;align-items:center;gap:6px;">
+        <span style="width:6px;height:6px;border-radius:50%;background:#00f5a0;box-shadow:0 0 8px #00f5a0;"></span>
         <span>Systems Verified</span>
       </div>
     </div>
