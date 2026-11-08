@@ -1,10 +1,14 @@
 <div align="center">
 
-# ⚔️ benslates — Cyberdeck Portfolio OS
+# benslates -- Cyberdeck Portfolio OS
+
+### Benjamin Andrew Slates (Muhammad Umer Farooq)
+<b>Red Team • Offensive Security • Security Research</b>
 
 <p align="center">
   <a href="https://benslates.xyz"><img src="https://img.shields.io/badge/Live_Site-benslates.xyz-ff2a6d?style=for-the-badge&logo=googlechrome&logoColor=white" alt="Live Website"></a>
   <a href="https://benslates.xyz"><img src="https://img.shields.io/badge/Specialization-Red_Teaming-9d4edd?style=for-the-badge&logo=kalilinux&logoColor=white" alt="Offensive Security"></a>
+  <a href="https://linkedin.com/in/m-umer-farooq-a2a0b721"><img src="https://img.shields.io/badge/LinkedIn-Profile-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white" alt="LinkedIn"></a>
   <a href="./LICENSE"><img src="https://img.shields.io/badge/License-MIT-00f5a0?style=for-the-badge" alt="License: MIT"></a>
   <a href="https://github.com/ben-slates"><img src="https://img.shields.io/badge/GitHub-ben--slates-181717?style=for-the-badge&logo=github&logoColor=white" alt="GitHub"></a>
 </p>
@@ -14,48 +18,162 @@
 </p>
 
 <p align="center">
-  <a href="#-dual-experience-architecture">Architecture</a> •
-  <a href="#-features">Features</a> •
-  <a href="#-terminal-command-cheatsheet">Terminal Commands</a> •
-  <a href="#-offensive-security-arsenal">Arsenal</a> •
-  <a href="#-certifications--labs">Certifications</a> •
-  <a href="#-quick-start">Quick Start</a> •
-  <a href="#-contact">Contact</a>
+  <a href="#activity--github-metrics">Metrics</a> •
+  <a href="#executive-profile">Profile</a> •
+  <a href="#core-specializations">Specializations</a> •
+  <a href="#featured-engineering--research-projects">Projects</a> •
+  <a href="#security-arsenal--tooling">Arsenal</a> •
+  <a href="#tech--languages-stack">Tech Stack</a> •
+  <a href="#dual-experience-architecture">Architecture</a> •
+  <a href="#certifications--verified-labs">Certifications</a> •
+  <a href="#quick-start-local-setup">Quick Start</a> •
+  <a href="#contact">Contact</a>
 </p>
 
 ---
 
 </div>
 
-## 🌐 Live Website
+## Live Website
 
 Access the production deployment directly at:  
-👉 **[https://benslates.xyz](https://benslates.xyz)**
+**[https://benslates.xyz](https://benslates.xyz)**
 
 ---
 
-## 🔮 Dual-Experience Architecture
+## Activity & GitHub Metrics
+
+<div align="center">
+
+| Performance Metrics | Current Streak |
+| :---: | :---: |
+| <img src="https://github-readme-stats.vercel.app/api?username=ben-slates&show_icons=true&theme=radical&hide_border=true&count_private=true" width="410" alt="GitHub Stats" /> | <img src="https://github-readme-streak-stats.herokuapp.com/?user=ben-slates&theme=radical&hide_border=true" width="410" alt="Streak Stats" /> |
+
+<br/>
+
+<img src="https://github-readme-stats.vercel.app/api/top-langs/?username=ben-slates&layout=compact&theme=radical&hide_border=true" width="410" alt="Top Languages" />
+
+</div>
+
+---
+
+## Executive Profile
+
+Computer Science researcher specializing in **Red Teaming, Offensive Security Architecture, and Low-Level Exploit Development**.
+
+I build offensive security tools from the ground up, dissect and recreate adversarial attack vectors, and construct robust, ToS-compliant software integrations.
+
+- **Primary Focus**: Active Directory internals, Kerberos manipulation, C2 telemetry, binary reversing, and evasive client-side mods.
+- **Current Research**: Distributed multi-platform architectures, AV/EDR evasion mechanics, and real-time audio/network stream engineering.
+
+---
+
+## Core Specializations
+
+```
+┌──[ Red Team & Adversarial Operations ]
+│   ├── Active Directory: Kerberoasting, AS-REP Roasting, Shadow Credentials, gMSA Key Extraction
+│   ├── Infrastructure: C2 Framework Design, Domain Dominance, Pivoting & Lateral Movement
+│   └── Network Attacks: DNS Tunneling, Rogue AP Infrastructure, MITM Telemetry Manipulation
+│
+└──[ Engineering & Systems Architecture ]
+    ├── Languages: Rust, Go, Python, TypeScript, C, x86/x64 Assembly, Modern Bash
+    ├── Mod Engineering: Electron App Patching, Web Audio DSP, Dynamic Buffer Normalization
+    └── Security Automation: ML-powered CVE Triaging, Custom Protocol Dissectors, Automated Threat Auditing
+```
+
+---
+
+## Featured Engineering & Research Projects
+
+| Project | Domain | Architecture & Highlights |
+| :--- | :--- | :--- |
+| **[discord-voice-notes](https://github.com/ben-slates/discord-voice-notes)** | Client Modding & Audio DSP | Native Opus 64kbps recording engine, Base64 waveform generation, 83 Full HD glass themes, real-time theme search, and large file bypass |
+| **[BEN_C2](https://github.com/ben-slates/BEN_C2)** | Command & Control | Asynchronous post-exploitation C2 server engineered with Rust performance core and Python API orchestration |
+| **[CVE-2026-31431-Exploit](https://github.com/ben-slates/CVE-2026-31431-Exploit)** | Exploit Development | Vulnerability research, memory analysis, and weaponized proof-of-concept exploitation suite |
+| **[CVE-2024-37054](https://github.com/ben-slates/CVE-2024-37054)** | Vulnerability Research | Technical analysis, payload structuring, and environment reproductive attack demonstration |
+| **[gmsa-aes-key-extractor](https://github.com/ben-slates/gmsa-aes-key-extractor)** | Active Directory Security | Group Managed Service Account (gMSA) cryptographic AES key extraction and offline ticket forged decryption |
+| **[CVE-FINDER](https://github.com/ben-slates/CVE-FINDER)** | Threat Intelligence & ML | Automated CVE ingestion pipeline evaluating real-time zero-day chatter and CVSS severity scoring |
+| **[uploadserver2](https://github.com/ben-slates/uploadserver2)** | Network Systems | Secure, self-hosted HTTP/2 file transport server featuring authenticated streaming and remote shell sync |
+| **[esp32_NAT_router](https://github.com/ben-slates/esp32_NAT_router)** | Embedded & Hardware Security | ESP32-based portable micro-router firmware facilitating covert field deployment and packet redirection |
+
+---
+
+## Security Arsenal & Tooling
+
+<div align="center">
+
+<p align="center">
+  <img src="https://img.shields.io/badge/Kali_Linux-557C94?style=for-the-badge&logo=kalilinux&logoColor=white" alt="Kali Linux">
+  <img src="https://img.shields.io/badge/Burp_Suite-FF6633?style=for-the-badge&logo=burpsuite&logoColor=white" alt="Burp Suite">
+  <img src="https://img.shields.io/badge/Metasploit-2596CD?style=for-the-badge" alt="Metasploit">
+  <img src="https://img.shields.io/badge/Wireshark-1679A7?style=for-the-badge&logo=wireshark&logoColor=white" alt="Wireshark">
+  <img src="https://img.shields.io/badge/BloodHound-CC0000?style=for-the-badge" alt="BloodHound">
+  <img src="https://img.shields.io/badge/Nmap-000000?style=for-the-badge" alt="Nmap">
+  <img src="https://img.shields.io/badge/Evil--WinRM-000000?style=for-the-badge" alt="Evil-WinRM">
+</p>
+
+</div>
+
+---
+
+## Tech & Languages Stack
+
+<div align="center">
+
+<p align="center">
+  <img src="https://img.shields.io/badge/Rust-000000?style=for-the-badge&logo=rust&logoColor=white" alt="Rust">
+  <img src="https://img.shields.io/badge/Go-00ADD8?style=for-the-badge&logo=go&logoColor=white" alt="Go">
+  <img src="https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white" alt="Python">
+  <img src="https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=typescript&logoColor=white" alt="TypeScript">
+  <img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black" alt="JavaScript">
+  <img src="https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=nodedotjs&logoColor=white" alt="Node.js">
+  <img src="https://img.shields.io/badge/C-A8B9CC?style=for-the-badge&logo=c&logoColor=black" alt="C">
+  <img src="https://img.shields.io/badge/Bash-4EAA25?style=for-the-badge&logo=gnubash&logoColor=white" alt="Bash">
+</p>
+
+</div>
+
+---
+
+## Practical Security & CTFs
+
+Active participant on **Hack The Box** and practical cyber training labs:
+
+`Web Security` • `Active Directory Exploitation` • `Pivoting & Tunnels` • `Post-Exploitation` • `Privilege Escalation` • `SOC Triage`
+
+---
+
+## Education
+
+- **B.S. in Computer Science**  
+  *University of Agriculture, Faisalabad* (2023 - 2027)
+
+---
+
+## Dual-Experience Architecture
 
 This portfolio detects the client viewport and provides two specialized user experiences with zero external framework overhead:
 
-### 🖥️ Desktop Mode (`> 768px`) — Kali Linux Desktop OS Simulation
+### Desktop Mode (> 768px) -- Kali Linux Desktop OS Simulation
 - **Simulated Display Manager**: Kali-themed login prompt with terminal boot sequence.
 - **XFCE-Inspired Window Manager**: Fully draggable, resizable, maximizable, and minimizable windows with active taskbar integration.
-- **Interactive Terminal (`zsh` emulation)**: Full shell simulation supporting real commands, file operations, pipe-like execution, and easter eggs.
+- **Interactive Terminal (zsh emulation)**: Full shell simulation supporting real commands, file operations, pipe-like execution, and easter eggs.
 - **Simulated File System**: Custom virtual VFS supporting directories, file navigation, reading, and downloading assets (`resume.pdf`, certificates).
-- **Integrated Apps**: Mousepad text viewer/editor, File Manager, Browser preview, and Live System Clock.
+- **Integrated Apps**: Mousepad text viewer/editor, File Manager, Document viewer, and Live System Clock.
 
-### 📱 Mobile Mode (`≤ 768px`) — Cyber-Glassmorphic HUD Interface
+### Mobile Mode (<= 768px) -- Cyber-Glassmorphic HUD Interface
 - **Telemetry System Tray**: Real-time HUD showing Kali distribution status, fluctuating CPU/RAM telemetry, and live green status beacon.
 - **Bento Profile Card**: Profile photo (`me.jpg`) framed in dynamic multi-color neon aura rings, verified researcher badge, and academic credentials.
-- **Horizontal Quick-Nav**: Instant 1-tap anchor navigation across sections (`About`, `Arsenal`, `Certs`, `Experience`, `Contact`).
-- **Color-Coded Offensive Arsenal**: Categorized skill tags (Exploitation, Scripting, Network, Web Security).
+- **Horizontal Quick-Nav**: Instant 1-tap anchor navigation across sections (`About`, `Profile`, `Projects`, `Metrics`, `Specializations`, `Arsenal`, `Certs`, `Experience`, `Education`, `Contact`).
+- **Featured Projects & Research**: Dedicated interactive cards for all 8 engineering repositories with architecture highlights and direct GitHub navigation.
+- **Color-Coded Offensive Arsenal & Stack**: Categorized skill tags (Exploitation, Scripting, Network, Web Security, System Languages).
 - **Verified HTB Labs & Certs**: Direct PDF access for Hack The Box machine certificates and Cisco Networking Academy validations.
 - **Signature Glassy Liquid Footer**: Frosted glass container with ambient liquid light orbs, security updates subscription form, and social channels.
 
 ---
 
-## 💻 Terminal Command Cheatsheet
+## Terminal Command Cheatsheet
 
 When accessing the terminal in Desktop Mode, the following commands are available:
 
@@ -63,6 +181,7 @@ When accessing the terminal in Desktop Mode, the following commands are availabl
 | :--- | :--- |
 | `help` | Lists all available terminal commands |
 | `whoami` | Displays profile information and security background |
+| `projects` | Lists featured engineering & research projects |
 | `skills` / `tools` | Outputs offensive security toolkit and competencies |
 | `certs` | Lists verified certifications and lab accomplishments |
 | `cat <file>` | Reads the content of a file from the virtual file system |
@@ -71,45 +190,29 @@ When accessing the terminal in Desktop Mode, the following commands are availabl
 | `clear` | Clears the terminal buffer |
 | `matrix` | Toggles animated digital rain background |
 | `neofetch` | Displays Kali Linux system specifications and ASCII art |
-| `get resume.pdf`| Downloads official Curriculum Vitae (PDF) |
+| `get resume.pdf` | Downloads official Curriculum Vitae (PDF) |
 | `uname -a` | Prints Linux kernel release and system telemetry |
 
 ---
 
-## 🛡️ Offensive Security Arsenal
+## Certifications & Verified Labs
 
-<div align="center">
-
-| Domain | Tools & Technologies |
-| :--- | :--- |
-| **Operating Systems** | Kali Linux, Parrot Security, Debian, Ubuntu Server, Windows Subsystem for Linux |
-| **Exploitation & Red Teaming** | Burp Suite Pro, Metasploit Framework, Hashcat, John the Ripper, Hydra, SQLmap |
-| **Network & Enumeration** | Nmap, Wireshark, Gobuster, Nikto, Netcat, TCPdump, Fierce, Ffuf |
-| **Programming & Scripting** | Python 3, Bash / Shell Scripting, SQL, PowerShell, C/C++ |
-| **Core Competencies** | Recon & OSINT, Web App Penetration Testing (OWASP Top 10), Privilege Escalation, Network Pivoting |
-
-</div>
-
----
-
-## 📜 Certifications & Verified Labs
-
-- **Hack The Box** — *Mythical Machine* (`HTBCERT-3620BFA7E0`)
-- **Hack The Box** — *Puppet Machine* (`HTBCERT-D149A5DFAD`)
-- **Cisco Networking Academy** — *Getting Started with Cisco Packet Tracer*
-- **Cisco Networking Academy** — *Introduction to Cybersecurity*
+- **Hack The Box** -- *Mythical Machine* (`HTBCERT-3620BFA7E0`)
+- **Hack The Box** -- *Puppet Machine* (`HTBCERT-D149A5DFAD`)
+- **Cisco Networking Academy** -- *Getting Started with Cisco Packet Tracer*
+- **Cisco Networking Academy** -- *Introduction to Cybersecurity*
 
 *(All PDF certificates are included in the repository under [`certs/`](./certs))*
 
 ---
 
-## 📂 Project Structure
+## Project Structure
 
 ```bash
 benslates/
 ├── index.html          # Core single-page application (Desktop OS + Mobile HUD)
 ├── me.jpg              # High-resolution profile avatar asset
-├── mobile_bg.jpg       # Optimized wallpaper for mobile glass cards
+├── mobile_bg.jpg       # Wallpaper asset for mobile glass cards
 ├── wallpaper.png       # Desktop Kali Linux wallpaper
 ├── wallpaper1.png      # Alternate desktop background asset
 ├── favicon.svg         # SVG vector favicon
@@ -127,7 +230,7 @@ benslates/
 
 ---
 
-## 🚀 Quick Start (Local Setup)
+## Quick Start (Local Setup)
 
 Clone the repository and serve with any local HTTP server:
 
@@ -149,24 +252,29 @@ Open your browser and navigate to `http://localhost:8080`.
 
 ---
 
-## 👨‍💻 Author
+## Author
 
-**Muhammad Umer Farooq** (*benslates*)  
+**Benjamin Andrew Slates** (*Muhammad Umer Farooq*)  
 *Cybersecurity Specialist & Offensive Red Teamer*  
 Active at **Rynex Security**
 
-- 🌐 Website: [benslates.xyz](https://benslates.xyz)
-- 🐙 GitHub: [@ben-slates](https://github.com/ben-slates)
-- ✉️ Email: [hello@benslates.xyz](mailto:hello@benslates.xyz) / [umerf2700@gmail.com](mailto:umerf2700@gmail.com)
-- 📞 Direct: +92-321-9400902
+- Website: [benslates.xyz](https://benslates.xyz)
+- LinkedIn: [linkedin.com/in/m-umer-farooq-a2a0b721](https://linkedin.com/in/m-umer-farooq-a2a0b721)
+- GitHub: [@ben-slates](https://github.com/ben-slates)
+- Email: [hello@benslates.xyz](mailto:hello@benslates.xyz) / [umerf2700@gmail.com](mailto:umerf2700@gmail.com)
+- Direct: +92-321-9400902
 
 ---
 
-## ⚖️ License & Brand Usage
+## License & Brand Usage
 
 - **Code & Assets**: Licensed under the [MIT License](./LICENSE).
 - **Brand & Identity**: The name **benslates** and associated identity assets are protected under the [Brand Usage Policy](./BRAND.md).
 
 <div align="center">
-  <sub>the quieter you become, the more you are able to hear</sub>
+
+### Build • Break • Understand
+
+<sub>the quieter you become, the more you are able to hear</sub>
+
 </div>

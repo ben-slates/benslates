@@ -1106,7 +1106,7 @@ html,body{width:100%;height:100%;overflow:hidden;font-family:var(--font-ui);back
   }
   .mport-stag.stag-cyan::before { color: #00f0ff !important; }
   .mport-stag::before {
-    content: '❯';
+    content: '>';
     color: #ff2a6d;
     font-size: 9px;
     font-weight: 900;
@@ -1229,6 +1229,139 @@ html,body{width:100%;height:100%;overflow:hidden;font-family:var(--font-ui);back
   .mport-cr-lbl { color: rgba(255, 255, 255, 0.5); font-weight: 500; font-size: 11px; }
   .mport-cr-val { color: #00f5a0; font-weight: 600; }
   .mport-cr-val a { color: #00f0ff; text-decoration: none; }
+
+
+  /* ── FEATURED PROJECTS CARDS ── */
+  .mport-proj-card {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 42, 109, 0.24);
+    border-radius: 18px;
+    padding: 16px 18px;
+    margin-bottom: 12px;
+    transition: all 0.2s;
+    position: relative;
+    overflow: hidden;
+  }
+  .mport-proj-card:hover {
+    border-color: rgba(0, 240, 255, 0.45);
+    background: rgba(255, 255, 255, 0.05);
+  }
+  .mport-proj-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; height: 2px;
+    background: linear-gradient(90deg, #ff2a6d, #9d4edd, #00f0ff);
+  }
+  .mport-proj-top {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 8px;
+    margin-bottom: 8px;
+    flex-wrap: wrap;
+  }
+  .mport-proj-name {
+    font-family: var(--font-mono);
+    font-size: 13.5px;
+    font-weight: 700;
+    color: #ffffff;
+    letter-spacing: 0.02em;
+  }
+  .mport-proj-domain {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    padding: 3px 8px;
+    border-radius: 10px;
+    background: rgba(0, 240, 255, 0.12);
+    border: 1px solid rgba(0, 240, 255, 0.3);
+    color: #00f0ff;
+    font-weight: 600;
+    white-space: nowrap;
+  }
+  .mport-proj-desc {
+    font-size: 12.5px;
+    color: rgba(240, 240, 240, 0.85);
+    line-height: 1.55;
+    margin-bottom: 12px;
+  }
+  .mport-proj-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    padding: 6px 14px;
+    border-radius: 10px;
+    background: linear-gradient(135deg, rgba(255, 42, 109, 0.25), rgba(157, 78, 221, 0.25));
+    border: 1px solid rgba(255, 42, 109, 0.45);
+    color: #fff;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.2s;
+  }
+  .mport-proj-btn:hover {
+    background: #ff2a6d;
+    color: #050102;
+  }
+
+  /* ── GITHUB METRICS STATS ── */
+  .mport-metrics-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    align-items: center;
+    width: 100%;
+  }
+  .mport-stat-img {
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    border-radius: 14px;
+    border: 1px solid rgba(255, 42, 109, 0.25);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
+    background: rgba(0, 0, 0, 0.5);
+    display: block;
+  }
+
+  /* ── ASCII TERMINAL TREE ── */
+  .mport-tree-pre {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    line-height: 1.55;
+    color: #00f5a0;
+    background: rgba(5, 2, 8, 0.75);
+    border: 1px solid rgba(0, 245, 160, 0.28);
+    border-radius: 14px;
+    padding: 14px;
+    overflow-x: auto;
+    white-space: pre;
+    box-shadow: inset 0 0 15px rgba(0, 245, 160, 0.05);
+  }
+
+  /* ── EXECUTIVE PROFILE FOCUS BLOCKS ── */
+  .mport-focus-block {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 42, 109, 0.2);
+    border-radius: 14px;
+    padding: 12px 14px;
+    margin-bottom: 10px;
+  }
+  .mport-focus-title {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 700;
+    color: #ff2a6d;
+    letter-spacing: 0.04em;
+    margin-bottom: 5px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .mport-focus-text {
+    font-size: 12.5px;
+    color: rgba(240, 240, 240, 0.88);
+    line-height: 1.5;
+  }
 
   /* ── SIGNATURE LIQUID GLASSY FOOTER ── */
   .mport-glassy-footer {
@@ -1692,8 +1825,8 @@ html,body{width:100%;height:100%;overflow:hidden;font-family:var(--font-ui);back
       </div>
       <div class="win-body">
         <div class="mp-toolbar">
-          <button class="mp-tb-btn mp-save-btn" onclick="saveMousepadFile()">💾 Save</button>
-          <button class="mp-tb-btn" onclick="newMousepadFile()">📄 New</button>
+          <button class="mp-tb-btn mp-save-btn" onclick="saveMousepadFile()">Save</button>
+          <button class="mp-tb-btn" onclick="newMousepadFile()">New</button>
           <input type="text" id="mp-filepath-inp" class="mp-path-inp" placeholder="~/filename.txt" />
           <span class="mp-status" id="mp-status-lbl"></span>
         </div>
@@ -1820,118 +1953,179 @@ function clearSession(){
 /* ── FILESYSTEM ──────────────────────────────────────────────────────────── */
 var FS={
   "~":{type:"dir",children:{
-    "about.txt":{type:"file",icon:"📄",content:[
-      "<span class='t-section'>── PERSONAL INFORMATION ──</span>",
+    "about.txt":{type:"file",icon:"[TXT]",content:[
+      "<span class='t-section'>-- EXECUTIVE PROFILE --</span>",
       "",
-      "<span class='t-key'>Name    </span> <span class='t-ok'>ᴍᴜʜᴀᴍᴍᴀᴅ ᴜᴍᴇʀ ꜰᴀʀᴏᴏQ</span>",
-      "<span class='t-key'>Age     </span> 22 years",
-      "<span class='t-key'>Location</span> Shahkot, Punjab, Pakistan",
+      "<span class='t-key'>Name        </span> <span class='t-ok'>Benjamin Andrew Slates (Muhammad Umer Farooq)</span>",
+      "<span class='t-key'>Role        </span> <span class='t-red'>Red Team • Offensive Security • Security Research</span>",
+      "<span class='t-key'>Degree      </span> BS Computer Science, UAF (2023 - 2027)",
+      "<span class='t-key'>Primary     </span> Active Directory, Kerberos, C2 Telemetry, Exploit Dev",
+      "<span class='t-key'>Research    </span> Distributed architectures, AV/EDR evasion, Audio/DSP",
       "",
-      "Aspiring <span class='t-red'>Red Teamer</span> &amp; Ethical Hacker"
+      "Motto: Build • Break • Understand"
     ]},
-    "education.txt":{type:"file",icon:"📚",content:[
-      "<span class='t-section'>── EDUCATION ──</span>",
+    "specializations.txt":{type:"file",icon:"[SPEC]",content:[
+      "<span class='t-section'>-- CORE SPECIALIZATIONS --</span>",
       "",
-      "<span class='t-key'>Degree  </span> BS Computer Science",
-      "<span class='t-key'>Semester</span> 7th (In Progress)",
-      "",
-      "<span class='t-key'>Subjects</span> Networks • OS • Databases"
+      "┌──[ Red Team & Adversarial Operations ]",
+      "│   ├── Active Directory: Kerberoasting, AS-REP Roasting, Shadow Credentials, gMSA Key Extraction",
+      "│   ├── Infrastructure: C2 Framework Design, Domain Dominance, Pivoting & Lateral Movement",
+      "│   └── Network Attacks: DNS Tunneling, Rogue AP Infrastructure, MITM Telemetry Manipulation",
+      "│",
+      "└──[ Engineering & Systems Architecture ]",
+      "    ├── Languages: Rust, Go, Python, TypeScript, C, x86/x64 Assembly, Modern Bash",
+      "    ├── Mod Engineering: Electron App Patching, Web Audio DSP, Dynamic Buffer Normalization",
+      "    └── Security Automation: ML-powered CVE Triaging, Custom Protocol Dissectors, Automated Threat Auditing"
     ]},
-    "interests.txt":{type:"file",icon:"🎯",content:[
-      "<span class='t-section'>── INTERESTS ──</span>",
+    "projects":{type:"dir",icon:"[DIR]",isDesktop:true,children:{
+      "discord-voice-notes.txt":{type:"file",icon:"[TXT]",content:[
+        "<span class='t-section'>-- discord-voice-notes --</span>",
+        "<span class='t-key'>Domain      </span> Client Modding & Audio DSP",
+        "<span class='t-key'>Architecture</span> Native Opus 64kbps recording engine, Base64 waveform generation,",
+        "              83 Full HD glass themes, real-time theme search, and large file bypass",
+        "<span class='t-key'>Repository  </span> <span class='t-dir'>https://github.com/ben-slates/discord-voice-notes</span>"
+      ]},
+      "BEN_C2.txt":{type:"file",icon:"[TXT]",content:[
+        "<span class='t-section'>-- BEN_C2 --</span>",
+        "<span class='t-key'>Domain      </span> Command & Control",
+        "<span class='t-key'>Architecture</span> Asynchronous post-exploitation C2 server engineered with",
+        "              Rust performance core and Python API orchestration",
+        "<span class='t-key'>Repository  </span> <span class='t-dir'>https://github.com/ben-slates/BEN_C2</span>"
+      ]},
+      "CVE-2026-31431-Exploit.txt":{type:"file",icon:"[TXT]",content:[
+        "<span class='t-section'>-- CVE-2026-31431-Exploit --</span>",
+        "<span class='t-key'>Domain      </span> Exploit Development",
+        "<span class='t-key'>Architecture</span> Vulnerability research, memory analysis, and weaponized",
+        "              proof-of-concept exploitation suite",
+        "<span class='t-key'>Repository  </span> <span class='t-dir'>https://github.com/ben-slates/CVE-2026-31431-Exploit</span>"
+      ]},
+      "CVE-2024-37054.txt":{type:"file",icon:"[TXT]",content:[
+        "<span class='t-section'>-- CVE-2024-37054 --</span>",
+        "<span class='t-key'>Domain      </span> Vulnerability Research",
+        "<span class='t-key'>Architecture</span> Technical analysis, payload structuring, and environment",
+        "              reproductive attack demonstration",
+        "<span class='t-key'>Repository  </span> <span class='t-dir'>https://github.com/ben-slates/CVE-2024-37054</span>"
+      ]},
+      "gmsa-aes-key-extractor.txt":{type:"file",icon:"[TXT]",content:[
+        "<span class='t-section'>-- gmsa-aes-key-extractor --</span>",
+        "<span class='t-key'>Domain      </span> Active Directory Security",
+        "<span class='t-key'>Architecture</span> Group Managed Service Account (gMSA) cryptographic AES",
+        "              key extraction and offline ticket forged decryption",
+        "<span class='t-key'>Repository  </span> <span class='t-dir'>https://github.com/ben-slates/gmsa-aes-key-extractor</span>"
+      ]},
+      "CVE-FINDER.txt":{type:"file",icon:"[TXT]",content:[
+        "<span class='t-section'>-- CVE-FINDER --</span>",
+        "<span class='t-key'>Domain      </span> Threat Intelligence & ML",
+        "<span class='t-key'>Architecture</span> Automated CVE ingestion pipeline evaluating real-time zero-day",
+        "              chatter and CVSS severity scoring",
+        "<span class='t-key'>Repository  </span> <span class='t-dir'>https://github.com/ben-slates/CVE-FINDER</span>"
+      ]},
+      "uploadserver2.txt":{type:"file",icon:"[TXT]",content:[
+        "<span class='t-section'>-- uploadserver2 --</span>",
+        "<span class='t-key'>Domain      </span> Network Systems",
+        "<span class='t-key'>Architecture</span> Secure, self-hosted HTTP/2 file transport server featuring",
+        "              authenticated streaming and remote shell sync",
+        "<span class='t-key'>Repository  </span> <span class='t-dir'>https://github.com/ben-slates/uploadserver2</span>"
+      ]},
+      "esp32_NAT_router.txt":{type:"file",icon:"[TXT]",content:[
+        "<span class='t-section'>-- esp32_NAT_router --</span>",
+        "<span class='t-key'>Domain      </span> Embedded & Hardware Security",
+        "<span class='t-key'>Architecture</span> ESP32-based portable micro-router firmware facilitating",
+        "              covert field deployment and packet redirection",
+        "<span class='t-key'>Repository  </span> <span class='t-dir'>https://github.com/ben-slates/esp32_NAT_router</span>"
+      ]}
+    }},
+    "education.txt":{type:"file",icon:"[TXT]",content:[
+      "<span class='t-section'>-- EDUCATION --</span>",
       "",
-      "  <span class='t-red'>•</span> Red Teaming &amp; Ethical Hacking",
-      "  <span class='t-red'>•</span> Penetration Testing",
-      "  <span class='t-red'>•</span> Web App Security",
-      "  <span class='t-red'>•</span> Network Security &amp; Exploitation"
+      "<span class='t-key'>Degree     </span> B.S. in Computer Science",
+      "<span class='t-key'>Institution</span> University of Agriculture, Faisalabad",
+      "<span class='t-key'>Duration   </span> 2023 - 2027",
+      "",
+      "<span class='t-key'>Subjects   </span> Networks, Operating Systems, Database Systems, Computer Architecture"
     ]},
-        "rynexsecurity.txt":{type:"file",icon:"🛡️",content:[
-      "<span class='t-section'>── CURRENT ROLE / WORK ──</span>",
+    "rynexsecurity.txt":{type:"file",icon:"[WORK]",content:[
+      "<span class='t-section'>-- CURRENT ROLE / WORK --</span>",
       "",
       "<span class='t-key'>Company </span> <span class='t-ok'>Rynex Security</span>",
       "<span class='t-key'>Role    </span> Cybersecurity / Red Teamer",
       "<span class='t-key'>Status  </span> Currently Working",
-      "<span class='t-key'>Website </span> <span class='t-dir'>rynexsecurity.com</span>",
+      "<span class='t-key'>Website </span> <span class='t-dir'>https://rynexsecurity.com</span>",
       "<span class='t-key'>Email   </span> <span class='t-ok'>hello@benslates.xyz</span>"
     ]},
-    "contact.txt":{type:"file",icon:"📧",content:[
-      "<span class='t-section'>── CONTACT ──</span>",
+    "contact.txt":{type:"file",icon:"[TXT]",content:[
+      "<span class='t-section'>-- CONTACT & CHANNELS --</span>",
       "",
-      "<span class='t-key'>Email </span> <span class='t-dir'>hello@benslates.xyz</span>",
-      "<span class='t-key'>Phone </span> <span class='t-ok'>+92-321-9400902</span>",
-      "<span class='t-key'>GitHub</span> <span class='t-dir'>github.com/ben-slates</span>"
+      "<span class='t-key'>Website </span> <span class='t-dir'>https://benslates.xyz</span>",
+      "<span class='t-key'>LinkedIn</span> <span class='t-dir'>https://linkedin.com/in/m-umer-farooq-a2a0b721</span>",
+      "<span class='t-key'>GitHub  </span> <span class='t-dir'>https://github.com/ben-slates</span>",
+      "<span class='t-key'>Email   </span> <span class='t-ok'>hello@benslates.xyz</span>",
+      "<span class='t-key'>Phone   </span> <span class='t-ok'>+92-321-9400902</span>"
     ]},
-    "goals.txt":{type:"file",icon:"🗺️",content:[
-      "<span class='t-section'>── GOALS &amp; ROADMAP ──</span>",
+    "resume.pdf":{type:"file",icon:"[PDF]",isPdf:true,content:[
+      "<span class='t-section'>-- resume.pdf --</span>",
       "",
-      "Short-term:",
-      "  <span class='t-ok'>✓</span> Security fundamentals",
-      "  <span class='t-dir'>→</span> Intermediate labs",
-      "  <span class='t-dir'>→</span> GitHub writeups",
-      "",
-      "Long-term:",
-      "  <span class='t-sudo'>★</span> OSCP certified red teamer",
-      "  <span class='t-sudo'>★</span> eJPT → PNPT → OSCP"
+      "  Use <span class='t-cmd'>get resume.pdf</span>   -- download to your device",
+      "  Use <span class='t-cmd'>open resume.pdf</span>  -- view in browser"
     ]},
-    "resume.pdf":{type:"file",icon:"📋",isPdf:true,content:[
-      "<span class='t-section'>── resume.pdf ──</span>",
-      "",
-      "  Use <span class='t-cmd'>get resume.pdf</span>   — download to your device",
-      "  Use <span class='t-cmd'>open resume.pdf</span>  — view in browser"
-    ]},
-    "certs":{type:"dir",icon:"📁",isDesktop:true,children:{
-      "Getting_Started_with_Cisco_Packet_Tracer.pdf":{type:"file",icon:"📜",isPdf:true,content:[
-        "<span class='t-section'>── Getting_Started_with_Cisco_Packet_Tracer.pdf ──</span>",
+    "certs":{type:"dir",icon:"[DIR]",isDesktop:true,children:{
+      "Getting_Started_with_Cisco_Packet_Tracer.pdf":{type:"file",icon:"[PDF]",isPdf:true,content:[
+        "<span class='t-section'>-- Getting_Started_with_Cisco_Packet_Tracer.pdf --</span>",
         "",
         "  Certification: Cisco Packet Tracer",
-        "  Use <span class='t-cmd'>get Getting_Started_with_Cisco_Packet_Tracer.pdf</span>   — download",
-        "  Use <span class='t-cmd'>open Getting_Started_with_Cisco_Packet_Tracer.pdf</span>  — view in browser"
+        "  Use <span class='t-cmd'>get Getting_Started_with_Cisco_Packet_Tracer.pdf</span>   -- download",
+        "  Use <span class='t-cmd'>open Getting_Started_with_Cisco_Packet_Tracer.pdf</span>  -- view in browser"
       ]},
-      "Introduction_to_Cybersecurity.pdf":{type:"file",icon:"📜",isPdf:true,content:[
-        "<span class='t-section'>── Introduction_to_Cybersecurity.pdf ──</span>",
+      "Introduction_to_Cybersecurity.pdf":{type:"file",icon:"[PDF]",isPdf:true,content:[
+        "<span class='t-section'>-- Introduction_to_Cybersecurity.pdf --</span>",
         "",
         "  Certification: Introduction to Cybersecurity",
-        "  Use <span class='t-cmd'>get Introduction_to_Cybersecurity.pdf</span>   — download",
-        "  Use <span class='t-cmd'>open Introduction_to_Cybersecurity.pdf</span>  — view in browser"
+        "  Use <span class='t-cmd'>get Introduction_to_Cybersecurity.pdf</span>   -- download",
+        "  Use <span class='t-cmd'>open Introduction_to_Cybersecurity.pdf</span>  -- view in browser"
       ]},
-      "Mythical.pdf":{type:"file",icon:"📜",isPdf:true,content:[
-        "<span class='t-section'>── Mythical.pdf ──</span>",
+      "Mythical.pdf":{type:"file",icon:"[PDF]",isPdf:true,content:[
+        "<span class='t-section'>-- Mythical.pdf --</span>",
         "",
         "  Certification: Hack The Box - Mythical Machine",
         "  Certificate ID: HTBCERT-3620BFA7E0",
         "  Date: 04 Jun 2026",
-        "  Use <span class='t-cmd'>get Mythical.pdf</span>   — download",
-        "  Use <span class='t-cmd'>open Mythical.pdf</span>  — view in browser"
+        "  Use <span class='t-cmd'>get Mythical.pdf</span>   -- download",
+        "  Use <span class='t-cmd'>open Mythical.pdf</span>  -- view in browser"
       ]},
-      "Puppet.pdf":{type:"file",icon:"📜",isPdf:true,content:[
-        "<span class='t-section'>── Puppet.pdf ──</span>",
+      "Puppet.pdf":{type:"file",icon:"[PDF]",isPdf:true,content:[
+        "<span class='t-section'>-- Puppet.pdf --</span>",
         "",
         "  Certification: Hack The Box - Puppet Machine",
         "  Certificate ID: HTBCERT-D149A5DFAD",
         "  Date: 31 May 2026",
-        "  Use <span class='t-cmd'>get Puppet.pdf</span>   — download",
-        "  Use <span class='t-cmd'>open Puppet.pdf</span>  — view in browser"
+        "  Use <span class='t-cmd'>get Puppet.pdf</span>   -- download",
+        "  Use <span class='t-cmd'>open Puppet.pdf</span>  -- view in browser"
       ]}
     }},
-    "skills":{type:"dir",icon:"📁",children:{
-      "tools.txt":{type:"file",icon:"🔧",content:[
-        "<span class='t-section'>── TOOLS &amp; TECHNOLOGIES ──</span>",
+    "skills":{type:"dir",icon:"[DIR]",children:{
+      "tools.txt":{type:"file",icon:"[TXT]",content:[
+        "<span class='t-section'>-- SECURITY ARSENAL & TOOLING --</span>",
         "",
-        "<span class='t-red'>■</span> Kali Linux  <span class='t-red'>■</span> Burp Suite  <span class='t-red'>■</span> Nmap",
-        "<span class='t-red'>■</span> Metasploit  <span class='t-red'>■</span> Wireshark",
-        "<span class='t-red'>■</span> Gobuster    <span class='t-red'>■</span> Hashcat",
+        "<span class='t-red'>[+]</span> Kali Linux   <span class='t-red'>[+]</span> Burp Suite Pro   <span class='t-red'>[+]</span> Metasploit",
+        "<span class='t-red'>[+]</span> Wireshark    <span class='t-red'>[+]</span> BloodHound       <span class='t-red'>[+]</span> Nmap",
+        "<span class='t-red'>[+]</span> Evil-WinRM   <span class='t-red'>[+]</span> Hashcat          <span class='t-red'>[+]</span> Gobuster",
         "",
-        "<span class='t-ok'>■</span> Python  <span class='t-ok'>■</span> Bash  <span class='t-ok'>■</span> SQL"
+        "<span class='t-section'>-- TECH & LANGUAGES STACK --</span>",
+        "",
+        "<span class='t-ok'>[+]</span> Rust         <span class='t-ok'>[+]</span> Go               <span class='t-ok'>[+]</span> Python",
+        "<span class='t-ok'>[+]</span> TypeScript   <span class='t-ok'>[+]</span> JavaScript       <span class='t-ok'>[+]</span> Node.js",
+        "<span class='t-ok'>[+]</span> C            <span class='t-ok'>[+]</span> Bash             <span class='t-ok'>[+]</span> x86/x64 Assembly"
       ]},
-      "practical.txt":{type:"file",icon:"💪",content:[
-        "<span class='t-section'>── PRACTICAL EXPERIENCE ──</span>",
+      "practical.txt":{type:"file",icon:"[TXT]",content:[
+        "<span class='t-section'>-- PRACTICAL SECURITY & CTFS --</span>",
         "",
-        "  <span class='t-dir'>→</span> Recon &amp; Enumeration",
-        "  <span class='t-dir'>→</span> Exploitation Techniques",
-        "  <span class='t-dir'>→</span> Privilege Escalation (Linux &amp; Windows)",
-        "  <span class='t-dir'>→</span> SQLi, XSS, CSRF",
-        "",
-        "Platforms: TryHackMe • HTB • PortSwigger"
+        "Active participant on Hack The Box and practical cyber training labs:",
+        "  -> Web Security",
+        "  -> Active Directory Exploitation",
+        "  -> Pivoting & Tunnels",
+        "  -> Post-Exploitation",
+        "  -> Privilege Escalation",
+        "  -> SOC Triage"
       ]}
     }}
   }}
@@ -1993,7 +2187,7 @@ function setNodeFile(fullPath, content){
   var lines = Array.isArray(content) ? content : String(content).split("\n");
   curr.children[filename] = {
     type: "file",
-    icon: "📄",
+    icon: "[TXT]",
     content: lines
   };
   saveFS();
@@ -2565,7 +2759,7 @@ function saveMousepadFile(){
   if(ok){
     var fname = path.split("/").pop();
     document.getElementById("mp-title-file").textContent = fname;
-    showMpStatus("Saved ✓", false);
+    showMpStatus("Saved [OK]", false);
   } else {
     showMpStatus("Error saving", true);
   }
@@ -2825,6 +3019,7 @@ function execCmd(raw, isSudo){
       tLine("  <span class='t-cmd'>nano &lt;file&gt;</span>     Edit file in Mousepad");
       tLine("  <span class='t-cmd'>get &lt;file&gt;</span>      Download file to your device");
       tLine("  <span class='t-cmd'>open &lt;file&gt;</span>     Open file in viewer");
+      tLine("  <span class='t-cmd'>projects</span>        List featured engineering &amp; research projects");
       tLine("  <span class='t-cmd'>files</span>           Open File Manager");
       tLine("  <span class='t-cmd'>pwd</span>             Print working directory");
       tLine("  <span class='t-cmd'>whoami</span>          Current user");
@@ -2921,6 +3116,21 @@ function execCmd(raw, isSudo){
       }
       break;
     }
+    case "projects":{
+      tLine("<span class='t-section'>── FEATURED ENGINEERING &amp; RESEARCH PROJECTS ──</span>");
+      tBlank();
+      tLine("  <span class='t-cmd'>discord-voice-notes</span>    Client Modding &amp; Audio DSP (Opus, Base64 waveforms, 83 glass themes)");
+      tLine("  <span class='t-cmd'>BEN_C2</span>                 Command &amp; Control (Asynchronous C2, Rust core, Python orchestration)");
+      tLine("  <span class='t-cmd'>CVE-2026-31431-Exploit</span> Exploit Development (Vulnerability PoC &amp; memory analysis suite)");
+      tLine("  <span class='t-cmd'>CVE-2024-37054</span>         Vulnerability Research (Adversarial attack demonstration)");
+      tLine("  <span class='t-cmd'>gmsa-aes-key-extractor</span> Active Directory (gMSA AES key extraction &amp; ticket decryption)");
+      tLine("  <span class='t-cmd'>CVE-FINDER</span>             Threat Intel &amp; ML (Automated CVE pipeline &amp; zero-day triage)");
+      tLine("  <span class='t-cmd'>uploadserver2</span>          Network Systems (Secure HTTP/2 file transport with shell sync)");
+      tLine("  <span class='t-cmd'>esp32_NAT_router</span>       Hardware Security (Covert field deployment micro-router)");
+      tBlank();
+      tLine("<span class='t-muted'>Type <span class='t-cmd'>cat projects/&lt;name&gt;.txt</span> or visit <span class='t-dir'>https://github.com/ben-slates</span></span>");
+      break;
+    }
     case "files":
       openFiles(termPath); tLine("<span class='t-ok'>Opening File Manager...</span>"); break;
     case "get":{
@@ -2935,7 +3145,7 @@ function execCmd(raw, isSudo){
         var a=document.createElement("a");
         a.href=resolvedPath; a.download=args[0];
         document.body.appendChild(a); a.click(); a.remove();
-        tLine("<span class='t-ok'>✓ Download started: "+esc(args[0])+"</span>");
+        tLine("<span class='t-ok'>[OK] Download started: "+esc(args[0])+"</span>");
       } else {
         var content=fg.content.map(function(l){return l.replace(/<[^>]+>/g,"")}).join("\n");
         var blob=new Blob([content],{type:"text/plain"});
@@ -2943,7 +3153,7 @@ function execCmd(raw, isSudo){
         var a2=document.createElement("a"); a2.href=url; a2.download=args[0];
         document.body.appendChild(a2); a2.click();
         setTimeout(function(){URL.revokeObjectURL(url);a2.remove();},1000);
-        tLine("<span class='t-ok'>✓ Download started: "+esc(args[0])+"</span>");
+        tLine("<span class='t-ok'>[OK] Download started: "+esc(args[0])+"</span>");
       }
       break;
     }
@@ -3131,11 +3341,16 @@ document.addEventListener("DOMContentLoaded", startMobileTicker);
 
   <!-- QUICK ANCHOR NAVIGATION BAR -->
   <nav class="mport-quicknav" aria-label="Mobile Sections">
-    <a href="#m-about" class="mport-qlink">[ 👤 About ]</a>
-    <a href="#m-skills" class="mport-qlink">[ ⚔️ Arsenal ]</a>
-    <a href="#m-certs" class="mport-qlink">[ 📜 Certs &amp; Labs ]</a>
-    <a href="#m-work" class="mport-qlink">[ 💼 Experience ]</a>
-    <a href="#m-contact" class="mport-qlink">[ 📬 Contact ]</a>
+    <a href="#m-about" class="mport-qlink">[ ABOUT ]</a>
+    <a href="#m-profile" class="mport-qlink">[ PROFILE ]</a>
+    <a href="#m-projects" class="mport-qlink">[ PROJECTS ]</a>
+    <a href="#m-specializations" class="mport-qlink">[ SPECIALIZATIONS ]</a>
+    <a href="#m-metrics" class="mport-qlink">[ METRICS ]</a>
+    <a href="#m-skills" class="mport-qlink">[ ARSENAL ]</a>
+    <a href="#m-certs" class="mport-qlink">[ CERTS &amp; LABS ]</a>
+    <a href="#m-work" class="mport-qlink">[ EXPERIENCE ]</a>
+    <a href="#m-education" class="mport-qlink">[ EDUCATION ]</a>
+    <a href="#m-contact" class="mport-qlink">[ CONTACT ]</a>
   </nav>
 
   <!-- MAIN SCROLL CONTAINER -->
@@ -3145,77 +3360,255 @@ document.addEventListener("DOMContentLoaded", startMobileTicker);
     <section class="mport-hero" id="m-about">
       <div class="mport-avatar-wrap">
         <div class="mport-avatar-ring">
-          <img src="me.jpg" alt="Muhammad Umer Farooq" class="mport-avatar-img">
+          <img src="me.jpg" alt="Benjamin Andrew Slates" class="mport-avatar-img">
           <span class="mport-status-beacon" title="Active &amp; Ready for Engagements"></span>
         </div>
         <div class="mport-hero-title-box">
           <div class="mport-hero-tag">
             <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><path d="m4.93 4.93 4.24 4.24"/></svg>
-            OFFENSIVE SECURITY &amp; RED TEAM
+            RED TEAM // OFFENSIVE SECURITY // RESEARCH
           </div>
-          <h1 class="mport-hero-name">ᴍᴜʜᴀᴍᴍᴀᴅ ᴜᴍᴇʀ ꜰᴀʀᴏᴏQ</h1>
+          <h1 class="mport-hero-name">ʙᴇɴᴊᴀᴍɪɴ ᴀɴᴅʀᴇᴡ ꜱʟᴀᴛᴇꜱ</h1>
           <div class="mport-hero-alias">@benslates <span class="mport-alias-tag">VERIFIED RESEARCHER</span></div>
         </div>
       </div>
-      <p class="mport-hero-sub">Aspiring Red Teamer &amp; Cybersecurity Specialist focused on Offensive Security, Network Exploitation, Web Pentesting, and Threat Adversary Emulation.</p>
-      
+      <p class="mport-hero-sub">Computer Science researcher specializing in Red Teaming, Offensive Security Architecture, and Low-Level Exploit Development. Building offensive security tools, dissecting adversarial vectors, and engineering robust software integrations.</p>
+
+      <div style="display:flex; flex-wrap:wrap; gap:8px; margin-bottom:16px;">
+        <a href="https://benslates.xyz" target="_blank" class="mport-proj-btn" style="background:rgba(0,0,0,0.6); border-color:rgba(255,255,255,0.25);">benslates.xyz ↗</a>
+        <a href="https://linkedin.com/in/m-umer-farooq-a2a0b721" target="_blank" class="mport-proj-btn" style="background:rgba(10,102,194,0.25); border-color:#0A66C2;">LinkedIn Profile ↗</a>
+        <a href="https://github.com/ben-slates" target="_blank" class="mport-proj-btn" style="background:rgba(255,42,109,0.2); border-color:#ff2a6d;">GitHub @ben-slates ↗</a>
+      </div>
+
       <div class="mport-hero-grid">
         <div class="mport-ib">
           <div class="mport-ib-lbl">Degree</div>
           <div class="mport-ib-val">BS Computer Science</div>
         </div>
         <div class="mport-ib">
-          <div class="mport-ib-lbl">Semester</div>
-          <div class="mport-ib-val">7th (In Progress)</div>
-        </div>
-        <div class="mport-ib">
-          <div class="mport-ib-lbl">Location</div>
-          <div class="mport-ib-val">Pakistan 🇵🇰</div>
+          <div class="mport-ib-lbl">Institution</div>
+          <div class="mport-ib-val">UAF (2023 - 2027)</div>
         </div>
         <div class="mport-ib">
           <div class="mport-ib-lbl">Specialization</div>
-          <div class="mport-ib-val" style="color:#00f5a0;">Red Teaming ⚔️</div>
+          <div class="mport-ib-val" style="color:#00f5a0;">Red Teaming</div>
+        </div>
+        <div class="mport-ib">
+          <div class="mport-ib-lbl">Status</div>
+          <div class="mport-ib-val" style="color:#ff2a6d;">Active Researcher</div>
         </div>
       </div>
     </section>
 
-    <!-- SKILLS & ARSENAL (SMEXY BENTO) -->
+    <!-- EXECUTIVE PROFILE & RESEARCH -->
+    <section class="mport-card" id="m-profile">
+      <div class="mport-title">
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        Executive Profile &amp; Research
+      </div>
+      <p style="font-size:13px; color:rgba(240,240,240,0.9); line-height:1.6; margin-bottom:14px;">
+        Computer Science researcher specializing in <b>Red Teaming, Offensive Security Architecture, and Low-Level Exploit Development</b>.
+        I build offensive security tools from the ground up, dissect and recreate adversarial attack vectors, and construct robust, ToS-compliant software integrations.
+      </p>
+
+      <div class="mport-focus-block">
+        <div class="mport-focus-title">
+          <span style="color:#ff2a6d;">[+]</span> PRIMARY FOCUS
+        </div>
+        <div class="mport-focus-text">
+          Active Directory internals, Kerberos manipulation, C2 telemetry, binary reversing, and evasive client-side mods.
+        </div>
+      </div>
+
+      <div class="mport-focus-block" style="margin-bottom:0;">
+        <div class="mport-focus-title" style="color:#00f0ff;">
+          <span style="color:#00f0ff;">[+]</span> CURRENT RESEARCH
+        </div>
+        <div class="mport-focus-text">
+          Distributed multi-platform architectures, AV/EDR evasion mechanics, and real-time audio/network stream engineering.
+        </div>
+      </div>
+    </section>
+
+    <!-- CORE SPECIALIZATIONS (TREE VIEW) -->
+    <section class="mport-card" id="m-specializations">
+      <div class="mport-title">
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+        Core Specializations
+      </div>
+      <div class="mport-tree-pre">┌──[ Red Team &amp; Adversarial Operations ]
+│   ├── Active Directory: Kerberoasting, AS-REP Roasting, Shadow Credentials, gMSA Key Extraction
+│   ├── Infrastructure: C2 Framework Design, Domain Dominance, Pivoting &amp; Lateral Movement
+│   └── Network Attacks: DNS Tunneling, Rogue AP Infrastructure, MITM Telemetry Manipulation
+│
+└──[ Engineering &amp; Systems Architecture ]
+    ├── Languages: Rust, Go, Python, TypeScript, C, x86/x64 Assembly, Modern Bash
+    ├── Mod Engineering: Electron App Patching, Web Audio DSP, Dynamic Buffer Normalization
+    └── Security Automation: ML-powered CVE Triaging, Custom Protocol Dissectors, Automated Threat Auditing</div>
+    </section>
+
+    <!-- FEATURED ENGINEERING & RESEARCH PROJECTS -->
+    <section class="mport-card" id="m-projects">
+      <div class="mport-title">
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
+        Featured Projects &amp; Research
+      </div>
+
+      <!-- 1. discord-voice-notes -->
+      <div class="mport-proj-card">
+        <div class="mport-proj-top">
+          <div class="mport-proj-name">discord-voice-notes</div>
+          <span class="mport-proj-domain">Client Modding &amp; Audio DSP</span>
+        </div>
+        <p class="mport-proj-desc">Native Opus 64kbps recording engine, Base64 waveform generation, 83 Full HD glass themes, real-time theme search, and large file bypass.</p>
+        <a href="https://github.com/ben-slates/discord-voice-notes" target="_blank" class="mport-proj-btn">
+          <span>github.com/ben-slates/discord-voice-notes</span> ↗
+        </a>
+      </div>
+
+      <!-- 2. BEN_C2 -->
+      <div class="mport-proj-card">
+        <div class="mport-proj-top">
+          <div class="mport-proj-name">BEN_C2</div>
+          <span class="mport-proj-domain" style="border-color:rgba(255,42,109,0.4); color:#ff88a3;">Command &amp; Control</span>
+        </div>
+        <p class="mport-proj-desc">Asynchronous post-exploitation C2 server engineered with Rust performance core and Python API orchestration.</p>
+        <a href="https://github.com/ben-slates/BEN_C2" target="_blank" class="mport-proj-btn">
+          <span>github.com/ben-slates/BEN_C2</span> ↗
+        </a>
+      </div>
+
+      <!-- 3. CVE-2026-31431-Exploit -->
+      <div class="mport-proj-card">
+        <div class="mport-proj-top">
+          <div class="mport-proj-name">CVE-2026-31431-Exploit</div>
+          <span class="mport-proj-domain" style="border-color:rgba(157,78,221,0.4); color:#c77dff;">Exploit Development</span>
+        </div>
+        <p class="mport-proj-desc">Vulnerability research, memory analysis, and weaponized proof-of-concept exploitation suite.</p>
+        <a href="https://github.com/ben-slates/CVE-2026-31431-Exploit" target="_blank" class="mport-proj-btn">
+          <span>github.com/ben-slates/CVE-2026-31431-Exploit</span> ↗
+        </a>
+      </div>
+
+      <!-- 4. CVE-2024-37054 -->
+      <div class="mport-proj-card">
+        <div class="mport-proj-top">
+          <div class="mport-proj-name">CVE-2024-37054</div>
+          <span class="mport-proj-domain" style="border-color:rgba(157,78,221,0.4); color:#c77dff;">Vulnerability Research</span>
+        </div>
+        <p class="mport-proj-desc">Technical analysis, payload structuring, and environment reproductive attack demonstration.</p>
+        <a href="https://github.com/ben-slates/CVE-2024-37054" target="_blank" class="mport-proj-btn">
+          <span>github.com/ben-slates/CVE-2024-37054</span> ↗
+        </a>
+      </div>
+
+      <!-- 5. gmsa-aes-key-extractor -->
+      <div class="mport-proj-card">
+        <div class="mport-proj-top">
+          <div class="mport-proj-name">gmsa-aes-key-extractor</div>
+          <span class="mport-proj-domain" style="border-color:rgba(0,245,160,0.4); color:#00f5a0;">Active Directory Security</span>
+        </div>
+        <p class="mport-proj-desc">Group Managed Service Account (gMSA) cryptographic AES key extraction and offline ticket forged decryption.</p>
+        <a href="https://github.com/ben-slates/gmsa-aes-key-extractor" target="_blank" class="mport-proj-btn">
+          <span>github.com/ben-slates/gmsa-aes-key-extractor</span> ↗
+        </a>
+      </div>
+
+      <!-- 6. CVE-FINDER -->
+      <div class="mport-proj-card">
+        <div class="mport-proj-top">
+          <div class="mport-proj-name">CVE-FINDER</div>
+          <span class="mport-proj-domain">Threat Intelligence &amp; ML</span>
+        </div>
+        <p class="mport-proj-desc">Automated CVE ingestion pipeline evaluating real-time zero-day chatter and CVSS severity scoring.</p>
+        <a href="https://github.com/ben-slates/CVE-FINDER" target="_blank" class="mport-proj-btn">
+          <span>github.com/ben-slates/CVE-FINDER</span> ↗
+        </a>
+      </div>
+
+      <!-- 7. uploadserver2 -->
+      <div class="mport-proj-card">
+        <div class="mport-proj-top">
+          <div class="mport-proj-name">uploadserver2</div>
+          <span class="mport-proj-domain">Network Systems</span>
+        </div>
+        <p class="mport-proj-desc">Secure, self-hosted HTTP/2 file transport server featuring authenticated streaming and remote shell sync.</p>
+        <a href="https://github.com/ben-slates/uploadserver2" target="_blank" class="mport-proj-btn">
+          <span>github.com/ben-slates/uploadserver2</span> ↗
+        </a>
+      </div>
+
+      <!-- 8. esp32_NAT_router -->
+      <div class="mport-proj-card" style="margin-bottom:0;">
+        <div class="mport-proj-top">
+          <div class="mport-proj-name">esp32_NAT_router</div>
+          <span class="mport-proj-domain" style="border-color:rgba(255,140,0,0.4); color:#ffb366;">Embedded &amp; Hardware</span>
+        </div>
+        <p class="mport-proj-desc">ESP32-based portable micro-router firmware facilitating covert field deployment and packet redirection.</p>
+        <a href="https://github.com/ben-slates/esp32_NAT_router" target="_blank" class="mport-proj-btn">
+          <span>github.com/ben-slates/esp32_NAT_router</span> ↗
+        </a>
+      </div>
+    </section>
+
+    <!-- ACTIVITY & GITHUB METRICS -->
+    <section class="mport-card" id="m-metrics">
+      <div class="mport-title">
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+        Activity &amp; GitHub Metrics
+      </div>
+      <div class="mport-metrics-grid">
+        <img src="https://github-readme-stats.vercel.app/api?username=ben-slates&show_icons=true&theme=radical&hide_border=true&count_private=true" alt="GitHub Performance Metrics" class="mport-stat-img" loading="lazy">
+        <img src="https://github-readme-streak-stats.herokuapp.com/?user=ben-slates&theme=radical&hide_border=true" alt="GitHub Streak Stats" class="mport-stat-img" loading="lazy">
+        <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=ben-slates&layout=compact&theme=radical&hide_border=true" alt="Top Languages" class="mport-stat-img" loading="lazy">
+      </div>
+    </section>
+
+    <!-- SKILLS & ARSENAL -->
     <section class="mport-card" id="m-skills">
       <div class="mport-title">
         <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
-        Offensive Security Arsenal
+        Security Arsenal &amp; Tooling
       </div>
-      
+
       <div class="mport-skill-group">
-        <div class="mport-sg-title">Exploitation &amp; Red Team Tools</div>
+        <div class="mport-sg-title">Red Team &amp; Exploitation Tools</div>
         <div class="mport-skill-tags">
           <span class="mport-stag">Kali Linux</span>
           <span class="mport-stag">Burp Suite Pro</span>
           <span class="mport-stag">Metasploit</span>
-          <span class="mport-stag">Hashcat</span>
+          <span class="mport-stag">Wireshark</span>
+          <span class="mport-stag stag-cyan">BloodHound</span>
           <span class="mport-stag stag-cyan">Nmap</span>
-          <span class="mport-stag stag-cyan">Wireshark</span>
-          <span class="mport-stag stag-cyan">Gobuster</span>
+          <span class="mport-stag stag-cyan">Evil-WinRM</span>
+          <span class="mport-stag">Hashcat</span>
+          <span class="mport-stag">Gobuster</span>
         </div>
       </div>
 
       <div class="mport-skill-group">
-        <div class="mport-sg-title">Scripting &amp; Automation</div>
+        <div class="mport-sg-title">Tech &amp; Languages Stack</div>
         <div class="mport-skill-tags">
+          <span class="mport-stag stag-purple">Rust</span>
+          <span class="mport-stag stag-purple">Go</span>
           <span class="mport-stag stag-purple">Python</span>
+          <span class="mport-stag stag-purple">TypeScript</span>
+          <span class="mport-stag stag-purple">JavaScript</span>
+          <span class="mport-stag stag-purple">Node.js</span>
+          <span class="mport-stag stag-purple">C</span>
           <span class="mport-stag stag-purple">Bash</span>
-          <span class="mport-stag stag-purple">SQL</span>
-          <span class="mport-stag stag-purple">PowerShell</span>
         </div>
       </div>
 
       <div class="mport-skill-group" style="margin-bottom:0;">
-        <div class="mport-sg-title">Tactics &amp; Domains</div>
+        <div class="mport-sg-title">Practical Security &amp; CTF Disciplines</div>
         <div class="mport-skill-tags">
-          <span class="mport-stag">Recon &amp; OSINT</span>
-          <span class="mport-stag">Linux &amp; Windows PrivEsc</span>
-          <span class="mport-stag">Web Security (SQLi, XSS, CSRF)</span>
-          <span class="mport-stag">Network Pivoting</span>
+          <span class="mport-stag">Web Security</span>
+          <span class="mport-stag">Active Directory Exploitation</span>
+          <span class="mport-stag">Pivoting &amp; Tunnels</span>
+          <span class="mport-stag">Post-Exploitation</span>
+          <span class="mport-stag">Privilege Escalation</span>
+          <span class="mport-stag">SOC Triage</span>
         </div>
       </div>
     </section>
@@ -3226,10 +3619,10 @@ document.addEventListener("DOMContentLoaded", startMobileTicker);
         <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/></svg>
         Certifications &amp; Machine Labs
       </div>
-      
+
       <div class="mport-cert-item">
         <div>
-          <div class="mport-cert-name">Hack The Box — Mythical Machine</div>
+          <div class="mport-cert-name">Hack The Box -- Mythical Machine</div>
           <div class="mport-cert-sub">HTBCERT-3620BFA7E0</div>
         </div>
         <a href="certs/Mythical.pdf" download class="mport-cert-btn">View PDF ↗</a>
@@ -3237,7 +3630,7 @@ document.addEventListener("DOMContentLoaded", startMobileTicker);
 
       <div class="mport-cert-item">
         <div>
-          <div class="mport-cert-name">Hack The Box — Puppet Machine</div>
+          <div class="mport-cert-name">Hack The Box -- Puppet Machine</div>
           <div class="mport-cert-sub">HTBCERT-D149A5DFAD</div>
         </div>
         <a href="certs/Puppet.pdf" download class="mport-cert-btn">View PDF ↗</a>
@@ -3288,29 +3681,55 @@ document.addEventListener("DOMContentLoaded", startMobileTicker);
       </div>
     </section>
 
+    <!-- EDUCATION -->
+    <section class="mport-card" id="m-education">
+      <div class="mport-title">
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
+        Education
+      </div>
+      <div class="mport-work-box">
+        <div style="font-family:var(--font-mono);font-size:10px;color:#00f0ff;letter-spacing:0.12em;text-transform:uppercase;margin-bottom:6px;font-weight:700;">
+          [ DEGREE PROGRAM ]
+        </div>
+        <div style="font-size:17px;font-weight:800;color:#fff;margin-bottom:4px;">B.S. in Computer Science</div>
+        <div style="font-family:var(--font-mono);font-size:13px;color:#00f5a0;margin-bottom:10px;font-weight:600;">University of Agriculture, Faisalabad (2023 - 2027)</div>
+        <p style="font-size:13px;color:rgba(240,240,240,0.85);line-height:1.6;margin-bottom:0;">
+          Core competencies in Network Protocols, Operating System Internals, Database Management Systems, and Cryptography.
+        </p>
+      </div>
+    </section>
+
     <!-- CONTACT CARD -->
     <section class="mport-card" id="m-contact">
       <div class="mport-title">
         <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
         Direct Contact &amp; Channels
       </div>
-      <a href="mailto:hello@benslates.xyz" class="mport-contact-row">
-        <span class="mport-cr-lbl">✉️ EMAIL</span>
-        <span class="mport-cr-val" style="color:#00f0ff;">hello@benslates.xyz</span>
+      <a href="https://benslates.xyz" target="_blank" class="mport-contact-row">
+        <span class="mport-cr-lbl">WEBSITE</span>
+        <span class="mport-cr-val" style="color:#00f0ff;">benslates.xyz ↗</span>
+      </a>
+      <a href="https://linkedin.com/in/m-umer-farooq-a2a0b721" target="_blank" class="mport-contact-row">
+        <span class="mport-cr-lbl">LINKEDIN</span>
+        <span class="mport-cr-val" style="color:#0A66C2;">m-umer-farooq-a2a0b721 ↗</span>
       </a>
       <a href="https://github.com/ben-slates" target="_blank" class="mport-contact-row">
-        <span class="mport-cr-lbl">🐙 GITHUB</span>
+        <span class="mport-cr-lbl">GITHUB</span>
         <span class="mport-cr-val" style="color:#00f5a0;">github.com/ben-slates ↗</span>
       </a>
+      <a href="mailto:hello@benslates.xyz" class="mport-contact-row">
+        <span class="mport-cr-lbl">EMAIL</span>
+        <span class="mport-cr-val" style="color:#ff2a6d;">hello@benslates.xyz</span>
+      </a>
       <a href="tel:+923219400902" class="mport-contact-row">
-        <span class="mport-cr-lbl">📞 PHONE</span>
+        <span class="mport-cr-lbl">PHONE</span>
         <span class="mport-cr-val">+92-321-9400902</span>
       </a>
     </section>
 
   </main>
 
-  <!-- ── ULTRA-SEXY SIGNATURE GLASSY LIQUID FOOTER ── -->
+  <!-- SIGNATURE GLASSY LIQUID FOOTER -->
   <footer class="mport-glassy-footer">
     <div class="mport-foot-brand">
       <div class="mport-bs-logo">
@@ -3331,15 +3750,16 @@ document.addEventListener("DOMContentLoaded", startMobileTicker);
     <!-- Security Advisories & Newsletter -->
     <form class="mport-newsletter" onsubmit="event.preventDefault(); alert('Subscribed to Benslates Security Updates: ' + this.querySelector('input').value); this.reset();">
       <input type="email" placeholder="Get security research updates..." required autocomplete="email">
-      <button type=submit>Join</button>
+      <button type="submit">Join</button>
     </form>
 
     <!-- Social Links Bar -->
     <div class="mport-social-bar">
       <div class="mport-soc-links">
-        <a href="https://github.com/ben-slates" target="_blank" class="mport-soc-btn" aria-label="GitHub">◉</a>
-        <a href="mailto:hello@benslates.xyz" class="mport-soc-btn" aria-label="Email">✉</a>
-        <a href="https://rynexsecurity.com" target="_blank" class="mport-soc-btn" aria-label="Rynex Security">⚔</a>
+        <a href="https://github.com/ben-slates" target="_blank" class="mport-soc-btn" aria-label="GitHub">GH</a>
+        <a href="https://linkedin.com/in/m-umer-farooq-a2a0b721" target="_blank" class="mport-soc-btn" aria-label="LinkedIn">IN</a>
+        <a href="mailto:hello@benslates.xyz" class="mport-soc-btn" aria-label="Email">EM</a>
+        <a href="https://rynexsecurity.com" target="_blank" class="mport-soc-btn" aria-label="Rynex Security">RS</a>
       </div>
       <div style="font-family:var(--font-mono);font-size:10px;color:rgba(255,255,255,0.7);display:flex;align-items:center;gap:6px;">
         <span style="width:6px;height:6px;border-radius:50%;background:#00f5a0;box-shadow:0 0 8px #00f5a0;"></span>
@@ -3347,8 +3767,9 @@ document.addEventListener("DOMContentLoaded", startMobileTicker);
       </div>
     </div>
 
+    <div class="mport-motto" style="margin-bottom:6px; font-weight:700; letter-spacing:0.1em; color:#00f0ff;">Build • Break • Understand</div>
     <div class="mport-motto">the quieter you become, the more you are able to hear</div>
-    <div class="mport-copyright">&copy; 2026 ᴍᴜʜᴀᴍᴍᴀᴅ ᴜᴍᴇʀ ꜰᴀʀᴏᴏQ. All rights reserved.</div>
+    <div class="mport-copyright">&copy; 2026 Benjamin Andrew Slates. All rights reserved.</div>
     <button class="mport-top-btn" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="18 15 12 9 6 15"/></svg>
       Back to Top
@@ -3357,5 +3778,6 @@ document.addEventListener("DOMContentLoaded", startMobileTicker);
     <div class="mport-wm-text">BENSLATES</div>
   </footer>
 </div>
+
 </body>
 </html>
