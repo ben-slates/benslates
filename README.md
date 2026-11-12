@@ -2,13 +2,13 @@
 
 # benslates -- Cyberdeck Portfolio OS
 
-### Benjamin Andrew Slates (Muhammad Umer Farooq)
+### Benjamin Andrew Slates
 <b>Red Team • Offensive Security • Security Research</b>
 
 <p align="center">
   <a href="https://benslates.xyz"><img src="https://img.shields.io/badge/Live_Site-benslates.xyz-ff2a6d?style=for-the-badge&logo=googlechrome&logoColor=white" alt="Live Website"></a>
   <a href="https://benslates.xyz"><img src="https://img.shields.io/badge/Specialization-Red_Teaming-9d4edd?style=for-the-badge&logo=kalilinux&logoColor=white" alt="Offensive Security"></a>
-  <a href="https://linkedin.com/in/m-umer-farooq-a2a0b721"><img src="https://img.shields.io/badge/LinkedIn-Profile-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white" alt="LinkedIn"></a>
+  <a href="https://linkedin.com/in/ben-slates"><img src="https://img.shields.io/badge/LinkedIn-Profile-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white" alt="LinkedIn"></a>
   <a href="./LICENSE"><img src="https://img.shields.io/badge/License-MIT-00f5a0?style=for-the-badge" alt="License: MIT"></a>
   <a href="https://github.com/ben-slates"><img src="https://img.shields.io/badge/GitHub-ben--slates-181717?style=for-the-badge&logo=github&logoColor=white" alt="GitHub"></a>
 </p>
@@ -134,12 +134,6 @@ Active participant on **Hack The Box** and practical cyber training labs:
 
 ---
 
-## Education
-
-- **B.S. in Computer Science**  
-  *University of Agriculture, Faisalabad* (2023 - 2027)
-
----
 
 ## Dual-Experience Architecture
 
@@ -155,7 +149,7 @@ This portfolio detects the client viewport and provides two specialized user exp
 ### Mobile Mode (<= 768px) -- Cyber-Glassmorphic HUD Interface
 - **Telemetry System Tray**: Real-time HUD showing Kali distribution status, fluctuating CPU/RAM telemetry, and live green status beacon.
 - **Bento Profile Card**: Profile photo (`me.jpg`) framed in dynamic multi-color neon aura rings, verified researcher badge, and academic credentials.
-- **Horizontal Quick-Nav**: Instant 1-tap anchor navigation across sections (`About`, `Profile`, `Projects`, `Metrics`, `Specializations`, `Arsenal`, `Certs`, `Experience`, `Education`, `Contact`).
+- **Horizontal Quick-Nav**: Instant 1-tap anchor navigation across sections (`About`, `Profile`, `Projects`, `Metrics`, `Specializations`, `Arsenal`, `Certs`, `Experience`, `Contact`).
 - **Featured Projects & Research**: Dedicated interactive cards for all 8 engineering repositories with architecture highlights and direct GitHub navigation.
 - **Color-Coded Offensive Arsenal & Stack**: Categorized skill tags (Exploitation, Scripting, Network, Web Security, System Languages).
 - **Verified HTB Labs & Certs**: Direct PDF access for Hack The Box machine certificates and Cisco Networking Academy validations.
@@ -244,15 +238,14 @@ Open your browser and navigate to `http://localhost:8080`.
 
 ## Author
 
-**Benjamin Andrew Slates** (*Muhammad Umer Farooq*)  
+**Benjamin Andrew Slates**  
 *Cybersecurity Specialist & Offensive Red Teamer*  
 Active at **Rynex Security**
 
 - Website: [benslates.xyz](https://benslates.xyz)
-- LinkedIn: [linkedin.com/in/m-umer-farooq-a2a0b721](https://linkedin.com/in/m-umer-farooq-a2a0b721)
+- LinkedIn: [Profile](https://linkedin.com/in/ben-slates)
 - GitHub: [@ben-slates](https://github.com/ben-slates)
-- Email: [hello@benslates.xyz](mailto:hello@benslates.xyz) / [umerf2700@gmail.com](mailto:umerf2700@gmail.com)
-- Direct: +92-321-9400902
+- Email: [hello@benslates.xyz](mailto:hello@benslates.xyz)
 
 ---
 
