@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>Benjamin Andrew Slates -- Red Team &amp; Offensive Security Research</title>
-<meta name="description" content="Personal portfolio and research laboratory of Benjamin Andrew Slates (@benslates). Red Teaming, Offensive Security Architecture, C2 Development, and Exploit Engineering.">
+<title>Benjamin Andrew Slates // Red Team &amp; Offensive Security Research</title>
+<meta name="description" content="Personal portfolio and offensive security laboratory of Benjamin Andrew Slates (@benslates). Red Teaming, Active Directory Internals, C2 Engineering, and Low-Level Exploit Development.">
 
 <!-- Favicons -->
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
@@ -14,753 +14,1218 @@
 <!-- Fonts -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700;800&family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&family=Outfit:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
 
 <style>
 :root {
-  --bg-dark: #080a11;
-  --bg-card: rgba(13, 17, 26, 0.76);
-  --bg-card-hover: rgba(18, 24, 36, 0.88);
-  --border-neon: rgba(0, 240, 255, 0.18);
-  --border-neon-hover: rgba(0, 240, 255, 0.5);
-  --border-glass: rgba(255, 255, 255, 0.08);
-  --accent-pink: #ff2a6d;
-  --accent-purple: #8b5cf6;
+  --bg-deep: #05070c;
+  --bg-card: rgba(12, 16, 26, 0.78);
+  --bg-card-hover: rgba(18, 24, 38, 0.9);
+  --bg-card-active: rgba(22, 30, 48, 0.95);
+  
+  --border-hairline: rgba(255, 255, 255, 0.08);
+  --border-hover: rgba(0, 240, 255, 0.42);
+  --border-neon-glow: rgba(0, 240, 255, 0.25);
+  
   --accent-cyan: #00f0ff;
   --accent-green: #00f5a0;
-  --accent-orange: #ff9f43;
-  --text-main: #f8fafc;
+  --accent-purple: #8b5cf6;
+  --accent-pink: #ff2a6d;
+  --accent-amber: #ffb020;
+  
+  --text-primary: #f8fafc;
+  --text-secondary: #cbd5e1;
   --text-muted: #94a3b8;
-  --font-ui: 'Outfit', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  --font-mono: 'JetBrains Mono', 'Courier New', monospace;
+  --text-faint: #64748b;
+  
+  --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+  --font-sans: 'Space Grotesk', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-display: 'Outfit', sans-serif;
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
 
 html {
   scroll-behavior: smooth;
-  background-color: var(--bg-dark);
+  background-color: var(--bg-deep);
 }
 
 body {
   width: 100%;
   min-height: 100vh;
-  font-family: var(--font-ui);
-  background-color: var(--bg-dark);
-  color: var(--text-main);
+  font-family: var(--font-sans);
+  background-color: var(--bg-deep);
+  color: var(--text-primary);
   overflow-x: hidden;
   position: relative;
   -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-/* Custom Scrollbar */
-::-webkit-scrollbar { width: 7px; height: 7px; }
-::-webkit-scrollbar-track { background: #080a11; }
-::-webkit-scrollbar-thumb { background: rgba(0, 240, 255, 0.25); border-radius: 4px; }
+/* Custom High-Tech Scrollbar */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: #05070c; }
+::-webkit-scrollbar-thumb { background: rgba(0, 240, 255, 0.22); border-radius: 3px; }
 ::-webkit-scrollbar-thumb:hover { background: var(--accent-cyan); }
 
-/* Ambient Liquid Backdrop */
-.cyber-bg {
+/* Ambient Matrix Canvas */
+#matrix-canvas {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.12;
+  transition: opacity 0.5s ease;
+}
+
+/* Cyber Atmospheric Layers */
+.cyber-bg-layer {
   position: fixed;
   inset: 0;
   pointer-events: none;
-  z-index: 0;
+  z-index: 1;
   overflow: hidden;
-  background: radial-gradient(circle at 50% -10%, #101626 0%, #080a11 70%);
 }
-.cyber-bg::before {
+.cyber-bg-layer::before {
   content: '';
   position: absolute;
-  top: -15%;
-  right: 10%;
-  width: 55vw;
-  height: 55vw;
-  max-width: 650px;
-  max-height: 650px;
+  top: -20%;
+  right: -10%;
+  width: 65vw;
+  height: 65vw;
+  max-width: 800px;
+  max-height: 800px;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(0, 240, 255, 0.12) 0%, rgba(139, 92, 246, 0.07) 50%, transparent 70%);
-  filter: blur(90px);
-  animation: orbFloat1 20s ease-in-out infinite alternate;
+  background: radial-gradient(circle, rgba(0, 240, 255, 0.1) 0%, rgba(139, 92, 246, 0.05) 50%, transparent 70%);
+  filter: blur(100px);
+  animation: orbDrift1 22s ease-in-out infinite alternate;
 }
-.cyber-bg::after {
+.cyber-bg-layer::after {
   content: '';
   position: absolute;
-  bottom: 5%;
-  left: 5%;
-  width: 50vw;
-  height: 50vw;
-  max-width: 600px;
-  max-height: 600px;
+  bottom: -15%;
+  left: -10%;
+  width: 60vw;
+  height: 60vw;
+  max-width: 750px;
+  max-height: 750px;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(255, 42, 109, 0.1) 0%, rgba(139, 92, 246, 0.07) 50%, transparent 70%);
-  filter: blur(90px);
-  animation: orbFloat2 24s ease-in-out infinite alternate;
+  background: radial-gradient(circle, rgba(255, 42, 109, 0.08) 0%, rgba(139, 92, 246, 0.05) 50%, transparent 70%);
+  filter: blur(100px);
+  animation: orbDrift2 26s ease-in-out infinite alternate;
 }
-.cyber-grid-overlay {
+.cyber-grid-mesh {
   position: absolute;
   inset: 0;
   background-image:
-    linear-gradient(rgba(0, 240, 255, 0.02) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(0, 240, 255, 0.02) 1px, transparent 1px);
-  background-size: 44px 44px;
+    linear-gradient(rgba(0, 240, 255, 0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 240, 255, 0.025) 1px, transparent 1px);
+  background-size: 50px 50px;
   pointer-events: none;
 }
 
-@keyframes orbFloat1 {
+@keyframes orbDrift1 {
   0% { transform: translate(0, 0) scale(1); }
-  50% { transform: translate(50px, 30px) scale(1.08); }
-  100% { transform: translate(-30px, 60px) scale(0.95); }
+  50% { transform: translate(-60px, 40px) scale(1.08); }
+  100% { transform: translate(30px, 80px) scale(0.94); }
 }
-@keyframes orbFloat2 {
+@keyframes orbDrift2 {
   0% { transform: translate(0, 0) scale(1); }
-  50% { transform: translate(-40px, -40px) scale(1.1); }
-  100% { transform: translate(25px, -20px) scale(0.92); }
+  50% { transform: translate(50px, -50px) scale(1.1); }
+  100% { transform: translate(-30px, -30px) scale(0.92); }
 }
 
-/* STICKY CYBER-GLASS HEADER */
-.cyber-header {
+/* ── STICKY CYBER FLOATING HUD NAVBAR ── */
+.cyber-nav {
   position: sticky;
   top: 0;
-  z-index: 99;
-  background: rgba(8, 10, 17, 0.84);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-  backdrop-filter: blur(24px) saturate(180%);
-  -webkit-backdrop-filter: blur(24px) saturate(180%);
-  padding: 14px 24px;
+  z-index: 1000;
+  width: 100%;
+  padding: 12px 24px;
+  background: rgba(5, 7, 12, 0.82);
+  backdrop-filter: blur(28px) saturate(200%);
+  -webkit-backdrop-filter: blur(28px) saturate(200%);
+  border-bottom: 1px solid var(--border-hairline);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.65);
   display: flex;
   align-items: center;
   justify-content: space-between;
-  box-shadow: 0 4px 28px rgba(0, 0, 0, 0.55);
+  gap: 16px;
 }
-.header-brand {
-  font-family: var(--font-mono);
-  font-size: 17px;
-  font-weight: 800;
-  color: #fff;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  text-decoration: none;
-  letter-spacing: -0.01em;
-}
-.header-brand span {
-  background: linear-gradient(135deg, #ffffff 40%, var(--accent-cyan) 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  filter: drop-shadow(0 0 10px rgba(0, 240, 255, 0.4));
-}
-.header-actions {
+.nav-brand {
   display: flex;
   align-items: center;
   gap: 12px;
+  text-decoration: none;
+  font-family: var(--font-mono);
+  font-weight: 800;
+  font-size: 15px;
+  color: #fff;
+  letter-spacing: -0.02em;
 }
-.terminal-toggle-btn {
+.brand-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  background: rgba(0, 240, 255, 0.1);
+  border: 1px solid rgba(0, 240, 255, 0.35);
+  box-shadow: 0 0 15px rgba(0, 240, 255, 0.2);
+  color: var(--accent-cyan);
+  font-weight: 900;
+  font-size: 13px;
+}
+.brand-name {
+  background: linear-gradient(135deg, #ffffff 40%, var(--accent-cyan) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 0 12px rgba(0, 240, 255, 0.35));
+}
+.brand-tagline {
+  font-size: 10px;
+  color: var(--text-muted);
+  font-weight: 500;
+  display: none;
+}
+@media (min-width: 900px) {
+  .brand-tagline { display: inline-block; margin-left: 6px; }
+}
+
+.nav-links {
+  display: none;
+  align-items: center;
+  gap: 6px;
+  list-style: none;
+}
+@media (min-width: 860px) {
+  .nav-links { display: flex; }
+}
+.nav-link-item a {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-decoration: none;
+  padding: 6px 12px;
+  border-radius: 14px;
+  border: 1px solid transparent;
+  transition: all 0.2s;
+  letter-spacing: 0.04em;
+}
+.nav-link-item a:hover {
+  color: #fff;
+  border-color: rgba(0, 240, 255, 0.25);
+  background: rgba(0, 240, 255, 0.08);
+  box-shadow: 0 0 14px rgba(0, 240, 255, 0.15);
+}
+
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.hud-btn {
   font-family: var(--font-mono);
   font-size: 11px;
   font-weight: 700;
-  color: var(--accent-cyan);
-  background: rgba(0, 240, 255, 0.08);
-  border: 1px solid rgba(0, 240, 255, 0.32);
-  padding: 7px 16px;
-  border-radius: 20px;
+  padding: 7px 14px;
+  border-radius: 16px;
   cursor: pointer;
   display: inline-flex;
   align-items: center;
-  gap: 7px;
-  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-  box-shadow: 0 0 14px rgba(0, 240, 255, 0.12);
+  gap: 6px;
+  text-decoration: none;
+  transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
 }
-.terminal-toggle-btn:hover {
+.btn-matrix-toggle {
+  background: rgba(0, 245, 160, 0.08);
+  border: 1px solid rgba(0, 245, 160, 0.28);
+  color: var(--accent-green);
+}
+.btn-matrix-toggle:hover {
+  background: var(--accent-green);
+  color: #05070c;
+  box-shadow: 0 0 20px rgba(0, 245, 160, 0.4);
+}
+.btn-terminal-cta {
+  background: rgba(0, 240, 255, 0.1);
+  border: 1px solid rgba(0, 240, 255, 0.35);
+  color: var(--accent-cyan);
+  box-shadow: 0 0 14px rgba(0, 240, 255, 0.15);
+}
+.btn-terminal-cta:hover {
   background: var(--accent-cyan);
-  color: #080a11;
+  color: #05070c;
   box-shadow: 0 0 24px rgba(0, 240, 255, 0.5);
   transform: translateY(-1px);
 }
 
-/* HORIZONTAL QUICK NAV BAR */
-.cyber-quicknav {
-  display: flex;
-  gap: 8px;
-  overflow-x: auto;
-  padding: 10px 24px;
-  background: rgba(8, 10, 17, 0.72);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-  scrollbar-width: none;
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  position: relative;
-  z-index: 98;
-}
-.cyber-quicknav::-webkit-scrollbar { display: none; }
-.qlink {
-  font-family: var(--font-mono);
-  font-size: 11px;
-  color: #94a3b8;
-  text-decoration: none;
-  padding: 6px 14px;
-  border-radius: 20px;
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  white-space: nowrap;
-  transition: all 0.2s;
-  letter-spacing: 0.02em;
-}
-.qlink:hover, .qlink:active {
-  background: rgba(0, 240, 255, 0.12);
-  border-color: var(--accent-cyan);
-  color: #fff;
-  box-shadow: 0 0 16px rgba(0, 240, 255, 0.2);
-  transform: translateY(-1px);
-}
-
-/* MAIN APP WRAPPER */
-.app-container {
+/* ── MAIN CONTENT CONTAINER ── */
+.app-viewport {
   position: relative;
   z-index: 10;
   width: 100%;
-  max-width: 1180px;
+  max-width: 1240px;
   margin: 0 auto;
-  padding: 24px 20px 50px;
+  padding: 24px 20px 80px;
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: 28px;
 }
 
-/* ── CARDS (GLASS BENTO) ── */
-.glass-card {
+/* ── BENTO BASE CARDS ── */
+.bento-card {
   background: var(--bg-card);
-  border: 1px solid var(--border-glass);
-  border-radius: 22px;
-  padding: 24px;
-  backdrop-filter: blur(28px) saturate(180%);
-  -webkit-backdrop-filter: blur(28px) saturate(180%);
-  box-shadow: 0 18px 45px rgba(0, 0, 0, 0.65), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  border: 1px solid var(--border-hairline);
+  border-radius: 24px;
+  padding: 26px;
+  backdrop-filter: blur(28px) saturate(190%);
+  -webkit-backdrop-filter: blur(28px) saturate(190%);
+  box-shadow: 0 18px 45px rgba(0, 0, 0, 0.68), inset 0 1px 0 rgba(255, 255, 255, 0.09);
   position: relative;
   overflow: hidden;
-  transition: border-color 0.25s, box-shadow 0.25s;
+  transition: border-color 0.25s, box-shadow 0.25s, transform 0.25s;
 }
-.glass-card::before {
+.bento-card::before {
   content: '';
   position: absolute;
   top: 0; left: 0; right: 0; height: 1.5px;
-  background: linear-gradient(90deg, transparent, rgba(0, 240, 255, 0.5), rgba(139, 92, 246, 0.5), rgba(255, 42, 109, 0.5), transparent);
+  background: linear-gradient(90deg, transparent, rgba(0, 240, 255, 0.6), rgba(139, 92, 246, 0.6), rgba(255, 42, 109, 0.6), transparent);
 }
-.glass-card:hover {
-  border-color: rgba(0, 240, 255, 0.32);
-  box-shadow: 0 20px 48px rgba(0, 0, 0, 0.72), 0 0 30px rgba(0, 240, 255, 0.06);
+.bento-card:hover {
+  border-color: var(--border-hover);
+  box-shadow: 0 24px 50px rgba(0, 0, 0, 0.75), 0 0 35px var(--border-neon-glow);
 }
 
-.card-title {
+/* Section Header Titles */
+.sec-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 20px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--border-hairline);
+  flex-wrap: wrap;
+}
+.sec-title {
   font-family: var(--font-mono);
-  font-size: 13px;
+  font-size: 13.5px;
   font-weight: 700;
   color: var(--accent-cyan);
   letter-spacing: 0.08em;
-  margin-bottom: 18px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
-  padding-bottom: 11px;
   text-transform: uppercase;
   display: flex;
   align-items: center;
-  gap: 9px;
+  gap: 10px;
 }
-.card-title svg { color: var(--accent-cyan); flex-shrink: 0; }
+.sec-title svg { color: var(--accent-cyan); flex-shrink: 0; }
+.sec-badge {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  padding: 3px 9px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--border-hairline);
+  color: var(--text-muted);
+}
 
-/* ── HERO BENTO CARD ── */
-.hero-bento {
+/* ── 01. HERO COMMAND BENTO ── */
+.hero-bento-grid {
   display: grid;
   grid-template-columns: 1fr;
   gap: 20px;
-  position: relative;
-  z-index: 2;
 }
-@media (min-width: 820px) {
-  .hero-bento {
-    grid-template-columns: auto 1fr;
-    gap: 30px;
-    align-items: center;
+@media (min-width: 940px) {
+  .hero-bento-grid {
+    grid-template-columns: 1.6fr 1fr;
+    align-items: stretch;
   }
 }
 
-.hero-avatar-col {
+/* Dossier Card */
+.dossier-card {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  text-align: center;
-  gap: 14px;
+  justify-content: space-between;
+  gap: 22px;
 }
-@media (min-width: 820px) {
-  .hero-avatar-col {
+.dossier-meta-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--text-faint);
+  letter-spacing: 0.06em;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  padding-bottom: 10px;
+}
+.dossier-meta-top .clearance {
+  color: var(--accent-pink);
+  font-weight: 700;
+}
+
+.dossier-main-row {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+@media (min-width: 640px) {
+  .dossier-main-row {
+    flex-direction: row;
     align-items: flex-start;
-    text-align: left;
+    gap: 26px;
   }
 }
 
-.avatar-ring {
+.avatar-wrapper {
   position: relative;
-  width: 104px;
-  height: 104px;
-  border-radius: 50%;
-  padding: 3px;
-  background: linear-gradient(135deg, var(--accent-cyan), var(--accent-purple), var(--accent-pink));
-  box-shadow: 0 0 28px rgba(0, 240, 255, 0.4), 0 0 45px rgba(139, 92, 246, 0.25);
+  width: 110px;
+  height: 110px;
   flex-shrink: 0;
-  animation: ringPulse 4s ease-in-out infinite alternate;
+  margin: 0 auto;
 }
-@keyframes ringPulse {
-  0% { transform: scale(1); filter: drop-shadow(0 0 12px rgba(0, 240, 255, 0.4)); }
-  100% { transform: scale(1.025); filter: drop-shadow(0 0 22px rgba(255, 42, 109, 0.45)); }
+@media (min-width: 640px) {
+  .avatar-wrapper { margin: 0; }
 }
-.avatar-img {
+.avatar-aura {
+  position: absolute;
+  inset: -4px;
+  border-radius: 50%;
+  background: conic-gradient(from 0deg, var(--accent-cyan), var(--accent-purple), var(--accent-pink), var(--accent-cyan));
+  animation: auraRotate 6s linear infinite;
+  filter: drop-shadow(0 0 16px rgba(0, 240, 255, 0.45));
+}
+@keyframes auraRotate {
+  100% { transform: rotate(360deg); }
+}
+.avatar-inner {
+  position: relative;
   width: 100%;
   height: 100%;
   border-radius: 50%;
-  object-fit: cover;
-  display: block;
+  overflow: hidden;
+  border: 3px solid #05070c;
   background: #0d121c;
 }
-.status-beacon {
+.avatar-photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.live-beacon {
   position: absolute;
   bottom: 4px;
   right: 4px;
-  width: 16px;
-  height: 16px;
+  width: 18px;
+  height: 18px;
   border-radius: 50%;
   background: var(--accent-green);
-  border: 3px solid #080a11;
-  box-shadow: 0 0 10px var(--accent-green);
-  animation: beaconBlink 2.5s infinite ease-in-out;
+  border: 3.5px solid #05070c;
+  box-shadow: 0 0 12px var(--accent-green);
+  animation: beaconPulse 2s infinite ease-in-out;
 }
-@keyframes beaconBlink {
+@keyframes beaconPulse {
   0%, 100% { opacity: 1; transform: scale(1); }
-  50% { opacity: 0.5; transform: scale(0.9); }
+  50% { opacity: 0.45; transform: scale(0.9); }
 }
 
-.hero-info-col {
+.dossier-info {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 10px;
+  flex: 1;
+  text-align: center;
 }
-.hero-tag {
-  font-family: var(--font-mono);
-  font-size: 10.5px;
-  color: var(--accent-cyan);
-  letter-spacing: 0.12em;
-  font-weight: 700;
-  text-transform: uppercase;
+@media (min-width: 640px) {
+  .dossier-info { text-align: left; }
+}
+.role-chip-row {
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 8px;
+  flex-wrap: wrap;
+  justify-content: center;
 }
-.hero-name {
-  font-size: clamp(24px, 3.5vw, 36px);
+@media (min-width: 640px) {
+  .role-chip-row { justify-content: flex-start; }
+}
+.role-chip {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: var(--accent-cyan);
+  text-transform: uppercase;
+}
+.verified-pill {
+  font-family: var(--font-mono);
+  font-size: 9.5px;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 12px;
+  background: rgba(139, 92, 246, 0.18);
+  border: 1px solid rgba(139, 92, 246, 0.4);
+  color: #c4b5fd;
+  letter-spacing: 0.05em;
+}
+
+.dossier-name {
+  font-family: var(--font-display);
+  font-size: clamp(26px, 4vw, 40px);
   font-weight: 800;
-  color: #fff;
-  letter-spacing: 0.02em;
-  line-height: 1.15;
+  letter-spacing: -0.01em;
+  line-height: 1.1;
   background: linear-gradient(135deg, #ffffff 40%, #c4b5fd 80%, #67e8f9 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
-.hero-alias {
+.dossier-alias {
   font-family: var(--font-mono);
-  font-size: 12px;
-  color: #94a3b8;
-  display: flex;
-  align-items: center;
-  gap: 8px;
+  font-size: 13px;
+  color: var(--text-muted);
 }
-.alias-badge {
-  font-size: 9px;
-  padding: 2px 8px;
-  border-radius: 12px;
-  background: rgba(139, 92, 246, 0.18);
-  border: 1px solid rgba(139, 92, 246, 0.38);
-  color: #c4b5fd;
-  font-weight: 700;
-  letter-spacing: 0.05em;
-}
-.hero-sub {
-  font-size: 14px;
-  color: #cbd5e1;
+
+.dossier-bio {
+  font-size: 13.5px;
+  color: var(--text-secondary);
   line-height: 1.6;
 }
 
-/* Quick Action Buttons */
-.hero-links-wrap {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  margin-top: 4px;
-}
-.hero-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
+/* Prompt Line */
+.dossier-terminal-line {
+  background: rgba(5, 7, 12, 0.7);
+  border: 1px solid rgba(0, 240, 255, 0.18);
+  border-radius: 12px;
+  padding: 9px 14px;
   font-family: var(--font-mono);
   font-size: 11px;
-  padding: 7px 14px;
-  border-radius: 12px;
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.14);
-  color: #f8fafc;
-  text-decoration: none;
-  font-weight: 600;
-  transition: all 0.2s;
+  color: var(--accent-green);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  overflow-x: auto;
+  white-space: nowrap;
 }
-.hero-btn:hover {
-  background: var(--accent-cyan);
+.dossier-terminal-line .t-prefix {
+  color: var(--accent-cyan);
+  font-weight: 700;
+}
+.dossier-terminal-line .t-cursor {
+  display: inline-block;
+  width: 7px;
+  height: 13px;
+  background: var(--accent-green);
+  animation: termCursorBlink 1s infinite steps(2, start);
+}
+@keyframes termCursorBlink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+
+/* Action Buttons Cluster */
+.dossier-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  padding-top: 6px;
+  justify-content: center;
+}
+@media (min-width: 640px) {
+  .dossier-actions { justify-content: flex-start; }
+}
+.act-btn {
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+  font-weight: 600;
+  padding: 8px 16px;
+  border-radius: 14px;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: #fff;
+}
+.act-btn:hover {
+  background: rgba(0, 240, 255, 0.12);
   border-color: var(--accent-cyan);
-  color: #080a11;
-  box-shadow: 0 0 16px rgba(0, 240, 255, 0.35);
+  box-shadow: 0 0 16px rgba(0, 240, 255, 0.3);
   transform: translateY(-1px);
 }
+.act-btn.primary {
+  background: linear-gradient(135deg, rgba(0, 240, 255, 0.2), rgba(139, 92, 246, 0.2));
+  border-color: var(--accent-cyan);
+  color: var(--accent-cyan);
+  font-weight: 700;
+}
+.act-btn.primary:hover {
+  background: var(--accent-cyan);
+  color: #05070c;
+  box-shadow: 0 0 25px rgba(0, 240, 255, 0.5);
+}
 
-/* Hero Stats Grid */
-.hero-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 10px;
-  margin-top: 6px;
+/* ── HUD INTEL CARD (SIDEKICK BENTO) ── */
+.intel-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 16px;
+  background: radial-gradient(circle at top right, rgba(0, 240, 255, 0.06), transparent 70%), var(--bg-card);
 }
-@media (min-width: 600px) {
-  .hero-grid {
-    grid-template-columns: repeat(4, 1fr);
-  }
-}
-.ib-box {
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+.intel-row {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 10px 14px;
+  background: rgba(255, 255, 255, 0.025);
+  border: 1px solid rgba(255, 255, 255, 0.06);
   border-radius: 14px;
-  padding: 12px 14px;
-  backdrop-filter: blur(12px);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08);
 }
-.ib-lbl {
+.intel-label {
   font-family: var(--font-mono);
-  font-size: 9.5px;
-  color: #94a3b8;
+  font-size: 10px;
+  color: var(--text-muted);
   text-transform: uppercase;
-  margin-bottom: 4px;
   letter-spacing: 0.06em;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
-.ib-val {
+.intel-val {
   font-family: var(--font-mono);
-  font-size: 13px;
+  font-size: 12.5px;
   color: #fff;
   font-weight: 700;
 }
-
-/* ── EXECUTIVE PROFILE FOCUS BLOCKS ── */
-.focus-block {
-  background: rgba(255, 255, 255, 0.025);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 14px;
-  padding: 14px 16px;
-  margin-top: 12px;
+.bar-track {
+  width: 100%;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 2px;
+  overflow: hidden;
+  margin-top: 4px;
 }
-.focus-title {
-  font-family: var(--font-mono);
-  font-size: 11px;
-  font-weight: 700;
-  color: var(--accent-cyan);
-  letter-spacing: 0.04em;
-  margin-bottom: 5px;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-}
-.focus-text {
-  font-size: 13px;
-  color: #cbd5e1;
-  line-height: 1.55;
+.bar-fill {
+  height: 100%;
+  border-radius: 2px;
+  background: linear-gradient(90deg, var(--accent-cyan), var(--accent-green));
 }
 
-/* ── CORE SPECIALIZATIONS TREE ── */
-.tree-pre {
-  font-family: var(--font-mono);
-  font-size: 11.5px;
-  line-height: 1.6;
-  color: var(--accent-green);
-  background: rgba(7, 9, 14, 0.85);
-  border: 1px solid rgba(0, 245, 160, 0.25);
-  border-radius: 16px;
-  padding: 16px 18px;
-  overflow-x: auto;
-  white-space: pre;
-  box-shadow: inset 0 0 15px rgba(0, 245, 160, 0.04);
-}
-
-/* ── PROJECTS RESPONSIVE GRID ── */
-.projects-grid {
+/* ── HERO STAT NODES BAR ── */
+.stat-nodes-grid {
   display: grid;
-  grid-template-columns: 1fr;
+  grid-template-columns: repeat(2, 1fr);
   gap: 14px;
 }
-@media (min-width: 680px) {
-  .projects-grid {
-    grid-template-columns: repeat(2, 1fr);
+@media (min-width: 768px) {
+  .stat-nodes-grid {
+    grid-template-columns: repeat(4, 1fr);
   }
 }
-@media (min-width: 1040px) {
-  .projects-grid {
-    grid-template-columns: repeat(3, 1fr);
-  }
-}
-
-.proj-card {
-  background: rgba(18, 23, 33, 0.55);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+.stat-node {
+  background: var(--bg-card);
+  border: 1px solid var(--border-hairline);
   border-radius: 18px;
   padding: 18px 20px;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  gap: 6px;
   position: relative;
   overflow: hidden;
+  transition: all 0.25s;
 }
-.proj-card::before {
+.stat-node:hover {
+  border-color: rgba(0, 240, 255, 0.35);
+  transform: translateY(-2px);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.6);
+}
+.stat-node::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; height: 2px;
+  background: linear-gradient(90deg, var(--accent-cyan), var(--accent-pink));
+}
+.stat-num {
+  font-family: var(--font-mono);
+  font-size: clamp(24px, 2.5vw, 32px);
+  font-weight: 800;
+  color: #fff;
+  line-height: 1;
+}
+.stat-label {
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* ── 02. EMBEDDED LIVE CYBERDECK CONSOLE ── */
+.terminal-dock {
+  background: rgba(6, 8, 14, 0.94);
+  border: 1px solid rgba(0, 240, 255, 0.3);
+  border-radius: 20px;
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.85), 0 0 30px rgba(0, 240, 255, 0.12);
+  overflow: hidden;
+  font-family: var(--font-mono);
+}
+.term-head {
+  background: rgba(14, 18, 28, 0.95);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 10px 18px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.term-dots {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+.term-dot {
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+}
+.term-dot.red { background: #ff5f56; }
+.term-dot.yellow { background: #ffbd2e; }
+.term-dot.green { background: #27c93f; }
+
+.term-title-text {
+  font-size: 11px;
+  color: var(--text-muted);
+  letter-spacing: 0.04em;
+}
+.term-quick-chips {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  overflow-x: auto;
+  padding: 8px 18px;
+  background: rgba(9, 12, 19, 0.7);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  scrollbar-width: none;
+}
+.term-quick-chips::-webkit-scrollbar { display: none; }
+.tchip {
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  color: var(--accent-cyan);
+  background: rgba(0, 240, 255, 0.08);
+  border: 1px solid rgba(0, 240, 255, 0.22);
+  padding: 4px 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.15s;
+}
+.tchip:hover {
+  background: var(--accent-cyan);
+  color: #05070c;
+}
+
+.term-screen {
+  height: 280px;
+  overflow-y: auto;
+  padding: 14px 18px;
+  font-size: 12.5px;
+  line-height: 1.6;
+  color: #e2e8f0;
+}
+.t-out-line { margin-bottom: 4px; word-break: break-all; }
+.t-cyan { color: var(--accent-cyan); }
+.t-green { color: var(--accent-green); }
+.t-pink { color: var(--accent-pink); }
+.t-purple { color: #c4b5fd; }
+.t-muted { color: var(--text-muted); }
+
+.term-input-box {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 18px;
+  background: rgba(9, 12, 19, 0.95);
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+.term-prompt {
+  color: var(--accent-green);
+  font-weight: 700;
+  font-size: 12px;
+}
+.term-input-el {
+  flex: 1;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: #fff;
+  font-family: var(--font-mono);
+  font-size: 12.5px;
+}
+
+/* ── 03. WEAPONIZED ARSENAL (PROJECTS) ── */
+.arsenal-filters {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  padding-bottom: 12px;
+  scrollbar-width: none;
+}
+.arsenal-filters::-webkit-scrollbar { display: none; }
+.filter-tab {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 600;
+  padding: 7px 16px;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: var(--text-muted);
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.2s;
+}
+.filter-tab:hover {
+  color: #fff;
+  border-color: rgba(0, 240, 255, 0.3);
+}
+.filter-tab.active {
+  background: rgba(0, 240, 255, 0.14);
+  border-color: var(--accent-cyan);
+  color: #fff;
+  box-shadow: 0 0 16px rgba(0, 240, 255, 0.25);
+}
+
+.arsenal-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+  margin-top: 10px;
+}
+@media (min-width: 680px) {
+  .arsenal-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (min-width: 1060px) {
+  .arsenal-grid { grid-template-columns: repeat(3, 1fr); }
+}
+
+.crate-card {
+  background: rgba(13, 18, 28, 0.6);
+  border: 1px solid var(--border-hairline);
+  border-radius: 20px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 14px;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.crate-card::before {
   content: '';
   position: absolute;
   top: 0; left: 0; right: 0; height: 1.5px;
   background: linear-gradient(90deg, var(--accent-cyan), var(--accent-purple), var(--accent-pink));
-  opacity: 0.75;
+  opacity: 0.7;
 }
-.proj-card:hover {
-  border-color: rgba(0, 240, 255, 0.4);
-  background: rgba(22, 29, 42, 0.75);
+.crate-card:hover {
+  border-color: var(--accent-cyan);
+  background: rgba(18, 25, 38, 0.85);
   transform: translateY(-3px);
-  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.6), 0 0 24px rgba(0, 240, 255, 0.08);
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.7), 0 0 25px rgba(0, 240, 255, 0.1);
 }
-.proj-top {
+
+.crate-top {
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
-  gap: 8px;
-  margin-bottom: 8px;
-  flex-wrap: wrap;
+  gap: 10px;
 }
-.proj-name {
+.crate-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.crate-path {
   font-family: var(--font-mono);
-  font-size: 13.5px;
+  font-size: 10px;
+  color: var(--text-faint);
+  letter-spacing: 0.04em;
+}
+.crate-name {
+  font-family: var(--font-mono);
+  font-size: 14px;
   font-weight: 700;
-  color: #ffffff;
+  color: #fff;
   letter-spacing: 0.02em;
 }
-.proj-domain {
+.crate-badge {
   font-family: var(--font-mono);
-  font-size: 9.5px;
+  font-size: 9px;
+  font-weight: 700;
   padding: 3px 8px;
-  border-radius: 10px;
+  border-radius: 8px;
   background: rgba(0, 240, 255, 0.1);
-  border: 1px solid rgba(0, 240, 255, 0.28);
+  border: 1px solid rgba(0, 240, 255, 0.3);
   color: var(--accent-cyan);
-  font-weight: 600;
   white-space: nowrap;
 }
-.proj-desc {
+.crate-desc {
   font-size: 12.5px;
-  color: #cbd5e1;
+  color: var(--text-secondary);
   line-height: 1.55;
-  margin-bottom: 14px;
   flex: 1;
 }
-.proj-footer {
+.crate-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.cpill {
+  font-family: var(--font-mono);
+  font-size: 9.5px;
+  padding: 2px 7px;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: #c4b5fd;
+}
+.crate-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding-top: 12px;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+.clone-copy-btn {
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  color: var(--text-muted);
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 5px 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  transition: all 0.15s;
+}
+.clone-copy-btn:hover {
+  color: #fff;
+  border-color: var(--accent-cyan);
+  background: rgba(0, 240, 255, 0.1);
+}
+.repo-link-btn {
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  font-weight: 700;
+  color: #fff;
+  background: linear-gradient(135deg, rgba(0, 240, 255, 0.15), rgba(139, 92, 246, 0.15));
+  border: 1px solid rgba(0, 240, 255, 0.35);
+  padding: 5px 12px;
+  border-radius: 8px;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  transition: all 0.2s;
+}
+.repo-link-btn:hover {
+  background: var(--accent-cyan);
+  color: #05070c;
+  box-shadow: 0 0 16px rgba(0, 240, 255, 0.4);
+}
+
+/* Catalog Banner */
+.catalog-banner {
+  margin-top: 8px;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px dashed rgba(0, 240, 255, 0.3);
+  border-radius: 16px;
+  padding: 14px 20px;
   display: flex;
   align-items: center;
   justify-content: space-between;
   flex-wrap: wrap;
-  gap: 8px;
-  padding-top: 10px;
-  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  gap: 12px;
 }
-.proj-tags {
+.catalog-text {
   font-family: var(--font-mono);
-  font-size: 10px;
-  color: #c4b5fd;
+  font-size: 11.5px;
+  color: var(--text-muted);
 }
-.proj-btn {
+.catalog-btn {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--accent-cyan);
+  text-decoration: none;
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  font-family: var(--font-mono);
-  font-size: 11px;
-  padding: 6px 12px;
+  padding: 6px 14px;
   border-radius: 10px;
   background: rgba(0, 240, 255, 0.1);
   border: 1px solid rgba(0, 240, 255, 0.3);
-  color: #fff;
-  text-decoration: none;
-  font-weight: 600;
   transition: all 0.2s;
 }
-.proj-btn:hover {
+.catalog-btn:hover {
   background: var(--accent-cyan);
-  color: #080a11;
-  box-shadow: 0 0 16px rgba(0, 240, 255, 0.4);
+  color: #05070c;
 }
 
-/* ── DUAL COLUMN LAYOUT FOR DESKTOP (ARSENAL & CERTS) ── */
-.desktop-split-grid {
+/* ── 04. ADVERSARIAL ATTACK MATRIX (SPECIALIZATIONS) ── */
+.matrix-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+}
+@media (min-width: 768px) {
+  .matrix-grid { grid-template-columns: repeat(2, 1fr); }
+}
+.matrix-card {
+  background: rgba(255, 255, 255, 0.025);
+  border: 1px solid var(--border-hairline);
+  border-radius: 18px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  transition: all 0.25s;
+}
+.matrix-card:hover {
+  border-color: rgba(0, 240, 255, 0.35);
+  background: rgba(255, 255, 255, 0.04);
+}
+.matrix-head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--accent-cyan);
+}
+.matrix-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--text-secondary);
+}
+.matrix-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  line-height: 1.5;
+}
+.matrix-item::before {
+  content: '>';
+  color: var(--accent-pink);
+  font-weight: 900;
+}
+
+/* ── 05. SECURITY ARSENAL & TOOLING ── */
+.arsenal-split {
   display: grid;
   grid-template-columns: 1fr;
   gap: 20px;
 }
 @media (min-width: 820px) {
-  .desktop-split-grid {
-    grid-template-columns: 1fr 1fr;
-  }
+  .arsenal-split { grid-template-columns: 1fr 1fr; }
 }
-
-/* Skill Tags */
-.skill-group { margin-bottom: 16px; }
-.sg-title {
+.tool-group-title {
   font-family: var(--font-mono);
   font-size: 11px;
-  color: #94a3b8;
-  margin-bottom: 10px;
+  color: var(--text-muted);
   text-transform: uppercase;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.06em;
+  margin-bottom: 12px;
 }
-.skill-tags { display: flex; flex-wrap: wrap; gap: 8px; }
-.stag {
+.tool-chips-wrap {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.tool-chip {
   font-family: var(--font-mono);
   font-size: 11.5px;
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  color: #f8fafc;
-  padding: 6px 12px;
+  padding: 6px 13px;
   border-radius: 12px;
+  background: rgba(255, 255, 255, 0.035);
+  border: 1px solid var(--border-hairline);
+  color: #fff;
   display: inline-flex;
   align-items: center;
-  gap: 6px;
+  gap: 7px;
   transition: all 0.2s;
 }
-.stag:hover {
+.tool-chip:hover {
   border-color: var(--accent-cyan);
   background: rgba(0, 240, 255, 0.08);
+  transform: translateY(-1px);
 }
-.stag::before { content: '>'; color: var(--accent-pink); font-size: 9px; font-weight: 900; }
-.stag.stag-purple { background: rgba(139, 92, 246, 0.08); border-color: rgba(139, 92, 246, 0.25); }
-.stag.stag-purple::before { color: #c4b5fd; }
-.stag.stag-cyan { background: rgba(0, 240, 255, 0.07); border-color: rgba(0, 240, 255, 0.25); }
-.stag.stag-cyan::before { color: var(--accent-cyan); }
+.tc-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent-cyan);
+}
+.tool-chip.pink .tc-dot { background: var(--accent-pink); }
+.tool-chip.purple .tc-dot { background: var(--accent-purple); }
+.tool-chip.green .tc-dot { background: var(--accent-green); }
 
-/* Certifications */
-.cert-item {
+/* ── 06. DEFENSE VAULT (CERTS) ── */
+.certs-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+}
+@media (min-width: 680px) {
+  .certs-grid { grid-template-columns: repeat(2, 1fr); }
+}
+.cert-card {
   background: rgba(255, 255, 255, 0.025);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  border: 1px solid var(--border-hairline);
   border-radius: 16px;
-  padding: 12px 16px;
-  margin-bottom: 10px;
+  padding: 16px 18px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 12px;
+  gap: 14px;
   transition: all 0.2s;
 }
-.cert-item:hover {
+.cert-card:hover {
   border-color: rgba(0, 240, 255, 0.3);
-  background: rgba(255, 255, 255, 0.04);
+  background: rgba(255, 255, 255, 0.045);
+}
+.cert-title-block {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+.cert-org {
+  font-family: var(--font-mono);
+  font-size: 9.5px;
+  color: var(--accent-cyan);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
 }
 .cert-name {
   font-family: var(--font-mono);
   font-size: 12.5px;
-  color: #ffffff;
   font-weight: 700;
+  color: #fff;
 }
-.cert-sub {
-  font-size: 10.5px;
-  color: #94a3b8;
+.cert-id {
   font-family: var(--font-mono);
-  margin-top: 3px;
+  font-size: 10px;
+  color: var(--text-faint);
 }
-.cert-btn {
+.cert-action-btn {
   font-family: var(--font-mono);
   font-size: 11px;
-  padding: 7px 13px;
+  font-weight: 700;
+  padding: 7px 14px;
+  border-radius: 10px;
   background: rgba(0, 240, 255, 0.1);
   border: 1px solid rgba(0, 240, 255, 0.3);
-  border-radius: 10px;
-  color: #ffffff;
+  color: #fff;
   text-decoration: none;
-  font-weight: 700;
-  transition: all 0.15s;
+  white-space: nowrap;
+  transition: all 0.2s;
 }
-.cert-btn:hover {
+.cert-action-btn:hover {
   background: var(--accent-cyan);
-  color: #080a11;
+  color: #05070c;
   box-shadow: 0 0 16px rgba(0, 240, 255, 0.4);
 }
 
-.resume-cta-btn {
-  width: 100%;
-  padding: 13px 20px;
-  font-size: 13px;
-  font-weight: 700;
-  font-family: var(--font-mono);
-  color: #fff;
-  text-decoration: none;
-  background: linear-gradient(135deg, var(--accent-cyan) 0%, var(--accent-purple) 50%, var(--accent-pink) 100%);
-  border-radius: 16px;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  box-shadow: 0 8px 25px rgba(0, 240, 255, 0.25);
+.resume-highlight-box {
+  margin-top: 14px;
+  background: linear-gradient(135deg, rgba(0, 240, 255, 0.08), rgba(139, 92, 246, 0.08));
+  border: 1px solid rgba(0, 240, 255, 0.3);
+  border-radius: 18px;
+  padding: 20px;
   display: flex;
   align-items: center;
-  justify-content: center;
-  gap: 8px;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+.resume-text-side {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.resume-btn-cta {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 700;
+  padding: 10px 20px;
+  border-radius: 14px;
+  background: linear-gradient(135deg, var(--accent-cyan), var(--accent-green));
+  color: #05070c;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  box-shadow: 0 0 20px rgba(0, 240, 255, 0.3);
   transition: all 0.2s;
-  cursor: pointer;
 }
-.resume-cta-btn:hover {
+.resume-btn-cta:hover {
   transform: translateY(-1px);
-  box-shadow: 0 12px 32px rgba(0, 240, 255, 0.4);
+  box-shadow: 0 0 30px rgba(0, 240, 255, 0.6);
 }
 
-/* Work Box */
-.work-box {
-  background: rgba(255, 255, 255, 0.025);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 18px;
-  padding: 18px;
-  position: relative;
-  overflow: hidden;
+/* ── 07. FIRM EXPERIENCE & CONTACT ── */
+.firm-contact-split {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
 }
-
-/* Contact Rows */
-.contact-row {
+@media (min-width: 768px) {
+  .firm-contact-split { grid-template-columns: 1fr 1fr; }
+}
+.contact-channel-row {
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 12px 16px;
   background: rgba(255, 255, 255, 0.025);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  border: 1px solid var(--border-hairline);
   border-radius: 14px;
   margin-bottom: 8px;
   font-family: var(--font-mono);
-  font-size: 12.5px;
+  font-size: 12px;
   text-decoration: none;
   color: inherit;
   transition: all 0.2s;
 }
-.contact-row:hover {
-  background: rgba(0, 240, 255, 0.08);
+.contact-channel-row:hover {
   border-color: var(--accent-cyan);
+  background: rgba(0, 240, 255, 0.08);
 }
-.cr-lbl { color: #94a3b8; font-weight: 500; font-size: 11px; }
-.cr-val { color: var(--accent-green); font-weight: 600; }
+.c-lbl { color: var(--text-muted); font-size: 10.5px; }
+.c-val { color: var(--accent-cyan); font-weight: 600; }
 
-/* ── SIGNATURE GLASSY LIQUID FOOTER ── */
-.glassy-footer {
+/* ── SIGNATURE CYBER FOOTER ── */
+.cyber-footer {
   width: 100%;
-  margin-top: 30px;
-  padding: 38px 24px 32px;
-  background: rgba(8, 10, 16, 0.94);
-  backdrop-filter: blur(30px) saturate(180%);
-  -webkit-backdrop-filter: blur(30px) saturate(180%);
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
-  box-shadow: 0 -18px 50px rgba(0, 0, 0, 0.7);
+  margin-top: 40px;
+  padding: 40px 24px 34px;
+  background: rgba(6, 8, 14, 0.95);
+  border-top: 1px solid var(--border-hairline);
+  box-shadow: 0 -20px 50px rgba(0, 0, 0, 0.7);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -769,29 +1234,29 @@ body {
   position: relative;
   z-index: 10;
 }
-.foot-brand {
+.foot-brand-row {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 10px;
   font-family: var(--font-mono);
   font-size: 16px;
   font-weight: 800;
   color: #fff;
 }
-.foot-motto {
+.foot-quote {
   font-family: var(--font-mono);
   font-size: 11.5px;
-  color: #94a3b8;
+  color: var(--text-muted);
   letter-spacing: 0.06em;
 }
-.social-bar {
+.foot-socials {
   display: flex;
   align-items: center;
   gap: 10px;
 }
-.soc-btn {
-  width: 38px;
-  height: 38px;
+.fs-btn {
+  width: 40px;
+  height: 40px;
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -799,848 +1264,1153 @@ body {
   color: #fff;
   text-decoration: none;
   background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  border: 1px solid var(--border-hairline);
   transition: all 0.2s;
 }
-.soc-btn:hover {
+.fs-btn:hover {
   background: var(--accent-cyan);
   border-color: var(--accent-cyan);
-  color: #080a11;
+  color: #05070c;
   box-shadow: 0 0 16px rgba(0, 240, 255, 0.4);
   transform: translateY(-2px);
 }
-.soc-btn svg { display: block; }
-.copyright-txt {
+.fs-btn svg { display: block; }
+.foot-copy {
   font-family: var(--font-mono);
   font-size: 11px;
-  color: rgba(255, 255, 255, 0.4);
+  color: var(--text-faint);
 }
 
-/* ── INTERACTIVE CYBER TERMINAL MODAL ── */
-#terminal-modal {
+/* ── HUD NOTIFICATION TOAST ── */
+#hud-toast {
   position: fixed;
-  inset: 0;
+  bottom: 24px;
+  right: 24px;
   z-index: 10000;
-  background: rgba(0, 0, 0, 0.75);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  display: none;
-  align-items: center;
-  justify-content: center;
-  padding: 16px;
-}
-.term-window {
-  width: 100%;
-  max-width: 820px;
-  height: min(600px, 85vh);
-  background: rgba(9, 12, 18, 0.96);
-  border: 1px solid rgba(0, 240, 255, 0.35);
-  border-radius: 16px;
-  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.9), 0 0 35px rgba(0, 240, 255, 0.18);
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
+  background: rgba(10, 14, 22, 0.95);
+  border: 1px solid var(--accent-cyan);
+  border-radius: 14px;
+  padding: 12px 20px;
   font-family: var(--font-mono);
-}
-.term-titlebar {
-  background: rgba(14, 18, 28, 0.96);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-  padding: 10px 16px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-.term-tb-title {
   font-size: 11.5px;
   color: #fff;
-  font-weight: 700;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8), 0 0 20px rgba(0, 240, 255, 0.35);
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 10px;
+  transform: translateY(120px);
+  opacity: 0;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  pointer-events: none;
 }
-.term-tb-controls {
-  display: flex;
-  align-items: center;
-  gap: 8px;
+#hud-toast.show {
+  transform: translateY(0);
+  opacity: 1;
 }
-.term-tb-btn {
-  width: 13px;
-  height: 13px;
-  border-radius: 50%;
-  border: none;
-  cursor: pointer;
-}
-.btn-close { background: #ff5f56; }
-.btn-min { background: #ffbd2e; }
-.btn-max { background: #27c93f; }
 
-.term-body {
-  flex: 1;
-  padding: 14px 16px;
-  overflow-y: auto;
-  font-size: 12.5px;
-  line-height: 1.6;
-  color: #e5e5e5;
-  display: flex;
-  flex-direction: column;
-}
-.term-output-area { flex: 1; }
-.t-line { margin-bottom: 4px; word-break: break-all; }
-.t-prompt { color: var(--accent-green); font-weight: 700; }
-.t-cmd { color: var(--accent-cyan); font-weight: 600; }
-.t-section { color: var(--accent-pink); font-weight: 700; }
-.t-key { color: rgba(255, 255, 255, 0.6); }
-.t-ok { color: var(--accent-green); }
-.t-warn { color: #ff5f56; }
-.t-muted { color: rgba(255, 255, 255, 0.4); }
-
-.term-input-line {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  margin-top: 8px;
-}
-.term-inp {
-  flex: 1;
-  background: transparent;
-  border: none;
-  outline: none;
-  color: #fff;
-  font-family: var(--font-mono);
-  font-size: 13px;
-}
 </style>
 </head>
 <body>
 
-<!-- Ambient Backdrop -->
-<div class="cyber-bg">
-  <div class="cyber-grid-overlay"></div>
+<!-- Ambient Matrix Rain Canvas -->
+<canvas id="matrix-canvas"></canvas>
+
+<!-- Cyber Ambient Mesh & Lighting -->
+<div class="cyber-bg-layer">
+  <div class="cyber-grid-mesh"></div>
 </div>
 
-<!-- STICKY CYBER-GLASS HEADER -->
-<header class="cyber-header">
-  <a href="#about" class="header-brand">
-    <svg viewBox="0 0 32 32" width="22" height="22" fill="none">
-      <rect x="2" y="2" width="28" height="28" rx="6" fill="rgba(0, 240, 255, 0.12)" stroke="#00f0ff" stroke-width="1.5"/>
-      <text x="7" y="21" font-family="'JetBrains Mono', monospace" font-size="14" font-weight="900" fill="#ffffff" letter-spacing="-1">B</text>
-      <text x="17" y="21" font-family="'JetBrains Mono', monospace" font-size="14" font-weight="900" fill="#00f0ff" letter-spacing="-1">S</text>
-    </svg>
-    <span>benslates</span>
+<!-- STICKY CYBER FLOATING HUD NAVBAR -->
+<header class="cyber-nav">
+  <a href="#dossier" class="nav-brand">
+    <div class="brand-badge">BS</div>
+    <span class="brand-name">benslates</span>
+    <span class="brand-tagline">// OFFSEC CORE</span>
   </a>
 
-  <div class="header-actions">
-    <button class="terminal-toggle-btn" onclick="openTerminal()" title="Launch interactive shell (~)">
-      <span>&gt;_</span> TERMINAL
+  <ul class="nav-links">
+    <li class="nav-link-item"><a href="#dossier">[ DOSSIER ]</a></li>
+    <li class="nav-link-item"><a href="#terminal">[ TERMINAL ]</a></li>
+    <li class="nav-link-item"><a href="#arsenal">[ ARSENAL ]</a></li>
+    <li class="nav-link-item"><a href="#matrix">[ ATTACK MATRIX ]</a></li>
+    <li class="nav-link-item"><a href="#skills">[ SKILLS ]</a></li>
+    <li class="nav-link-item"><a href="#vault">[ VAULT ]</a></li>
+    <li class="nav-link-item"><a href="#firm">[ FIRM ]</a></li>
+  </ul>
+
+  <div class="nav-actions">
+    <button class="hud-btn btn-matrix-toggle" id="matrix-toggle-btn" onclick="toggleMatrix()">
+      MATRIX: ON
     </button>
+    <a href="#terminal" class="hud-btn btn-terminal-cta" onclick="focusTerminal()">
+      &gt;_ CONSOLE
+    </a>
   </div>
 </header>
 
-<!-- QUICK NAVIGATION -->
-<nav class="cyber-quicknav" aria-label="Sections">
-  <a href="#about" class="qlink">[ ABOUT ]</a>
-  <a href="#profile" class="qlink">[ PROFILE ]</a>
-  <a href="#projects" class="qlink">[ TOOLS &amp; REPOSITORIES ]</a>
-  <a href="#specializations" class="qlink">[ SPECIALIZATIONS ]</a>
-  <a href="#skills" class="qlink">[ ARSENAL ]</a>
-  <a href="#certs" class="qlink">[ CERTS &amp; LABS ]</a>
-  <a href="#experience" class="qlink">[ EXPERIENCE ]</a>
-  <a href="#contact" class="qlink">[ CONTACT ]</a>
-</nav>
+<!-- MAIN APP VIEWPORT -->
+<main class="app-viewport">
 
-<!-- MAIN CONTENT WRAPPER -->
-<main class="app-container">
+  <!-- 01. HERO COMMAND BENTO SECTION -->
+  <section id="dossier" class="hero-bento-grid">
+    
+    <!-- Left: Master Dossier Card -->
+    <div class="bento-card dossier-card">
+      <div class="dossier-meta-top">
+        <span>ID: 0x42 // OPERATOR_DOSSIER</span>
+        <span class="clearance">CLEARANCE: RED_TEAM // LEVEL_5</span>
+      </div>
 
-  <!-- HERO BENTO SECTION -->
-  <section class="glass-card" id="about">
-    <div class="hero-bento">
-      <!-- Avatar & Beacon -->
-      <div class="hero-avatar-col">
-        <div class="avatar-ring">
-          <img src="me.jpg" alt="Benjamin Andrew Slates" class="avatar-img">
-          <span class="status-beacon" title="Active &amp; Ready for Engagements"></span>
+      <div class="dossier-main-row">
+        <!-- Avatar Ring -->
+        <div class="avatar-wrapper">
+          <div class="avatar-aura"></div>
+          <div class="avatar-inner">
+            <img src="me.jpg" alt="Benjamin Andrew Slates" class="avatar-photo">
+          </div>
+          <span class="live-beacon" title="Active &amp; Ready for Engagements"></span>
+        </div>
+
+        <!-- Info & Typography -->
+        <div class="dossier-info">
+          <div class="role-chip-row">
+            <span class="role-chip">RED TEAM // OFFENSIVE SECURITY RESEARCH</span>
+            <span class="verified-pill">VERIFIED RESEARCHER</span>
+          </div>
+          <h1 class="dossier-name">ʙᴇɴᴊᴀᴍɪɴ ᴀɴᴅʀᴇᴡ ꜱʟᴀᴛᴇꜱ</h1>
+          <div class="dossier-alias">@benslates &bull; Cybersecurity Specialist</div>
+          <p class="dossier-bio">
+            Computer Science researcher specializing in Red Teaming, Offensive Security Architecture, and Low-Level Exploit Development. Building offensive security tools from the ground up, dissecting adversarial vectors, and engineering robust software integrations.
+          </p>
         </div>
       </div>
 
-      <!-- Info & Title -->
-      <div class="hero-info-col">
-        <div class="hero-tag">
-          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><path d="m4.93 4.93 4.24 4.24"/></svg>
-          RED TEAM // OFFENSIVE SECURITY // RESEARCH
-        </div>
-        <h1 class="hero-name">ʙᴇɴᴊᴀᴍɪɴ ᴀɴᴅʀᴇᴡ ꜱʟᴀᴛᴇꜱ</h1>
-        <div class="hero-alias">
-          @benslates <span class="alias-badge">VERIFIED RESEARCHER</span>
-        </div>
-        <p class="hero-sub">
-          Cybersecurity researcher specializing in Red Teaming, Offensive Security Architecture, and Low-Level Exploit Development. Building offensive security tools, dissecting adversarial vectors, and engineering robust software integrations.
-        </p>
-
-        <!-- Action Links -->
-        <div class="hero-links-wrap">
-          <a href="./resume.pdf" target="_blank" class="hero-btn" style="border-color:var(--accent-green); color:var(--accent-green);">Resume (PDF) ↗</a>
-          <a href="https://github.com/ben-slates" target="_blank" class="hero-btn" style="border-color:var(--accent-cyan);">GitHub @ben-slates ↗</a>
-          <a href="https://linkedin.com/in/ben-slates" target="_blank" class="hero-btn" style="border-color:#0A66C2;">LinkedIn Profile ↗</a>
-          <a href="mailto:hello@benslates.xyz" class="hero-btn">Email Contact ↗</a>
-        </div>
-
-        <!-- Telemetry Stats -->
-        <div class="hero-grid">
-          <div class="ib-box">
-            <div class="ib-lbl">Role</div>
-            <div class="ib-val">Red Teamer</div>
-          </div>
-          <div class="ib-box">
-            <div class="ib-lbl">Firm</div>
-            <div class="ib-val">Rynex Security</div>
-          </div>
-          <div class="ib-box">
-            <div class="ib-lbl">Specialization</div>
-            <div class="ib-val" style="color:var(--accent-green);">Offensive Security</div>
-          </div>
-          <div class="ib-box">
-            <div class="ib-lbl">Focus</div>
-            <div class="ib-val" style="color:var(--accent-pink);">Exploit Dev &amp; C2</div>
-          </div>
-        </div>
+      <!-- Live Typing Prompt Line -->
+      <div class="dossier-terminal-line">
+        <span class="t-prefix">root@benslates:~#</span>
+        <span id="typing-hero-cmd">./engage_redteam.sh --target enterprise_ad --stealth-level max</span>
+        <span class="t-cursor"></span>
       </div>
+
+      <!-- Action Buttons Cluster -->
+      <div class="dossier-actions">
+        <a href="#terminal" class="act-btn primary" onclick="focusTerminal()">
+          <span>&gt;_</span> Launch Console
+        </a>
+        <a href="./resume.pdf" target="_blank" class="act-btn" style="border-color:var(--accent-green); color:var(--accent-green);">
+          <span>[+]</span> Resume (PDF) ↗
+        </a>
+        <a href="https://github.com/ben-slates" target="_blank" class="act-btn">
+          <span>#</span> GitHub @ben-slates ↗
+        </a>
+        <a href="https://linkedin.com/in/ben-slates" target="_blank" class="act-btn" style="border-color:#0A66C2;">
+          <span>in</span> LinkedIn ↗
+        </a>
+        <a href="mailto:hello@benslates.xyz" class="act-btn">
+          <span>@</span> Email Contact ↗
+        </a>
+      </div>
+    </div>
+
+    <!-- Right: Operational Intel & Threat HUD Card -->
+    <div class="bento-card intel-card">
+      <div class="sec-header" style="margin-bottom:0; padding-bottom:8px;">
+        <span class="sec-title" style="font-size:12px;">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="m4.93 4.93 4.24 4.24"/></svg>
+          OPERATIONAL HUD
+        </span>
+        <span class="sec-badge" style="color:var(--accent-green); border-color:rgba(0,245,160,0.3);">LIVE</span>
+      </div>
+
+      <div class="intel-row">
+        <div class="intel-label">
+          <span>Active Directory Exploitation</span>
+          <span style="color:var(--accent-cyan);">98%</span>
+        </div>
+        <div class="bar-track"><div class="bar-fill" style="width:98%;"></div></div>
+      </div>
+
+      <div class="intel-row">
+        <div class="intel-label">
+          <span>Low-Level Rust &amp; Exploit Dev</span>
+          <span style="color:var(--accent-cyan);">94%</span>
+        </div>
+        <div class="bar-track"><div class="bar-fill" style="width:94%;"></div></div>
+      </div>
+
+      <div class="intel-row">
+        <div class="intel-label">
+          <span>C2 Telemetry &amp; Evasion</span>
+          <span style="color:var(--accent-cyan);">95%</span>
+        </div>
+        <div class="bar-track"><div class="bar-fill" style="width:95%;"></div></div>
+      </div>
+
+      <div class="intel-row">
+        <div class="intel-label">
+          <span>Primary Active Firm</span>
+          <span style="color:var(--accent-pink);">VERIFIED</span>
+        </div>
+        <div class="intel-val" style="font-size:11.5px;">Rynex Security &bull; Red Teamer</div>
+      </div>
+
+      <div class="intel-row">
+        <div class="intel-label">
+          <span>HTB ProLabs Accomplishment</span>
+          <span style="color:var(--accent-green);">ROOTED</span>
+        </div>
+        <div class="intel-val" style="font-size:11.5px;">Mythical &amp; Puppet Machine PWNED</div>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- STAT NODES COUNTERS BAR -->
+  <section class="stat-nodes-grid">
+    <div class="stat-node">
+      <div class="stat-num" style="color:var(--accent-cyan);">11+</div>
+      <div class="stat-label">Security Tools Engineered</div>
+    </div>
+    <div class="stat-node">
+      <div class="stat-num" style="color:var(--accent-pink);">2+</div>
+      <div class="stat-label">Weaponized CVE Exploits</div>
+    </div>
+    <div class="stat-node">
+      <div class="stat-num" style="color:var(--accent-green);">100%</div>
+      <div class="stat-label">Offensive Red Team Focus</div>
+    </div>
+    <div class="stat-node">
+      <div class="stat-num" style="color:#c4b5fd;">HTB Pro</div>
+      <div class="stat-label">Verified Certifications</div>
     </div>
   </section>
 
-  <!-- EXECUTIVE PROFILE & RESEARCH -->
-  <section class="glass-card" id="profile">
-    <div class="card-title">
-      <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-      Executive Profile &amp; Research
-    </div>
-    <p style="font-size:13.5px; color:rgba(240,240,240,0.9); line-height:1.65;">
-      Cybersecurity researcher specializing in <b>Red Teaming, Offensive Security Architecture, and Low-Level Exploit Development</b>.
-      I build offensive security tools from the ground up, dissect and recreate adversarial attack vectors, and construct robust, ToS-compliant software integrations.
-    </p>
-
-    <div class="focus-block">
-      <div class="focus-title">
-        <span style="color:var(--accent-pink);">[+]</span> PRIMARY FOCUS
+  <!-- 02. EMBEDDED LIVE CYBERDECK CONSOLE -->
+  <section id="terminal" class="terminal-dock">
+    <div class="term-head">
+      <div class="term-dots">
+        <div class="term-dot red"></div>
+        <div class="term-dot yellow"></div>
+        <div class="term-dot green"></div>
       </div>
-      <div class="focus-text">
-        Active Directory internals, Kerberos manipulation, C2 telemetry, binary reversing, and evasive client-side mods.
-      </div>
+      <div class="term-title-text">root@benslates: ~/research/offensive (zsh)</div>
+      <div style="font-size:10px; color:var(--text-faint);">PRESS ` OR ~ TO FOCUS</div>
     </div>
 
-    <div class="focus-block">
-      <div class="focus-title" style="color:var(--accent-cyan);">
-        <span style="color:var(--accent-cyan);">[+]</span> CURRENT RESEARCH
-      </div>
-      <div class="focus-text">
-        Distributed multi-platform architectures, AV/EDR evasion mechanics, and real-time audio/network stream engineering.
-      </div>
+    <!-- Quick Action Chips for Instant One-Click Commands -->
+    <div class="term-quick-chips">
+      <span style="font-size:10px; color:var(--text-faint); margin-right:4px;">RUN:</span>
+      <button class="tchip" onclick="execCommand('whoami')">whoami</button>
+      <button class="tchip" onclick="execCommand('tools')">tools</button>
+      <button class="tchip" onclick="execCommand('exploits')">exploits</button>
+      <button class="tchip" onclick="execCommand('matrix-ad')">matrix-ad</button>
+      <button class="tchip" onclick="execCommand('certs')">certs</button>
+      <button class="tchip" onclick="execCommand('help')">help</button>
+      <button class="tchip" onclick="execCommand('clear')">clear</button>
+    </div>
+
+    <!-- Screen Output -->
+    <div class="term-screen" id="term-screen">
+      <div class="t-out-line t-cyan">================================================================</div>
+      <div class="t-out-line t-cyan">  BENJAMIN ANDREW SLATES // OFFENSIVE RESEARCH LAB [v2.4]</div>
+      <div class="t-out-line t-muted">  Red Teaming &bull; Active Directory Internals &bull; Low-Level Exploits</div>
+      <div class="t-out-line t-cyan">================================================================</div>
+      <div class="t-out-line t-green">System initialized. Type &apos;help&apos; or click chips above to inspect.</div>
+      <div class="t-out-line">&nbsp;</div>
+    </div>
+
+    <!-- Live Command Input Line -->
+    <div class="term-input-box">
+      <span class="term-prompt">root@kali:~#</span>
+      <input type="text" id="term-input" class="term-input-el" placeholder="type 'help', 'whoami', 'tools', 'matrix-ad'..." autocomplete="off" spellcheck="false">
     </div>
   </section>
 
-  <!-- BUILT TOOLS & REPOSITORIES -->
-  <section class="glass-card" id="projects">
-    <div class="card-title">
-      <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
-      Built Tools &amp; Repositories
+  <!-- 03. WEAPONIZED ARSENAL & REPOSITORIES -->
+  <section id="arsenal" class="bento-card">
+    <div class="sec-header">
+      <div class="sec-title">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
+        WEAPONIZED ARSENAL &amp; REPOSITORIES
+      </div>
+      <span class="sec-badge">11 OFFENSIVE TOOLS</span>
     </div>
 
-    <div class="projects-grid">
+    <!-- Filter Tabs -->
+    <div class="arsenal-filters">
+      <button class="filter-tab active" onclick="filterArsenal('all', this)">[ ALL ARSENAL (11) ]</button>
+      <button class="filter-tab" onclick="filterArsenal('c2', this)">[ C2 &amp; AD (3) ]</button>
+      <button class="filter-tab" onclick="filterArsenal('exploit', this)">[ EXPLOITS &amp; CVES (3) ]</button>
+      <button class="filter-tab" onclick="filterArsenal('client', this)">[ CLIENT &amp; DSP (2) ]</button>
+      <button class="filter-tab" onclick="filterArsenal('net', this)">[ NETWORK &amp; SYSTEMS (3) ]</button>
+    </div>
+
+    <!-- Projects Grid -->
+    <div class="arsenal-grid" id="arsenal-grid">
+
       <!-- 1. mdread -->
-      <div class="proj-card">
-        <div class="proj-top">
-          <div class="proj-name">mdread</div>
-          <span class="proj-domain">CLI &amp; Markdown</span>
+      <div class="crate-card" data-cat="net">
+        <div class="crate-top">
+          <div class="crate-meta">
+            <span class="crate-path">cli/markdown-tooling</span>
+            <span class="crate-name">mdread</span>
+          </div>
+          <span class="crate-badge">CLI ENGINE</span>
         </div>
-        <p class="proj-desc">Fast, clutter-free CLI Markdown reader featuring instant one-click command copying straight to your system clipboard.</p>
-        <div class="proj-footer">
-          <span class="proj-tags">Python • Terminal UI</span>
-          <a href="https://github.com/ben-slates/mdread" target="_blank" class="proj-btn">github.com ↗</a>
+        <p class="crate-desc">Fast, clutter-free CLI Markdown reader featuring instant one-click command copying straight to your system clipboard.</p>
+        <div class="crate-pills">
+          <span class="cpill">Python</span>
+          <span class="cpill">Terminal UI</span>
+          <span class="cpill">Clipboard Hook</span>
+        </div>
+        <div class="crate-actions">
+          <button class="clone-copy-btn" onclick="copyClone('https://github.com/ben-slates/mdread.git')">
+            <span>[+]</span> Copy Clone
+          </button>
+          <a href="https://github.com/ben-slates/mdread" target="_blank" class="repo-link-btn">
+            View Code ↗
+          </a>
         </div>
       </div>
 
       <!-- 2. BEN_C2 -->
-      <div class="proj-card">
-        <div class="proj-top">
-          <div class="proj-name">BEN_C2</div>
-          <span class="proj-domain" style="border-color:rgba(255,42,109,0.4); color:#ff88a3;">Command &amp; Control</span>
+      <div class="crate-card" data-cat="c2">
+        <div class="crate-top">
+          <div class="crate-meta">
+            <span class="crate-path">c2/post-exploitation</span>
+            <span class="crate-name">BEN_C2</span>
+          </div>
+          <span class="crate-badge" style="border-color:var(--accent-pink); color:var(--accent-pink);">WEAPONIZED C2</span>
         </div>
-        <p class="proj-desc">Asynchronous post-exploitation C2 server engineered with Rust performance core and Python API orchestration.</p>
-        <div class="proj-footer">
-          <span class="proj-tags">Rust • Python • Async</span>
-          <a href="https://github.com/ben-slates/BEN_C2" target="_blank" class="proj-btn">github.com ↗</a>
+        <p class="crate-desc">Asynchronous post-exploitation Command &amp; Control server engineered with high-performance Rust core and Python orchestration API.</p>
+        <div class="crate-pills">
+          <span class="cpill">Rust Core</span>
+          <span class="cpill">Python API</span>
+          <span class="cpill">Async IO</span>
+          <span class="cpill">Encrypted Stager</span>
+        </div>
+        <div class="crate-actions">
+          <button class="clone-copy-btn" onclick="copyClone('https://github.com/ben-slates/BEN_C2.git')">
+            <span>[+]</span> Copy Clone
+          </button>
+          <a href="https://github.com/ben-slates/BEN_C2" target="_blank" class="repo-link-btn">
+            View Code ↗
+          </a>
         </div>
       </div>
 
       <!-- 3. discord-voice-notes -->
-      <div class="proj-card">
-        <div class="proj-top">
-          <div class="proj-name">discord-voice-notes</div>
-          <span class="proj-domain">Client Mod &amp; Audio DSP</span>
+      <div class="crate-card" data-cat="client">
+        <div class="crate-top">
+          <div class="crate-meta">
+            <span class="crate-path">mods/audio-dsp</span>
+            <span class="crate-name">discord-voice-notes</span>
+          </div>
+          <span class="crate-badge" style="border-color:#c4b5fd; color:#c4b5fd;">NATIVE OPUS</span>
         </div>
-        <p class="proj-desc">Native Opus 64kbps recording engine, Base64 waveform generation, 83 Full HD glass themes, real-time theme search, and large file bypass.</p>
-        <div class="proj-footer">
-          <span class="proj-tags">CSS • JavaScript • Opus</span>
-          <a href="https://github.com/ben-slates/discord-voice-notes" target="_blank" class="proj-btn">github.com ↗</a>
+        <p class="crate-desc">Native Opus 64kbps recording engine, Base64 waveform generation, 83 Full HD glass themes, real-time search, and large file bypass.</p>
+        <div class="crate-pills">
+          <span class="cpill">Web Audio DSP</span>
+          <span class="cpill">Opus 64k</span>
+          <span class="cpill">Electron Hook</span>
+          <span class="cpill">83 Themes</span>
+        </div>
+        <div class="crate-actions">
+          <button class="clone-copy-btn" onclick="copyClone('https://github.com/ben-slates/discord-voice-notes.git')">
+            <span>[+]</span> Copy Clone
+          </button>
+          <a href="https://github.com/ben-slates/discord-voice-notes" target="_blank" class="repo-link-btn">
+            View Code ↗
+          </a>
         </div>
       </div>
 
       <!-- 4. CVE-2026-31431-Exploit -->
-      <div class="proj-card">
-        <div class="proj-top">
-          <div class="proj-name">CVE-2026-31431-Exploit</div>
-          <span class="proj-domain" style="border-color:rgba(157,78,221,0.4); color:#c77dff;">Exploit Development</span>
+      <div class="crate-card" data-cat="exploit">
+        <div class="crate-top">
+          <div class="crate-meta">
+            <span class="crate-path">exploits/vulnerability-poc</span>
+            <span class="crate-name">CVE-2026-31431-Exploit</span>
+          </div>
+          <span class="crate-badge" style="border-color:var(--accent-pink); color:var(--accent-pink);">ZERO-DAY POC</span>
         </div>
-        <p class="proj-desc">Vulnerability research, memory analysis, and weaponized proof-of-concept exploitation suite.</p>
-        <div class="proj-footer">
-          <span class="proj-tags">Python • Memory PoC</span>
-          <a href="https://github.com/ben-slates/CVE-2026-31431-Exploit" target="_blank" class="proj-btn">github.com ↗</a>
+        <p class="crate-desc">Vulnerability research, memory corruption analysis, and weaponized proof-of-concept exploitation suite.</p>
+        <div class="crate-pills">
+          <span class="cpill">Python</span>
+          <span class="cpill">Memory Analysis</span>
+          <span class="cpill">Payload Structuring</span>
+        </div>
+        <div class="crate-actions">
+          <button class="clone-copy-btn" onclick="copyClone('https://github.com/ben-slates/CVE-2026-31431-Exploit.git')">
+            <span>[+]</span> Copy Clone
+          </button>
+          <a href="https://github.com/ben-slates/CVE-2026-31431-Exploit" target="_blank" class="repo-link-btn">
+            View Code ↗
+          </a>
         </div>
       </div>
 
       <!-- 5. CVE-2024-37054 -->
-      <div class="proj-card">
-        <div class="proj-top">
-          <div class="proj-name">CVE-2024-37054</div>
-          <span class="proj-domain" style="border-color:rgba(157,78,221,0.4); color:#c77dff;">Vulnerability Research</span>
+      <div class="crate-card" data-cat="exploit">
+        <div class="crate-top">
+          <div class="crate-meta">
+            <span class="crate-path">exploits/cve-research</span>
+            <span class="crate-name">CVE-2024-37054</span>
+          </div>
+          <span class="crate-badge">CVE REPRO</span>
         </div>
-        <p class="proj-desc">Technical analysis, payload structuring, and environment reproductive attack demonstration.</p>
-        <div class="proj-footer">
-          <span class="proj-tags">Python • Analysis</span>
-          <a href="https://github.com/ben-slates/CVE-2024-37054" target="_blank" class="proj-btn">github.com ↗</a>
+        <p class="crate-desc">Technical analysis, payload structuring, and reproducible attack demonstration against verified software target.</p>
+        <div class="crate-pills">
+          <span class="cpill">Adversarial Research</span>
+          <span class="cpill">PoC Suite</span>
+          <span class="cpill">Audit</span>
+        </div>
+        <div class="crate-actions">
+          <button class="clone-copy-btn" onclick="copyClone('https://github.com/ben-slates/CVE-2024-37054.git')">
+            <span>[+]</span> Copy Clone
+          </button>
+          <a href="https://github.com/ben-slates/CVE-2024-37054" target="_blank" class="repo-link-btn">
+            View Code ↗
+          </a>
         </div>
       </div>
 
       <!-- 6. gmsa-aes-key-extractor -->
-      <div class="proj-card">
-        <div class="proj-top">
-          <div class="proj-name">gmsa-aes-key-extractor</div>
-          <span class="proj-domain" style="border-color:rgba(0,245,160,0.4); color:var(--accent-green);">Active Directory</span>
+      <div class="crate-card" data-cat="c2">
+        <div class="crate-top">
+          <div class="crate-meta">
+            <span class="crate-path">ad/kerberos-crypto</span>
+            <span class="crate-name">gmsa-aes-key-extractor</span>
+          </div>
+          <span class="crate-badge" style="border-color:var(--accent-green); color:var(--accent-green);">AD KERBEROS</span>
         </div>
-        <p class="proj-desc">Group Managed Service Account (gMSA) cryptographic AES key extraction and offline ticket forged decryption.</p>
-        <div class="proj-footer">
-          <span class="proj-tags">Python • Kerberos AES</span>
-          <a href="https://github.com/ben-slates/gmsa-aes-key-extractor" target="_blank" class="proj-btn">github.com ↗</a>
+        <p class="crate-desc">Group Managed Service Account cryptographic AES key extraction and offline Kerberos forged ticket decryption suite.</p>
+        <div class="crate-pills">
+          <span class="cpill">Active Directory</span>
+          <span class="cpill">AES Decryption</span>
+          <span class="cpill">Kerberos Tickets</span>
+        </div>
+        <div class="crate-actions">
+          <button class="clone-copy-btn" onclick="copyClone('https://github.com/ben-slates/gmsa-aes-key-extractor.git')">
+            <span>[+]</span> Copy Clone
+          </button>
+          <a href="https://github.com/ben-slates/gmsa-aes-key-extractor" target="_blank" class="repo-link-btn">
+            View Code ↗
+          </a>
         </div>
       </div>
 
       <!-- 7. CVE-FINDER -->
-      <div class="proj-card">
-        <div class="proj-top">
-          <div class="proj-name">CVE-FINDER</div>
-          <span class="proj-domain">Threat Intel &amp; ML</span>
+      <div class="crate-card" data-cat="exploit">
+        <div class="crate-top">
+          <div class="crate-meta">
+            <span class="crate-path">threat-intel/ml-pipeline</span>
+            <span class="crate-name">CVE-FINDER</span>
+          </div>
+          <span class="crate-badge">THREAT INTEL</span>
         </div>
-        <p class="proj-desc">ML-powered CVE vulnerability intelligence platform with 15+ years of NVD historical records &amp; real-time security chatter analysis.</p>
-        <div class="proj-footer">
-          <span class="proj-tags">Python • ML Pipeline</span>
-          <a href="https://github.com/ben-slates/CVE-FINDER" target="_blank" class="proj-btn">github.com ↗</a>
+        <p class="crate-desc">Automated vulnerability intelligence platform with 15+ years of NVD historical records &amp; real-time security chatter analysis.</p>
+        <div class="crate-pills">
+          <span class="cpill">Python</span>
+          <span class="cpill">NVD API</span>
+          <span class="cpill">CVSS Triaging</span>
+          <span class="cpill">Machine Learning</span>
+        </div>
+        <div class="crate-actions">
+          <button class="clone-copy-btn" onclick="copyClone('https://github.com/ben-slates/CVE-FINDER.git')">
+            <span>[+]</span> Copy Clone
+          </button>
+          <a href="https://github.com/ben-slates/CVE-FINDER" target="_blank" class="repo-link-btn">
+            View Code ↗
+          </a>
         </div>
       </div>
 
       <!-- 8. uploadserver2 -->
-      <div class="proj-card">
-        <div class="proj-top">
-          <div class="proj-name">uploadserver2</div>
-          <span class="proj-domain">Network Systems</span>
+      <div class="crate-card" data-cat="net">
+        <div class="crate-top">
+          <div class="crate-meta">
+            <span class="crate-path">network/http2-transport</span>
+            <span class="crate-name">uploadserver2</span>
+          </div>
+          <span class="crate-badge">HTTP/2 SYNC</span>
         </div>
-        <p class="proj-desc">Self-hosted HTTP/2 file transport server featuring recursive browsing, streamed uploads/downloads, remote console clients, and Cloudflare Tunnel support.</p>
-        <div class="proj-footer">
-          <span class="proj-tags">Python • HTTP/2 Stream</span>
-          <a href="https://github.com/ben-slates/uploadserver2" target="_blank" class="proj-btn">github.com ↗</a>
+        <p class="crate-desc">Secure, self-hosted HTTP/2 file transport server featuring authenticated streaming, remote console sync, and Cloudflare Tunnel support.</p>
+        <div class="crate-pills">
+          <span class="cpill">HTTP/2 Transport</span>
+          <span class="cpill">Cloudflare Tunnel</span>
+          <span class="cpill">Token Auth</span>
+        </div>
+        <div class="crate-actions">
+          <button class="clone-copy-btn" onclick="copyClone('https://github.com/ben-slates/uploadserver2.git')">
+            <span>[+]</span> Copy Clone
+          </button>
+          <a href="https://github.com/ben-slates/uploadserver2" target="_blank" class="repo-link-btn">
+            View Code ↗
+          </a>
         </div>
       </div>
 
       <!-- 9. esp32_NAT_router -->
-      <div class="proj-card">
-        <div class="proj-top">
-          <div class="proj-name">esp32_NAT_router</div>
-          <span class="proj-domain" style="border-color:rgba(255,140,0,0.4); color:var(--accent-orange);">Hardware &amp; Embedded</span>
+      <div class="crate-card" data-cat="net">
+        <div class="crate-top">
+          <div class="crate-meta">
+            <span class="crate-path">embedded/hardware-ops</span>
+            <span class="crate-name">esp32_NAT_router</span>
+          </div>
+          <span class="crate-badge" style="border-color:var(--accent-amber); color:var(--accent-amber);">HARDWARE OPS</span>
         </div>
-        <p class="proj-desc">Portable ESP32-based Wi-Fi router and IoT gateway facilitating NAT routing, DHCP services, hotspot management, and packet redirection.</p>
-        <div class="proj-footer">
-          <span class="proj-tags">C • ESP32 Firmware</span>
-          <a href="https://github.com/ben-slates/esp32_NAT_router" target="_blank" class="proj-btn">github.com ↗</a>
+        <p class="crate-desc">ESP32-based portable micro-router firmware facilitating covert field deployment, packet redirection, and NAT bridging.</p>
+        <div class="crate-pills">
+          <span class="cpill">C/C++</span>
+          <span class="cpill">ESP32 Firmware</span>
+          <span class="cpill">Packet Routing</span>
+          <span class="cpill">Field Device</span>
+        </div>
+        <div class="crate-actions">
+          <button class="clone-copy-btn" onclick="copyClone('https://github.com/ben-slates/esp32_NAT_router.git')">
+            <span>[+]</span> Copy Clone
+          </button>
+          <a href="https://github.com/ben-slates/esp32_NAT_router" target="_blank" class="repo-link-btn">
+            View Code ↗
+          </a>
         </div>
       </div>
 
       <!-- 10. Crypto_Guard -->
-      <div class="proj-card">
-        <div class="proj-top">
-          <div class="proj-name">Crypto_Guard</div>
-          <span class="proj-domain" style="border-color:rgba(0,245,160,0.4); color:var(--accent-green);">Cryptography</span>
+      <div class="crate-card" data-cat="c2">
+        <div class="crate-top">
+          <div class="crate-meta">
+            <span class="crate-path">crypto/file-integrity</span>
+            <span class="crate-name">Crypto_Guard</span>
+          </div>
+          <span class="crate-badge">CRYPTOGRAPHY</span>
         </div>
-        <p class="proj-desc">Security toolkit providing cryptographic validation, file hashing, cipher operations, and payload protection.</p>
-        <div class="proj-footer">
-          <span class="proj-tags">Python • Ciphers &amp; Hashes</span>
-          <a href="https://github.com/ben-slates/Crypto_Guard" target="_blank" class="proj-btn">github.com ↗</a>
+        <p class="crate-desc">Security toolkit providing cryptographic validation, file hashing, cipher operations, and payload tamper protection.</p>
+        <div class="crate-pills">
+          <span class="cpill">SHA-256</span>
+          <span class="cpill">AES Cipher</span>
+          <span class="cpill">Payload Guard</span>
+        </div>
+        <div class="crate-actions">
+          <button class="clone-copy-btn" onclick="copyClone('https://github.com/ben-slates/Crypto_Guard.git')">
+            <span>[+]</span> Copy Clone
+          </button>
+          <a href="https://github.com/ben-slates/Crypto_Guard" target="_blank" class="repo-link-btn">
+            View Code ↗
+          </a>
         </div>
       </div>
 
       <!-- 11. CNN_EMNIST_VISUALIZATION -->
-      <div class="proj-card">
-        <div class="proj-top">
-          <div class="proj-name">CNN_EMNIST_VISUALIZATION</div>
-          <span class="proj-domain" style="border-color:rgba(157,78,221,0.4); color:#c77dff;">Deep Learning</span>
+      <div class="crate-card" data-cat="client">
+        <div class="crate-top">
+          <div class="crate-meta">
+            <span class="crate-path">ai/deep-learning-nn</span>
+            <span class="crate-name">CNN_EMNIST_VISUALIZATION</span>
+          </div>
+          <span class="crate-badge">NEURAL NET</span>
         </div>
-        <p class="proj-desc">Deep learning CNN models on MNIST/EMNIST with interactive Streamlit drawing canvas and real-time inference predictions.</p>
-        <div class="proj-footer">
-          <span class="proj-tags">Python • PyTorch • Streamlit</span>
-          <a href="https://github.com/ben-slates/CNN_EMNIST_VISUALIZATION" target="_blank" class="proj-btn">github.com ↗</a>
+        <p class="crate-desc">Deep learning CNN models on MNIST/EMNIST with interactive Streamlit drawing canvas and real-time prediction web app.</p>
+        <div class="crate-pills">
+          <span class="cpill">PyTorch / TensorFlow</span>
+          <span class="cpill">Streamlit UI</span>
+          <span class="cpill">Computer Vision</span>
+        </div>
+        <div class="crate-actions">
+          <button class="clone-copy-btn" onclick="copyClone('https://github.com/ben-slates/CNN_EMNIST_VISUALIZATION.git')">
+            <span>[+]</span> Copy Clone
+          </button>
+          <a href="https://github.com/ben-slates/CNN_EMNIST_VISUALIZATION" target="_blank" class="repo-link-btn">
+            View Code ↗
+          </a>
         </div>
       </div>
 
-      <!-- 12. GitHub Explorer CTA -->
-      <div class="proj-card" style="background:rgba(255,42,109,0.06); border-color:rgba(255,42,109,0.4); justify-content:center; text-align:center;">
-        <div style="font-family:var(--font-mono); font-size:14px; font-weight:800; color:#fff; margin-bottom:8px;">
-          Explore All 29+ Repositories
+    </div>
+
+    <!-- Catalog Explorer Link -->
+    <div class="catalog-banner">
+      <div class="catalog-text">
+        <b style="color:#fff;">Looking for more?</b> Explore 29+ public and experimental security repositories on GitHub.
+      </div>
+      <a href="https://github.com/ben-slates?tab=repositories" target="_blank" class="catalog-btn">
+        Explore All 29+ Repositories ↗
+      </a>
+    </div>
+  </section>
+
+  <!-- 04. ADVERSARIAL ATTACK MATRIX (SPECIALIZATIONS) -->
+  <section id="matrix" class="bento-card">
+    <div class="sec-header">
+      <div class="sec-title">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/></svg>
+        ADVERSARIAL ATTACK MATRIX
+      </div>
+      <span class="sec-badge">CORE SPECIALIZATIONS</span>
+    </div>
+
+    <div class="matrix-grid">
+      <!-- Matrix 1 -->
+      <div class="matrix-card">
+        <div class="matrix-head">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          01 // ACTIVE DIRECTORY DOMINANCE
         </div>
-        <p style="font-size:12px; color:rgba(255,255,255,0.7); margin-bottom:14px;">
-          View full source code, exploits, kernel mods, and network utilities on GitHub.
-        </p>
-        <a href="https://github.com/ben-slates?tab=repositories" target="_blank" class="proj-btn" style="justify-content:center;">
-          github.com/ben-slates ↗
-        </a>
+        <ul class="matrix-list">
+          <li class="matrix-item">Kerberoasting, AS-REP Roasting &amp; Ticket Encryption cracking</li>
+          <li class="matrix-item">Group Managed Service Accounts (gMSA) AES Key Extraction</li>
+          <li class="matrix-item">Shadow Credentials &amp; KeyCredentialLink manipulation</li>
+          <li class="matrix-item">Domain Dominance, DCSync &amp; Golden/Silver Ticket forgery</li>
+        </ul>
+      </div>
+
+      <!-- Matrix 2 -->
+      <div class="matrix-card">
+        <div class="matrix-head">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/></svg>
+          02 // C2 &amp; LATERAL INFRASTRUCTURE
+        </div>
+        <ul class="matrix-list">
+          <li class="matrix-item">Asynchronous Rust Core C2 architecture &amp; memory stagers</li>
+          <li class="matrix-item">Domain Fronting, TLS SNI camouflage &amp; DNS Tunneling</li>
+          <li class="matrix-item">Multi-hop SOCKS proxy pivoting &amp; covert reverse shells</li>
+          <li class="matrix-item">MITM telemetry interception &amp; encrypted command dispatch</li>
+        </ul>
+      </div>
+
+      <!-- Matrix 3 -->
+      <div class="matrix-card">
+        <div class="matrix-head">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="4 17 10 11 4 5"/><line x1="12" y1="19" x2="20" y2="19"/></svg>
+          03 // EXPLOIT ENGINEERING &amp; REVERSING
+        </div>
+        <ul class="matrix-list">
+          <li class="matrix-item">Vulnerability research, patch analysis &amp; weaponized PoC suites</li>
+          <li class="matrix-item">x86/x64 assembly disassembly, binary reversing &amp; GDB tracing</li>
+          <li class="matrix-item">AV/EDR evasion mechanics &amp; dynamic buffer normalization</li>
+          <li class="matrix-item">ML-powered CVE ingestion pipelines &amp; zero-day triage</li>
+        </ul>
+      </div>
+
+      <!-- Matrix 4 -->
+      <div class="matrix-card">
+        <div class="matrix-head">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12.55a11 11 0 0 1 14.08 0"/><path d="M1.42 9a16 16 0 0 1 21.16 0"/><path d="M8.53 16.11a6 6 0 0 1 6.95 0"/><line x1="12" y1="20" x2="12.01" y2="20"/></svg>
+          04 // CLIENT MODS &amp; HARDWARE OPS
+        </div>
+        <ul class="matrix-list">
+          <li class="matrix-item">Electron app patching, native Opus DSP recording engines</li>
+          <li class="matrix-item">Base64 waveform DSP generation &amp; buffer bypass systems</li>
+          <li class="matrix-item">ESP32 covert field micro-router firmware &amp; packet redirection</li>
+          <li class="matrix-item">HTTP/2 authenticated remote shell synchronization</li>
+        </ul>
       </div>
     </div>
   </section>
 
-  <!-- CORE SPECIALIZATIONS -->
-  <section class="glass-card" id="specializations">
-    <div class="card-title">
-      <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
-      Core Specializations
-    </div>
-    <div class="tree-pre">┌──[ Red Team &amp; Adversarial Operations ]
-│   ├── Active Directory: Kerberoasting, AS-REP Roasting, Shadow Credentials, gMSA Key Extraction
-│   ├── Infrastructure: C2 Framework Design, Domain Dominance, Pivoting &amp; Lateral Movement
-│   └── Network Attacks: DNS Tunneling, Rogue AP Infrastructure, MITM Telemetry Manipulation
-│
-└──[ Engineering &amp; Systems Architecture ]
-    ├── Languages: Rust, Go, Python, TypeScript, C, x86/x64 Assembly, Modern Bash
-    ├── Mod Engineering: Electron App Patching, Web Audio DSP, Dynamic Buffer Normalization
-    └── Security Automation: ML-powered CVE Triaging, Custom Protocol Dissectors, Automated Threat Auditing</div>
-  </section>
-
-  <!-- SPLIT GRID: ARSENAL & TECH STACK -->
-  <section class="glass-card" id="skills">
-    <div class="card-title">
-      <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
-      Security Arsenal &amp; Tooling
+  <!-- 05. SECURITY ARSENAL & TOOLING -->
+  <section id="skills" class="bento-card">
+    <div class="sec-header">
+      <div class="sec-title">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+        SECURITY ARSENAL &amp; TECH STACK
+      </div>
+      <span class="sec-badge">VERIFIED TOOLKIT</span>
     </div>
 
-    <div class="desktop-split-grid">
-      <!-- Left Column: Exploitation -->
+    <div class="arsenal-split">
+      <!-- Offensive Security Tools -->
       <div>
-        <div class="skill-group">
-          <div class="sg-title">Red Team &amp; Exploitation Tools</div>
-          <div class="skill-tags">
-            <span class="stag">Kali Linux</span>
-            <span class="stag">Burp Suite Pro</span>
-            <span class="stag">Metasploit</span>
-            <span class="stag">Wireshark</span>
-            <span class="stag stag-cyan">BloodHound</span>
-            <span class="stag stag-cyan">Nmap</span>
-            <span class="stag stag-cyan">Evil-WinRM</span>
-            <span class="stag">Hashcat</span>
-            <span class="stag">Gobuster</span>
-          </div>
-        </div>
-
-        <div class="skill-group" style="margin-bottom:0;">
-          <div class="sg-title">Practical CTF Disciplines</div>
-          <div class="skill-tags">
-            <span class="stag">Web Security</span>
-            <span class="stag">Active Directory Exploitation</span>
-            <span class="stag">Pivoting &amp; Tunnels</span>
-            <span class="stag">Post-Exploitation</span>
-            <span class="stag">Privilege Escalation</span>
-            <span class="stag">SOC Triage</span>
-          </div>
+        <div class="tool-group-title">Adversarial Operations &amp; Tooling</div>
+        <div class="tool-chips-wrap">
+          <div class="tool-chip"><span class="tc-dot"></span>Kali Linux</div>
+          <div class="tool-chip pink"><span class="tc-dot"></span>Burp Suite Pro</div>
+          <div class="tool-chip pink"><span class="tc-dot"></span>Metasploit</div>
+          <div class="tool-chip purple"><span class="tc-dot"></span>BloodHound</div>
+          <div class="tool-chip"><span class="tc-dot"></span>Wireshark</div>
+          <div class="tool-chip"><span class="tc-dot"></span>Nmap</div>
+          <div class="tool-chip green"><span class="tc-dot"></span>Evil-WinRM</div>
+          <div class="tool-chip purple"><span class="tc-dot"></span>Impacket</div>
+          <div class="tool-chip pink"><span class="tc-dot"></span>Ghidra / GDB</div>
+          <div class="tool-chip green"><span class="tc-dot"></span>Kerbrute</div>
+          <div class="tool-chip"><span class="tc-dot"></span>CrackMapExec</div>
         </div>
       </div>
 
-      <!-- Right Column: Languages & Systems -->
+      <!-- Languages & Systems Stack -->
       <div>
-        <div class="skill-group" style="margin-bottom:0;">
-          <div class="sg-title">Systems &amp; Languages Stack</div>
-          <div class="skill-tags">
-            <span class="stag stag-purple">Rust</span>
-            <span class="stag stag-purple">Go</span>
-            <span class="stag stag-purple">Python 3</span>
-            <span class="stag stag-purple">TypeScript</span>
-            <span class="stag stag-purple">JavaScript</span>
-            <span class="stag stag-purple">Node.js</span>
-            <span class="stag stag-purple">C</span>
-            <span class="stag stag-purple">Modern Bash</span>
-            <span class="stag stag-purple">x86/x64 Assembly</span>
-            <span class="stag stag-purple">SQL</span>
-          </div>
+        <div class="tool-group-title">Languages &amp; Systems Architecture</div>
+        <div class="tool-chips-wrap">
+          <div class="tool-chip green"><span class="tc-dot"></span>Rust</div>
+          <div class="tool-chip"><span class="tc-dot"></span>Go</div>
+          <div class="tool-chip purple"><span class="tc-dot"></span>Python</div>
+          <div class="tool-chip"><span class="tc-dot"></span>TypeScript</div>
+          <div class="tool-chip pink"><span class="tc-dot"></span>C</div>
+          <div class="tool-chip pink"><span class="tc-dot"></span>x86/x64 Assembly</div>
+          <div class="tool-chip"><span class="tc-dot"></span>JavaScript</div>
+          <div class="tool-chip green"><span class="tc-dot"></span>Bash / Zsh</div>
+          <div class="tool-chip purple"><span class="tc-dot"></span>Node.js</div>
+          <div class="tool-chip"><span class="tc-dot"></span>Docker</div>
+          <div class="tool-chip"><span class="tc-dot"></span>Web Audio API</div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- SPLIT GRID: CERTS & EXPERIENCE -->
-  <div class="desktop-split-grid">
-    <!-- Certifications & Labs -->
-    <section class="glass-card" id="certs">
-      <div class="card-title">
-        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/></svg>
-        Certifications &amp; Machine Labs
+  <!-- 06. DEFENSE VAULT (CERTS & RESUME) -->
+  <section id="vault" class="bento-card">
+    <div class="sec-header">
+      <div class="sec-title">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        DEFENSE VAULT &amp; CERTIFICATIONS
       </div>
+      <span class="sec-badge">VERIFIED CREDENTIALS</span>
+    </div>
 
-      <div class="cert-item">
-        <div>
-          <div class="cert-name">Hack The Box -- Mythical Machine</div>
-          <div class="cert-sub">HTBCERT-3620BFA7E0</div>
+    <div class="certs-grid">
+      <!-- Cert 1 -->
+      <div class="cert-card">
+        <div class="cert-title-block">
+          <span class="cert-org">Hack The Box</span>
+          <span class="cert-name">Mythical Machine</span>
+          <span class="cert-id">ID: HTBCERT-3620BFA7E0</span>
         </div>
-        <a href="certs/Mythical.pdf" download class="cert-btn">View PDF ↗</a>
-      </div>
-
-      <div class="cert-item">
-        <div>
-          <div class="cert-name">Hack The Box -- Puppet Machine</div>
-          <div class="cert-sub">HTBCERT-D149A5DFAD</div>
-        </div>
-        <a href="certs/Puppet.pdf" download class="cert-btn">View PDF ↗</a>
-      </div>
-
-      <div class="cert-item">
-        <div>
-          <div class="cert-name">Cisco Packet Tracer</div>
-          <div class="cert-sub">Networking Fundamentals</div>
-        </div>
-        <a href="certs/Getting_Started_with_Cisco_Packet_Tracer.pdf" download class="cert-btn">View PDF ↗</a>
-      </div>
-
-      <div class="cert-item">
-        <div>
-          <div class="cert-name">Introduction to Cybersecurity</div>
-          <div class="cert-sub">Cisco Networking Academy</div>
-        </div>
-        <a href="certs/Introduction_to_Cybersecurity.pdf" download class="cert-btn">View PDF ↗</a>
-      </div>
-
-      <div style="margin-top:14px;">
-        <a href="resume.pdf" download class="resume-cta-btn">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-          Download Official Resume (PDF)
+        <a href="certs/Mythical.pdf" target="_blank" class="cert-action-btn">
+          View PDF ↗
         </a>
       </div>
-    </section>
 
-    <!-- Role & Contact Channels -->
-    <section class="glass-card" id="experience">
-      <div class="card-title">
-        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
-        Current Role &amp; Engagements
-      </div>
-
-      <div class="work-box" style="margin-bottom:14px;">
-        <div style="font-family:var(--font-mono);font-size:10px;color:var(--accent-pink);letter-spacing:0.12em;text-transform:uppercase;margin-bottom:6px;font-weight:700;display:flex;align-items:center;gap:6px;">
-          <span style="display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--accent-green);box-shadow:0 0 8px var(--accent-green);"></span>
-          [ ACTIVE EMPLOYMENT ]
+      <!-- Cert 2 -->
+      <div class="cert-card">
+        <div class="cert-title-block">
+          <span class="cert-org">Hack The Box</span>
+          <span class="cert-name">Puppet Machine</span>
+          <span class="cert-id">ID: HTBCERT-D149A5DFAD</span>
         </div>
-        <div style="font-size:18px;font-weight:800;color:#fff;margin-bottom:4px;">Rynex Security</div>
-        <div style="font-family:var(--font-mono);font-size:13px;color:var(--accent-green);margin-bottom:10px;font-weight:600;">Cybersecurity &amp; Red Teaming Specialist</div>
-        <p style="font-size:13px;color:rgba(240,240,240,0.88);line-height:1.6;margin-bottom:12px;">Performing offensive penetration testing, adversarial vulnerability research, and security architecture assessments.</p>
-        <div style="display:flex;align-items:center;justify-content:space-between;padding-top:10px;border-top:1px solid rgba(255,42,109,0.2);">
-          <span style="font-family:var(--font-mono);font-size:11px;color:rgba(255,255,255,0.5);">OFFICIAL FIRM</span>
-          <a href="https://rynexsecurity.com" target="_blank" class="cert-btn">rynexsecurity.com ↗</a>
+        <a href="certs/Puppet.pdf" target="_blank" class="cert-action-btn">
+          View PDF ↗
+        </a>
+      </div>
+
+      <!-- Cert 3 -->
+      <div class="cert-card">
+        <div class="cert-title-block">
+          <span class="cert-org">Cisco Networking Academy</span>
+          <span class="cert-name">Cisco Packet Tracer</span>
+          <span class="cert-id">Verified Credential</span>
+        </div>
+        <a href="certs/Getting_Started_with_Cisco_Packet_Tracer.pdf" target="_blank" class="cert-action-btn">
+          View PDF ↗
+        </a>
+      </div>
+
+      <!-- Cert 4 -->
+      <div class="cert-card">
+        <div class="cert-title-block">
+          <span class="cert-org">Cisco Networking Academy</span>
+          <span class="cert-name">Introduction to Cybersecurity</span>
+          <span class="cert-id">Verified Credential</span>
+        </div>
+        <a href="certs/Introduction_to_Cybersecurity.pdf" target="_blank" class="cert-action-btn">
+          View PDF ↗
+        </a>
+      </div>
+    </div>
+
+    <!-- Resume Callout Box -->
+    <div class="resume-highlight-box">
+      <div class="resume-text-side">
+        <span style="font-family:var(--font-mono); font-size:10px; color:var(--accent-cyan); font-weight:700;">OFFICIAL DOCUMENT</span>
+        <span style="font-family:var(--font-mono); font-size:14px; font-weight:700; color:#fff;">Curriculum Vitae // Benjamin Andrew Slates</span>
+        <span style="font-size:12px; color:var(--text-muted);">Complete offensive security background, technical proficiencies, and project architecture summaries.</span>
+      </div>
+      <a href="./resume.pdf" target="_blank" class="resume-btn-cta">
+        Download Resume (PDF) ↗
+      </a>
+    </div>
+  </section>
+
+  <!-- 07. FIRM EXPERIENCE & CONTACT CHANNELS -->
+  <section id="firm" class="bento-card">
+    <div class="sec-header">
+      <div class="sec-title">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        ACTIVE FIRM &amp; DIRECT CHANNELS
+      </div>
+      <span class="sec-badge">CURRENT ROLE &bull; CONTACT</span>
+    </div>
+
+    <div class="firm-contact-split">
+      <!-- Rynex Security Profile -->
+      <div style="background:rgba(255,255,255,0.025); border:1px solid var(--border-hairline); border-radius:18px; padding:20px; display:flex; flex-direction:column; justify-content:space-between; gap:12px;">
+        <div>
+          <div style="font-family:var(--font-mono); font-size:10px; color:var(--accent-pink); font-weight:700; margin-bottom:4px;">ORGANIZATION</div>
+          <div style="font-family:var(--font-mono); font-size:15px; font-weight:800; color:#fff;">Rynex Security</div>
+          <div style="font-family:var(--font-mono); font-size:12px; color:var(--accent-green); margin-top:2px;">Role: Cybersecurity Specialist &bull; Red Teamer</div>
+          <p style="font-size:12.5px; color:var(--text-secondary); line-height:1.6; margin-top:10px;">
+            Executing offensive penetration testing, adversarial attack recreation, infrastructure hardening assessments, and vulnerability audits.
+          </p>
+        </div>
+        <div style="display:flex; align-items:center; justify-content:space-between; padding-top:10px; border-top:1px solid rgba(255,255,255,0.06);">
+          <span style="font-family:var(--font-mono); font-size:11px; color:var(--text-faint);">OFFICIAL FIRM DOMAIN</span>
+          <a href="https://rynexsecurity.com" target="_blank" class="cert-action-btn">rynexsecurity.com ↗</a>
         </div>
       </div>
 
-      <div id="contact">
-        <a href="https://linkedin.com/in/ben-slates" target="_blank" class="contact-row">
-          <span class="cr-lbl">LINKEDIN</span>
-          <span class="cr-val" style="color:#0A66C2;">Connect on LinkedIn ↗</span>
+      <!-- Contact Rows -->
+      <div>
+        <a href="https://linkedin.com/in/ben-slates" target="_blank" class="contact-channel-row">
+          <span class="c-lbl">LINKEDIN</span>
+          <span class="c-val" style="color:#0A66C2;">Connect on LinkedIn ↗</span>
         </a>
-        <a href="https://github.com/ben-slates" target="_blank" class="contact-row">
-          <span class="cr-lbl">GITHUB</span>
-          <span class="cr-val" style="color:var(--accent-green);">github.com/ben-slates ↗</span>
+        <a href="https://github.com/ben-slates" target="_blank" class="contact-channel-row">
+          <span class="c-lbl">GITHUB</span>
+          <span class="c-val" style="color:var(--accent-cyan);">github.com/ben-slates ↗</span>
         </a>
-        <a href="mailto:hello@benslates.xyz" class="contact-row">
-          <span class="cr-lbl">EMAIL</span>
-          <span class="cr-val" style="color:var(--accent-pink);">hello@benslates.xyz</span>
+        <a href="mailto:hello@benslates.xyz" class="contact-channel-row">
+          <span class="c-lbl">EMAIL</span>
+          <span class="c-val" style="color:var(--accent-pink);">hello@benslates.xyz ↗</span>
         </a>
       </div>
-    </section>
-  </div>
+    </div>
+  </section>
 
 </main>
 
-<!-- SIGNATURE GLASSY LIQUID FOOTER -->
-<footer class="glassy-footer">
-  <div class="foot-brand">
-    <svg viewBox="0 0 32 32" width="18" height="18" fill="none">
-      <rect x="2" y="2" width="28" height="28" rx="6" fill="rgba(0, 240, 255, 0.12)" stroke="#00f0ff" stroke-width="1.5"/>
-      <text x="7" y="21" font-family="'JetBrains Mono', monospace" font-size="14" font-weight="900" fill="#ffffff" letter-spacing="-1">B</text>
-      <text x="17" y="21" font-family="'JetBrains Mono', monospace" font-size="14" font-weight="900" fill="#00f0ff" letter-spacing="-1">S</text>
-    </svg>
-    <span>benslates</span>
+<!-- SIGNATURE CYBER FOOTER -->
+<footer class="cyber-footer">
+  <div class="foot-brand-row">
+    <div class="brand-badge">BS</div>
+    <span>benslates // Benjamin Andrew Slates</span>
   </div>
 
-  <div style="font-family:var(--font-mono); font-size:13px; color:#fff; font-weight:700;">
-    Offensive Security // Research &amp; Operations
+  <div class="foot-quote" style="color:var(--accent-cyan); font-weight:700;">
+    Build &bull; Break &bull; Understand
+  </div>
+  <div class="foot-quote">
+    the quieter you become, the more you are able to hear
   </div>
 
-  <div class="social-bar">
-    <a href="https://github.com/ben-slates" target="_blank" class="soc-btn" aria-label="GitHub" title="GitHub">
+  <div class="foot-socials">
+    <a href="https://github.com/ben-slates" target="_blank" class="fs-btn" aria-label="GitHub" title="GitHub">
       <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
     </a>
-    <a href="https://linkedin.com/in/ben-slates" target="_blank" class="soc-btn" aria-label="LinkedIn" title="LinkedIn">
+    <a href="https://linkedin.com/in/ben-slates" target="_blank" class="fs-btn" aria-label="LinkedIn" title="LinkedIn">
       <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
     </a>
-    <a href="mailto:hello@benslates.xyz" class="soc-btn" aria-label="Email" title="Email">
+    <a href="mailto:hello@benslates.xyz" class="fs-btn" aria-label="Email" title="Email">
       <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
     </a>
-    <a href="https://rynexsecurity.com" target="_blank" class="soc-btn" aria-label="Rynex Security" title="Rynex Security">
+    <a href="https://rynexsecurity.com" target="_blank" class="fs-btn" aria-label="Rynex Security" title="Rynex Security">
       <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
     </a>
   </div>
 
-  <div class="foot-motto" style="color:var(--accent-cyan); font-weight:700;">Build • Break • Understand</div>
-  <div class="foot-motto">the quieter you become, the more you are able to hear</div>
-  <div class="copyright-txt">&copy; 2026 Benjamin Andrew Slates. All rights reserved.</div>
+  <div class="foot-copy">&copy; 2026 Benjamin Andrew Slates. All rights reserved.</div>
 
-  <button class="hero-btn" onclick="window.scrollTo({top:0, behavior:'smooth'})" style="margin-top:4px;">
+  <button class="act-btn" onclick="window.scrollTo({top:0, behavior:'smooth'})" style="margin-top:6px; font-size:10.5px;">
     Back to Top ↑
   </button>
 </footer>
 
-<!-- INTERACTIVE CYBER TERMINAL MODAL -->
-<div id="terminal-modal" onclick="handleModalBackdropClick(event)">
-  <div class="term-window">
-    <div class="term-titlebar">
-      <div class="term-tb-title">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--accent-pink)" stroke-width="2"><rect x="2" y="3" width="20" height="18" rx="3"/><path d="M7 9l3 3-3 3M12 15h5"/></svg>
-        <span>root@kali:~# (zsh) -- Cyberdeck Console</span>
-      </div>
-      <div class="term-tb-controls">
-        <button class="term-tb-btn btn-min" onclick="closeTerminal()" title="Minimize"></button>
-        <button class="term-tb-btn btn-close" onclick="closeTerminal()" title="Close"></button>
-      </div>
-    </div>
-
-    <div class="term-body" id="term-scroll-container">
-      <div class="term-output-area" id="terminal-output">
-        <div class="t-line"><span class="t-section">========================================================</span></div>
-        <div class="t-line"><span class="t-section">   BENSLATES CYBERDECK OS // INTERACTIVE SHELL</span></div>
-        <div class="t-line"><span class="t-muted">   Type <span class="t-cmd">help</span> to view commands, or <span class="t-cmd">exit</span> to close window.</span></div>
-        <div class="t-line"><span class="t-section">========================================================</span></div>
-        <div class="t-line">&nbsp;</div>
-      </div>
-
-      <div class="term-input-line">
-        <span class="t-prompt">root@kali:~#</span>
-        <input type="text" id="terminal-input" class="term-inp" autocomplete="off" autocorrect="off" autocapitalize="none" spellcheck="false" autofocus>
-      </div>
-    </div>
-  </div>
+<!-- HUD NOTIFICATION TOAST -->
+<div id="hud-toast">
+  <span style="color:var(--accent-green); font-weight:700;">[+]</span>
+  <span id="toast-msg">COPIED TO CLIPBOARD</span>
 </div>
 
 <script>
-/* ── INTERACTIVE TERMINAL LOGIC ── */
-var termHistory = [];
-var termHistIdx = -1;
+/* ── MATRIX DIGITAL RAIN CANVAS ── */
+var matrixCanvas = document.getElementById("matrix-canvas");
+var ctx = matrixCanvas.getContext("2d");
+var matrixRunning = true;
+var matrixChars = "0123456789ABCDEFｦｱｳｴｵｶｷｹｺｻｼｽｾｿﾀﾂﾃﾅﾆﾇﾈﾊﾋﾎﾏﾐﾑﾒﾓﾔﾕﾗﾘﾜ";
+matrixChars = matrixChars.split("");
+var fontSize = 13;
+var columns = 0;
+var drops = [];
 
-function openTerminal() {
-  var modal = document.getElementById("terminal-modal");
-  modal.style.display = "flex";
-  var input = document.getElementById("terminal-input");
-  setTimeout(function() { input.focus(); }, 100);
+function initMatrix() {
+  matrixCanvas.width = window.innerWidth;
+  matrixCanvas.height = window.innerHeight;
+  columns = Math.floor(matrixCanvas.width / fontSize);
+  drops = [];
+  for (var i = 0; i < columns; i++) {
+    drops[i] = Math.floor(Math.random() * -100);
+  }
 }
+initMatrix();
+window.addEventListener("resize", initMatrix);
 
-function closeTerminal() {
-  var modal = document.getElementById("terminal-modal");
-  modal.style.display = "none";
+function drawMatrix() {
+  if (!matrixRunning) return;
+  ctx.fillStyle = "rgba(5, 7, 12, 0.06)";
+  ctx.fillRect(0, 0, matrixCanvas.width, matrixCanvas.height);
+  
+  ctx.fillStyle = "#00f5a0";
+  ctx.font = fontSize + "px 'JetBrains Mono', monospace";
+  
+  for (var i = 0; i < drops.length; i++) {
+    var text = matrixChars[Math.floor(Math.random() * matrixChars.length)];
+    ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+    
+    if (drops[i] * fontSize > matrixCanvas.height && Math.random() > 0.975) {
+      drops[i] = 0;
+    }
+    drops[i]++;
+  }
 }
+var matrixInterval = setInterval(drawMatrix, 35);
 
-function handleModalBackdropClick(e) {
-  if (e.target.id === "terminal-modal") {
-    closeTerminal();
+function toggleMatrix() {
+  matrixRunning = !matrixRunning;
+  var btn = document.getElementById("matrix-toggle-btn");
+  if (matrixRunning) {
+    btn.textContent = "MATRIX: ON";
+    btn.style.color = "var(--accent-green)";
+    matrixCanvas.style.opacity = "0.12";
+  } else {
+    btn.textContent = "MATRIX: OFF";
+    btn.style.color = "var(--text-muted)";
+    matrixCanvas.style.opacity = "0";
+    ctx.clearRect(0, 0, matrixCanvas.width, matrixCanvas.height);
   }
 }
 
-// Hotkey: Press ` or ~ to toggle terminal
+/* ── INTERACTIVE ARSENAL FILTER ── */
+function filterArsenal(cat, btn) {
+  var tabs = document.querySelectorAll(".filter-tab");
+  tabs.forEach(function(t) { t.classList.remove("active"); });
+  btn.classList.add("active");
+  
+  var cards = document.querySelectorAll(".crate-card");
+  cards.forEach(function(c) {
+    if (cat === "all" || c.getAttribute("data-cat") === cat) {
+      c.style.display = "flex";
+      c.style.opacity = "1";
+    } else {
+      c.style.display = "none";
+      c.style.opacity = "0";
+    }
+  });
+}
+
+/* ── CLIPBOARD HUD TOAST ── */
+function copyClone(repoUrl) {
+  var cmd = "git clone " + repoUrl;
+  navigator.clipboard.writeText(cmd).then(function() {
+    showToast("CLONE COMMAND COPIED: " + cmd);
+  }).catch(function() {
+    showToast("COPIED REPOSITORY URL");
+  });
+}
+
+function showToast(msg) {
+  var toast = document.getElementById("hud-toast");
+  var text = document.getElementById("toast-msg");
+  text.textContent = msg;
+  toast.classList.add("show");
+  setTimeout(function() {
+    toast.classList.remove("show");
+  }, 2600);
+}
+
+/* ── INTERACTIVE TERMINAL LOGIC ── */
+var termInput = document.getElementById("term-input");
+var termScreen = document.getElementById("term-screen");
+var termHist = [];
+var termHistIdx = -1;
+
+function focusTerminal() {
+  var el = document.getElementById("terminal");
+  el.scrollIntoView({ behavior: "smooth", block: "center" });
+  setTimeout(function() { termInput.focus(); }, 400);
+}
+
+// Global hotkey ` or ~ to focus terminal
 document.addEventListener("keydown", function(e) {
   if (e.key === "`" || e.key === "~") {
-    var modal = document.getElementById("terminal-modal");
-    if (modal.style.display === "flex") {
-      closeTerminal();
-    } else {
+    if (document.activeElement !== termInput) {
       e.preventDefault();
-      openTerminal();
+      focusTerminal();
     }
   }
 });
 
-function termPrint(html) {
-  var area = document.getElementById("terminal-output");
-  var div = document.createElement("div");
-  div.className = "t-line";
-  div.innerHTML = html;
-  area.appendChild(div);
-  var scroller = document.getElementById("term-scroll-container");
-  scroller.scrollTop = scroller.scrollHeight;
-}
-
-var termInput = document.getElementById("terminal-input");
 termInput.addEventListener("keydown", function(e) {
   if (e.key === "Enter") {
-    e.preventDefault();
-    var val = termInput.value.trim();
-    if (val) {
-      termHistory.push(val);
-      termHistIdx = termHistory.length;
-    }
-    termPrint("<span class='t-prompt'>root@kali:~#</span> " + escapeHtml(val));
+    var raw = termInput.value.trim();
+    if (!raw) return;
+    termHist.push(raw);
+    termHistIdx = termHist.length;
+    execCommand(raw);
     termInput.value = "";
-    executeTermCmd(val);
   } else if (e.key === "ArrowUp") {
-    e.preventDefault();
     if (termHistIdx > 0) {
       termHistIdx--;
-      termInput.value = termHistory[termHistIdx];
+      termInput.value = termHist[termHistIdx];
     }
   } else if (e.key === "ArrowDown") {
-    e.preventDefault();
-    if (termHistIdx < termHistory.length - 1) {
+    if (termHistIdx < termHist.length - 1) {
       termHistIdx++;
-      termInput.value = termHistory[termHistIdx];
+      termInput.value = termHist[termHistIdx];
     } else {
-      termHistIdx = termHistory.length;
+      termHistIdx = termHist.length;
       termInput.value = "";
     }
   }
 });
 
+function tPrint(html) {
+  var div = document.createElement("div");
+  div.className = "t-out-line";
+  div.innerHTML = html;
+  termScreen.appendChild(div);
+  termScreen.scrollTop = termScreen.scrollHeight;
+}
+
+function execCommand(cmdStr) {
+  tPrint("<span class='t-green'>root@kali:~#</span> <span class='t-cyan'>" + escapeHtml(cmdStr) + "</span>");
+  var parts = cmdStr.trim().split(" ");
+  var cmd = parts[0].toLowerCase();
+  var arg = parts.slice(1).join(" ").trim();
+
+  switch(cmd) {
+    case "help":
+      tPrint("<span class='t-purple'>AVAILABLE COMMANDS:</span>");
+      tPrint("  <span class='t-cyan'>whoami</span>      Display operator bio, clearance and identity");
+      tPrint("  <span class='t-cyan'>tools</span>       Output built security tools &amp; repositories");
+      tPrint("  <span class='t-cyan'>exploits</span>    View weaponized CVE research &amp; zero-day PoCs");
+      tPrint("  <span class='t-cyan'>matrix-ad</span>   Print Active Directory attack execution vectors");
+      tPrint("  <span class='t-cyan'>skills</span>      Display security arsenal &amp; systems stack");
+      tPrint("  <span class='t-cyan'>certs</span>       List verified Hack The Box &amp; Cisco credentials");
+      tPrint("  <span class='t-cyan'>matrix</span>      Toggle background digital rain animation");
+      tPrint("  <span class='t-cyan'>resume</span>      Download official Curriculum Vitae (PDF)");
+      tPrint("  <span class='t-cyan'>contact</span>     Print verified direct communication channels");
+      tPrint("  <span class='t-cyan'>clear</span>       Flush console buffer");
+      break;
+
+    case "whoami":
+      tPrint("<span class='t-pink'>[ OPERATOR DOSSIER ]</span>");
+      tPrint("Name:        Benjamin Andrew Slates (@benslates)");
+      tPrint("Clearance:   Level 5 // Red Team Operations &amp; Research");
+      tPrint("Firm:        Rynex Security (rynexsecurity.com)");
+      tPrint("Role:        Cybersecurity Specialist &amp; Offensive Red Teamer");
+      tPrint("Primary:     Active Directory, Kerberos Manipulation, C2 Engineering");
+      tPrint("Status:      Active &amp; Ready for Engagements");
+      break;
+
+    case "tools":
+    case "projects":
+      tPrint("<span class='t-pink'>[ BUILT WEAPONIZED ARSENAL ]</span>");
+      tPrint("  1. <span class='t-cyan'>mdread</span>                 Fast CLI Markdown reader with clipboard hooks");
+      tPrint("  2. <span class='t-cyan'>BEN_C2</span>                 Async Rust performance C2 server &amp; Python API");
+      tPrint("  3. <span class='t-cyan'>discord-voice-notes</span>    Native Opus 64k audio DSP &amp; 83 glass themes");
+      tPrint("  4. <span class='t-cyan'>CVE-2026-31431-Exploit</span> Vulnerability research &amp; weaponized memory PoC");
+      tPrint("  5. <span class='t-cyan'>CVE-2024-37054</span>         Adversarial vulnerability reproduction suite");
+      tPrint("  6. <span class='t-cyan'>gmsa-aes-key-extractor</span> gMSA cryptographic AES key extraction tool");
+      tPrint("  7. <span class='t-cyan'>CVE-FINDER</span>             ML-powered CVE vulnerability triage platform");
+      tPrint("  8. <span class='t-cyan'>uploadserver2</span>          HTTP/2 transport server with Cloudflare tunnel");
+      tPrint("  9. <span class='t-cyan'>esp32_NAT_router</span>       ESP32 covert micro-router field firmware");
+      tPrint(" 10. <span class='t-cyan'>Crypto_Guard</span>           Cryptographic hashing &amp; payload tamper guard");
+      tPrint(" 11. <span class='t-cyan'>CNN_EMNIST_VIZ</span>         Deep learning neural net threat classifier");
+      break;
+
+    case "exploits":
+      tPrint("<span class='t-pink'>[ WEAPONIZED CVES &amp; ZERO-DAY RESEARCH ]</span>");
+      tPrint("  &bull; <span class='t-cyan'>CVE-2026-31431</span>: Memory analysis &amp; PoC exploitation suite");
+      tPrint("  &bull; <span class='t-cyan'>CVE-2024-37054</span>: Technical analysis &amp; environment attack reproduction");
+      tPrint("  &bull; <span class='t-cyan'>gMSA Kerberos</span>: AES Key Extraction &amp; offline forged decryption");
+      break;
+
+    case "matrix-ad":
+      tPrint("<span class='t-pink'>[ ACTIVE DIRECTORY ATTACK PIPELINE ]</span>");
+      tPrint("  &bull; Kerberoasting &bull; AS-REP Roasting &bull; Shadow Credentials");
+      tPrint("  &bull; gMSA Key Extraction &bull; Golden/Silver Ticket Forgery &bull; DCSync");
+      tPrint("  &bull; Domain Dominance &bull; In-Memory C2 Telemetry Fronting");
+      break;
+
+    case "skills":
+      tPrint("<span class='t-pink'>[ SECURITY ARSENAL &amp; SYSTEMS STACK ]</span>");
+      tPrint("  Arsenal:   Kali Linux, Burp Suite, Metasploit, BloodHound, Wireshark, Nmap, Evil-WinRM");
+      tPrint("  Languages: Rust, Go, Python, TypeScript, C, x86/x64 Assembly, Modern Bash");
+      break;
+
+    case "certs":
+      tPrint("<span class='t-pink'>[ VERIFIED LAB ACCOMPLISHMENTS ]</span>");
+      tPrint("  &bull; Hack The Box: Mythical Machine (HTBCERT-3620BFA7E0)");
+      tPrint("  &bull; Hack The Box: Puppet Machine   (HTBCERT-D149A5DFAD)");
+      tPrint("  &bull; Cisco Networking Academy: Cisco Packet Tracer");
+      tPrint("  &bull; Cisco Networking Academy: Introduction to Cybersecurity");
+      break;
+
+    case "matrix":
+      toggleMatrix();
+      tPrint("<span class='t-green'>Toggled Matrix Digital Rain.</span>");
+      break;
+
+    case "resume":
+      window.open("./resume.pdf", "_blank");
+      tPrint("<span class='t-green'>Opening resume.pdf in new tab...</span>");
+      break;
+
+    case "contact":
+      tPrint("<span class='t-pink'>[ DIRECT CHANNELS ]</span>");
+      tPrint("  Email:    hello@benslates.xyz");
+      tPrint("  GitHub:   https://github.com/ben-slates");
+      tPrint("  LinkedIn: https://linkedin.com/in/ben-slates");
+      tPrint("  Firm:     Rynex Security (rynexsecurity.com)");
+      break;
+
+    case "clear":
+      termScreen.innerHTML = "";
+      break;
+
+    default:
+      tPrint("<span style='color:#ff5f56;'>Command not found: " + escapeHtml(cmd) + ". Type 'help' for available commands.</span>");
+  }
+}
+
 function escapeHtml(str) {
   return str.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
 }
 
-function executeTermCmd(raw) {
-  if (!raw) return;
-  var parts = raw.split(" ").filter(Boolean);
-  var cmd = parts[0].toLowerCase();
-  var arg = parts[1] ? parts[1].toLowerCase() : "";
+/* ── DYNAMIC TYPING HERO EFFECT ── */
+var heroCmds = [
+  "./engage_redteam.sh --target enterprise_ad --stealth-level max",
+  "rust_c2 --bind 0.0.0.0:443 --crypto aes-256-gcm --domain-fronting",
+  "python3 gmsa_extractor.py --dc-ip 10.10.10.1 --offline-tickets",
+  "exploit_suite --cve CVE-2026-31431 --rop-chain --evasion edr"
+];
+var hIdx = 0;
+var charIdx = 0;
+var isDeleting = false;
+var typeEl = document.getElementById("typing-hero-cmd");
 
-  switch (cmd) {
-    case "help":
-      termPrint("<span class='t-section'>── AVAILABLE COMMANDS ──</span>");
-      termPrint("  <span class='t-cmd'>help</span>         List commands");
-      termPrint("  <span class='t-cmd'>whoami</span>       Display researcher profile");
-      termPrint("  <span class='t-cmd'>projects</span>     List engineered tools &amp; repositories");
-      termPrint("  <span class='t-cmd'>skills</span>       Display technical security arsenal");
-      termPrint("  <span class='t-cmd'>certs</span>        List HTB machines &amp; credentials");
-      termPrint("  <span class='t-cmd'>ls</span>           List virtual directory contents");
-      termPrint("  <span class='t-cmd'>cat &lt;file&gt;</span>   Read a file (e.g., cat about.txt)");
-      termPrint("  <span class='t-cmd'>uname -a</span>     Show system architecture info");
-      termPrint("  <span class='t-cmd'>matrix</span>       Toggle digital rain");
-      termPrint("  <span class='t-cmd'>clear</span>        Clear terminal window");
-      termPrint("  <span class='t-cmd'>exit</span>         Close terminal modal");
-      break;
-
-    case "whoami":
-      termPrint("<span class='t-ok'>Benjamin Andrew Slates</span> (@benslates)");
-      termPrint("Red Team • Offensive Security • Security Research");
-      termPrint("Firm: Rynex Security (Active Employment)");
-      break;
-
-    case "projects":
-      termPrint("<span class='t-section'>── BUILT TOOLS &amp; REPOSITORIES ──</span>");
-      termPrint("  <span class='t-cmd'>mdread</span>                 CLI Markdown reader with 1-click clipboard copy (Python)");
-      termPrint("  <span class='t-cmd'>BEN_C2</span>                 Asynchronous post-exploitation C2 server (Rust/Python)");
-      termPrint("  <span class='t-cmd'>discord-voice-notes</span>    Native Opus 64kbps recording &amp; glass themes suite");
-      termPrint("  <span class='t-cmd'>CVE-2026-31431-Exploit</span> Weaponized proof-of-concept exploitation suite");
-      termPrint("  <span class='t-cmd'>CVE-2024-37054</span>         Adversarial vulnerability research &amp; demonstration");
-      termPrint("  <span class='t-cmd'>gmsa-aes-key-extractor</span> gMSA cryptographic AES key retrieval tool");
-      termPrint("  <span class='t-cmd'>CVE-FINDER</span>             ML-powered real-time vulnerability intelligence");
-      termPrint("  <span class='t-cmd'>uploadserver2</span>          Self-hosted HTTP/2 authenticated file server");
-      termPrint("  <span class='t-cmd'>esp32_NAT_router</span>       Hardware micro-router for packet redirection");
-      termPrint("  <span class='t-cmd'>Crypto_Guard</span>           Cryptographic validation &amp; payload hashing toolkit");
-      termPrint("<span class='t-muted'>Visit <span class='t-ok'>https://github.com/ben-slates</span> for all 29+ repositories.</span>");
-      break;
-
-    case "skills":
-    case "tools":
-      termPrint("<span class='t-section'>── TECHNICAL ARSENAL ──</span>");
-      termPrint("  Red Team:  Kali Linux, Burp Suite Pro, Metasploit, BloodHound, Nmap, Wireshark, Evil-WinRM");
-      termPrint("  Systems:   Rust, Go, Python 3, TypeScript, JavaScript, Node.js, C, Modern Bash, Assembly");
-      termPrint("  Domains:   Active Directory Attacks, Kerberoasting, Pivoting, C2 Infrastructure, Web Security");
-      break;
-
-    case "certs":
-      termPrint("<span class='t-section'>── CERTIFICATIONS &amp; LABS ──</span>");
-      termPrint("  • Hack The Box -- Mythical Machine (HTBCERT-3620BFA7E0)");
-      termPrint("  • Hack The Box -- Puppet Machine (HTBCERT-D149A5DFAD)");
-      termPrint("  • Cisco Networking Academy -- Getting Started with Cisco Packet Tracer");
-      termPrint("  • Cisco Networking Academy -- Introduction to Cybersecurity");
-      break;
-
-    case "ls":
-      termPrint("<span class='t-cmd'>about.txt</span>   <span class='t-cmd'>specializations.txt</span>   <span class='t-cmd'>contact.txt</span>   <span class='t-cmd'>rynexsecurity.txt</span>   <span class='t-cmd'>resume.pdf</span>");
-      break;
-
-    case "cat":
-      if (!arg) {
-        termPrint("<span class='t-warn'>Usage: cat &lt;filename&gt;</span>");
-      } else if (arg === "about.txt") {
-        termPrint("<span class='t-section'>-- EXECUTIVE PROFILE --</span>");
-        termPrint("<span class='t-key'>Name:</span> <span class='t-ok'>Benjamin Andrew Slates</span>");
-        termPrint("<span class='t-key'>Role:</span> Red Team • Offensive Security • Security Research");
-        termPrint("<span class='t-key'>Firm:</span> Rynex Security");
-        termPrint("<span class='t-key'>Focus:</span> Active Directory, Kerberos, C2 Telemetry, Exploit Dev");
-        termPrint("Motto: Build • Break • Understand");
-      } else if (arg === "contact.txt") {
-        termPrint("<span class='t-section'>-- CONTACT CHANNELS --</span>");
-        termPrint("Website:  https://benslates.xyz");
-        termPrint("LinkedIn: https://linkedin.com/in/ben-slates");
-        termPrint("GitHub:   https://github.com/ben-slates");
-        termPrint("Email:    hello@benslates.xyz");
-      } else if (arg === "rynexsecurity.txt") {
-        termPrint("<span class='t-section'>-- FIRM --</span>");
-        termPrint("Company: Rynex Security (rynexsecurity.com)");
-        termPrint("Role:    Cybersecurity / Red Teamer");
-        termPrint("Status:  Active Employment");
-      } else if (arg === "specializations.txt") {
-        termPrint("Active Directory • C2 Telemetry • Exploit Dev • Network Pivoting • Audio DSP • Rust Systems");
-      } else if (arg === "resume.pdf") {
-        termPrint("<span class='t-warn'>Binary file -- downloading resume.pdf...</span>");
-        var a = document.createElement("a");
-        a.href = "resume.pdf";
-        a.download = "resume.pdf";
-        document.body.appendChild(a);
-        a.click();
-        a.remove();
-        termPrint("<span class='t-ok'>Download started: resume.pdf</span>");
-      } else {
-        termPrint("<span class='t-warn'>cat: " + escapeHtml(arg) + ": No such file</span>");
-      }
-      break;
-
-    case "uname":
-      termPrint("Linux kali 6.11.2-amd64 #1 SMP PREEMPT_DYNAMIC x86_64 GNU/Linux");
-      break;
-
-    case "matrix":
-      termPrint("<span class='t-ok'>01000010 01000101 01001110 01010011 01001100 01000001 01010100 01000101 01010011</span>");
-      termPrint("<span class='t-cmd'>Wake up, Neo... The Matrix has you. Follow the white rabbit.</span>");
-      break;
-
-    case "clear":
-    case "cls":
-      document.getElementById("terminal-output").innerHTML = "";
-      break;
-
-    case "exit":
-      closeTerminal();
-      break;
-
-    default:
-      termPrint("<span class='t-warn'>bash: " + escapeHtml(cmd) + ": command not found.</span> Type <span class='t-cmd'>help</span> for commands.");
+function typeLoop() {
+  var current = heroCmds[hIdx];
+  if (isDeleting) {
+    typeEl.textContent = current.substring(0, charIdx - 1);
+    charIdx--;
+  } else {
+    typeEl.textContent = current.substring(0, charIdx + 1);
+    charIdx++;
   }
-}
-</script>
 
+  var speed = isDeleting ? 30 : 60;
+  if (!isDeleting && charIdx === current.length) {
+    speed = 2200;
+    isDeleting = true;
+  } else if (isDeleting && charIdx === 0) {
+    isDeleting = false;
+    hIdx = (hIdx + 1) % heroCmds.length;
+    speed = 400;
+  }
+  setTimeout(typeLoop, speed);
+}
+setTimeout(typeLoop, 1500);
+
+</script>
 </body>
 </html>

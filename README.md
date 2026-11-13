@@ -148,8 +148,13 @@ This portfolio delivers a unified, zero-friction responsive Cyberdeck experience
 - **Mobile Mode (<= 768px)**: Compact, touch-optimized cyber-glassmorphic interface with single-column flow and one-tap access.
 
 ### Interactive Cyber Terminal Console
-- Toggleable on demand via the header `[ >_ TERMINAL ]` button or keyboard shortcut (``` ` ``` / `~`).
+- Embedded directly on the page and quick-focused via shortcut (``` ` ``` / `~`) or navbar trigger, with live one-click execution chips (`whoami`, `tools`, `exploits`, `matrix-ad`, `certs`, `help`, `clear`).
 - Full interactive command-line interface supporting system queries, project navigation, skill audits, and matrix visuals.
+
+### Dynamic Features
+- **Ambient Matrix Rain Canvas**: Toggleable background streaming digital glyph rain (`[ MATRIX: ON/OFF ]`).
+- **Interactive Weaponized Arsenal**: Filterable project crates with 1-click clipboard clone command copying (`git clone ...`).
+- **Tactical Attack Matrix**: Structured domain breakdown covering Active Directory dominance, C2 telemetry, exploit dev, and client DSP engineering.
 
 ---
 
