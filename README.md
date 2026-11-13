@@ -14,7 +14,7 @@
 </p>
 
 <p align="center">
-  <b>A unified responsive Cyberdeck portfolio featuring instant access across desktop and mobile, real-time telemetry HUD, interactive project showcases, and an on-demand cyber terminal console.</b>
+  <b>A unified responsive Cyberdeck portfolio featuring instant access across desktop and mobile, interactive project showcases, sleek obsidian cyber aesthetics, and an on-demand cyber terminal console.</b>
 </p>
 
 <p align="center">
@@ -141,11 +141,11 @@ This portfolio delivers a unified, zero-friction responsive Cyberdeck experience
 
 ### Immediate Access (No Login Barrier)
 - Instant loading across all viewports without artificial gatekeeping or passwords.
-- Real-time HUD telemetry ticker (`Kali-Rolling`, dynamic CPU/RAM usage, and active security clearance beacon).
+- Streamlined cyber-glass navigation with instant section anchors and sticky quick-nav bar.
 
 ### Responsive Viewports
 - **Desktop Mode (> 768px)**: Expansive wide-screen Cyberdeck layout with multi-column Bento grids, illuminated glass panels, and interactive project cards.
-- **Mobile Mode (<= 768px)**: Compact, touch-optimized cyber-glassmorphic interface with single-column flow, persistent telemetry, and one-tap access.
+- **Mobile Mode (<= 768px)**: Compact, touch-optimized cyber-glassmorphic interface with single-column flow and one-tap access.
 
 ### Interactive Cyber Terminal Console
 - Toggleable on demand via the header `[ >_ TERMINAL ]` button or keyboard shortcut (``` ` ``` / `~`).
