@@ -1,13 +1,13 @@
 # benslates Brand Usage Policy
 
-© 2026 benslates. All rights reserved.
+(c) 2026 benslates. All rights reserved.
 
-## 🔐 Ownership
+## Ownership
 
 The name "benslates" is the personal brand and identity of its creator.
 It represents original work, research, and projects in cybersecurity and technology.
 
-## ✅ Allowed Use
+## Allowed Use
 
 You are allowed to:
 
@@ -15,7 +15,7 @@ You are allowed to:
 * Share links to official projects
 * Fork and use code under the MIT License (see LICENSE file)
 
-## ❌ Restricted Use
+## Restricted Use
 
 You may NOT:
 
@@ -24,16 +24,16 @@ You may NOT:
 * Create products, services, or domains using the name "benslates"
 * Use the brand in a way that causes confusion or damages reputation
 
-## 📜 Licensing Note
+## Licensing Note
 
 This policy applies to the NAME and BRAND only.
 All code is licensed separately under the MIT License.
 
-## 📩 Permissions
+## Permissions
 
 For commercial use or collaborations, contact:
 [hello@benslates.xyz](mailto:hello@benslates.xyz)
 
-## ⚖️ Enforcement
+## Enforcement
 
 Unauthorized use of the "benslates" name may result in requests for removal or legal action where applicable.

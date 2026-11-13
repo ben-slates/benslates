@@ -14,7 +14,7 @@
 </p>
 
 <p align="center">
-  <b>A single-page cybersecurity portfolio featuring an interactive Kali Linux desktop simulation on desktop and an ultra-premium cyber-glassmorphic HUD interface on mobile.</b>
+  <b>A unified responsive Cyberdeck portfolio featuring instant access across desktop and mobile, real-time telemetry HUD, interactive project showcases, and an on-demand cyber terminal console.</b>
 </p>
 
 <p align="center">
@@ -135,31 +135,27 @@ Active participant on **Hack The Box** and practical cyber training labs:
 ---
 
 
-## Dual-Experience Architecture
+## Unified Cyberdeck Architecture
 
-This portfolio detects the client viewport and provides two specialized user experiences with zero external framework overhead:
+This portfolio delivers a unified, zero-friction responsive Cyberdeck experience across all client devices with zero external framework overhead:
 
-### Desktop Mode (> 768px) -- Kali Linux Desktop OS Simulation
-- **Simulated Display Manager**: Kali-themed login prompt with terminal boot sequence.
-- **XFCE-Inspired Window Manager**: Fully draggable, resizable, maximizable, and minimizable windows with active taskbar integration.
-- **Interactive Terminal (zsh emulation)**: Full shell simulation supporting real commands, file operations, pipe-like execution, and easter eggs.
-- **Simulated File System**: Custom virtual VFS supporting directories, file navigation, reading, and downloading assets (`resume.pdf`, certificates).
-- **Integrated Apps**: Mousepad text viewer/editor, File Manager, Document viewer, and Live System Clock.
+### Immediate Access (No Login Barrier)
+- Instant loading across all viewports without artificial gatekeeping or passwords.
+- Real-time HUD telemetry ticker (`Kali-Rolling`, dynamic CPU/RAM usage, and active security clearance beacon).
 
-### Mobile Mode (<= 768px) -- Cyber-Glassmorphic HUD Interface
-- **Telemetry System Tray**: Real-time HUD showing Kali distribution status, fluctuating CPU/RAM telemetry, and live green status beacon.
-- **Bento Profile Card**: Profile photo (`me.jpg`) framed in dynamic multi-color neon aura rings, verified researcher badge, and academic credentials.
-- **Horizontal Quick-Nav**: Instant 1-tap anchor navigation across sections (`About`, `Profile`, `Projects`, `Metrics`, `Specializations`, `Arsenal`, `Certs`, `Experience`, `Contact`).
-- **Featured Projects & Research**: Dedicated interactive cards for all 8 engineering repositories with architecture highlights and direct GitHub navigation.
-- **Color-Coded Offensive Arsenal & Stack**: Categorized skill tags (Exploitation, Scripting, Network, Web Security, System Languages).
-- **Verified HTB Labs & Certs**: Direct PDF access for Hack The Box machine certificates and Cisco Networking Academy validations.
-- **Signature Glassy Liquid Footer**: Frosted glass container with ambient liquid light orbs, security updates subscription form, and social channels.
+### Responsive Viewports
+- **Desktop Mode (> 768px)**: Expansive wide-screen Cyberdeck layout with multi-column Bento grids, illuminated glass panels, and interactive project cards.
+- **Mobile Mode (<= 768px)**: Compact, touch-optimized cyber-glassmorphic interface with single-column flow, persistent telemetry, and one-tap access.
+
+### Interactive Cyber Terminal Console
+- Toggleable on demand via the header `[ >_ TERMINAL ]` button or keyboard shortcut (``` ` ``` / `~`).
+- Full interactive command-line interface supporting system queries, project navigation, skill audits, and matrix visuals.
 
 ---
 
 ## Terminal Command Cheatsheet
 
-When accessing the terminal in Desktop Mode, the following commands are available:
+When accessing the interactive Cyber Terminal console, the following commands are available:
 
 | Command | Description |
 | :--- | :--- |
@@ -194,7 +190,7 @@ When accessing the terminal in Desktop Mode, the following commands are availabl
 
 ```bash
 benslates/
-├── index.html          # Core single-page application (Desktop OS + Mobile HUD)
+├── index.html          # Core single-page application (Unified Cyberdeck HUD + Terminal Modal)
 ├── me.jpg              # High-resolution profile avatar asset
 ├── mobile_bg.jpg       # Wallpaper asset for mobile glass cards
 ├── wallpaper.png       # Desktop Kali Linux wallpaper
