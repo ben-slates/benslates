@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="cyan">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
@@ -17,20 +17,20 @@
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&family=Outfit:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
 
 <style>
+/* ── DYNAMIC THEME SYSTEM ── */
 :root {
   --bg-deep: #05070c;
-  --bg-card: rgba(12, 16, 26, 0.78);
-  --bg-card-hover: rgba(18, 24, 38, 0.9);
-  --bg-card-active: rgba(22, 30, 48, 0.95);
+  --bg-card: rgba(11, 15, 25, 0.76);
+  --bg-card-hover: rgba(16, 22, 36, 0.9);
   
   --border-hairline: rgba(255, 255, 255, 0.08);
-  --border-hover: rgba(0, 240, 255, 0.42);
-  --border-neon-glow: rgba(0, 240, 255, 0.25);
+  --border-hover: rgba(0, 240, 255, 0.45);
+  --border-neon-glow: rgba(0, 240, 255, 0.28);
   
-  --accent-cyan: #00f0ff;
+  --accent-primary: #00f0ff;
+  --accent-secondary: #8b5cf6;
+  --accent-tertiary: #ff2a6d;
   --accent-green: #00f5a0;
-  --accent-purple: #8b5cf6;
-  --accent-pink: #ff2a6d;
   --accent-amber: #ffb020;
   
   --text-primary: #f8fafc;
@@ -43,11 +43,38 @@
   --font-display: 'Outfit', sans-serif;
 }
 
+[data-theme="matrix"] {
+  --bg-deep: #030805;
+  --bg-card: rgba(8, 20, 12, 0.78);
+  --bg-card-hover: rgba(12, 28, 18, 0.92);
+  --border-hairline: rgba(0, 245, 160, 0.12);
+  --border-hover: rgba(0, 245, 160, 0.55);
+  --border-neon-glow: rgba(0, 245, 160, 0.35);
+  --accent-primary: #00f5a0;
+  --accent-secondary: #00d26a;
+  --accent-tertiary: #52b788;
+  --accent-green: #00ff88;
+}
+
+[data-theme="crimson"] {
+  --bg-deep: #080306;
+  --bg-card: rgba(22, 9, 15, 0.78);
+  --bg-card-hover: rgba(30, 12, 22, 0.92);
+  --border-hairline: rgba(255, 42, 109, 0.14);
+  --border-hover: rgba(255, 42, 109, 0.55);
+  --border-neon-glow: rgba(255, 42, 109, 0.35);
+  --accent-primary: #ff2a6d;
+  --accent-secondary: #c026d3;
+  --accent-tertiary: #f43f5e;
+  --accent-green: #10b981;
+}
+
 * { box-sizing: border-box; margin: 0; padding: 0; }
 
 html {
   scroll-behavior: smooth;
   background-color: var(--bg-deep);
+  transition: background-color 0.4s ease;
 }
 
 body {
@@ -64,9 +91,9 @@ body {
 
 /* Custom High-Tech Scrollbar */
 ::-webkit-scrollbar { width: 6px; height: 6px; }
-::-webkit-scrollbar-track { background: #05070c; }
-::-webkit-scrollbar-thumb { background: rgba(0, 240, 255, 0.22); border-radius: 3px; }
-::-webkit-scrollbar-thumb:hover { background: var(--accent-cyan); }
+::-webkit-scrollbar-track { background: var(--bg-deep); }
+::-webkit-scrollbar-thumb { background: rgba(0, 240, 255, 0.25); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--accent-primary); }
 
 /* Ambient Matrix Canvas */
 #matrix-canvas {
@@ -74,7 +101,7 @@ body {
   inset: 0;
   z-index: 0;
   pointer-events: none;
-  opacity: 0.12;
+  opacity: 0.11;
   transition: opacity 0.5s ease;
 }
 
@@ -89,60 +116,60 @@ body {
 .cyber-bg-layer::before {
   content: '';
   position: absolute;
-  top: -20%;
-  right: -10%;
-  width: 65vw;
-  height: 65vw;
-  max-width: 800px;
-  max-height: 800px;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(0, 240, 255, 0.1) 0%, rgba(139, 92, 246, 0.05) 50%, transparent 70%);
-  filter: blur(100px);
-  animation: orbDrift1 22s ease-in-out infinite alternate;
-}
-.cyber-bg-layer::after {
-  content: '';
-  position: absolute;
-  bottom: -15%;
-  left: -10%;
+  top: -15%;
+  right: -5%;
   width: 60vw;
   height: 60vw;
   max-width: 750px;
   max-height: 750px;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(255, 42, 109, 0.08) 0%, rgba(139, 92, 246, 0.05) 50%, transparent 70%);
+  background: radial-gradient(circle, rgba(0, 240, 255, 0.09) 0%, rgba(139, 92, 246, 0.04) 50%, transparent 70%);
   filter: blur(100px);
-  animation: orbDrift2 26s ease-in-out infinite alternate;
+  animation: orbFloat1 24s ease-in-out infinite alternate;
+}
+.cyber-bg-layer::after {
+  content: '';
+  position: absolute;
+  bottom: -10%;
+  left: -5%;
+  width: 55vw;
+  height: 55vw;
+  max-width: 700px;
+  max-height: 700px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 42, 109, 0.08) 0%, rgba(139, 92, 246, 0.04) 50%, transparent 70%);
+  filter: blur(100px);
+  animation: orbFloat2 28s ease-in-out infinite alternate;
 }
 .cyber-grid-mesh {
   position: absolute;
   inset: 0;
   background-image:
-    linear-gradient(rgba(0, 240, 255, 0.025) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(0, 240, 255, 0.025) 1px, transparent 1px);
-  background-size: 50px 50px;
+    linear-gradient(rgba(255, 255, 255, 0.015) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.015) 1px, transparent 1px);
+  background-size: 48px 48px;
   pointer-events: none;
 }
 
-@keyframes orbDrift1 {
+@keyframes orbFloat1 {
   0% { transform: translate(0, 0) scale(1); }
-  50% { transform: translate(-60px, 40px) scale(1.08); }
-  100% { transform: translate(30px, 80px) scale(0.94); }
+  50% { transform: translate(-50px, 40px) scale(1.08); }
+  100% { transform: translate(30px, 70px) scale(0.95); }
 }
-@keyframes orbDrift2 {
+@keyframes orbFloat2 {
   0% { transform: translate(0, 0) scale(1); }
-  50% { transform: translate(50px, -50px) scale(1.1); }
-  100% { transform: translate(-30px, -30px) scale(0.92); }
+  50% { transform: translate(40px, -40px) scale(1.1); }
+  100% { transform: translate(-30px, -25px) scale(0.92); }
 }
 
-/* ── STICKY CYBER FLOATING HUD NAVBAR ── */
+/* ── STICKY FLOATING HUD NAVBAR ── */
 .cyber-nav {
   position: sticky;
   top: 0;
   z-index: 1000;
   width: 100%;
   padding: 12px 24px;
-  background: rgba(5, 7, 12, 0.82);
+  background: rgba(5, 7, 12, 0.84);
   backdrop-filter: blur(28px) saturate(200%);
   -webkit-backdrop-filter: blur(28px) saturate(200%);
   border-bottom: 1px solid var(--border-hairline);
@@ -171,17 +198,18 @@ body {
   height: 32px;
   border-radius: 8px;
   background: rgba(0, 240, 255, 0.1);
-  border: 1px solid rgba(0, 240, 255, 0.35);
-  box-shadow: 0 0 15px rgba(0, 240, 255, 0.2);
-  color: var(--accent-cyan);
+  border: 1px solid var(--accent-primary);
+  box-shadow: 0 0 15px var(--border-neon-glow);
+  color: var(--accent-primary);
   font-weight: 900;
   font-size: 13px;
+  transition: all 0.3s;
 }
 .brand-name {
-  background: linear-gradient(135deg, #ffffff 40%, var(--accent-cyan) 100%);
+  background: linear-gradient(135deg, #ffffff 40%, var(--accent-primary) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  filter: drop-shadow(0 0 12px rgba(0, 240, 255, 0.35));
+  filter: drop-shadow(0 0 12px var(--border-neon-glow));
 }
 .brand-tagline {
   font-size: 10px;
@@ -189,17 +217,17 @@ body {
   font-weight: 500;
   display: none;
 }
-@media (min-width: 900px) {
+@media (min-width: 920px) {
   .brand-tagline { display: inline-block; margin-left: 6px; }
 }
 
 .nav-links {
   display: none;
   align-items: center;
-  gap: 6px;
+  gap: 5px;
   list-style: none;
 }
-@media (min-width: 860px) {
+@media (min-width: 900px) {
   .nav-links { display: flex; }
 }
 .nav-link-item a {
@@ -224,42 +252,47 @@ body {
 .nav-actions {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 8px;
 }
 .hud-btn {
   font-family: var(--font-mono);
   font-size: 11px;
   font-weight: 700;
-  padding: 7px 14px;
+  padding: 6px 13px;
   border-radius: 16px;
   cursor: pointer;
   display: inline-flex;
   align-items: center;
   gap: 6px;
   text-decoration: none;
-  transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  border: 1px solid var(--border-hairline);
+  background: rgba(255, 255, 255, 0.035);
+  color: var(--text-muted);
 }
-.btn-matrix-toggle {
-  background: rgba(0, 245, 160, 0.08);
-  border: 1px solid rgba(0, 245, 160, 0.28);
-  color: var(--accent-green);
+.hud-btn:hover {
+  color: #fff;
+  border-color: var(--accent-primary);
+  background: rgba(0, 240, 255, 0.1);
+  transform: translateY(-1px);
 }
-.btn-matrix-toggle:hover {
-  background: var(--accent-green);
-  color: #05070c;
-  box-shadow: 0 0 20px rgba(0, 245, 160, 0.4);
+.btn-theme-cycle {
+  color: var(--accent-primary);
+  border-color: rgba(0, 240, 255, 0.3);
+}
+.btn-sfx-toggle {
+  font-size: 10.5px;
 }
 .btn-terminal-cta {
-  background: rgba(0, 240, 255, 0.1);
-  border: 1px solid rgba(0, 240, 255, 0.35);
-  color: var(--accent-cyan);
-  box-shadow: 0 0 14px rgba(0, 240, 255, 0.15);
+  background: rgba(0, 240, 255, 0.12);
+  border-color: var(--accent-primary);
+  color: var(--accent-primary);
+  box-shadow: 0 0 14px var(--border-neon-glow);
 }
 .btn-terminal-cta:hover {
-  background: var(--accent-cyan);
+  background: var(--accent-primary);
   color: #05070c;
-  box-shadow: 0 0 24px rgba(0, 240, 255, 0.5);
-  transform: translateY(-1px);
+  box-shadow: 0 0 25px var(--border-neon-glow);
 }
 
 /* ── MAIN CONTENT CONTAINER ── */
@@ -275,7 +308,7 @@ body {
   gap: 28px;
 }
 
-/* ── BENTO BASE CARDS ── */
+/* ── BENTO BASE CARDS WITH 3D HOVER TILT ── */
 .bento-card {
   background: var(--bg-card);
   border: 1px solid var(--border-hairline);
@@ -286,13 +319,13 @@ body {
   box-shadow: 0 18px 45px rgba(0, 0, 0, 0.68), inset 0 1px 0 rgba(255, 255, 255, 0.09);
   position: relative;
   overflow: hidden;
-  transition: border-color 0.25s, box-shadow 0.25s, transform 0.25s;
+  transition: border-color 0.25s, box-shadow 0.25s, transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
 }
 .bento-card::before {
   content: '';
   position: absolute;
   top: 0; left: 0; right: 0; height: 1.5px;
-  background: linear-gradient(90deg, transparent, rgba(0, 240, 255, 0.6), rgba(139, 92, 246, 0.6), rgba(255, 42, 109, 0.6), transparent);
+  background: linear-gradient(90deg, transparent, var(--accent-primary), var(--accent-secondary), var(--accent-tertiary), transparent);
 }
 .bento-card:hover {
   border-color: var(--border-hover);
@@ -314,14 +347,14 @@ body {
   font-family: var(--font-mono);
   font-size: 13.5px;
   font-weight: 700;
-  color: var(--accent-cyan);
+  color: var(--accent-primary);
   letter-spacing: 0.08em;
   text-transform: uppercase;
   display: flex;
   align-items: center;
   gap: 10px;
 }
-.sec-title svg { color: var(--accent-cyan); flex-shrink: 0; }
+.sec-title svg { color: var(--accent-primary); flex-shrink: 0; }
 .sec-badge {
   font-family: var(--font-mono);
   font-size: 10px;
@@ -338,9 +371,9 @@ body {
   grid-template-columns: 1fr;
   gap: 20px;
 }
-@media (min-width: 940px) {
+@media (min-width: 960px) {
   .hero-bento-grid {
-    grid-template-columns: 1.6fr 1fr;
+    grid-template-columns: 1.6fr 1.05fr;
     align-items: stretch;
   }
 }
@@ -365,7 +398,7 @@ body {
   padding-bottom: 10px;
 }
 .dossier-meta-top .clearance {
-  color: var(--accent-pink);
+  color: var(--accent-tertiary);
   font-weight: 700;
 }
 
@@ -384,8 +417,8 @@ body {
 
 .avatar-wrapper {
   position: relative;
-  width: 110px;
-  height: 110px;
+  width: 114px;
+  height: 114px;
   flex-shrink: 0;
   margin: 0 auto;
 }
@@ -396,9 +429,9 @@ body {
   position: absolute;
   inset: -4px;
   border-radius: 50%;
-  background: conic-gradient(from 0deg, var(--accent-cyan), var(--accent-purple), var(--accent-pink), var(--accent-cyan));
+  background: conic-gradient(from 0deg, var(--accent-primary), var(--accent-secondary), var(--accent-tertiary), var(--accent-primary));
   animation: auraRotate 6s linear infinite;
-  filter: drop-shadow(0 0 16px rgba(0, 240, 255, 0.45));
+  filter: drop-shadow(0 0 16px var(--border-neon-glow));
 }
 @keyframes auraRotate {
   100% { transform: rotate(360deg); }
@@ -409,7 +442,7 @@ body {
   height: 100%;
   border-radius: 50%;
   overflow: hidden;
-  border: 3px solid #05070c;
+  border: 3.5px solid var(--bg-deep);
   background: #0d121c;
 }
 .avatar-photo {
@@ -426,7 +459,7 @@ body {
   height: 18px;
   border-radius: 50%;
   background: var(--accent-green);
-  border: 3.5px solid #05070c;
+  border: 3.5px solid var(--bg-deep);
   box-shadow: 0 0 12px var(--accent-green);
   animation: beaconPulse 2s infinite ease-in-out;
 }
@@ -460,7 +493,7 @@ body {
   font-size: 10px;
   font-weight: 700;
   letter-spacing: 0.1em;
-  color: var(--accent-cyan);
+  color: var(--accent-primary);
   text-transform: uppercase;
 }
 .verified-pill {
@@ -475,22 +508,24 @@ body {
   letter-spacing: 0.05em;
 }
 
+/* Scramble Hero Name */
 .dossier-name {
   font-family: var(--font-display);
-  font-size: clamp(26px, 4vw, 40px);
+  font-size: clamp(26px, 4vw, 38px);
   font-weight: 800;
   letter-spacing: -0.01em;
   line-height: 1.1;
-  background: linear-gradient(135deg, #ffffff 40%, #c4b5fd 80%, #67e8f9 100%);
+  background: linear-gradient(135deg, #ffffff 40%, var(--accent-primary) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+  cursor: pointer;
+  user-select: none;
 }
 .dossier-alias {
   font-family: var(--font-mono);
   font-size: 13px;
   color: var(--text-muted);
 }
-
 .dossier-bio {
   font-size: 13.5px;
   color: var(--text-secondary);
@@ -513,7 +548,7 @@ body {
   white-space: nowrap;
 }
 .dossier-terminal-line .t-prefix {
-  color: var(--accent-cyan);
+  color: var(--accent-primary);
   font-weight: 700;
 }
 .dossier-terminal-line .t-cursor {
@@ -553,23 +588,23 @@ body {
 }
 .act-btn:hover {
   background: rgba(0, 240, 255, 0.12);
-  border-color: var(--accent-cyan);
-  box-shadow: 0 0 16px rgba(0, 240, 255, 0.3);
+  border-color: var(--accent-primary);
+  box-shadow: 0 0 16px var(--border-neon-glow);
   transform: translateY(-1px);
 }
 .act-btn.primary {
   background: linear-gradient(135deg, rgba(0, 240, 255, 0.2), rgba(139, 92, 246, 0.2));
-  border-color: var(--accent-cyan);
-  color: var(--accent-cyan);
+  border-color: var(--accent-primary);
+  color: var(--accent-primary);
   font-weight: 700;
 }
 .act-btn.primary:hover {
-  background: var(--accent-cyan);
+  background: var(--accent-primary);
   color: #05070c;
-  box-shadow: 0 0 25px rgba(0, 240, 255, 0.5);
+  box-shadow: 0 0 25px var(--border-neon-glow);
 }
 
-/* ── HUD INTEL CARD (SIDEKICK BENTO) ── */
+/* ── HUD INTEL CARD & RADAR CANVAS ── */
 .intel-card {
   display: flex;
   flex-direction: column;
@@ -577,14 +612,42 @@ body {
   gap: 16px;
   background: radial-gradient(circle at top right, rgba(0, 240, 255, 0.06), transparent 70%), var(--bg-card);
 }
+.radar-cluster {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid var(--border-hairline);
+  border-radius: 16px;
+  padding: 12px 14px;
+}
+#radar-canvas {
+  width: 110px;
+  height: 110px;
+  border-radius: 50%;
+  background: #04080e;
+  border: 1.5px solid var(--accent-primary);
+  box-shadow: 0 0 16px var(--border-neon-glow);
+  flex-shrink: 0;
+}
+.radar-intel-text {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+}
+.rit-title { color: var(--accent-primary); font-weight: 700; font-size: 11px; }
+.rit-sub { color: var(--text-muted); line-height: 1.4; }
+
 .intel-row {
   display: flex;
   flex-direction: column;
-  gap: 6px;
-  padding: 10px 14px;
+  gap: 5px;
+  padding: 9px 12px;
   background: rgba(255, 255, 255, 0.025);
   border: 1px solid rgba(255, 255, 255, 0.06);
-  border-radius: 14px;
+  border-radius: 12px;
 }
 .intel-label {
   font-family: var(--font-mono);
@@ -596,24 +659,18 @@ body {
   align-items: center;
   justify-content: space-between;
 }
-.intel-val {
-  font-family: var(--font-mono);
-  font-size: 12.5px;
-  color: #fff;
-  font-weight: 700;
-}
 .bar-track {
   width: 100%;
   height: 4px;
   background: rgba(255, 255, 255, 0.08);
   border-radius: 2px;
   overflow: hidden;
-  margin-top: 4px;
+  margin-top: 3px;
 }
 .bar-fill {
   height: 100%;
   border-radius: 2px;
-  background: linear-gradient(90deg, var(--accent-cyan), var(--accent-green));
+  background: linear-gradient(90deg, var(--accent-primary), var(--accent-green));
 }
 
 /* ── HERO STAT NODES BAR ── */
@@ -640,7 +697,7 @@ body {
   transition: all 0.25s;
 }
 .stat-node:hover {
-  border-color: rgba(0, 240, 255, 0.35);
+  border-color: var(--accent-primary);
   transform: translateY(-2px);
   box-shadow: 0 12px 30px rgba(0, 0, 0, 0.6);
 }
@@ -648,7 +705,7 @@ body {
   content: '';
   position: absolute;
   top: 0; left: 0; right: 0; height: 2px;
-  background: linear-gradient(90deg, var(--accent-cyan), var(--accent-pink));
+  background: linear-gradient(90deg, var(--accent-primary), var(--accent-tertiary));
 }
 .stat-num {
   font-family: var(--font-mono);
@@ -668,9 +725,9 @@ body {
 /* ── 02. EMBEDDED LIVE CYBERDECK CONSOLE ── */
 .terminal-dock {
   background: rgba(6, 8, 14, 0.94);
-  border: 1px solid rgba(0, 240, 255, 0.3);
+  border: 1px solid var(--accent-primary);
   border-radius: 20px;
-  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.85), 0 0 30px rgba(0, 240, 255, 0.12);
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.85), 0 0 30px var(--border-neon-glow);
   overflow: hidden;
   font-family: var(--font-mono);
 }
@@ -715,7 +772,7 @@ body {
 .tchip {
   font-family: var(--font-mono);
   font-size: 10.5px;
-  color: var(--accent-cyan);
+  color: var(--accent-primary);
   background: rgba(0, 240, 255, 0.08);
   border: 1px solid rgba(0, 240, 255, 0.22);
   padding: 4px 10px;
@@ -725,22 +782,22 @@ body {
   transition: all 0.15s;
 }
 .tchip:hover {
-  background: var(--accent-cyan);
+  background: var(--accent-primary);
   color: #05070c;
 }
 
 .term-screen {
-  height: 280px;
+  height: 290px;
   overflow-y: auto;
   padding: 14px 18px;
-  font-size: 12.5px;
+  font-size: 12px;
   line-height: 1.6;
   color: #e2e8f0;
 }
-.t-out-line { margin-bottom: 4px; word-break: break-all; }
-.t-cyan { color: var(--accent-cyan); }
+.t-out-line { margin-bottom: 3px; word-break: break-all; }
+.t-primary { color: var(--accent-primary); }
 .t-green { color: var(--accent-green); }
-.t-pink { color: var(--accent-pink); }
+.t-pink { color: var(--accent-tertiary); }
 .t-purple { color: #c4b5fd; }
 .t-muted { color: var(--text-muted); }
 
@@ -791,13 +848,13 @@ body {
 }
 .filter-tab:hover {
   color: #fff;
-  border-color: rgba(0, 240, 255, 0.3);
+  border-color: var(--accent-primary);
 }
 .filter-tab.active {
   background: rgba(0, 240, 255, 0.14);
-  border-color: var(--accent-cyan);
+  border-color: var(--accent-primary);
   color: #fff;
-  box-shadow: 0 0 16px rgba(0, 240, 255, 0.25);
+  box-shadow: 0 0 16px var(--border-neon-glow);
 }
 
 .arsenal-grid {
@@ -830,14 +887,14 @@ body {
   content: '';
   position: absolute;
   top: 0; left: 0; right: 0; height: 1.5px;
-  background: linear-gradient(90deg, var(--accent-cyan), var(--accent-purple), var(--accent-pink));
+  background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary), var(--accent-tertiary));
   opacity: 0.7;
 }
 .crate-card:hover {
-  border-color: var(--accent-cyan);
+  border-color: var(--accent-primary);
   background: rgba(18, 25, 38, 0.85);
   transform: translateY(-3px);
-  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.7), 0 0 25px rgba(0, 240, 255, 0.1);
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.7), 0 0 25px var(--border-neon-glow);
 }
 
 .crate-top {
@@ -872,7 +929,7 @@ body {
   border-radius: 8px;
   background: rgba(0, 240, 255, 0.1);
   border: 1px solid rgba(0, 240, 255, 0.3);
-  color: var(--accent-cyan);
+  color: var(--accent-primary);
   white-space: nowrap;
 }
 .crate-desc {
@@ -919,7 +976,7 @@ body {
 }
 .clone-copy-btn:hover {
   color: #fff;
-  border-color: var(--accent-cyan);
+  border-color: var(--accent-primary);
   background: rgba(0, 240, 255, 0.1);
 }
 .repo-link-btn {
@@ -938,9 +995,9 @@ body {
   transition: all 0.2s;
 }
 .repo-link-btn:hover {
-  background: var(--accent-cyan);
+  background: var(--accent-primary);
   color: #05070c;
-  box-shadow: 0 0 16px rgba(0, 240, 255, 0.4);
+  box-shadow: 0 0 16px var(--border-neon-glow);
 }
 
 /* Catalog Banner */
@@ -965,7 +1022,7 @@ body {
   font-family: var(--font-mono);
   font-size: 11px;
   font-weight: 700;
-  color: var(--accent-cyan);
+  color: var(--accent-primary);
   text-decoration: none;
   display: inline-flex;
   align-items: center;
@@ -977,7 +1034,7 @@ body {
   transition: all 0.2s;
 }
 .catalog-btn:hover {
-  background: var(--accent-cyan);
+  background: var(--accent-primary);
   color: #05070c;
 }
 
@@ -1001,7 +1058,7 @@ body {
   transition: all 0.25s;
 }
 .matrix-card:hover {
-  border-color: rgba(0, 240, 255, 0.35);
+  border-color: var(--accent-primary);
   background: rgba(255, 255, 255, 0.04);
 }
 .matrix-head {
@@ -1011,13 +1068,13 @@ body {
   font-family: var(--font-mono);
   font-size: 12px;
   font-weight: 700;
-  color: var(--accent-cyan);
+  color: var(--accent-primary);
 }
 .matrix-list {
   list-style: none;
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 7px;
   font-family: var(--font-mono);
   font-size: 11px;
   color: var(--text-secondary);
@@ -1027,12 +1084,35 @@ body {
   align-items: flex-start;
   gap: 8px;
   line-height: 1.5;
+  cursor: pointer;
+  padding: 3px 6px;
+  border-radius: 6px;
+  transition: background 0.15s;
+}
+.matrix-item:hover {
+  background: rgba(0, 240, 255, 0.08);
+  color: #fff;
 }
 .matrix-item::before {
   content: '>';
-  color: var(--accent-pink);
+  color: var(--accent-tertiary);
   font-weight: 900;
 }
+
+/* Vector Tactical Inspector Box */
+#vector-inspector {
+  margin-top: 14px;
+  padding: 14px 18px;
+  border-radius: 14px;
+  background: rgba(5, 8, 14, 0.85);
+  border: 1px solid var(--accent-primary);
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+  display: none;
+}
+.vi-title { color: var(--accent-primary); font-weight: 700; margin-bottom: 6px; }
+.vi-row { color: var(--text-muted); margin-bottom: 3px; }
+.vi-val { color: #fff; font-weight: 600; }
 
 /* ── 05. SECURITY ARSENAL & TOOLING ── */
 .arsenal-split {
@@ -1068,9 +1148,10 @@ body {
   align-items: center;
   gap: 7px;
   transition: all 0.2s;
+  cursor: default;
 }
 .tool-chip:hover {
-  border-color: var(--accent-cyan);
+  border-color: var(--accent-primary);
   background: rgba(0, 240, 255, 0.08);
   transform: translateY(-1px);
 }
@@ -1078,10 +1159,10 @@ body {
   width: 6px;
   height: 6px;
   border-radius: 50%;
-  background: var(--accent-cyan);
+  background: var(--accent-primary);
 }
-.tool-chip.pink .tc-dot { background: var(--accent-pink); }
-.tool-chip.purple .tc-dot { background: var(--accent-purple); }
+.tool-chip.pink .tc-dot { background: var(--accent-tertiary); }
+.tool-chip.purple .tc-dot { background: var(--accent-secondary); }
 .tool-chip.green .tc-dot { background: var(--accent-green); }
 
 /* ── 06. DEFENSE VAULT (CERTS) ── */
@@ -1105,7 +1186,7 @@ body {
   transition: all 0.2s;
 }
 .cert-card:hover {
-  border-color: rgba(0, 240, 255, 0.3);
+  border-color: var(--accent-primary);
   background: rgba(255, 255, 255, 0.045);
 }
 .cert-title-block {
@@ -1116,7 +1197,7 @@ body {
 .cert-org {
   font-family: var(--font-mono);
   font-size: 9.5px;
-  color: var(--accent-cyan);
+  color: var(--accent-primary);
   text-transform: uppercase;
   letter-spacing: 0.05em;
 }
@@ -1145,9 +1226,9 @@ body {
   transition: all 0.2s;
 }
 .cert-action-btn:hover {
-  background: var(--accent-cyan);
+  background: var(--accent-primary);
   color: #05070c;
-  box-shadow: 0 0 16px rgba(0, 240, 255, 0.4);
+  box-shadow: 0 0 16px var(--border-neon-glow);
 }
 
 .resume-highlight-box {
@@ -1173,18 +1254,18 @@ body {
   font-weight: 700;
   padding: 10px 20px;
   border-radius: 14px;
-  background: linear-gradient(135deg, var(--accent-cyan), var(--accent-green));
+  background: linear-gradient(135deg, var(--accent-primary), var(--accent-green));
   color: #05070c;
   text-decoration: none;
   display: inline-flex;
   align-items: center;
   gap: 7px;
-  box-shadow: 0 0 20px rgba(0, 240, 255, 0.3);
+  box-shadow: 0 0 20px var(--border-neon-glow);
   transition: all 0.2s;
 }
 .resume-btn-cta:hover {
   transform: translateY(-1px);
-  box-shadow: 0 0 30px rgba(0, 240, 255, 0.6);
+  box-shadow: 0 0 30px var(--border-neon-glow);
 }
 
 /* ── 07. FIRM EXPERIENCE & CONTACT ── */
@@ -1212,11 +1293,11 @@ body {
   transition: all 0.2s;
 }
 .contact-channel-row:hover {
-  border-color: var(--accent-cyan);
+  border-color: var(--accent-primary);
   background: rgba(0, 240, 255, 0.08);
 }
 .c-lbl { color: var(--text-muted); font-size: 10.5px; }
-.c-val { color: var(--accent-cyan); font-weight: 600; }
+.c-val { color: var(--accent-primary); font-weight: 600; }
 
 /* ── SIGNATURE CYBER FOOTER ── */
 .cyber-footer {
@@ -1268,10 +1349,10 @@ body {
   transition: all 0.2s;
 }
 .fs-btn:hover {
-  background: var(--accent-cyan);
-  border-color: var(--accent-cyan);
+  background: var(--accent-primary);
+  border-color: var(--accent-primary);
   color: #05070c;
-  box-shadow: 0 0 16px rgba(0, 240, 255, 0.4);
+  box-shadow: 0 0 16px var(--border-neon-glow);
   transform: translateY(-2px);
 }
 .fs-btn svg { display: block; }
@@ -1287,14 +1368,14 @@ body {
   bottom: 24px;
   right: 24px;
   z-index: 10000;
-  background: rgba(10, 14, 22, 0.95);
-  border: 1px solid var(--accent-cyan);
+  background: rgba(10, 14, 22, 0.96);
+  border: 1px solid var(--accent-primary);
   border-radius: 14px;
   padding: 12px 20px;
   font-family: var(--font-mono);
   font-size: 11.5px;
   color: #fff;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8), 0 0 20px rgba(0, 240, 255, 0.35);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8), 0 0 20px var(--border-neon-glow);
   display: flex;
   align-items: center;
   gap: 10px;
@@ -1339,7 +1420,13 @@ body {
   </ul>
 
   <div class="nav-actions">
-    <button class="hud-btn btn-matrix-toggle" id="matrix-toggle-btn" onclick="toggleMatrix()">
+    <button class="hud-btn btn-theme-cycle" onclick="cycleTheme()" title="Switch Theme (Cyan / Matrix / Crimson)">
+      THEME: <span id="theme-lbl">CYAN</span>
+    </button>
+    <button class="hud-btn btn-sfx-toggle" id="sfx-toggle-btn" onclick="toggleAudioSFX()" title="Tactical Audio SFX">
+      SFX: OFF
+    </button>
+    <button class="hud-btn" id="matrix-toggle-btn" onclick="toggleMatrix()">
       MATRIX: ON
     </button>
     <a href="#terminal" class="hud-btn btn-terminal-cta" onclick="focusTerminal()">
@@ -1371,13 +1458,13 @@ body {
           <span class="live-beacon" title="Active &amp; Ready for Engagements"></span>
         </div>
 
-        <!-- Info & Typography -->
+        <!-- Info & Typography with Scramble Decoder -->
         <div class="dossier-info">
           <div class="role-chip-row">
             <span class="role-chip">RED TEAM // OFFENSIVE SECURITY RESEARCH</span>
             <span class="verified-pill">VERIFIED RESEARCHER</span>
           </div>
-          <h1 class="dossier-name">ʙᴇɴᴊᴀᴍɪɴ ᴀɴᴅʀᴇᴡ ꜱʟᴀᴛᴇꜱ</h1>
+          <h1 class="dossier-name" id="hero-scramble-name" onmouseover="scrambleName()">ʙᴇɴᴊᴀᴍɪɴ ᴀɴᴅʀᴇᴡ ꜱʟᴀᴛᴇꜱ</h1>
           <div class="dossier-alias">@benslates &bull; Cybersecurity Specialist</div>
           <p class="dossier-bio">
             Computer Science researcher specializing in Red Teaming, Offensive Security Architecture, and Low-Level Exploit Development. Building offensive security tools from the ground up, dissecting adversarial vectors, and engineering robust software integrations.
@@ -1412,20 +1499,32 @@ body {
       </div>
     </div>
 
-    <!-- Right: Operational Intel & Threat HUD Card -->
+    <!-- Right: Operational Intel & Tactical Radar Card -->
     <div class="bento-card intel-card">
       <div class="sec-header" style="margin-bottom:0; padding-bottom:8px;">
         <span class="sec-title" style="font-size:12px;">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="m4.93 4.93 4.24 4.24"/></svg>
-          OPERATIONAL HUD
+          TACTICAL RADAR HUD
         </span>
-        <span class="sec-badge" style="color:var(--accent-green); border-color:rgba(0,245,160,0.3);">LIVE</span>
+        <span class="sec-badge" style="color:var(--accent-green); border-color:rgba(0,245,160,0.3);">SWEEPING</span>
+      </div>
+
+      <!-- Tactical Radar Sweep Canvas Cluster -->
+      <div class="radar-cluster">
+        <canvas id="radar-canvas" width="110" height="110"></canvas>
+        <div class="radar-intel-text">
+          <span class="rit-title">SURFACE SCAN: ACTIVE</span>
+          <span class="rit-sub">3 Targets Monitored</span>
+          <span class="rit-sub">&bull; AD-DC01 (10.10.11.24)</span>
+          <span class="rit-sub">&bull; C2_CORE: RUST_LISTENER</span>
+          <span class="rit-sub">&bull; ESP32-NAT: COVERT_ROUTER</span>
+        </div>
       </div>
 
       <div class="intel-row">
         <div class="intel-label">
           <span>Active Directory Exploitation</span>
-          <span style="color:var(--accent-cyan);">98%</span>
+          <span style="color:var(--accent-primary);">98%</span>
         </div>
         <div class="bar-track"><div class="bar-fill" style="width:98%;"></div></div>
       </div>
@@ -1433,23 +1532,15 @@ body {
       <div class="intel-row">
         <div class="intel-label">
           <span>Low-Level Rust &amp; Exploit Dev</span>
-          <span style="color:var(--accent-cyan);">94%</span>
+          <span style="color:var(--accent-primary);">94%</span>
         </div>
         <div class="bar-track"><div class="bar-fill" style="width:94%;"></div></div>
       </div>
 
       <div class="intel-row">
         <div class="intel-label">
-          <span>C2 Telemetry &amp; Evasion</span>
-          <span style="color:var(--accent-cyan);">95%</span>
-        </div>
-        <div class="bar-track"><div class="bar-fill" style="width:95%;"></div></div>
-      </div>
-
-      <div class="intel-row">
-        <div class="intel-label">
           <span>Primary Active Firm</span>
-          <span style="color:var(--accent-pink);">VERIFIED</span>
+          <span style="color:var(--accent-tertiary);">VERIFIED</span>
         </div>
         <div class="intel-val" style="font-size:11.5px;">Rynex Security &bull; Red Teamer</div>
       </div>
@@ -1468,11 +1559,11 @@ body {
   <!-- STAT NODES COUNTERS BAR -->
   <section class="stat-nodes-grid">
     <div class="stat-node">
-      <div class="stat-num" style="color:var(--accent-cyan);">11+</div>
+      <div class="stat-num" style="color:var(--accent-primary);">11+</div>
       <div class="stat-label">Security Tools Engineered</div>
     </div>
     <div class="stat-node">
-      <div class="stat-num" style="color:var(--accent-pink);">2+</div>
+      <div class="stat-num" style="color:var(--accent-tertiary);">2+</div>
       <div class="stat-label">Weaponized CVE Exploits</div>
     </div>
     <div class="stat-node">
@@ -1500,8 +1591,10 @@ body {
     <!-- Quick Action Chips for Instant One-Click Commands -->
     <div class="term-quick-chips">
       <span style="font-size:10px; color:var(--text-faint); margin-right:4px;">RUN:</span>
+      <button class="tchip" onclick="execCommand('neofetch')">neofetch</button>
       <button class="tchip" onclick="execCommand('whoami')">whoami</button>
       <button class="tchip" onclick="execCommand('tools')">tools</button>
+      <button class="tchip" onclick="execCommand('scan')">scan</button>
       <button class="tchip" onclick="execCommand('exploits')">exploits</button>
       <button class="tchip" onclick="execCommand('matrix-ad')">matrix-ad</button>
       <button class="tchip" onclick="execCommand('certs')">certs</button>
@@ -1511,18 +1604,18 @@ body {
 
     <!-- Screen Output -->
     <div class="term-screen" id="term-screen">
-      <div class="t-out-line t-cyan">================================================================</div>
-      <div class="t-out-line t-cyan">  BENJAMIN ANDREW SLATES // OFFENSIVE RESEARCH LAB [v2.4]</div>
+      <div class="t-out-line t-primary">================================================================</div>
+      <div class="t-out-line t-primary">  BENJAMIN ANDREW SLATES // OFFENSIVE RESEARCH LAB [v2.5]</div>
       <div class="t-out-line t-muted">  Red Teaming &bull; Active Directory Internals &bull; Low-Level Exploits</div>
-      <div class="t-out-line t-cyan">================================================================</div>
-      <div class="t-out-line t-green">System initialized. Type &apos;help&apos; or click chips above to inspect.</div>
+      <div class="t-out-line t-primary">================================================================</div>
+      <div class="t-out-line t-green">System initialized. Type &apos;neofetch&apos;, &apos;scan&apos;, &apos;tools&apos;, or click chips above.</div>
       <div class="t-out-line">&nbsp;</div>
     </div>
 
     <!-- Live Command Input Line -->
     <div class="term-input-box">
       <span class="term-prompt">root@kali:~#</span>
-      <input type="text" id="term-input" class="term-input-el" placeholder="type 'help', 'whoami', 'tools', 'matrix-ad'..." autocomplete="off" spellcheck="false">
+      <input type="text" id="term-input" class="term-input-el" placeholder="type 'neofetch', 'scan', 'whoami', 'tools'..." autocomplete="off" spellcheck="false">
     </div>
   </section>
 
@@ -1580,7 +1673,7 @@ body {
             <span class="crate-path">c2/post-exploitation</span>
             <span class="crate-name">BEN_C2</span>
           </div>
-          <span class="crate-badge" style="border-color:var(--accent-pink); color:var(--accent-pink);">WEAPONIZED C2</span>
+          <span class="crate-badge" style="border-color:var(--accent-tertiary); color:var(--accent-tertiary);">WEAPONIZED C2</span>
         </div>
         <p class="crate-desc">Asynchronous post-exploitation Command &amp; Control server engineered with high-performance Rust core and Python orchestration API.</p>
         <div class="crate-pills">
@@ -1632,7 +1725,7 @@ body {
             <span class="crate-path">exploits/vulnerability-poc</span>
             <span class="crate-name">CVE-2026-31431-Exploit</span>
           </div>
-          <span class="crate-badge" style="border-color:var(--accent-pink); color:var(--accent-pink);">ZERO-DAY POC</span>
+          <span class="crate-badge" style="border-color:var(--accent-tertiary); color:var(--accent-tertiary);">ZERO-DAY POC</span>
         </div>
         <p class="crate-desc">Vulnerability research, memory corruption analysis, and weaponized proof-of-concept exploitation suite.</p>
         <div class="crate-pills">
@@ -1847,7 +1940,7 @@ body {
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/></svg>
         ADVERSARIAL ATTACK MATRIX
       </div>
-      <span class="sec-badge">CORE SPECIALIZATIONS</span>
+      <span class="sec-badge">CLICK VECTOR TO INSPECT</span>
     </div>
 
     <div class="matrix-grid">
@@ -1858,10 +1951,10 @@ body {
           01 // ACTIVE DIRECTORY DOMINANCE
         </div>
         <ul class="matrix-list">
-          <li class="matrix-item">Kerberoasting, AS-REP Roasting &amp; Ticket Encryption cracking</li>
-          <li class="matrix-item">Group Managed Service Accounts (gMSA) AES Key Extraction</li>
-          <li class="matrix-item">Shadow Credentials &amp; KeyCredentialLink manipulation</li>
-          <li class="matrix-item">Domain Dominance, DCSync &amp; Golden/Silver Ticket forgery</li>
+          <li class="matrix-item" onclick="inspectVector('gMSA Key Extraction', 'Active Directory gMSA &amp; msDS-ManagedPassword', 'T1558.003 (Steal or Forge Kerberos Tickets)', 'gmsa-aes-key-extractor', 'python3 gmsa_extractor.py -d corp.local -u user -p pass')">Group Managed Service Accounts (gMSA) AES Key Extraction</li>
+          <li class="matrix-item" onclick="inspectVector('Kerberoasting', 'SPN Encrypted Service Tickets', 'T1558.003 (Kerberoasting)', 'Impacket / Kerbrute', 'GetUserSPNs.py corp.local/user:password -request')">Kerberoasting &amp; Service Ticket TGS offline cracking</li>
+          <li class="matrix-item" onclick="inspectVector('Shadow Credentials', 'msDS-KeyCredentialLink Attribute', 'T1556 (Modify Authentication Process)', 'pyWhisker / PKINITtools', 'pywhisker.py -d corp.local -u user --action add')">Shadow Credentials &amp; PKINIT certificate forging</li>
+          <li class="matrix-item" onclick="inspectVector('DCSync Replication', 'Domain Controller Replication Sync (DRSUAPI)', 'T1003.006 (DCSync)', 'secretsdump.py', 'secretsdump.py corp.local/admin:pass@10.10.11.24')">Domain Dominance, DCSync &amp; Golden/Silver Ticket forgery</li>
         </ul>
       </div>
 
@@ -1872,10 +1965,10 @@ body {
           02 // C2 &amp; LATERAL INFRASTRUCTURE
         </div>
         <ul class="matrix-list">
-          <li class="matrix-item">Asynchronous Rust Core C2 architecture &amp; memory stagers</li>
-          <li class="matrix-item">Domain Fronting, TLS SNI camouflage &amp; DNS Tunneling</li>
-          <li class="matrix-item">Multi-hop SOCKS proxy pivoting &amp; covert reverse shells</li>
-          <li class="matrix-item">MITM telemetry interception &amp; encrypted command dispatch</li>
+          <li class="matrix-item" onclick="inspectVector('Rust C2 Core', 'Asynchronous Epoll/IOCP Transport Core', 'T1071 (Application Layer Protocol)', 'BEN_C2', 'cargo run --release -- --bind 0.0.0.0:443')">Asynchronous Rust Core C2 architecture &amp; memory stagers</li>
+          <li class="matrix-item" onclick="inspectVector('Domain Fronting', 'CDN SNI &amp; Host Header Camouflage', 'T1090.004 (Domain Fronting)', 'BEN_C2 / Cloudflare', 'curl -H &quot;Host: c2.internal&quot; https://trusted-cdn.com')">Domain Fronting, TLS SNI camouflage &amp; DNS Tunneling</li>
+          <li class="matrix-item" onclick="inspectVector('SOCKS Pivoting', 'Multi-hop Chisel / SSH Reverse Tunnels', 'T1090 (Proxy)', 'uploadserver2 / Chisel', 'chisel server --port 8000 --reverse')">Multi-hop SOCKS proxy pivoting &amp; covert reverse shells</li>
+          <li class="matrix-item" onclick="inspectVector('MITM Telemetry', 'Encrypted TLS Tunnel Interception', 'T1040 (Network Sniffing)', 'Wireshark / Burp', 'mitmproxy --mode transparent')">MITM telemetry interception &amp; encrypted command dispatch</li>
         </ul>
       </div>
 
@@ -1886,10 +1979,10 @@ body {
           03 // EXPLOIT ENGINEERING &amp; REVERSING
         </div>
         <ul class="matrix-list">
-          <li class="matrix-item">Vulnerability research, patch analysis &amp; weaponized PoC suites</li>
-          <li class="matrix-item">x86/x64 assembly disassembly, binary reversing &amp; GDB tracing</li>
-          <li class="matrix-item">AV/EDR evasion mechanics &amp; dynamic buffer normalization</li>
-          <li class="matrix-item">ML-powered CVE ingestion pipelines &amp; zero-day triage</li>
+          <li class="matrix-item" onclick="inspectVector('CVE-2026-31431', 'Memory Analysis &amp; Weaponized PoC', 'T1203 (Exploitation for Client Execution)', 'CVE-2026-31431-Exploit', 'python3 exploit.py --target 10.10.11.24 --rop-chain')">Vulnerability research, patch analysis &amp; weaponized PoC suites</li>
+          <li class="matrix-item" onclick="inspectVector('Binary Reversing', 'x86/x64 Disassembly &amp; ROP Stagers', 'T1055 (Process Injection)', 'GDB / Ghidra', 'gdb -q ./binary -ex &quot;break main&quot;')">x86/x64 assembly disassembly, binary reversing &amp; GDB tracing</li>
+          <li class="matrix-item" onclick="inspectVector('AV/EDR Evasion', 'Dynamic Memory Buffer Normalization', 'T1562 (Impair Defenses)', 'BEN_C2 Shellcode Stager', 'rust_stager --encrypt aes256 --syscalls direct')">AV/EDR evasion mechanics &amp; dynamic buffer normalization</li>
+          <li class="matrix-item" onclick="inspectVector('Automated Threat Intel', 'NVD Feed Parsing &amp; CVSS Triaging', 'T1595 (Active Scanning)', 'CVE-FINDER', 'python3 cve_finder.py --keyword active_directory')">ML-powered CVE ingestion pipelines &amp; zero-day triage</li>
         </ul>
       </div>
 
@@ -1900,12 +1993,21 @@ body {
           04 // CLIENT MODS &amp; HARDWARE OPS
         </div>
         <ul class="matrix-list">
-          <li class="matrix-item">Electron app patching, native Opus DSP recording engines</li>
-          <li class="matrix-item">Base64 waveform DSP generation &amp; buffer bypass systems</li>
-          <li class="matrix-item">ESP32 covert field micro-router firmware &amp; packet redirection</li>
-          <li class="matrix-item">HTTP/2 authenticated remote shell synchronization</li>
+          <li class="matrix-item" onclick="inspectVector('Discord Audio DSP', 'Native 64k Opus Engine &amp; Electron Hook', 'T1059.007 (JavaScript Modding)', 'discord-voice-notes', 'patch_electron --target app.asar --dsp opus64')">Electron app patching, native Opus DSP recording engines</li>
+          <li class="matrix-item" onclick="inspectVector('Waveform DSP', 'Dynamic Audio Buffer Normalization', 'T1027 (Obfuscated Files or Info)', 'Web Audio API', 'generate_waveform_base64(pcm_buffer)')">Base64 waveform DSP generation &amp; buffer bypass systems</li>
+          <li class="matrix-item" onclick="inspectVector('ESP32 Covert Router', 'Hardware NAT Bridging &amp; Packet Redirect', 'T1090.001 (Internal Proxy)', 'esp32_NAT_router', 'esptool.py write_flash 0x0 firmware.bin')">ESP32 covert field micro-router firmware &amp; packet redirection</li>
+          <li class="matrix-item" onclick="inspectVector('HTTP/2 Transport', 'Authenticated Stream Shell Synchronization', 'T1071.001 (Web Protocols)', 'uploadserver2', 'python3 server.py --http2 --port 8443 --token SECRET')">HTTP/2 authenticated remote shell synchronization</li>
         </ul>
       </div>
+    </div>
+
+    <!-- Interactive Vector Inspector Box -->
+    <div id="vector-inspector">
+      <div class="vi-title" id="vi-name">TACTICAL VECTOR INSPECTOR</div>
+      <div class="vi-row">Target Surface: <span class="vi-val" id="vi-surface">-</span></div>
+      <div class="vi-row">MITRE Technique: <span class="vi-val" id="vi-mitre">-</span></div>
+      <div class="vi-row">Arsenal Weapon: <span class="vi-val" id="vi-tool">-</span></div>
+      <div class="vi-row">Execution Command: <code class="vi-val" id="vi-cmd" style="color:var(--accent-green);">-</code></div>
     </div>
   </section>
 
@@ -2021,7 +2123,7 @@ body {
     <!-- Resume Callout Box -->
     <div class="resume-highlight-box">
       <div class="resume-text-side">
-        <span style="font-family:var(--font-mono); font-size:10px; color:var(--accent-cyan); font-weight:700;">OFFICIAL DOCUMENT</span>
+        <span style="font-family:var(--font-mono); font-size:10px; color:var(--accent-primary); font-weight:700;">OFFICIAL DOCUMENT</span>
         <span style="font-family:var(--font-mono); font-size:14px; font-weight:700; color:#fff;">Curriculum Vitae // Benjamin Andrew Slates</span>
         <span style="font-size:12px; color:var(--text-muted);">Complete offensive security background, technical proficiencies, and project architecture summaries.</span>
       </div>
@@ -2045,7 +2147,7 @@ body {
       <!-- Rynex Security Profile -->
       <div style="background:rgba(255,255,255,0.025); border:1px solid var(--border-hairline); border-radius:18px; padding:20px; display:flex; flex-direction:column; justify-content:space-between; gap:12px;">
         <div>
-          <div style="font-family:var(--font-mono); font-size:10px; color:var(--accent-pink); font-weight:700; margin-bottom:4px;">ORGANIZATION</div>
+          <div style="font-family:var(--font-mono); font-size:10px; color:var(--accent-tertiary); font-weight:700; margin-bottom:4px;">ORGANIZATION</div>
           <div style="font-family:var(--font-mono); font-size:15px; font-weight:800; color:#fff;">Rynex Security</div>
           <div style="font-family:var(--font-mono); font-size:12px; color:var(--accent-green); margin-top:2px;">Role: Cybersecurity Specialist &bull; Red Teamer</div>
           <p style="font-size:12.5px; color:var(--text-secondary); line-height:1.6; margin-top:10px;">
@@ -2066,11 +2168,11 @@ body {
         </a>
         <a href="https://github.com/ben-slates" target="_blank" class="contact-channel-row">
           <span class="c-lbl">GITHUB</span>
-          <span class="c-val" style="color:var(--accent-cyan);">github.com/ben-slates ↗</span>
+          <span class="c-val" style="color:var(--accent-primary);">github.com/ben-slates ↗</span>
         </a>
         <a href="mailto:hello@benslates.xyz" class="contact-channel-row">
           <span class="c-lbl">EMAIL</span>
-          <span class="c-val" style="color:var(--accent-pink);">hello@benslates.xyz ↗</span>
+          <span class="c-val" style="color:var(--accent-tertiary);">hello@benslates.xyz ↗</span>
         </a>
       </div>
     </div>
@@ -2085,7 +2187,7 @@ body {
     <span>benslates // Benjamin Andrew Slates</span>
   </div>
 
-  <div class="foot-quote" style="color:var(--accent-cyan); font-weight:700;">
+  <div class="foot-quote" style="color:var(--accent-primary); font-weight:700;">
     Build &bull; Break &bull; Understand
   </div>
   <div class="foot-quote">
@@ -2121,12 +2223,63 @@ body {
 </div>
 
 <script>
+/* ── THEME SWITCHER ENGINE ── */
+var themes = ["cyan", "matrix", "crimson"];
+var currentThemeIdx = 0;
+
+function cycleTheme() {
+  currentThemeIdx = (currentThemeIdx + 1) % themes.length;
+  var theme = themes[currentThemeIdx];
+  document.documentElement.setAttribute("data-theme", theme);
+  document.getElementById("theme-lbl").textContent = theme.toUpperCase();
+  playCyberTone(600, 0.08);
+  showToast("THEME ACTIVATED: " + theme.toUpperCase());
+}
+
+/* ── TACTICAL SYNTHESIZED WEB AUDIO SFX ── */
+var audioCtx = null;
+var sfxEnabled = false;
+
+function toggleAudioSFX() {
+  sfxEnabled = !sfxEnabled;
+  var btn = document.getElementById("sfx-toggle-btn");
+  if (sfxEnabled) {
+    if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    btn.textContent = "SFX: ON";
+    btn.style.color = "var(--accent-green)";
+    btn.style.borderColor = "var(--accent-green)";
+    playCyberTone(880, 0.1);
+    showToast("TACTICAL SFX ENABLED");
+  } else {
+    btn.textContent = "SFX: OFF";
+    btn.style.color = "var(--text-muted)";
+    btn.style.borderColor = "var(--border-hairline)";
+    showToast("TACTICAL SFX MUTED");
+  }
+}
+
+function playCyberTone(freq, duration) {
+  if (!sfxEnabled) return;
+  try {
+    if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    var osc = audioCtx.createOscillator();
+    var gain = audioCtx.createGain();
+    osc.type = "sine";
+    osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
+    gain.gain.setValueAtTime(0.04, audioCtx.currentTime);
+    gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + duration);
+    osc.connect(gain);
+    gain.connect(audioCtx.destination);
+    osc.start();
+    osc.stop(audioCtx.currentTime + duration);
+  } catch(e) {}
+}
+
 /* ── MATRIX DIGITAL RAIN CANVAS ── */
 var matrixCanvas = document.getElementById("matrix-canvas");
 var ctx = matrixCanvas.getContext("2d");
 var matrixRunning = true;
-var matrixChars = "0123456789ABCDEFｦｱｳｴｵｶｷｹｺｻｼｽｾｿﾀﾂﾃﾅﾆﾇﾈﾊﾋﾎﾏﾐﾑﾒﾓﾔﾕﾗﾘﾜ";
-matrixChars = matrixChars.split("");
+var matrixChars = "0123456789ABCDEFｦｱｳｴｵｶｷｹｺｻｼｽｾｿﾀﾂﾃﾅﾆﾇﾈﾊﾋﾎﾏﾐﾑﾒﾓﾔﾕﾗﾘﾜ".split("");
 var fontSize = 13;
 var columns = 0;
 var drops = [];
@@ -2148,38 +2301,145 @@ function drawMatrix() {
   ctx.fillStyle = "rgba(5, 7, 12, 0.06)";
   ctx.fillRect(0, 0, matrixCanvas.width, matrixCanvas.height);
   
-  ctx.fillStyle = "#00f5a0";
+  var theme = document.documentElement.getAttribute("data-theme");
+  ctx.fillStyle = theme === "matrix" ? "#00ff88" : (theme === "crimson" ? "#ff2a6d" : "#00f0ff");
   ctx.font = fontSize + "px 'JetBrains Mono', monospace";
   
   for (var i = 0; i < drops.length; i++) {
     var text = matrixChars[Math.floor(Math.random() * matrixChars.length)];
     ctx.fillText(text, i * fontSize, drops[i] * fontSize);
-    
     if (drops[i] * fontSize > matrixCanvas.height && Math.random() > 0.975) {
       drops[i] = 0;
     }
     drops[i]++;
   }
 }
-var matrixInterval = setInterval(drawMatrix, 35);
+setInterval(drawMatrix, 35);
 
 function toggleMatrix() {
   matrixRunning = !matrixRunning;
   var btn = document.getElementById("matrix-toggle-btn");
   if (matrixRunning) {
     btn.textContent = "MATRIX: ON";
-    btn.style.color = "var(--accent-green)";
-    matrixCanvas.style.opacity = "0.12";
+    matrixCanvas.style.opacity = "0.11";
   } else {
     btn.textContent = "MATRIX: OFF";
-    btn.style.color = "var(--text-muted)";
     matrixCanvas.style.opacity = "0";
     ctx.clearRect(0, 0, matrixCanvas.width, matrixCanvas.height);
   }
+  playCyberTone(500, 0.08);
+}
+
+/* ── TACTICAL RADAR CANVAS ENGINE ── */
+var radarCanvas = document.getElementById("radar-canvas");
+var rCtx = radarCanvas.getContext("2d");
+var sweepAngle = 0;
+var radarBlips = [
+  { x: 35, y: 40, label: "AD-DC01", color: "#00f0ff" },
+  { x: 75, y: 70, label: "C2_CORE", color: "#00f5a0" },
+  { x: 80, y: 35, label: "ESP32", color: "#ffb020" }
+];
+
+function drawRadar() {
+  var w = radarCanvas.width;
+  var h = radarCanvas.height;
+  var cx = w / 2;
+  var cy = h / 2;
+  var radius = w / 2 - 2;
+
+  // Fade trail
+  rCtx.fillStyle = "rgba(4, 8, 14, 0.15)";
+  rCtx.fillRect(0, 0, w, h);
+
+  // Concentric rings
+  rCtx.strokeStyle = "rgba(0, 240, 255, 0.15)";
+  rCtx.lineWidth = 1;
+  rCtx.beginPath();
+  rCtx.arc(cx, cy, radius * 0.35, 0, Math.PI * 2);
+  rCtx.arc(cx, cy, radius * 0.7, 0, Math.PI * 2);
+  rCtx.arc(cx, cy, radius * 0.96, 0, Math.PI * 2);
+  rCtx.stroke();
+
+  // Crosshairs
+  rCtx.beginPath();
+  rCtx.moveTo(cx, 0); rCtx.lineTo(cx, h);
+  rCtx.moveTo(0, cy); rCtx.lineTo(w, cy);
+  rCtx.stroke();
+
+  // Rotating sweep line
+  sweepAngle += 0.04;
+  var endX = cx + Math.cos(sweepAngle) * radius;
+  var endY = cy + Math.sin(sweepAngle) * radius;
+
+  rCtx.strokeStyle = "rgba(0, 240, 255, 0.8)";
+  rCtx.lineWidth = 1.5;
+  rCtx.beginPath();
+  rCtx.moveTo(cx, cy);
+  rCtx.lineTo(endX, endY);
+  rCtx.stroke();
+
+  // Render blips
+  for (var i = 0; i < radarBlips.length; i++) {
+    var b = radarBlips[i];
+    rCtx.fillStyle = b.color;
+    rCtx.beginPath();
+    rCtx.arc(b.x, b.y, 3, 0, Math.PI * 2);
+    rCtx.fill();
+    rCtx.fillStyle = "rgba(255,255,255,0.7)";
+    rCtx.font = "8px 'JetBrains Mono', monospace";
+    rCtx.fillText(b.label, b.x + 5, b.y + 2);
+  }
+}
+setInterval(drawRadar, 40);
+
+/* ── HACKER TEXT SCRAMBLE DECODER EFFECT ── */
+var originalName = "ʙᴇɴᴊᴀᴍɪɴ ᴀɴᴅʀᴇᴡ ꜱʟᴀᴛᴇꜱ";
+var scrambleChars = "01_X%&?!#[]0x42ABCDEF";
+var isScrambling = false;
+
+function scrambleName() {
+  if (isScrambling) return;
+  isScrambling = true;
+  playCyberTone(1200, 0.06);
+  var el = document.getElementById("hero-scramble-name");
+  var iter = 0;
+  var maxIter = originalName.length * 2.5;
+
+  var interval = setInterval(function() {
+    var text = "";
+    for (var i = 0; i < originalName.length; i++) {
+      if (i < iter / 2.5) {
+        text += originalName[i];
+      } else {
+        text += scrambleChars[Math.floor(Math.random() * scrambleChars.length)];
+      }
+    }
+    el.textContent = text;
+    iter++;
+    if (iter > maxIter) {
+      clearInterval(interval);
+      el.textContent = originalName;
+      isScrambling = false;
+    }
+  }, 25);
+}
+
+/* ── VECTOR TACTICAL INSPECTOR ── */
+function inspectVector(name, surface, mitre, tool, cmd) {
+  var box = document.getElementById("vector-inspector");
+  document.getElementById("vi-name").textContent = "TACTICAL VECTOR: " + name.toUpperCase();
+  document.getElementById("vi-surface").textContent = surface;
+  document.getElementById("vi-mitre").textContent = mitre;
+  document.getElementById("vi-tool").textContent = tool;
+  document.getElementById("vi-cmd").textContent = cmd;
+  box.style.display = "block";
+  box.scrollIntoView({ behavior: "smooth", block: "nearest" });
+  playCyberTone(900, 0.07);
 }
 
 /* ── INTERACTIVE ARSENAL FILTER ── */
 function filterArsenal(cat, btn) {
+  playCyberTone(750, 0.06);
   var tabs = document.querySelectorAll(".filter-tab");
   tabs.forEach(function(t) { t.classList.remove("active"); });
   btn.classList.add("active");
@@ -2198,6 +2458,7 @@ function filterArsenal(cat, btn) {
 
 /* ── CLIPBOARD HUD TOAST ── */
 function copyClone(repoUrl) {
+  playCyberTone(1400, 0.1);
   var cmd = "git clone " + repoUrl;
   navigator.clipboard.writeText(cmd).then(function() {
     showToast("CLONE COMMAND COPIED: " + cmd);
@@ -2216,13 +2477,14 @@ function showToast(msg) {
   }, 2600);
 }
 
-/* ── INTERACTIVE TERMINAL LOGIC ── */
+/* ── INTERACTIVE TERMINAL ENGINE ── */
 var termInput = document.getElementById("term-input");
 var termScreen = document.getElementById("term-screen");
 var termHist = [];
 var termHistIdx = -1;
 
 function focusTerminal() {
+  playCyberTone(800, 0.08);
   var el = document.getElementById("terminal");
   el.scrollIntoView({ behavior: "smooth", block: "center" });
   setTimeout(function() { termInput.focus(); }, 400);
@@ -2242,6 +2504,7 @@ termInput.addEventListener("keydown", function(e) {
   if (e.key === "Enter") {
     var raw = termInput.value.trim();
     if (!raw) return;
+    playCyberTone(650, 0.05);
     termHist.push(raw);
     termHistIdx = termHist.length;
     execCommand(raw);
@@ -2271,7 +2534,7 @@ function tPrint(html) {
 }
 
 function execCommand(cmdStr) {
-  tPrint("<span class='t-green'>root@kali:~#</span> <span class='t-cyan'>" + escapeHtml(cmdStr) + "</span>");
+  tPrint("<span class='t-green'>root@kali:~#</span> <span class='t-primary'>" + escapeHtml(cmdStr) + "</span>");
   var parts = cmdStr.trim().split(" ");
   var cmd = parts[0].toLowerCase();
   var arg = parts.slice(1).join(" ").trim();
@@ -2279,16 +2542,49 @@ function execCommand(cmdStr) {
   switch(cmd) {
     case "help":
       tPrint("<span class='t-purple'>AVAILABLE COMMANDS:</span>");
-      tPrint("  <span class='t-cyan'>whoami</span>      Display operator bio, clearance and identity");
-      tPrint("  <span class='t-cyan'>tools</span>       Output built security tools &amp; repositories");
-      tPrint("  <span class='t-cyan'>exploits</span>    View weaponized CVE research &amp; zero-day PoCs");
-      tPrint("  <span class='t-cyan'>matrix-ad</span>   Print Active Directory attack execution vectors");
-      tPrint("  <span class='t-cyan'>skills</span>      Display security arsenal &amp; systems stack");
-      tPrint("  <span class='t-cyan'>certs</span>       List verified Hack The Box &amp; Cisco credentials");
-      tPrint("  <span class='t-cyan'>matrix</span>      Toggle background digital rain animation");
-      tPrint("  <span class='t-cyan'>resume</span>      Download official Curriculum Vitae (PDF)");
-      tPrint("  <span class='t-cyan'>contact</span>     Print verified direct communication channels");
-      tPrint("  <span class='t-cyan'>clear</span>       Flush console buffer");
+      tPrint("  <span class='t-primary'>neofetch</span>     Display Kali Linux system specs &amp; ASCII logo");
+      tPrint("  <span class='t-primary'>scan</span>         Simulate live Nmap active target port scan");
+      tPrint("  <span class='t-primary'>whoami</span>       Display operator bio, clearance and identity");
+      tPrint("  <span class='t-primary'>tools</span>        Output built security tools &amp; repositories");
+      tPrint("  <span class='t-primary'>exploits</span>     View weaponized CVE research &amp; zero-day PoCs");
+      tPrint("  <span class='t-primary'>matrix-ad</span>    Print Active Directory attack execution vectors");
+      tPrint("  <span class='t-primary'>skills</span>       Display security arsenal &amp; systems stack");
+      tPrint("  <span class='t-primary'>certs</span>        List verified Hack The Box &amp; Cisco credentials");
+      tPrint("  <span class='t-primary'>matrix</span>       Toggle background digital rain animation");
+      tPrint("  <span class='t-primary'>theme</span>        Switch theme (cyan, matrix, crimson)");
+      tPrint("  <span class='t-primary'>resume</span>       Download official Curriculum Vitae (PDF)");
+      tPrint("  <span class='t-primary'>clear</span>        Flush console buffer");
+      break;
+
+    case "neofetch":
+      tPrint("<span class='t-primary'>         _,met$$$$$gg.          root@benslates</span>");
+      tPrint("<span class='t-primary'>      ,g$$$$$$$$$$$$$$$P.       OS: Kali Linux (Rolling 2026.4)</span>");
+      tPrint("<span class='t-primary'>    ,g$$P&quot;     &quot;&quot;&quot;Y$$.&quot;.        Host: Cyberdeck v2.5 (x86_64)</span>");
+      tPrint("<span class='t-primary'>   ,$$P'              `$$$.     Kernel: 6.12.0-kali-amd64</span>");
+      tPrint("<span class='t-primary'>  ',$$P       ,ggs.     `$$b:   Uptime: 248 days, 14:35</span>");
+      tPrint("<span class='t-primary'>  `d$$'     ,$P&quot;'   .    $$$    Shell: zsh 5.9</span>");
+      tPrint("<span class='t-primary'>   $$P      d$'     ,    $$P    Terminal: Cyberdeck HUD</span>");
+      tPrint("<span class='t-primary'>   $$:      $$.   -    ,d$$'    Focus: Red Teaming &amp; Exploit Dev</span>");
+      tPrint("<span class='t-primary'>   $$\;      Y$b._   _,d$P'     Firm: Rynex Security (Active)</span>");
+      tPrint("<span class='t-primary'>   Y$$.    `.`&quot;Y$$$$P&quot;'         Tools Built: 11 Weaponized Repos</span>");
+      tPrint("<span class='t-primary'>    `$$b      &quot;-.__             Certifications: HTB Mythical &amp; Puppet</span>");
+      tPrint("<span class='t-primary'>     `Y$$                       Memory: 2.6GiB / 32GiB</span>");
+      tPrint("<span class='t-primary'>      `$$b.                     Status: Level 5 Security Clearance</span>");
+      break;
+
+    case "scan":
+      tPrint("<span class='t-primary'>[*] Starting Nmap 7.94 ( https://nmap.org ) at 2026-11-13 23:40</span>");
+      tPrint("<span class='t-muted'>[*] Initiating SYN Stealth Scan against 10.10.11.24 (mythical.htb)...</span>");
+      setTimeout(function() {
+        tPrint("<span class='t-green'>[+] Discovered open port 53/tcp on 10.10.11.24 (domain)</span>");
+        tPrint("<span class='t-green'>[+] Discovered open port 88/tcp on 10.10.11.24 (kerberos-sec)</span>");
+        tPrint("<span class='t-green'>[+] Discovered open port 135/tcp on 10.10.11.24 (msrpc)</span>");
+        tPrint("<span class='t-green'>[+] Discovered open port 389/tcp on 10.10.11.24 (ldap)</span>");
+        tPrint("<span class='t-green'>[+] Discovered open port 445/tcp on 10.10.11.24 (microsoft-ds)</span>");
+        tPrint("<span class='t-green'>[+] Discovered open port 5985/tcp on 10.10.11.24 (wsman / WinRM)</span>");
+        tPrint("<span class='t-primary'>[*] Target identified: Windows Server 2022 Active Directory Domain Controller</span>");
+        tPrint("<span class='t-pink'>[*] Recommended Attack Vector: AS-REP Roasting / gMSA AES Extraction</span>");
+      }, 300);
       break;
 
     case "whoami":
@@ -2304,24 +2600,24 @@ function execCommand(cmdStr) {
     case "tools":
     case "projects":
       tPrint("<span class='t-pink'>[ BUILT WEAPONIZED ARSENAL ]</span>");
-      tPrint("  1. <span class='t-cyan'>mdread</span>                 Fast CLI Markdown reader with clipboard hooks");
-      tPrint("  2. <span class='t-cyan'>BEN_C2</span>                 Async Rust performance C2 server &amp; Python API");
-      tPrint("  3. <span class='t-cyan'>discord-voice-notes</span>    Native Opus 64k audio DSP &amp; 83 glass themes");
-      tPrint("  4. <span class='t-cyan'>CVE-2026-31431-Exploit</span> Vulnerability research &amp; weaponized memory PoC");
-      tPrint("  5. <span class='t-cyan'>CVE-2024-37054</span>         Adversarial vulnerability reproduction suite");
-      tPrint("  6. <span class='t-cyan'>gmsa-aes-key-extractor</span> gMSA cryptographic AES key extraction tool");
-      tPrint("  7. <span class='t-cyan'>CVE-FINDER</span>             ML-powered CVE vulnerability triage platform");
-      tPrint("  8. <span class='t-cyan'>uploadserver2</span>          HTTP/2 transport server with Cloudflare tunnel");
-      tPrint("  9. <span class='t-cyan'>esp32_NAT_router</span>       ESP32 covert micro-router field firmware");
-      tPrint(" 10. <span class='t-cyan'>Crypto_Guard</span>           Cryptographic hashing &amp; payload tamper guard");
-      tPrint(" 11. <span class='t-cyan'>CNN_EMNIST_VIZ</span>         Deep learning neural net threat classifier");
+      tPrint("  1. <span class='t-primary'>mdread</span>                 Fast CLI Markdown reader with clipboard hooks");
+      tPrint("  2. <span class='t-primary'>BEN_C2</span>                 Async Rust performance C2 server &amp; Python API");
+      tPrint("  3. <span class='t-primary'>discord-voice-notes</span>    Native Opus 64k audio DSP &amp; 83 glass themes");
+      tPrint("  4. <span class='t-primary'>CVE-2026-31431-Exploit</span> Vulnerability research &amp; weaponized memory PoC");
+      tPrint("  5. <span class='t-primary'>CVE-2024-37054</span>         Adversarial vulnerability reproduction suite");
+      tPrint("  6. <span class='t-primary'>gmsa-aes-key-extractor</span> gMSA cryptographic AES key extraction tool");
+      tPrint("  7. <span class='t-primary'>CVE-FINDER</span>             ML-powered CVE vulnerability triage platform");
+      tPrint("  8. <span class='t-primary'>uploadserver2</span>          HTTP/2 transport server with Cloudflare tunnel");
+      tPrint("  9. <span class='t-primary'>esp32_NAT_router</span>       ESP32 covert micro-router field firmware");
+      tPrint(" 10. <span class='t-primary'>Crypto_Guard</span>           Cryptographic hashing &amp; payload tamper guard");
+      tPrint(" 11. <span class='t-primary'>CNN_EMNIST_VIZ</span>         Deep learning neural net threat classifier");
       break;
 
     case "exploits":
       tPrint("<span class='t-pink'>[ WEAPONIZED CVES &amp; ZERO-DAY RESEARCH ]</span>");
-      tPrint("  &bull; <span class='t-cyan'>CVE-2026-31431</span>: Memory analysis &amp; PoC exploitation suite");
-      tPrint("  &bull; <span class='t-cyan'>CVE-2024-37054</span>: Technical analysis &amp; environment attack reproduction");
-      tPrint("  &bull; <span class='t-cyan'>gMSA Kerberos</span>: AES Key Extraction &amp; offline forged decryption");
+      tPrint("  &bull; <span class='t-primary'>CVE-2026-31431</span>: Memory analysis &amp; PoC exploitation suite");
+      tPrint("  &bull; <span class='t-primary'>CVE-2024-37054</span>: Technical analysis &amp; environment attack reproduction");
+      tPrint("  &bull; <span class='t-primary'>gMSA Kerberos</span>: AES Key Extraction &amp; offline forged decryption");
       break;
 
     case "matrix-ad":
@@ -2348,6 +2644,16 @@ function execCommand(cmdStr) {
     case "matrix":
       toggleMatrix();
       tPrint("<span class='t-green'>Toggled Matrix Digital Rain.</span>");
+      break;
+
+    case "theme":
+      if (arg === "cyan" || arg === "matrix" || arg === "crimson") {
+        document.documentElement.setAttribute("data-theme", arg);
+        document.getElementById("theme-lbl").textContent = arg.toUpperCase();
+        tPrint("<span class='t-green'>Theme set to: " + arg.toUpperCase() + "</span>");
+      } else {
+        cycleTheme();
+      }
       break;
 
     case "resume":
@@ -2380,7 +2686,7 @@ function escapeHtml(str) {
 var heroCmds = [
   "./engage_redteam.sh --target enterprise_ad --stealth-level max",
   "rust_c2 --bind 0.0.0.0:443 --crypto aes-256-gcm --domain-fronting",
-  "python3 gmsa_extractor.py --dc-ip 10.10.10.1 --offline-tickets",
+  "python3 gmsa_extractor.py --dc-ip 10.10.11.24 --offline-tickets",
   "exploit_suite --cve CVE-2026-31431 --rop-chain --evasion edr"
 ];
 var hIdx = 0;
