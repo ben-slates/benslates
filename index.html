@@ -324,6 +324,32 @@ body {
   color: #05070c;
   box-shadow: 0 0 25px var(--border-neon-glow);
 }
+.btn-cmd-palette {
+  display: none;
+  align-items: center;
+  gap: 5px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--accent-primary);
+  border-color: rgba(0, 240, 255, 0.35);
+  background: rgba(0, 240, 255, 0.06);
+  padding: 6px 10px;
+}
+@media (min-width: 960px) {
+  .btn-cmd-palette {
+    display: inline-flex;
+  }
+}
+.btn-cmd-palette:hover {
+  background: var(--accent-primary);
+  color: #05070c;
+  box-shadow: 0 0 20px var(--border-neon-glow);
+}
+.cmd-pill-tag {
+  font-size: 10px;
+  letter-spacing: 0.04em;
+}
 .btn-mobile-toggle {
   display: inline-flex;
   padding: 6px 10px;
@@ -1617,6 +1643,205 @@ body {
   }
 }
 
+/* ── CINEMATIC GRAIN OVERLAY ── */
+.grain-overlay {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 99998;
+  opacity: 0.032;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+}
+
+/* ── CARD INTERACTIVE MOUSE SPOTLIGHT (LINEAR / STRIPE GLOW) ── */
+.spotlight-card {
+  position: relative;
+}
+.spotlight-card::after {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  padding: 1.5px;
+  background: radial-gradient(380px circle at var(--spot-x, -500px) var(--spot-y, -500px), var(--accent-primary), transparent 65%);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.35s ease;
+  z-index: 10;
+}
+.spotlight-card:hover::after {
+  opacity: 0.95;
+}
+
+/* ── SCROLL-TRIGGERED REVEAL ANIMATIONS ── */
+.reveal-on-scroll {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.65s cubic-bezier(0.16, 1, 0.3, 1), transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+.reveal-on-scroll.revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ── GLOBAL COMMAND PALETTE (SPOTLIGHT HUD) ── */
+.cmd-palette-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(4, 7, 14, 0.82);
+  backdrop-filter: blur(24px) saturate(180%);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
+  z-index: 1000000;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 12vh 20px 20px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.cmd-palette-backdrop.open {
+  opacity: 1;
+  pointer-events: auto;
+}
+.cmd-palette-box {
+  width: 100%;
+  max-width: 620px;
+  background: #080c16;
+  border: 1px solid var(--accent-primary);
+  border-radius: 20px;
+  box-shadow: 0 30px 90px rgba(0, 0, 0, 0.95), 0 0 50px var(--border-neon-glow);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transform: scale(0.96) translateY(-8px);
+  transition: transform 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.cmd-palette-backdrop.open .cmd-palette-box {
+  transform: scale(1) translateY(0);
+}
+.cmd-palette-input-wrap {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 18px 22px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.02);
+}
+.cmd-search-icon {
+  color: var(--accent-primary);
+  flex-shrink: 0;
+}
+.cmd-palette-input {
+  width: 100%;
+  background: transparent;
+  border: none;
+  outline: none;
+  font-family: var(--font-mono);
+  font-size: 13.5px;
+  color: #fff;
+}
+.cmd-palette-input::placeholder {
+  color: var(--text-faint);
+  font-size: 12.5px;
+}
+.cmd-esc-badge {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--text-muted);
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid var(--border-hairline);
+  border-radius: 6px;
+  padding: 3px 7px;
+  flex-shrink: 0;
+}
+.cmd-palette-results {
+  max-height: 380px;
+  overflow-y: auto;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  scrollbar-width: thin;
+  scrollbar-color: var(--accent-primary) transparent;
+}
+.cmd-group-label {
+  font-family: var(--font-mono);
+  font-size: 9.5px;
+  color: var(--text-faint);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 8px 12px 4px;
+}
+.cmd-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 14px;
+  border-radius: 12px;
+  font-family: var(--font-mono);
+  font-size: 12.5px;
+  color: var(--text-main);
+  background: transparent;
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: all 0.15s;
+  text-align: left;
+  width: 100%;
+}
+.cmd-item.selected, .cmd-item:hover {
+  background: rgba(0, 240, 255, 0.08);
+  border-color: var(--accent-primary);
+  color: #fff;
+  transform: translateX(3px);
+}
+.cmd-item-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.cmd-item-icon {
+  color: var(--accent-primary);
+  font-size: 11px;
+}
+.cmd-item-shortcut {
+  font-size: 10px;
+  color: var(--text-muted);
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 6px;
+  padding: 2px 7px;
+}
+.cmd-palette-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 20px;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  background: rgba(255, 255, 255, 0.015);
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--text-faint);
+}
+.cmd-keys-hint {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.cmd-keys-hint kbd {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 4px;
+  padding: 2px 5px;
+  font-family: var(--font-mono);
+  color: var(--text-main);
+  margin-right: 4px;
+}
+
 </style>
 </head>
 <body>
@@ -1627,6 +1852,33 @@ body {
 
 <!-- Ambient Matrix Rain Canvas -->
 <canvas id="matrix-canvas"></canvas>
+
+<!-- Ambient Cinematic Grain Texture Overlay -->
+<div class="grain-overlay" aria-hidden="true"></div>
+
+<!-- GLOBAL COMMAND PALETTE (SPOTLIGHT HUD) -->
+<div class="cmd-palette-backdrop" id="cmd-palette" onclick="handlePaletteBackdrop(event)">
+  <div class="cmd-palette-box" role="dialog" aria-modal="true" aria-label="Command Palette">
+    <div class="cmd-palette-input-wrap">
+      <svg class="cmd-search-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      <input type="text" id="cmd-palette-input" class="cmd-palette-input" placeholder="Type a command or jump to section... (e.g. arsenal, cve, terminal, theme)" autocomplete="off" spellcheck="false">
+      <span class="cmd-esc-badge">ESC</span>
+    </div>
+
+    <div class="cmd-palette-results" id="cmd-palette-results">
+      <!-- Options rendered dynamically -->
+    </div>
+
+    <div class="cmd-palette-footer">
+      <div class="cmd-keys-hint">
+        <span><kbd>↑</kbd><kbd>↓</kbd> Navigate</span>
+        <span><kbd>↵</kbd> Select</span>
+        <span><kbd>ESC</kbd> Close</span>
+      </div>
+      <div class="cmd-palette-brand">BENJAMIN ANDREW SLATES // COMMAND PALETTE</div>
+    </div>
+  </div>
+</div>
 
 <!-- Cyber Ambient Mesh & Lighting -->
 <div class="cyber-bg-layer">
@@ -1654,6 +1906,9 @@ body {
     </ul>
 
     <div class="nav-actions">
+      <button class="hud-btn btn-cmd-palette" onclick="openCmdPalette()" title="Open Command Palette (Ctrl+K or /)">
+        <span class="cmd-pill-tag">⌘K</span>
+      </button>
       <button class="hud-btn btn-theme-cycle" onclick="cycleTheme()" title="Switch Theme (Cyan / Matrix / Crimson)">
         <span class="hud-dot"></span><span id="theme-lbl">CYAN</span>
       </button>
@@ -1699,7 +1954,7 @@ body {
   <section id="dossier" class="hero-bento-grid">
     
     <!-- Left: Master Dossier Card -->
-    <div class="bento-card dossier-card">
+    <div class="bento-card dossier-card spotlight-card reveal-on-scroll">
       <div class="dossier-meta-top">
         <span>ID: 0x42 // OPERATOR_DOSSIER</span>
         <span class="clearance">CLEARANCE: RED_TEAM // LEVEL_5</span>
@@ -1757,7 +2012,7 @@ body {
     </div>
 
     <!-- Right: Operational Intel Card -->
-    <div class="bento-card intel-card">
+    <div class="bento-card intel-card spotlight-card reveal-on-scroll">
       <div class="sec-header" style="margin-bottom:0; padding-bottom:8px;">
         <span class="sec-title" style="font-size:12px;">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
@@ -1827,26 +2082,26 @@ body {
 
   <!-- STAT NODES COUNTERS BAR -->
   <section class="stat-nodes-grid">
-    <div class="stat-node">
+    <div class="stat-node spotlight-card reveal-on-scroll">
       <div class="stat-num" style="color:var(--accent-primary);">11+</div>
       <div class="stat-label">Security Tools Engineered</div>
     </div>
-    <div class="stat-node">
+    <div class="stat-node spotlight-card reveal-on-scroll">
       <div class="stat-num" style="color:var(--accent-tertiary);">2+</div>
       <div class="stat-label">Weaponized CVE Exploits</div>
     </div>
-    <div class="stat-node">
+    <div class="stat-node spotlight-card reveal-on-scroll">
       <div class="stat-num" style="color:var(--accent-green);">100%</div>
       <div class="stat-label">Offensive Red Team Focus</div>
     </div>
-    <div class="stat-node">
+    <div class="stat-node spotlight-card reveal-on-scroll">
       <div class="stat-num" style="color:#c4b5fd;">HTB Pro</div>
       <div class="stat-label">Verified Certifications</div>
     </div>
   </section>
 
   <!-- 02. EMBEDDED LIVE CYBERDECK CONSOLE -->
-  <section id="terminal" class="terminal-dock">
+  <section id="terminal" class="terminal-dock spotlight-card reveal-on-scroll">
     <div class="term-head">
       <div class="term-dots">
         <div class="term-dot red"></div>
@@ -1889,7 +2144,7 @@ body {
   </section>
 
   <!-- 03. WEAPONIZED ARSENAL & REPOSITORIES -->
-  <section id="arsenal" class="bento-card">
+  <section id="arsenal" class="bento-card spotlight-card reveal-on-scroll">
     <div class="sec-header">
       <div class="sec-title">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
@@ -2532,15 +2787,28 @@ function cycleTheme() {
 var audioCtx = null;
 var sfxEnabled = false;
 
+try {
+  if (localStorage.getItem("benslates_sfx") === "true") {
+    sfxEnabled = true;
+    setTimeout(function() {
+      var btn = document.getElementById("sfx-toggle-btn");
+      var mBtn = document.getElementById("m-sfx-btn");
+      if (btn) { btn.textContent = "SFX: ON"; btn.style.color = "var(--accent-green)"; btn.style.borderColor = "var(--accent-green)"; }
+      if (mBtn) { mBtn.textContent = "SFX: ON"; mBtn.style.color = "var(--accent-green)"; }
+    }, 100);
+  }
+} catch(e) {}
+
 function toggleAudioSFX() {
   sfxEnabled = !sfxEnabled;
+  try { localStorage.setItem("benslates_sfx", sfxEnabled ? "true" : "false"); } catch(e) {}
   var btn = document.getElementById("sfx-toggle-btn");
   var mBtn = document.getElementById("m-sfx-btn");
   if (sfxEnabled) {
     if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
     if (btn) { btn.textContent = "SFX: ON"; btn.style.color = "var(--accent-green)"; btn.style.borderColor = "var(--accent-green)"; }
     if (mBtn) { mBtn.textContent = "SFX: ON"; mBtn.style.color = "var(--accent-green)"; }
-    playCyberTone(880, 0.1);
+    playCyberTone(880, 0.08);
     showToast("TACTICAL SFX ENABLED");
   } else {
     if (btn) { btn.textContent = "SFX: OFF"; btn.style.color = "var(--text-muted)"; btn.style.borderColor = "var(--border-hairline)"; }
@@ -2553,11 +2821,12 @@ function playCyberTone(freq, duration) {
   if (!sfxEnabled) return;
   try {
     if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    if (audioCtx.state === "suspended") audioCtx.resume();
     var osc = audioCtx.createOscillator();
     var gain = audioCtx.createGain();
     osc.type = "sine";
     osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
-    gain.gain.setValueAtTime(0.04, audioCtx.currentTime);
+    gain.gain.setValueAtTime(0.035, audioCtx.currentTime);
     gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + duration);
     osc.connect(gain);
     gain.connect(audioCtx.destination);
@@ -2732,6 +3001,8 @@ document.addEventListener("keydown", function(e) {
   }
 });
 
+var autocompleteList = ["help", "neofetch", "scan", "nmap", "whoami", "tools", "projects", "exploits", "cve", "matrix-ad", "ad-tree", "skills", "certs", "matrix", "theme", "resume", "contact", "clear", "banner"];
+
 termInput.addEventListener("keydown", function(e) {
   if (e.key === "Enter") {
     var raw = termInput.value.trim();
@@ -2742,17 +3013,31 @@ termInput.addEventListener("keydown", function(e) {
     execCommand(raw);
     termInput.value = "";
   } else if (e.key === "ArrowUp") {
-    if (termHistIdx > 0) {
+    e.preventDefault();
+    if (termHist.length > 0 && termHistIdx > 0) {
       termHistIdx--;
       termInput.value = termHist[termHistIdx];
     }
   } else if (e.key === "ArrowDown") {
+    e.preventDefault();
     if (termHistIdx < termHist.length - 1) {
       termHistIdx++;
       termInput.value = termHist[termHistIdx];
     } else {
       termHistIdx = termHist.length;
       termInput.value = "";
+    }
+  } else if (e.key === "Tab") {
+    e.preventDefault();
+    var val = termInput.value.trim().toLowerCase();
+    if (val) {
+      for (var i = 0; i < autocompleteList.length; i++) {
+        if (autocompleteList[i].startsWith(val)) {
+          termInput.value = autocompleteList[i];
+          playCyberTone(900, 0.03);
+          break;
+        }
+      }
     }
   }
 });
@@ -2805,6 +3090,7 @@ function execCommand(cmdStr) {
       break;
 
     case "scan":
+    case "nmap":
       tPrint("<span class='t-primary'>[*] Starting Nmap 7.94 ( https://nmap.org ) at 2026-11-13 23:40</span>");
       tPrint("<span class='t-muted'>[*] Initiating SYN Stealth Scan against 10.10.11.24 (mythical.htb)...</span>");
       setTimeout(function() {
@@ -2817,6 +3103,27 @@ function execCommand(cmdStr) {
         tPrint("<span class='t-primary'>[*] Target identified: Windows Server 2022 Active Directory Domain Controller</span>");
         tPrint("<span class='t-pink'>[*] Recommended Attack Vector: AS-REP Roasting / gMSA AES Extraction</span>");
       }, 300);
+      break;
+
+    case "banner":
+      tPrint("<span class='t-primary'> ____  _____ _   _ _____ _   _ _____ _____ _   _ </span>");
+      tPrint("<span class='t-primary'>| __ )| ____| \\ | |___ /| | | |_   _| ____| \\ | |</span>");
+      tPrint("<span class='t-primary'>|  _ \\|  _| |  \\| | |_ \\| | | | | | |  _| |  \\| |</span>");
+      tPrint("<span class='t-primary'>| |_) | |___| |\\  |___) | |_| | | | | |___| |\\  |</span>");
+      tPrint("<span class='t-primary'>|____/|_____|_| \\_|____/ \\___/  |_| |_____|_| \\_|</span>");
+      tPrint("<span class='t-pink'>BENJAMIN ANDREW SLATES // OFFENSIVE RESEARCH LAB</span>");
+      break;
+
+    case "ad-tree":
+      tPrint("<span class='t-pink'>[ ACTIVE DIRECTORY ATTACK GRAPH ]</span>");
+      tPrint("<span class='t-primary'>CORP.LOCAL</span> (Forest Functional Level 2016)");
+      tPrint("  ├── <span class='t-green'>DC01.CORP.LOCAL</span> (10.10.11.24) [Domain Controller]");
+      tPrint("  │    ├── <span class='t-muted'>Port 88:</span>  Kerberos [AS-REP / Kerberoasting Validated]");
+      tPrint("  │    ├── <span class='t-muted'>Port 389:</span> LDAP / LDAPS [Shadow Credentials Viable]");
+      tPrint("  │    └── <span class='t-muted'>Port 445:</span> SMB [gMSA Password Blob Extracted]");
+      tPrint("  ├── <span class='t-purple'>TIER-1 ASSETS</span>");
+      tPrint("  │    └── SQL01, APP02, FS01 [Unconstrained Delegation]");
+      tPrint("  └── <span class='t-pink'>TIER-0 DOMAIN ADMS</span> (Full DCSync Compromise Achieved)");
       break;
 
     case "whoami":
@@ -2845,6 +3152,7 @@ function execCommand(cmdStr) {
       tPrint(" 11. <span class='t-primary'>CNN_EMNIST_VIZ</span>         Deep learning neural net threat classifier");
       break;
 
+    case "cve":
     case "exploits":
       tPrint("<span class='t-pink'>[ WEAPONIZED CVES &amp; ZERO-DAY RESEARCH ]</span>");
       tPrint("  &bull; <span class='t-primary'>CVE-2026-31431</span>: Memory analysis &amp; PoC exploitation suite");
@@ -2948,6 +3256,209 @@ function typeLoop() {
   setTimeout(typeLoop, speed);
 }
 setTimeout(typeLoop, 1500);
+
+/* ── CARD INTERACTIVE MOUSE SPOTLIGHT (LINEAR / STRIPE GLOW) ── */
+document.addEventListener("mousemove", function(e) {
+  var cards = document.querySelectorAll(".spotlight-card, .bento-card, .crate-card, .stat-node, .matrix-card, .cert-card, .terminal-dock");
+  for (var i = 0; i < cards.length; i++) {
+    var c = cards[i];
+    var rect = c.getBoundingClientRect();
+    if (e.clientX >= rect.left - 60 && e.clientX <= rect.right + 60 &&
+        e.clientY >= rect.top - 60 && e.clientY <= rect.bottom + 60) {
+      c.style.setProperty("--spot-x", (e.clientX - rect.left) + "px");
+      c.style.setProperty("--spot-y", (e.clientY - rect.top) + "px");
+    }
+  }
+}, { passive: true });
+
+/* ── SCROLL OBSERVER REVEAL ENGINE ── */
+(function() {
+  var targets = document.querySelectorAll(".bento-card, .stat-node, .terminal-dock, .reveal-on-scroll");
+  if ("IntersectionObserver" in window) {
+    var observer = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("revealed");
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.08, rootMargin: "0px 0px -40px 0px" });
+
+    targets.forEach(function(el) {
+      observer.observe(el);
+    });
+  } else {
+    targets.forEach(function(el) {
+      el.classList.add("revealed");
+    });
+  }
+})();
+
+/* ── GLOBAL COMMAND PALETTE ENGINE ── */
+var cmdPaletteOpen = false;
+var cmdItems = [
+  { group: "NAVIGATION", icon: "01", name: "Dossier // Operator Profile", action: function() { navigateSection("dossier"); }, shortcut: "#dossier" },
+  { group: "NAVIGATION", icon: ">_", name: "Launch Terminal Console", action: function() { navigateSection("terminal"); focusTerminal(); }, shortcut: "#terminal" },
+  { group: "NAVIGATION", icon: "03", name: "Weaponized Arsenal // 11 Built Tools", action: function() { navigateSection("arsenal"); }, shortcut: "#arsenal" },
+  { group: "NAVIGATION", icon: "04", name: "Adversarial Attack Matrix // MITRE ATT&CK", action: function() { navigateSection("matrix"); }, shortcut: "#matrix" },
+  { group: "NAVIGATION", icon: "05", name: "Security Arsenal & Tech Stack", action: function() { navigateSection("skills"); }, shortcut: "#skills" },
+  { group: "NAVIGATION", icon: "06", name: "Defense Vault & Credentials (HTB Certs)", action: function() { navigateSection("vault"); }, shortcut: "#vault" },
+  { group: "NAVIGATION", icon: "07", name: "Firm Profile & Direct Contact", action: function() { navigateSection("firm"); }, shortcut: "#firm" },
+
+  { group: "QUICK ACTIONS", icon: "[T]", name: "Switch Theme (Cyan / Matrix / Crimson)", action: function() { cycleTheme(); }, shortcut: "THEME" },
+  { group: "QUICK ACTIONS", icon: "[S]", name: "Toggle Tactical Mechanical SFX", action: function() { toggleAudioSFX(); }, shortcut: "SFX" },
+  { group: "QUICK ACTIONS", icon: "[M]", name: "Toggle Matrix Digital Rain", action: function() { toggleMatrix(); }, shortcut: "MATRIX" },
+  { group: "QUICK ACTIONS", icon: "[+]", name: "Download Curriculum Vitae (PDF)", action: function() { window.open("./resume.pdf", "_blank"); }, shortcut: "CV.PDF" },
+  { group: "QUICK ACTIONS", icon: "[@]", name: "Copy Email: hello@benslates.xyz", action: function() { navigator.clipboard.writeText("hello@benslates.xyz"); showToast("COPIED: hello@benslates.xyz"); }, shortcut: "EMAIL" },
+  { group: "QUICK ACTIONS", icon: "[#]", name: "Open GitHub Profile (@ben-slates)", action: function() { window.open("https://github.com/ben-slates", "_blank"); }, shortcut: "GITHUB" },
+  { group: "QUICK ACTIONS", icon: "[in]", name: "Open LinkedIn Profile", action: function() { window.open("https://linkedin.com/in/ben-slates", "_blank"); }, shortcut: "LINKEDIN" },
+  { group: "QUICK ACTIONS", icon: "[>]", name: "Run Kali Neofetch in Console", action: function() { navigateSection("terminal"); execCommand("neofetch"); focusTerminal(); }, shortcut: "NEOFETCH" },
+  { group: "QUICK ACTIONS", icon: "[*]", name: "Run Active Target SYN Port Scan", action: function() { navigateSection("terminal"); execCommand("scan"); focusTerminal(); }, shortcut: "SCAN" }
+];
+var selectedCmdIdx = 0;
+var filteredCmdItems = cmdItems.slice();
+
+function openCmdPalette() {
+  var p = document.getElementById("cmd-palette");
+  if (!p) return;
+  cmdPaletteOpen = true;
+  p.classList.add("open");
+  var input = document.getElementById("cmd-palette-input");
+  input.value = "";
+  renderCmdPaletteItems("");
+  setTimeout(function() { input.focus(); }, 60);
+  playCyberTone(1000, 0.05);
+}
+
+function closeCmdPalette() {
+  var p = document.getElementById("cmd-palette");
+  if (!p) return;
+  cmdPaletteOpen = false;
+  p.classList.remove("open");
+  playCyberTone(600, 0.04);
+}
+
+function handlePaletteBackdrop(e) {
+  if (e.target.id === "cmd-palette") {
+    closeCmdPalette();
+  }
+}
+
+function navigateSection(id) {
+  closeCmdPalette();
+  var el = document.getElementById(id);
+  if (el) {
+    el.scrollIntoView({ behavior: "smooth", block: "start" });
+  }
+}
+
+function renderCmdPaletteItems(query) {
+  var list = document.getElementById("cmd-palette-results");
+  if (!list) return;
+  var q = (query || "").trim().toLowerCase();
+
+  filteredCmdItems = cmdItems.filter(function(item) {
+    if (!q) return true;
+    return item.name.toLowerCase().indexOf(q) !== -1 ||
+           item.group.toLowerCase().indexOf(q) !== -1 ||
+           item.shortcut.toLowerCase().indexOf(q) !== -1;
+  });
+
+  if (selectedCmdIdx >= filteredCmdItems.length) selectedCmdIdx = 0;
+
+  var html = "";
+  var lastGroup = "";
+  for (var i = 0; i < filteredCmdItems.length; i++) {
+    var it = filteredCmdItems[i];
+    if (it.group !== lastGroup) {
+      html += "<div class='cmd-group-label'>" + it.group + "</div>";
+      lastGroup = it.group;
+    }
+    var sel = i === selectedCmdIdx ? " selected" : "";
+    html += "<div class='cmd-item" + sel + "' onclick='executePaletteItem(" + i + ")' onmouseover='selectedCmdIdx=" + i + "; updateSelectedPaletteItem();'>";
+    html += "  <div class='cmd-item-left'>";
+    html += "    <span class='cmd-item-icon'>" + it.icon + "</span>";
+    html += "    <span>" + it.name + "</span>";
+    html += "  </div>";
+    html += "  <span class='cmd-item-shortcut'>" + it.shortcut + "</span>";
+    html += "</div>";
+  }
+
+  if (filteredCmdItems.length === 0) {
+    html = "<div style='padding:20px; text-align:center; color:var(--text-faint); font-family:var(--font-mono); font-size:12px;'>No matching commands or destinations found.</div>";
+  }
+
+  list.innerHTML = html;
+}
+
+function updateSelectedPaletteItem() {
+  var items = document.querySelectorAll(".cmd-palette-results .cmd-item");
+  items.forEach(function(el, idx) {
+    if (idx === selectedCmdIdx) el.classList.add("selected");
+    else el.classList.remove("selected");
+  });
+}
+
+function executePaletteItem(idx) {
+  if (filteredCmdItems[idx] && filteredCmdItems[idx].action) {
+    filteredCmdItems[idx].action();
+    closeCmdPalette();
+  }
+}
+
+document.addEventListener("keydown", function(e) {
+  if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === "k") {
+    e.preventDefault();
+    if (cmdPaletteOpen) closeCmdPalette();
+    else openCmdPalette();
+    return;
+  }
+
+  if (e.key === "/" && !cmdPaletteOpen && document.activeElement.tagName !== "INPUT" && document.activeElement.tagName !== "TEXTAREA") {
+    e.preventDefault();
+    openCmdPalette();
+    return;
+  }
+
+  if (!cmdPaletteOpen) return;
+
+  if (e.key === "Escape") {
+    e.preventDefault();
+    closeCmdPalette();
+  } else if (e.key === "ArrowDown") {
+    e.preventDefault();
+    if (filteredCmdItems.length > 0) {
+      selectedCmdIdx = (selectedCmdIdx + 1) % filteredCmdItems.length;
+      updateSelectedPaletteItem();
+      scrollSelectedPaletteItem();
+    }
+  } else if (e.key === "ArrowUp") {
+    e.preventDefault();
+    if (filteredCmdItems.length > 0) {
+      selectedCmdIdx = (selectedCmdIdx - 1 + filteredCmdItems.length) % filteredCmdItems.length;
+      updateSelectedPaletteItem();
+      scrollSelectedPaletteItem();
+    }
+  } else if (e.key === "Enter") {
+    e.preventDefault();
+    executePaletteItem(selectedCmdIdx);
+  }
+});
+
+function scrollSelectedPaletteItem() {
+  var sel = document.querySelector(".cmd-palette-results .cmd-item.selected");
+  if (sel) {
+    sel.scrollIntoView({ block: "nearest", behavior: "smooth" });
+  }
+}
+
+var paletteInputEl = document.getElementById("cmd-palette-input");
+if (paletteInputEl) {
+  paletteInputEl.addEventListener("input", function(e) {
+    selectedCmdIdx = 0;
+    renderCmdPaletteItems(e.target.value);
+  });
+}
 
 /* ── SMOOTH HIGH-PERFORMANCE LERP CURSOR ── */
 (function() {
