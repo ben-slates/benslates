@@ -196,10 +196,7 @@ When accessing the interactive Cyber Terminal console, the following commands ar
 ```bash
 benslates/
 ├── index.html          # Core single-page application (Unified Cyberdeck HUD + Terminal Modal)
-├── me.jpg              # High-resolution profile avatar asset
-├── mobile_bg.jpg       # Wallpaper asset for mobile glass cards
-├── wallpaper.png       # Desktop Kali Linux wallpaper
-├── wallpaper1.png      # Alternate desktop background asset
+├── me.jpeg             # Profile avatar asset
 ├── favicon.svg         # SVG vector favicon
 ├── icon.png            # Apple touch & high-DPI icon
 ├── resume.pdf          # Official resume (PDF)
