@@ -227,22 +227,12 @@ button {
   color: var(--accent-cyan);
   box-shadow: 0 0 14px rgba(0, 240, 255, 0.2);
 }
-.brand-text {
-  display: flex;
-  flex-direction: column;
-}
 .brand-name {
   font-family: var(--font-display);
   font-weight: 700;
   font-size: 16px;
   letter-spacing: -0.01em;
   color: var(--text-primary);
-}
-.brand-sub {
-  font-family: var(--font-mono);
-  font-size: 10px;
-  letter-spacing: 0.08em;
-  color: var(--accent-emerald);
 }
 
 .nav-links {
@@ -314,9 +304,6 @@ button {
 @media (max-width: 640px) {
   #sound-btn, #matrix-btn, .header-cv-btn {
     display: none !important;
-  }
-  .brand-sub {
-    display: none;
   }
 }
 
@@ -1704,10 +1691,7 @@ button {
       <!-- Brand Logo / Identity -->
       <a href="#hero" class="brand-identity">
         <div class="brand-badge">BS</div>
-        <div class="brand-text">
-          <span class="brand-name">benslates</span>
-          <span class="brand-sub">// RED TEAM LABS</span>
-        </div>
+        <span class="brand-name">benslates</span>
       </a>
 
       <!-- Desktop Nav Links -->
