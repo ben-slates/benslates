@@ -701,41 +701,71 @@ body {
   box-shadow: 0 0 25px var(--border-neon-glow);
 }
 
-/* ── HUD INTEL CARD & RADAR CANVAS ── */
+/* ── OPERATIONAL INTEL CARD ── */
 .intel-card {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  gap: 16px;
-  background: radial-gradient(circle at top right, rgba(0, 240, 255, 0.06), transparent 70%), var(--bg-card);
+  gap: 14px;
+  background: radial-gradient(circle at top right, rgba(0, 240, 255, 0.04), transparent 70%), var(--bg-card);
 }
-.radar-cluster {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-  background: rgba(255, 255, 255, 0.02);
-  border: 1px solid var(--border-hairline);
-  border-radius: 16px;
-  padding: 12px 14px;
-}
-#radar-canvas {
-  width: 110px;
-  height: 110px;
-  border-radius: 50%;
-  background: #04080e;
-  border: 1.5px solid var(--accent-primary);
-  box-shadow: 0 0 16px var(--border-neon-glow);
-  flex-shrink: 0;
-}
-.radar-intel-text {
+.intel-focus-box {
   display: flex;
   flex-direction: column;
-  gap: 4px;
-  font-family: var(--font-mono);
-  font-size: 10.5px;
+  gap: 10px;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid var(--border-hairline);
+  border-radius: 14px;
+  padding: 14px 16px;
 }
-.rit-title { color: var(--accent-primary); font-weight: 700; font-size: 11px; }
-.rit-sub { color: var(--text-muted); line-height: 1.4; }
+.focus-headline {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.08em;
+}
+.focus-title {
+  color: var(--accent-primary);
+  font-weight: 700;
+}
+.focus-status {
+  color: var(--accent-green);
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.focus-status::before {
+  content: '';
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent-green);
+  box-shadow: 0 0 8px var(--accent-green);
+}
+.focus-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.focus-pill {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  padding: 4px 9px;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.035);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: var(--text-main);
+  transition: all 0.2s;
+}
+.focus-pill:hover {
+  border-color: var(--accent-primary);
+  color: var(--accent-primary);
+  background: rgba(0, 240, 255, 0.05);
+}
 
 .intel-row {
   display: flex;
@@ -1621,31 +1651,35 @@ body {
       </div>
     </div>
 
-    <!-- Right: Operational Intel & Tactical Radar Card -->
+    <!-- Right: Operational Intel Card -->
     <div class="bento-card intel-card">
       <div class="sec-header" style="margin-bottom:0; padding-bottom:8px;">
         <span class="sec-title" style="font-size:12px;">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="m4.93 4.93 4.24 4.24"/></svg>
-          TACTICAL RADAR HUD
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          OPERATIONAL INTEL &amp; SPECS
         </span>
-        <span class="sec-badge" style="color:var(--accent-green); border-color:rgba(0,245,160,0.3);">SWEEPING</span>
+        <span class="sec-badge" style="color:var(--accent-primary); border-color:rgba(0,240,255,0.3);">ACTIVE RED TEAM</span>
       </div>
 
-      <!-- Tactical Radar Sweep Canvas Cluster -->
-      <div class="radar-cluster">
-        <canvas id="radar-canvas" width="110" height="110"></canvas>
-        <div class="radar-intel-text">
-          <span class="rit-title">SURFACE SCAN: ACTIVE</span>
-          <span class="rit-sub">3 Targets Monitored</span>
-          <span class="rit-sub">&bull; AD-DC01 (10.10.11.24)</span>
-          <span class="rit-sub">&bull; C2_CORE: RUST_LISTENER</span>
-          <span class="rit-sub">&bull; ESP32-NAT: COVERT_ROUTER</span>
+      <!-- Core Specialization Tags -->
+      <div class="intel-focus-box">
+        <div class="focus-headline">
+          <span class="focus-title">CORE SPECIALIZATIONS</span>
+          <span class="focus-status">OPERATIONAL</span>
+        </div>
+        <div class="focus-pills">
+          <span class="focus-pill">Active Directory</span>
+          <span class="focus-pill">Kerberos Attacks</span>
+          <span class="focus-pill">C2 Architecture</span>
+          <span class="focus-pill">Rust Implants</span>
+          <span class="focus-pill">Exploit Dev</span>
+          <span class="focus-pill">AV/EDR Evasion</span>
         </div>
       </div>
 
       <div class="intel-row">
         <div class="intel-label">
-          <span>Active Directory Exploitation</span>
+          <span>Active Directory &amp; Kerberos Internals</span>
           <span style="color:var(--accent-primary);">98%</span>
         </div>
         <div class="bar-track"><div class="bar-fill" style="width:98%;"></div></div>
@@ -1657,6 +1691,14 @@ body {
           <span style="color:var(--accent-primary);">94%</span>
         </div>
         <div class="bar-track"><div class="bar-fill" style="width:94%;"></div></div>
+      </div>
+
+      <div class="intel-row">
+        <div class="intel-label">
+          <span>Adversary Emulation &amp; C2 Infrastructure</span>
+          <span style="color:var(--accent-primary);">92%</span>
+        </div>
+        <div class="bar-track"><div class="bar-fill" style="width:92%;"></div></div>
       </div>
 
       <div class="intel-row">
@@ -2476,68 +2518,6 @@ function toggleMatrix() {
   }
   playCyberTone(500, 0.08);
 }
-
-/* ── TACTICAL RADAR CANVAS ENGINE ── */
-var radarCanvas = document.getElementById("radar-canvas");
-var rCtx = radarCanvas.getContext("2d");
-var sweepAngle = 0;
-var radarBlips = [
-  { x: 35, y: 40, label: "AD-DC01", color: "#00f0ff" },
-  { x: 75, y: 70, label: "C2_CORE", color: "#00f5a0" },
-  { x: 80, y: 35, label: "ESP32", color: "#ffb020" }
-];
-
-function drawRadar() {
-  var w = radarCanvas.width;
-  var h = radarCanvas.height;
-  var cx = w / 2;
-  var cy = h / 2;
-  var radius = w / 2 - 2;
-
-  // Fade trail
-  rCtx.fillStyle = "rgba(4, 8, 14, 0.15)";
-  rCtx.fillRect(0, 0, w, h);
-
-  // Concentric rings
-  rCtx.strokeStyle = "rgba(0, 240, 255, 0.15)";
-  rCtx.lineWidth = 1;
-  rCtx.beginPath();
-  rCtx.arc(cx, cy, radius * 0.35, 0, Math.PI * 2);
-  rCtx.arc(cx, cy, radius * 0.7, 0, Math.PI * 2);
-  rCtx.arc(cx, cy, radius * 0.96, 0, Math.PI * 2);
-  rCtx.stroke();
-
-  // Crosshairs
-  rCtx.beginPath();
-  rCtx.moveTo(cx, 0); rCtx.lineTo(cx, h);
-  rCtx.moveTo(0, cy); rCtx.lineTo(w, cy);
-  rCtx.stroke();
-
-  // Rotating sweep line
-  sweepAngle += 0.04;
-  var endX = cx + Math.cos(sweepAngle) * radius;
-  var endY = cy + Math.sin(sweepAngle) * radius;
-
-  rCtx.strokeStyle = "rgba(0, 240, 255, 0.8)";
-  rCtx.lineWidth = 1.5;
-  rCtx.beginPath();
-  rCtx.moveTo(cx, cy);
-  rCtx.lineTo(endX, endY);
-  rCtx.stroke();
-
-  // Render blips
-  for (var i = 0; i < radarBlips.length; i++) {
-    var b = radarBlips[i];
-    rCtx.fillStyle = b.color;
-    rCtx.beginPath();
-    rCtx.arc(b.x, b.y, 3, 0, Math.PI * 2);
-    rCtx.fill();
-    rCtx.fillStyle = "rgba(255,255,255,0.7)";
-    rCtx.font = "8px 'JetBrains Mono', monospace";
-    rCtx.fillText(b.label, b.x + 5, b.y + 2);
-  }
-}
-setInterval(drawRadar, 40);
 
 /* ── HACKER TEXT SCRAMBLE DECODER EFFECT ── */
 var originalName = "ʙᴇɴᴊᴀᴍɪɴ ᴀɴᴅʀᴇᴡ ꜱʟᴀᴛᴇꜱ";
