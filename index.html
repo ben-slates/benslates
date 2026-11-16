@@ -1516,9 +1516,114 @@ body {
   opacity: 1;
 }
 
+/* ── SMOOTH HIGH-END CYBER CURSOR ── */
+@media (pointer: fine) {
+  html, body {
+    cursor: none;
+  }
+  a, button, input, textarea, select, [role="button"], label, .bento-card, .act-btn, .hud-btn, .tool-card, .stat-node, .cert-action-btn, .fs-btn, .matrix-tab-btn {
+    cursor: none !important;
+  }
+}
+
+.custom-cursor-dot,
+.custom-cursor-ring {
+  position: fixed;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  z-index: 999999;
+  border-radius: 50%;
+  opacity: 0;
+  will-change: transform;
+  transform: translate3d(-100px, -100px, 0);
+}
+
+.custom-cursor-dot {
+  width: 6px;
+  height: 6px;
+  margin-top: -3px;
+  margin-left: -3px;
+  background-color: var(--accent-primary);
+  box-shadow: 0 0 10px var(--accent-primary);
+  transition: opacity 0.2s ease, width 0.2s ease, height 0.2s ease, background-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.custom-cursor-ring {
+  width: 36px;
+  height: 36px;
+  margin-top: -18px;
+  margin-left: -18px;
+  border: 1.5px solid var(--accent-primary);
+  background: rgba(0, 240, 255, 0.03);
+  box-shadow: 0 0 16px var(--border-neon-glow);
+  transition: opacity 0.3s ease, width 0.22s cubic-bezier(0.16, 1, 0.3, 1), height 0.22s cubic-bezier(0.16, 1, 0.3, 1), margin 0.22s cubic-bezier(0.16, 1, 0.3, 1), border-radius 0.22s ease, border-color 0.25s ease, background 0.25s ease, box-shadow 0.25s ease;
+}
+
+/* Hover on interactive elements */
+.custom-cursor-ring.cursor-hover {
+  width: 54px;
+  height: 54px;
+  margin-top: -27px;
+  margin-left: -27px;
+  border-color: var(--accent-primary);
+  background: rgba(0, 240, 255, 0.09);
+  box-shadow: 0 0 24px var(--border-neon-glow), inset 0 0 12px rgba(0, 240, 255, 0.12);
+}
+
+.custom-cursor-dot.cursor-hover {
+  width: 8px;
+  height: 8px;
+  margin-top: -4px;
+  margin-left: -4px;
+  background-color: #ffffff;
+  box-shadow: 0 0 14px #ffffff, 0 0 20px var(--accent-primary);
+}
+
+/* Click / Mousedown tactile compression */
+.custom-cursor-ring.cursor-active {
+  width: 26px;
+  height: 26px;
+  margin-top: -13px;
+  margin-left: -13px;
+  border-width: 2px;
+  background: rgba(0, 240, 255, 0.2);
+  box-shadow: 0 0 25px var(--border-neon-glow);
+}
+
+/* Terminal / Text input focus */
+.custom-cursor-ring.cursor-text {
+  width: 4px;
+  height: 24px;
+  margin-top: -12px;
+  margin-left: -2px;
+  border-radius: 2px;
+  border-width: 2px;
+  background: var(--accent-primary);
+  box-shadow: 0 0 12px var(--accent-primary);
+}
+.custom-cursor-dot.cursor-text {
+  opacity: 0;
+}
+
+/* Touch devices & reduced motion fallback */
+@media (pointer: coarse), (hover: none), (prefers-reduced-motion: reduce) {
+  .custom-cursor-dot,
+  .custom-cursor-ring {
+    display: none !important;
+  }
+  html, body, a, button, input {
+    cursor: auto !important;
+  }
+}
+
 </style>
 </head>
 <body>
+
+<!-- High-End Smooth Custom Cursor -->
+<div class="custom-cursor-dot" id="cursor-dot"></div>
+<div class="custom-cursor-ring" id="cursor-ring"></div>
 
 <!-- Ambient Matrix Rain Canvas -->
 <canvas id="matrix-canvas"></canvas>
@@ -2843,6 +2948,97 @@ function typeLoop() {
   setTimeout(typeLoop, speed);
 }
 setTimeout(typeLoop, 1500);
+
+/* ── SMOOTH HIGH-PERFORMANCE LERP CURSOR ── */
+(function() {
+  if (window.matchMedia("(pointer: coarse)").matches) return;
+
+  var dot = document.getElementById("cursor-dot");
+  var ring = document.getElementById("cursor-ring");
+  if (!dot || !ring) return;
+
+  var mouseX = -100;
+  var mouseY = -100;
+  var ringX = -100;
+  var ringY = -100;
+  var isVisible = false;
+  var hasMoved = false;
+  var ease = 0.16;
+
+  window.addEventListener("mousemove", function(e) {
+    mouseX = e.clientX;
+    mouseY = e.clientY;
+
+    if (!hasMoved) {
+      ringX = mouseX;
+      ringY = mouseY;
+      hasMoved = true;
+    }
+
+    if (!isVisible) {
+      isVisible = true;
+      dot.style.opacity = "1";
+      ring.style.opacity = "1";
+    }
+
+    dot.style.transform = "translate3d(" + mouseX + "px, " + mouseY + "px, 0)";
+  }, { passive: true });
+
+  window.addEventListener("mousedown", function() {
+    ring.classList.add("cursor-active");
+  });
+
+  window.addEventListener("mouseup", function() {
+    ring.classList.remove("cursor-active");
+  });
+
+  document.addEventListener("mouseleave", function() {
+    isVisible = false;
+    dot.style.opacity = "0";
+    ring.style.opacity = "0";
+  });
+
+  document.addEventListener("mouseenter", function() {
+    isVisible = true;
+    dot.style.opacity = "1";
+    ring.style.opacity = "1";
+  });
+
+  var hoverSelector = "a, button, [role='button'], .act-btn, .hud-btn, .tool-card, .matrix-tab-btn, .stat-node, .fs-btn, .social-icon-btn, .cert-action-btn, .bento-card, .focus-pill, .skill-pill, .role-chip, .verified-pill";
+  var textSelector = "input, textarea, [contenteditable='true'], #term-screen, .t-line";
+
+  document.addEventListener("mouseover", function(e) {
+    if (e.target.closest(textSelector)) {
+      ring.classList.add("cursor-text");
+      dot.classList.add("cursor-text");
+    } else if (e.target.closest(hoverSelector)) {
+      ring.classList.add("cursor-hover");
+      dot.classList.add("cursor-hover");
+    }
+  });
+
+  document.addEventListener("mouseout", function(e) {
+    var related = e.relatedTarget;
+    if (!related || !related.closest(textSelector)) {
+      ring.classList.remove("cursor-text");
+      dot.classList.remove("cursor-text");
+    }
+    if (!related || !related.closest(hoverSelector)) {
+      ring.classList.remove("cursor-hover");
+      dot.classList.remove("cursor-hover");
+    }
+  });
+
+  function renderCursor() {
+    if (hasMoved) {
+      ringX += (mouseX - ringX) * ease;
+      ringY += (mouseY - ringY) * ease;
+      ring.style.transform = "translate3d(" + ringX.toFixed(2) + "px, " + ringY.toFixed(2) + "px, 0)";
+    }
+    requestAnimationFrame(renderCursor);
+  }
+  requestAnimationFrame(renderCursor);
+})();
 
 </script>
 </body>
