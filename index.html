@@ -168,12 +168,18 @@ body {
   top: 0;
   z-index: 1000;
   width: 100%;
-  padding: 12px 24px;
-  background: rgba(5, 7, 12, 0.84);
+  background: rgba(5, 7, 12, 0.88);
   backdrop-filter: blur(28px) saturate(200%);
   -webkit-backdrop-filter: blur(28px) saturate(200%);
   border-bottom: 1px solid var(--border-hairline);
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.65);
+}
+.nav-inner {
+  max-width: 1240px;
+  margin: 0 auto;
+  width: 100%;
+  padding: 0 20px;
+  height: 64px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -182,13 +188,14 @@ body {
 .nav-brand {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 10px;
   text-decoration: none;
   font-family: var(--font-mono);
   font-weight: 800;
   font-size: 15px;
   color: #fff;
   letter-spacing: -0.02em;
+  flex-shrink: 0;
 }
 .brand-badge {
   display: inline-flex;
@@ -211,55 +218,68 @@ body {
   -webkit-text-fill-color: transparent;
   filter: drop-shadow(0 0 12px var(--border-neon-glow));
 }
+.brand-status-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--accent-green);
+  box-shadow: 0 0 8px var(--accent-green);
+  animation: beaconPulse 2s infinite ease-in-out;
+  margin-left: 2px;
+}
 .brand-tagline {
   font-size: 10px;
   color: var(--text-muted);
   font-weight: 500;
   display: none;
 }
-@media (min-width: 920px) {
-  .brand-tagline { display: inline-block; margin-left: 6px; }
+@media (min-width: 1100px) {
+  .brand-tagline { display: inline-block; margin-left: 4px; }
 }
 
 .nav-links {
   display: none;
   align-items: center;
-  gap: 5px;
+  gap: 4px;
   list-style: none;
+  margin: 0;
+  padding: 0;
 }
-@media (min-width: 900px) {
+@media (min-width: 960px) {
   .nav-links { display: flex; }
 }
 .nav-link-item a {
   font-family: var(--font-mono);
-  font-size: 11px;
+  font-size: 11.5px;
   font-weight: 600;
   color: var(--text-muted);
   text-decoration: none;
   padding: 6px 12px;
-  border-radius: 14px;
+  border-radius: 12px;
   border: 1px solid transparent;
   transition: all 0.2s;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.03em;
+  white-space: nowrap;
 }
 .nav-link-item a:hover {
   color: #fff;
   border-color: rgba(0, 240, 255, 0.25);
   background: rgba(0, 240, 255, 0.08);
-  box-shadow: 0 0 14px rgba(0, 240, 255, 0.15);
+  box-shadow: 0 0 12px var(--border-neon-glow);
 }
 
 .nav-actions {
   display: flex;
   align-items: center;
   gap: 8px;
+  flex-shrink: 0;
 }
 .hud-btn {
   font-family: var(--font-mono);
   font-size: 11px;
   font-weight: 700;
-  padding: 6px 13px;
-  border-radius: 16px;
+  padding: 6px 12px;
+  border-radius: 14px;
   cursor: pointer;
   display: inline-flex;
   align-items: center;
@@ -269,6 +289,7 @@ body {
   border: 1px solid var(--border-hairline);
   background: rgba(255, 255, 255, 0.035);
   color: var(--text-muted);
+  white-space: nowrap;
 }
 .hud-btn:hover {
   color: #fff;
@@ -276,12 +297,21 @@ body {
   background: rgba(0, 240, 255, 0.1);
   transform: translateY(-1px);
 }
+.hud-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent-primary);
+}
 .btn-theme-cycle {
   color: var(--accent-primary);
   border-color: rgba(0, 240, 255, 0.3);
 }
-.btn-sfx-toggle {
-  font-size: 10.5px;
+.btn-aux {
+  display: none;
+}
+@media (min-width: 1180px) {
+  .btn-aux { display: inline-flex; }
 }
 .btn-terminal-cta {
   background: rgba(0, 240, 255, 0.12);
@@ -293,6 +323,73 @@ body {
   background: var(--accent-primary);
   color: #05070c;
   box-shadow: 0 0 25px var(--border-neon-glow);
+}
+.btn-mobile-toggle {
+  display: inline-flex;
+  padding: 6px 10px;
+  font-size: 11.5px;
+  line-height: 1;
+}
+@media (min-width: 960px) {
+  .btn-mobile-toggle { display: none; }
+}
+
+/* ── MOBILE NAV DRAWER ── */
+.mobile-nav-drawer {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: rgba(6, 9, 16, 0.96);
+  backdrop-filter: blur(28px) saturate(200%);
+  -webkit-backdrop-filter: blur(28px) saturate(200%);
+  border-bottom: 1px solid var(--accent-primary);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.85);
+  padding: 18px 24px 22px;
+  flex-direction: column;
+  gap: 14px;
+  z-index: 999;
+}
+.mobile-nav-drawer.open {
+  display: flex;
+}
+.m-nav-links {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+}
+.m-nav-item a {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 12px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid var(--border-hairline);
+  transition: all 0.2s;
+}
+.m-nav-item a:hover {
+  color: #fff;
+  border-color: var(--accent-primary);
+  background: rgba(0, 240, 255, 0.08);
+}
+.m-aux-controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding-top: 10px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  flex-wrap: wrap;
 }
 
 /* ── MAIN CONTENT CONTAINER ── */
@@ -1403,35 +1500,60 @@ body {
 
 <!-- STICKY CYBER FLOATING HUD NAVBAR -->
 <header class="cyber-nav">
-  <a href="#dossier" class="nav-brand">
-    <div class="brand-badge">BS</div>
-    <span class="brand-name">benslates</span>
-    <span class="brand-tagline">// OFFSEC CORE</span>
-  </a>
-
-  <ul class="nav-links">
-    <li class="nav-link-item"><a href="#dossier">[ DOSSIER ]</a></li>
-    <li class="nav-link-item"><a href="#terminal">[ TERMINAL ]</a></li>
-    <li class="nav-link-item"><a href="#arsenal">[ ARSENAL ]</a></li>
-    <li class="nav-link-item"><a href="#matrix">[ ATTACK MATRIX ]</a></li>
-    <li class="nav-link-item"><a href="#skills">[ SKILLS ]</a></li>
-    <li class="nav-link-item"><a href="#vault">[ VAULT ]</a></li>
-    <li class="nav-link-item"><a href="#firm">[ FIRM ]</a></li>
-  </ul>
-
-  <div class="nav-actions">
-    <button class="hud-btn btn-theme-cycle" onclick="cycleTheme()" title="Switch Theme (Cyan / Matrix / Crimson)">
-      THEME: <span id="theme-lbl">CYAN</span>
-    </button>
-    <button class="hud-btn btn-sfx-toggle" id="sfx-toggle-btn" onclick="toggleAudioSFX()" title="Tactical Audio SFX">
-      SFX: OFF
-    </button>
-    <button class="hud-btn" id="matrix-toggle-btn" onclick="toggleMatrix()">
-      MATRIX: ON
-    </button>
-    <a href="#terminal" class="hud-btn btn-terminal-cta" onclick="focusTerminal()">
-      &gt;_ CONSOLE
+  <div class="nav-inner">
+    <a href="#dossier" class="nav-brand">
+      <div class="brand-badge">BS</div>
+      <span class="brand-name">benslates</span>
+      <span class="brand-status-dot" title="Operational // Red Team"></span>
+      <span class="brand-tagline">// OFFSEC CORE</span>
     </a>
+
+    <ul class="nav-links">
+      <li class="nav-link-item"><a href="#dossier">Dossier</a></li>
+      <li class="nav-link-item"><a href="#terminal">Terminal</a></li>
+      <li class="nav-link-item"><a href="#arsenal">Arsenal</a></li>
+      <li class="nav-link-item"><a href="#matrix">Attack Matrix</a></li>
+      <li class="nav-link-item"><a href="#skills">Skills</a></li>
+      <li class="nav-link-item"><a href="#vault">Vault</a></li>
+      <li class="nav-link-item"><a href="#firm">Firm</a></li>
+    </ul>
+
+    <div class="nav-actions">
+      <button class="hud-btn btn-theme-cycle" onclick="cycleTheme()" title="Switch Theme (Cyan / Matrix / Crimson)">
+        <span class="hud-dot"></span><span id="theme-lbl">CYAN</span>
+      </button>
+      <button class="hud-btn btn-aux" id="sfx-toggle-btn" onclick="toggleAudioSFX()" title="Tactical Audio SFX">
+        SFX: OFF
+      </button>
+      <button class="hud-btn btn-aux" id="matrix-toggle-btn" onclick="toggleMatrix()" title="Toggle Matrix Rain">
+        MATRIX
+      </button>
+      <a href="#terminal" class="hud-btn btn-terminal-cta" onclick="focusTerminal()">
+        &gt;_ CONSOLE
+      </a>
+      <button class="hud-btn btn-mobile-toggle" id="mobile-menu-btn" onclick="toggleMobileMenu()" aria-label="Toggle Navigation Menu">
+        <span>MENU</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile Dropdown Drawer -->
+  <div class="mobile-nav-drawer" id="mobile-nav-drawer">
+    <ul class="m-nav-links">
+      <li class="m-nav-item"><a href="#dossier" onclick="closeMobileMenu()"><span>Dossier</span> <span style="color:var(--text-faint); font-size:11px;">01 // PROFILE</span></a></li>
+      <li class="m-nav-item"><a href="#terminal" onclick="closeMobileMenu(); focusTerminal();"><span>Terminal Console</span> <span style="color:var(--accent-primary); font-size:11px;">&gt;_ SHELL</span></a></li>
+      <li class="m-nav-item"><a href="#arsenal" onclick="closeMobileMenu()"><span>Built Arsenal</span> <span style="color:var(--text-faint); font-size:11px;">11 TOOLS</span></a></li>
+      <li class="m-nav-item"><a href="#matrix" onclick="closeMobileMenu()"><span>Attack Matrix</span> <span style="color:var(--text-faint); font-size:11px;">VECTORS</span></a></li>
+      <li class="m-nav-item"><a href="#skills" onclick="closeMobileMenu()"><span>Security Skills</span> <span style="color:var(--text-faint); font-size:11px;">TOOLKIT</span></a></li>
+      <li class="m-nav-item"><a href="#vault" onclick="closeMobileMenu()"><span>Defense Vault</span> <span style="color:var(--accent-green); font-size:11px;">CERTS &amp; CV</span></a></li>
+      <li class="m-nav-item"><a href="#firm" onclick="closeMobileMenu()"><span>Active Firm &amp; Contact</span> <span style="color:var(--text-faint); font-size:11px;">RYNEX</span></a></li>
+    </ul>
+
+    <div class="m-aux-controls">
+      <button class="hud-btn" id="m-sfx-btn" onclick="toggleAudioSFX()">SFX: OFF</button>
+      <button class="hud-btn" id="m-matrix-btn" onclick="toggleMatrix()">MATRIX: ON</button>
+      <a href="./resume.pdf" target="_blank" class="hud-btn" style="border-color:var(--accent-green); color:var(--accent-green);">Resume (PDF) ↗</a>
+    </div>
   </div>
 </header>
 
@@ -2223,6 +2345,29 @@ body {
 </div>
 
 <script>
+
+/* ── MOBILE MENU CONTROLS ── */
+function toggleMobileMenu() {
+  var drawer = document.getElementById("mobile-nav-drawer");
+  var btn = document.getElementById("mobile-menu-btn");
+  var isOpen = drawer.classList.contains("open");
+  if (isOpen) {
+    drawer.classList.remove("open");
+    btn.innerHTML = "<span>MENU</span>";
+  } else {
+    drawer.classList.add("open");
+    btn.innerHTML = "<span>CLOSE</span>";
+    playCyberTone(700, 0.06);
+  }
+}
+
+function closeMobileMenu() {
+  var drawer = document.getElementById("mobile-nav-drawer");
+  var btn = document.getElementById("mobile-menu-btn");
+  if (drawer) drawer.classList.remove("open");
+  if (btn) btn.innerHTML = "<span>MENU</span>";
+}
+
 /* ── THEME SWITCHER ENGINE ── */
 var themes = ["cyan", "matrix", "crimson"];
 var currentThemeIdx = 0;
@@ -2243,17 +2388,16 @@ var sfxEnabled = false;
 function toggleAudioSFX() {
   sfxEnabled = !sfxEnabled;
   var btn = document.getElementById("sfx-toggle-btn");
+  var mBtn = document.getElementById("m-sfx-btn");
   if (sfxEnabled) {
     if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-    btn.textContent = "SFX: ON";
-    btn.style.color = "var(--accent-green)";
-    btn.style.borderColor = "var(--accent-green)";
+    if (btn) { btn.textContent = "SFX: ON"; btn.style.color = "var(--accent-green)"; btn.style.borderColor = "var(--accent-green)"; }
+    if (mBtn) { mBtn.textContent = "SFX: ON"; mBtn.style.color = "var(--accent-green)"; }
     playCyberTone(880, 0.1);
     showToast("TACTICAL SFX ENABLED");
   } else {
-    btn.textContent = "SFX: OFF";
-    btn.style.color = "var(--text-muted)";
-    btn.style.borderColor = "var(--border-hairline)";
+    if (btn) { btn.textContent = "SFX: OFF"; btn.style.color = "var(--text-muted)"; btn.style.borderColor = "var(--border-hairline)"; }
+    if (mBtn) { mBtn.textContent = "SFX: OFF"; mBtn.style.color = "var(--text-muted)"; }
     showToast("TACTICAL SFX MUTED");
   }
 }
@@ -2319,11 +2463,14 @@ setInterval(drawMatrix, 35);
 function toggleMatrix() {
   matrixRunning = !matrixRunning;
   var btn = document.getElementById("matrix-toggle-btn");
+  var mBtn = document.getElementById("m-matrix-btn");
   if (matrixRunning) {
-    btn.textContent = "MATRIX: ON";
+    if (btn) btn.textContent = "MATRIX";
+    if (mBtn) mBtn.textContent = "MATRIX: ON";
     matrixCanvas.style.opacity = "0.11";
   } else {
-    btn.textContent = "MATRIX: OFF";
+    if (btn) btn.textContent = "MATRIX: OFF";
+    if (mBtn) mBtn.textContent = "MATRIX: OFF";
     matrixCanvas.style.opacity = "0";
     ctx.clearRect(0, 0, matrixCanvas.width, matrixCanvas.height);
   }
