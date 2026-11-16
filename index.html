@@ -318,19 +318,6 @@ button {
   .brand-sub {
     display: none;
   }
-  .terminal-hint {
-    display: none;
-  }
-  .terminal-topbar {
-    padding: 10px 14px;
-  }
-}
-.terminal-chip-bar::-webkit-scrollbar {
-  display: none;
-}
-.terminal-chip-bar {
-  -ms-overflow-style: none;
-  scrollbar-width: none;
 }
 
 /* Mobile Drawer */
@@ -491,42 +478,6 @@ button {
 .hero-lead strong {
   color: var(--text-primary);
   font-weight: 600;
-}
-
-/* Typing command bar */
-.hero-cmd-box {
-  background: var(--bg-surface);
-  border: 1px solid var(--border-subtle);
-  border-radius: var(--radius-md);
-  padding: 12px 16px;
-  font-family: var(--font-mono);
-  font-size: 12px;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  overflow-x: auto;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.35);
-}
-.hero-cmd-prompt {
-  color: var(--accent-emerald);
-  font-weight: 600;
-  white-space: nowrap;
-}
-.hero-cmd-text {
-  color: var(--accent-cyan);
-  white-space: nowrap;
-}
-.typing-cursor {
-  display: inline-block;
-  width: 8px;
-  height: 15px;
-  background: var(--accent-cyan);
-  vertical-align: middle;
-  animation: blinkCursor 0.8s infinite;
-}
-@keyframes blinkCursor {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0; }
 }
 
 /* Hero CTA Cluster */
@@ -828,136 +779,6 @@ button {
   font-family: var(--font-mono);
   font-size: 11px;
   color: var(--text-muted);
-}
-
-/* ── INTERACTIVE TERMINAL CONSOLE ── */
-.terminal-window {
-  background: #090c12;
-  border: 1px solid var(--border-subtle);
-  border-radius: var(--radius-lg);
-  overflow: hidden;
-  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.6);
-  transition: border-color var(--transition-normal);
-}
-.terminal-window:focus-within, .terminal-window:hover {
-  border-color: rgba(0, 240, 255, 0.3);
-}
-.terminal-topbar {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 12px 18px;
-  background: #0d121b;
-  border-bottom: 1px solid var(--border-subtle);
-}
-.terminal-dots {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-.tdot {
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-}
-.tdot-red { background: #ff5f56; }
-.tdot-yellow { background: #ffbd2e; }
-.tdot-green { background: #27c93f; }
-.terminal-title {
-  font-family: var(--font-mono);
-  font-size: 11px;
-  color: var(--text-muted);
-}
-.terminal-hint {
-  font-family: var(--font-mono);
-  font-size: 10px;
-  color: var(--text-faint);
-}
-
-.terminal-chip-bar {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  padding: 10px 18px;
-  background: rgba(13, 18, 27, 0.6);
-  border-bottom: 1px solid var(--border-subtle);
-  overflow-x: auto;
-}
-.tchip-label {
-  font-family: var(--font-mono);
-  font-size: 10px;
-  color: var(--text-faint);
-  margin-right: 4px;
-}
-.tchip {
-  padding: 3px 8px;
-  border-radius: var(--radius-sm);
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid var(--border-subtle);
-  font-family: var(--font-mono);
-  font-size: 11px;
-  color: var(--accent-cyan);
-  white-space: nowrap;
-  transition: all var(--transition-fast);
-}
-.tchip:hover {
-  background: rgba(0, 240, 255, 0.12);
-  border-color: var(--accent-cyan);
-}
-
-.terminal-screen {
-  padding: 18px 20px;
-  font-family: var(--font-mono);
-  font-size: 12px;
-  line-height: 1.6;
-  max-height: 380px;
-  min-height: 220px;
-  overflow-y: auto;
-  color: var(--text-secondary);
-}
-.terminal-screen p {
-  margin-bottom: 8px;
-}
-.t-out-banner {
-  color: var(--accent-cyan);
-  font-weight: 600;
-  border-left: 2px solid var(--accent-cyan);
-  padding-left: 10px;
-  margin-bottom: 12px;
-}
-.t-out-highlight {
-  color: var(--accent-emerald);
-}
-.t-out-warn {
-  color: var(--accent-amber);
-}
-.t-out-err {
-  color: var(--accent-pink);
-}
-
-.terminal-input-row {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 12px 18px;
-  background: #0d121b;
-  border-top: 1px solid var(--border-subtle);
-}
-.terminal-prompt-user {
-  font-family: var(--font-mono);
-  font-size: 12px;
-  color: var(--accent-emerald);
-  font-weight: 600;
-  white-space: nowrap;
-}
-.terminal-input {
-  flex: 1;
-  background: none;
-  border: none;
-  outline: none;
-  font-family: var(--font-mono);
-  font-size: 12px;
-  color: var(--text-primary);
 }
 
 /* ── FLAGSHIP SHOWCASE ── */
@@ -1892,7 +1713,6 @@ button {
       <!-- Desktop Nav Links -->
       <nav class="nav-links">
         <a href="#hero" class="nav-link active">About</a>
-        <a href="#terminal" class="nav-link">Terminal</a>
         <a href="#flagships" class="nav-link">Flagships</a>
         <a href="#arsenal" class="nav-link">Arsenal</a>
         <a href="#attack-matrix" class="nav-link">Matrix</a>
@@ -1940,7 +1760,6 @@ button {
 <!-- Mobile Drawer Overlay -->
 <div class="mobile-drawer" id="mobile-drawer">
   <a href="#hero" class="nav-link" onclick="toggleMobileMenu()">About Me</a>
-  <a href="#terminal" class="nav-link" onclick="toggleMobileMenu()">Interactive Terminal</a>
   <a href="#flagships" class="nav-link" onclick="toggleMobileMenu()">Flagship Systems</a>
   <a href="#arsenal" class="nav-link" onclick="toggleMobileMenu()">Weaponized Arsenal</a>
   <a href="#attack-matrix" class="nav-link" onclick="toggleMobileMenu()">Adversarial Matrix</a>
@@ -1982,13 +1801,6 @@ button {
         Offensive security specialist and Red Teamer at <strong>Rynex Security</strong>. Specializing in Active Directory internal exploitation, custom C2 architecture, memory evasion, and low-level exploit engineering.
       </p>
 
-      <!-- Simulated Typing Command Bar -->
-      <div class="hero-cmd-box">
-        <span class="hero-cmd-prompt">root@benslates:~#</span>
-        <span class="hero-cmd-text" id="typing-hero-cmd"></span>
-        <span class="typing-cursor"></span>
-      </div>
-
       <!-- Action Cluster -->
       <div class="hero-cta-cluster">
         <a href="#flagships" class="btn-primary">
@@ -1996,9 +1808,9 @@ button {
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
         </a>
 
-        <a href="#terminal" class="btn-secondary">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="4 17 10 11 4 5"/><line x1="12" y1="19" x2="20" y2="19"/></svg>
-          <span>Open Shell</span>
+        <a href="resume.pdf" target="_blank" rel="noopener noreferrer" class="btn-secondary">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          <span>Download CV (PDF)</span>
         </a>
 
         <!-- Social Quick Actions -->
@@ -2108,63 +1920,11 @@ button {
     </div>
   </section>
 
-  <!-- ── 03. INTERACTIVE TERMINAL CONSOLE ── -->
-  <section class="section-wrap" id="terminal">
-    <div class="section-heading-row">
-      <div class="section-meta">
-        <span class="section-tag">01 // INTERACTIVE CLI</span>
-        <h2 class="section-title">Offensive Terminal Console</h2>
-      </div>
-      <span class="section-badge">INTERACTIVE SHELL v2.4</span>
-    </div>
-
-    <div class="terminal-window">
-      <!-- Terminal Window Bar -->
-      <div class="terminal-topbar">
-        <div class="terminal-dots">
-          <div class="tdot tdot-red"></div>
-          <div class="tdot tdot-yellow"></div>
-          <div class="tdot tdot-green"></div>
-        </div>
-        <div class="terminal-title">benslates@kali-redteam: ~/labs (zsh)</div>
-        <div class="terminal-hint">CLICK CHIPS OR TYPE BELOW</div>
-      </div>
-
-      <!-- Clickable Action Chips -->
-      <div class="terminal-chip-bar">
-        <span class="tchip-label">QUICK:</span>
-        <button class="tchip" onclick="runTermCmd('whoami')">whoami</button>
-        <button class="tchip" onclick="runTermCmd('flagships')">flagships</button>
-        <button class="tchip" onclick="runTermCmd('arsenal')">arsenal</button>
-        <button class="tchip" onclick="runTermCmd('exploits')">exploits</button>
-        <button class="tchip" onclick="runTermCmd('ad-matrix')">ad-matrix</button>
-        <button class="tchip" onclick="runTermCmd('skills')">skills</button>
-        <button class="tchip" onclick="runTermCmd('certs')">certs</button>
-        <button class="tchip" onclick="runTermCmd('rynex')">rynex</button>
-        <button class="tchip" onclick="runTermCmd('help')">help</button>
-        <button class="tchip" onclick="runTermCmd('clear')">clear</button>
-      </div>
-
-      <!-- Terminal Output Screen -->
-      <div class="terminal-screen" id="terminal-screen">
-        <p class="t-out-banner">BENJAMIN ANDREW SLATES [RED TEAM &amp; OFFENSIVE SECURITY LABS]</p>
-        <p>Operational environment initialized. Type 'help' or click any command chip above.</p>
-        <p class="t-out-highlight">System status: ALL SYSTEMS GREEN // NO EMOJIS // ACTIVE VERIFICATION</p>
-      </div>
-
-      <!-- Terminal Input Line -->
-      <div class="terminal-input-row">
-        <span class="terminal-prompt-user">root@benslates:~#</span>
-        <input type="text" id="terminal-input" class="terminal-input" placeholder="Type a command (e.g. whoami, arsenal, flagships, exploits)..." autocomplete="off" spellcheck="false">
-      </div>
-    </div>
-  </section>
-
-  <!-- ── 04. FLAGSHIP PROJECT SPOTLIGHTS ── -->
+  <!-- ── 02. FLAGSHIP PROJECT SPOTLIGHTS ── -->
   <section class="section-wrap" id="flagships">
     <div class="section-heading-row">
       <div class="section-meta">
-        <span class="section-tag">02 // FLAGSHIP WEAPONRY</span>
+        <span class="section-tag">01 // FLAGSHIP WEAPONRY</span>
         <h2 class="section-title">Primary Architectural Spotlights</h2>
       </div>
       <span class="section-badge">CORE RESEARCH PROJECTS</span>
@@ -2332,11 +2092,11 @@ button {
     </div>
   </section>
 
-  <!-- ── 05. WEAPONIZED ARSENAL REPOSITORIES ── -->
+  <!-- ── 03. WEAPONIZED ARSENAL REPOSITORIES ── -->
   <section class="section-wrap" id="arsenal">
     <div class="section-heading-row">
       <div class="section-meta">
-        <span class="section-tag">03 // WEAPONIZED ARSENAL</span>
+        <span class="section-tag">02 // WEAPONIZED ARSENAL</span>
         <h2 class="section-title">Open-Source Security Tooling</h2>
       </div>
       <span class="section-badge">11 REPOSITORIES</span>
@@ -2501,11 +2261,11 @@ button {
     </div>
   </section>
 
-  <!-- ── 06. ADVERSARIAL ATTACK MATRIX ── -->
+  <!-- ── 04. ADVERSARIAL ATTACK MATRIX ── -->
   <section class="section-wrap" id="attack-matrix">
     <div class="section-heading-row">
       <div class="section-meta">
-        <span class="section-tag">04 // ATTACK MATRIX</span>
+        <span class="section-tag">03 // ATTACK MATRIX</span>
         <h2 class="section-title">MITRE ATT&amp;CK Tactical Specializations</h2>
       </div>
       <span class="section-badge">OFFENSIVE OPERATIONAL SCOPE</span>
@@ -2632,11 +2392,11 @@ button {
     </div>
   </section>
 
-  <!-- ── 07. SKILLS & TECH STACK ── -->
+  <!-- ── 05. SKILLS & TECH STACK ── -->
   <section class="section-wrap" id="skills">
     <div class="section-heading-row">
       <div class="section-meta">
-        <span class="section-tag">05 // TECHNICAL TOOLKIT</span>
+        <span class="section-tag">04 // TECHNICAL TOOLKIT</span>
         <h2 class="section-title">Verified Systems &amp; Offensive Stack</h2>
       </div>
       <span class="section-badge">CORE PROFICIENCIES</span>
@@ -2705,11 +2465,11 @@ button {
     </div>
   </section>
 
-  <!-- ── 08. EXPERIENCE & FIRM DOSSIER ── -->
+  <!-- ── 06. EXPERIENCE & FIRM DOSSIER ── -->
   <section class="section-wrap" id="experience">
     <div class="section-heading-row">
       <div class="section-meta">
-        <span class="section-tag">06 // PROFESSIONAL ENGAGEMENT</span>
+        <span class="section-tag">05 // PROFESSIONAL ENGAGEMENT</span>
         <h2 class="section-title">Primary Operational Firm</h2>
       </div>
       <span class="section-badge">CURRENT ENGAGEMENT</span>
@@ -2749,11 +2509,11 @@ button {
     </div>
   </section>
 
-  <!-- ── 09. DEFENSE VAULT & CERTIFICATIONS ── -->
+  <!-- ── 07. DEFENSE VAULT & CERTIFICATIONS ── -->
   <section class="section-wrap" id="vault">
     <div class="section-heading-row">
       <div class="section-meta">
-        <span class="section-tag">07 // CREDENTIAL VAULT</span>
+        <span class="section-tag">06 // CREDENTIAL VAULT</span>
         <h2 class="section-title">Verified Certifications &amp; PWNED Machines</h2>
       </div>
       <span class="section-badge">VERIFIED CREDENTIALS</span>
@@ -2816,11 +2576,11 @@ button {
     </div>
   </section>
 
-  <!-- ── 10. DIRECT COMMUNICATIONS & CONTACT ── -->
+  <!-- ── 08. DIRECT COMMUNICATIONS & CONTACT ── -->
   <section class="section-wrap" id="contact">
     <div class="section-heading-row">
       <div class="section-meta">
-        <span class="section-tag">08 // SECURE COMMUNICATIONS</span>
+        <span class="section-tag">07 // SECURE COMMUNICATIONS</span>
         <h2 class="section-title">Initialize Direct Engagement</h2>
       </div>
       <span class="section-badge">OPEN TO OPPORTUNITIES</span>
@@ -2987,7 +2747,7 @@ function renderCursor() {
 requestAnimationFrame(renderCursor);
 
 // Add hover scaling on interactive targets
-var interactives = document.querySelectorAll('a, button, input, .crate-card, .matrix-card, .cert-card, .tchip');
+var interactives = document.querySelectorAll('a, button, input, .crate-card, .matrix-card, .cert-card');
 interactives.forEach(function(el) {
   el.addEventListener('mouseenter', function() {
     document.body.classList.add('cursor-hover');
@@ -3047,43 +2807,6 @@ function toggleMatrix() {
   if (btn) btn.style.color = matrixRunning ? "var(--accent-cyan)" : "var(--text-secondary)";
   showToast(matrixRunning ? 'Matrix rain active' : 'Matrix rain paused');
 }
-
-/* ── DYNAMIC TYPING HERO EFFECT ── */
-var heroCmds = [
-  "./engage_redteam.sh --target enterprise.local --stealth-level max",
-  "rust_c2 --bind 0.0.0.0:443 --crypto aes-256-gcm --domain-fronting",
-  "python3 gmsa_extractor.py --dc-ip 10.10.10.1 --offline-tickets",
-  "exploit_suite --cve CVE-2026-31431 --rop-chain --evasion edr",
-  "voice_notes_dsp --sample-rate 48000 --opus-encode --waveform-gen"
-];
-var hIdx = 0;
-var charIdx = 0;
-var isDeleting = false;
-var typeEl = document.getElementById("typing-hero-cmd");
-
-function typeLoop() {
-  if (!typeEl) return;
-  var current = heroCmds[hIdx];
-  if (isDeleting) {
-    typeEl.textContent = current.substring(0, charIdx - 1);
-    charIdx--;
-  } else {
-    typeEl.textContent = current.substring(0, charIdx + 1);
-    charIdx++;
-  }
-
-  var speed = isDeleting ? 25 : 55;
-  if (!isDeleting && charIdx === current.length) {
-    speed = 2200;
-    isDeleting = true;
-  } else if (isDeleting && charIdx === 0) {
-    isDeleting = false;
-    hIdx = (hIdx + 1) % heroCmds.length;
-    speed = 400;
-  }
-  setTimeout(typeLoop, speed);
-}
-setTimeout(typeLoop, 800);
 
 /* ── MOBILE MENU TOGGLE ── */
 function toggleMobileMenu() {
@@ -3158,160 +2881,9 @@ function filterCrates(cat, btn) {
   });
 }
 
-/* ── INTERACTIVE TERMINAL SHELL ── */
-var termInput = document.getElementById('terminal-input');
-var termScreen = document.getElementById('terminal-screen');
-var cmdHistory = [];
-var historyIdx = -1;
-
-var termCommands = {
-  whoami: function() {
-    return "<p class='t-out-banner'>OPERATOR IDENTIFICATION</p>" +
-           "<p>Name: Benjamin Andrew Slates (@benslates)</p>" +
-           "<p>Title: Cybersecurity Specialist &amp; Red Teamer</p>" +
-           "<p>Firm: Rynex Security (https://rynexsecurity.com)</p>" +
-           "<p>Focus: Active Directory Exploitation, C2 Architecture, Exploit Dev</p>" +
-           "<p>Clearance: Red Team Operations (Full Scope)</p>";
-  },
-  flagships: function() {
-    return "<p class='t-out-banner'>FLAGSHIP WEAPONRY SPOTLIGHTS</p>" +
-           "<p class='t-out-highlight'>[1] BEN_C2 Framework</p>" +
-           "<p>    Asynchronous Post-Exploitation C2 (Rust Core + Python AsyncIO)</p>" +
-           "<p>    Repo: https://github.com/ben-slates/BEN_C2</p>" +
-           "<p class='t-out-highlight'>[2] discord-voice-notes</p>" +
-           "<p>    Native Opus 64kbps DSP recording engine + 83 Full HD Themes</p>" +
-           "<p>    Repo: https://github.com/ben-slates/discord-voice-notes</p>";
-  },
-  arsenal: function() {
-    return "<p class='t-out-banner'>WEAPONIZED ARSENAL [11 REPOSITORIES]</p>" +
-           "<p>01. BEN_C2                 - Asynchronous Rust &amp; Python C2 Framework</p>" +
-           "<p>02. discord-voice-notes     - Native Opus DSP Audio Injection &amp; Themes</p>" +
-           "<p>03. mdread                  - Fast CLI Markdown Reader with instant clipboard hook</p>" +
-           "<p>04. CVE-2026-31431-Exploit   - Memory corruption analysis &amp; weaponized PoC</p>" +
-           "<p>05. CVE-2024-37054           - Adversarial attack PoC demonstration</p>" +
-           "<p>06. gmsa-aes-key-extractor  - Active Directory gMSA AES Key Extraction</p>" +
-           "<p>07. CVE-FINDER              - Automated Threat Intelligence &amp; Chatter Triage</p>" +
-           "<p>08. uploadserver2           - Secure HTTP/2 Transport &amp; Cloudflare Tunnel</p>" +
-           "<p>09. esp32_NAT_router        - Covert Field Micro-Router Firmware</p>" +
-           "<p>10. Crypto_Guard            - Cryptographic Verification &amp; Tamper Defense</p>" +
-           "<p>11. CNN_EMNIST_VISUALIZATION- Neural Net Canvas &amp; Digit Classification</p>";
-  },
-  exploits: function() {
-    return "<p class='t-out-banner'>WEAPONIZED EXPLOIT RESEARCH &amp; CVES</p>" +
-           "<p class='t-out-err'>[CVE-2026-31431] Memory corruption analysis, ROP chain creation &amp; PoC</p>" +
-           "<p class='t-out-warn'>[CVE-2024-37054] Vulnerability reproduction &amp; payload structuring</p>" +
-           "<p class='t-out-highlight'>[CVE-FINDER] Threat intelligence crawler indexing 15+ years of NVD records</p>";
-  },
-  'ad-matrix': function() {
-    return "<p class='t-out-banner'>ACTIVE DIRECTORY ATTACK PATHWAYS</p>" +
-           "<p>- Kerberoasting &amp; AS-REP Roasting (T1558.003, T1558.004)</p>" +
-           "<p>- gMSA AES Key Recovery (T1558.001)</p>" +
-           "<p>- Shadow Credentials &amp; KeyCredentialLink Abuse (T1098)</p>" +
-           "<p>- DCSync Replication &amp; Golden/Silver Tickets (T1003.006)</p>";
-  },
-  skills: function() {
-    return "<p class='t-out-banner'>VERIFIED TECHNICAL TOOLKIT</p>" +
-           "<p>Offensive: Kali Linux, Burp Suite Pro, Metasploit, BloodHound, Impacket, Ghidra</p>" +
-           "<p>Languages: Rust, Go, Python, C, Assembly x86/x64, TypeScript, Bash/Zsh</p>" +
-           "<p>Architecture: Active Directory, Kerberos, Docker, HTTP/2, Linux Internals</p>";
-  },
-  certs: function() {
-    return "<p class='t-out-banner'>VERIFIED CREDENTIAL VAULT</p>" +
-           "<p class='t-out-highlight'>[PWNED] Hack The Box - Mythical Machine (ID: HTBCERT-3620BFA7E0)</p>" +
-           "<p class='t-out-highlight'>[PWNED] Hack The Box - Puppet Machine (ID: HTBCERT-D149A5DFAD)</p>" +
-           "<p>[VERIFIED] Cisco Networking Academy - Cisco Packet Tracer</p>" +
-           "<p>[VERIFIED] Cisco Networking Academy - Introduction to Cybersecurity</p>";
-  },
-  rynex: function() {
-    return "<p class='t-out-banner'>PRIMARY ENGAGEMENT: RYNEX SECURITY</p>" +
-           "<p>Domain: https://rynexsecurity.com</p>" +
-           "<p>Role: Cybersecurity Specialist &amp; Red Teamer</p>" +
-           "<p>Scope: Offensive penetration testing, attack simulation &amp; adversarial tooling</p>";
-  },
-  help: function() {
-    return "<p class='t-out-banner'>AVAILABLE COMMANDS</p>" +
-           "<p><span class='t-out-highlight'>whoami</span>      - Display operator identity and bio</p>" +
-           "<p><span class='t-out-highlight'>flagships</span>   - Display flagship projects (BEN_C2 &amp; voice notes)</p>" +
-           "<p><span class='t-out-highlight'>arsenal</span>     - List all 11 offensive security tools</p>" +
-           "<p><span class='t-out-highlight'>exploits</span>    - Weaponized CVE exploits &amp; research</p>" +
-           "<p><span class='t-out-highlight'>ad-matrix</span>   - Active Directory attack pathways</p>" +
-           "<p><span class='t-out-highlight'>skills</span>      - Technical proficiencies &amp; languages</p>" +
-           "<p><span class='t-out-highlight'>certs</span>       - Verified credentials &amp; PWNED machines</p>" +
-           "<p><span class='t-out-highlight'>rynex</span>       - Rynex Security firm dossier</p>" +
-           "<p><span class='t-out-highlight'>clear</span>       - Clear terminal screen</p>";
-  },
-  clear: function() {
-    termScreen.innerHTML = "";
-    return "";
-  }
-};
-
-function executeCommand(raw) {
-  var cmd = raw.trim().toLowerCase();
-  if (!cmd) return;
-
-  cmdHistory.push(raw);
-  historyIdx = cmdHistory.length;
-
-  var line = document.createElement('p');
-  line.innerHTML = "<span class='t-out-highlight'>root@benslates:~#</span> " + escapeHtml(raw);
-  termScreen.appendChild(line);
-
-  if (termCommands[cmd]) {
-    var out = termCommands[cmd]();
-    if (out) {
-      var res = document.createElement('div');
-      res.innerHTML = out;
-      termScreen.appendChild(res);
-    }
-  } else {
-    var err = document.createElement('p');
-    err.className = 't-out-err';
-    err.textContent = "Command not found: " + cmd + ". Type 'help' for available commands.";
-    termScreen.appendChild(err);
-  }
-
-  termScreen.scrollTop = termScreen.scrollHeight;
-}
-
-function runTermCmd(cmd) {
-  playTactileClick();
-  executeCommand(cmd);
-}
-
-if (termInput) {
-  termInput.addEventListener('keydown', function(e) {
-    if (e.key === 'Enter') {
-      var val = termInput.value;
-      termInput.value = '';
-      executeCommand(val);
-    } else if (e.key === 'ArrowUp') {
-      if (historyIdx > 0) {
-        historyIdx--;
-        termInput.value = cmdHistory[historyIdx] || '';
-      }
-      e.preventDefault();
-    } else if (e.key === 'ArrowDown') {
-      if (historyIdx < cmdHistory.length - 1) {
-        historyIdx++;
-        termInput.value = cmdHistory[historyIdx] || '';
-      } else {
-        historyIdx = cmdHistory.length;
-        termInput.value = '';
-      }
-      e.preventDefault();
-    }
-  });
-}
-
-function escapeHtml(str) {
-  return str.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
-}
-
 /* ── COMMAND PALETTE (CMD+K) ── */
 var paletteItems = [
   { title: "About / Dossier", cat: "Navigation", target: "#hero" },
-  { title: "Offensive Terminal Shell", cat: "Navigation", target: "#terminal" },
   { title: "Flagship: BEN_C2 Framework", cat: "Flagship", target: "#flagships" },
   { title: "Flagship: discord-voice-notes", cat: "Flagship", target: "#flagships" },
   { title: "Weaponized Arsenal (11 Repos)", cat: "Navigation", target: "#arsenal" },
