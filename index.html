@@ -1973,10 +1973,10 @@ button {
 
       <!-- Main Headline -->
       <h1 class="hero-title">
-        BENJAMIN ANDREW <span class="gradient-text">SLATES</span>
+        <span class="scramble-text">BENJAMIN ANDREW</span> <span class="gradient-text scramble-text">SLATES</span>
       </h1>
       
-      <p class="hero-subtitle">// RED TEAMER &amp; OFFENSIVE SECURITY RESEARCHER</p>
+      <p class="hero-subtitle scramble-text">// RED TEAMER &amp; OFFENSIVE SECURITY RESEARCHER</p>
 
       <p class="hero-lead">
         Offensive security specialist and Red Teamer at <strong>Rynex Security</strong>. Specializing in Active Directory internal exploitation, custom C2 architecture, memory evasion, and low-level exploit engineering.
@@ -2035,8 +2035,8 @@ button {
         </div>
 
         <div class="dossier-profile-meta">
-          <span class="dossier-tagline">OFFENSIVE SPECIALIST</span>
-          <h2 class="dossier-name">Benjamin Andrew Slates</h2>
+          <span class="dossier-tagline scramble-text">OFFENSIVE SPECIALIST</span>
+          <h2 class="dossier-name scramble-text">Benjamin Andrew Slates</h2>
           <p class="dossier-org">Active Firm: <span>Rynex Security</span></p>
         </div>
       </div>
@@ -3446,6 +3446,135 @@ window.addEventListener('scroll', function() {
     }
   });
 });
+
+/* ── HACKER TEXT SCRAMBLE DECODER ENGINE ── */
+var SCRAMBLE_CHARS = "01_X%&?!#[]0x42ABCDEF-+=*<>/~^";
+
+function scrambleText(el, customDuration) {
+  if (!el || el.dataset.scrambling === "true") return;
+
+  if (el.children && el.children.length > 0) {
+    for (var c = 0; c < el.children.length; c++) {
+      scrambleText(el.children[c], customDuration);
+    }
+    return;
+  }
+
+  var original = el.dataset.origText || el.textContent;
+  if (!original || !original.trim()) return;
+  original = original.trim();
+  el.dataset.origText = original;
+  el.dataset.scrambling = "true";
+
+  var len = original.length;
+  var duration = customDuration || Math.min(850, Math.max(300, len * 25));
+  var startTime = performance.now();
+  var lastUpdate = 0;
+
+  function step(now) {
+    var elapsed = now - startTime;
+    var progress = Math.min(1, elapsed / duration);
+    var resolvedCount = Math.floor(progress * len);
+
+    if (now - lastUpdate > 30 || progress === 1) {
+      lastUpdate = now;
+      var buffer = "";
+      for (var i = 0; i < len; i++) {
+        var ch = original[i];
+        if (ch === " " || ch === "\n" || ch === "\t") {
+          buffer += ch;
+        } else if (i < resolvedCount) {
+          buffer += ch;
+        } else {
+          buffer += SCRAMBLE_CHARS[Math.floor(Math.random() * SCRAMBLE_CHARS.length)];
+        }
+      }
+      el.textContent = buffer;
+    }
+
+    if (progress < 1) {
+      requestAnimationFrame(step);
+    } else {
+      el.textContent = original;
+      el.dataset.scrambling = "false";
+    }
+  }
+
+  requestAnimationFrame(step);
+}
+
+function initScrambleEngine() {
+  var selector = ".scramble-text, .section-title, .section-tag, .crate-title, .matrix-domain-title, .pillar-title, .firm-name, .cert-name, .metric-number, .metric-title, .hero-subtitle, .dossier-tagline, .dossier-name, .brand-name";
+  var targets = document.querySelectorAll(selector);
+
+  targets.forEach(function(el) {
+    if (!el.dataset.origText && el.textContent) {
+      el.dataset.origText = el.textContent.trim();
+    }
+    el.addEventListener("mouseenter", function() {
+      scrambleText(el, 380);
+    });
+  });
+
+  // Hover on hero title container
+  var heroTitle = document.querySelector(".hero-title");
+  if (heroTitle) {
+    heroTitle.addEventListener("mouseenter", function() {
+      heroTitle.querySelectorAll(".scramble-text").forEach(function(sp) {
+        scrambleText(sp, 450);
+      });
+    });
+  }
+
+  // 1. Initial Page Load Cascade for Hero
+  setTimeout(function() {
+    var heroItems = document.querySelectorAll(".hero-grid .scramble-text, .hero-grid .hero-subtitle, .hero-grid .dossier-tagline, .hero-grid .dossier-name");
+    heroItems.forEach(function(item, idx) {
+      setTimeout(function() {
+        scrambleText(item, 580);
+      }, idx * 80);
+    });
+  }, 100);
+
+  // 2. Metrics Strip Cascade
+  setTimeout(function() {
+    var metricItems = document.querySelectorAll(".metric-number, .metric-title");
+    metricItems.forEach(function(item, idx) {
+      setTimeout(function() {
+        scrambleText(item, 480);
+      }, idx * 60);
+    });
+  }, 480);
+
+  // 3. Scroll Reveal Observer for all sections on complete site
+  if ("IntersectionObserver" in window) {
+    var sectionObserver = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          var items = entry.target.querySelectorAll(selector);
+          items.forEach(function(item, idx) {
+            setTimeout(function() {
+              scrambleText(item, 520);
+            }, idx * 50);
+          });
+          sectionObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1, rootMargin: "0px 0px -30px 0px" });
+
+    document.querySelectorAll("section[id]").forEach(function(sec) {
+      if (sec.id !== "hero") {
+        sectionObserver.observe(sec);
+      }
+    });
+  }
+}
+
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", initScrambleEngine);
+} else {
+  initScrambleEngine();
+}
 </script>
 
 </body>
