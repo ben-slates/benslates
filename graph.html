@@ -942,10 +942,6 @@ html, body {
       <button class="obs-btn" id="inspector-toggle" onclick="toggleInspector()" title="Toggle Markdown Inspector">
         <span>Note Inspector</span>
       </button>
-      <button class="obs-btn" onclick="cycleTheme()" title="Switch Theme Palette">
-        <span class="theme-indicator-dot"></span>
-        <span id="theme-label">Obsidian</span>
-      </button>
     </div>
   </header>
 
@@ -1049,25 +1045,8 @@ html, body {
 <div class="vault-toast" id="vault-toast"></div>
 
 <script>
-/* ── AUDIO TACTILE FEEDBACK ── */
-var audioCtx = null;
-function playClick() {
-  try {
-    if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-    if (audioCtx.state === 'suspended') audioCtx.resume();
-    var osc = audioCtx.createOscillator();
-    var gain = audioCtx.createGain();
-    osc.type = 'sine';
-    osc.frequency.setValueAtTime(950, audioCtx.currentTime);
-    osc.frequency.exponentialRampToValueAtTime(160, audioCtx.currentTime + 0.035);
-    gain.gain.setValueAtTime(0.06, audioCtx.currentTime);
-    gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.035);
-    osc.connect(gain);
-    gain.connect(audioCtx.destination);
-    osc.start();
-    osc.stop(audioCtx.currentTime + 0.035);
-  } catch(e) {}
-}
+/* ── AUDIO DISABLED ── */
+function playClick() {}
 
 function showToast(msg) {
   var t = document.getElementById('vault-toast');
@@ -2369,33 +2348,8 @@ function closeInspector() {
   if (ins) ins.classList.remove('open');
 }
 
-/* ── THEME ENGINE (5 OBSIDIAN PALETTES) ── */
-var THEMES = ["obsidian", "cyan", "matrix", "crimson", "amber"];
-var currentThemeIdx = 0;
-
-function applyTheme(tName) {
-  document.documentElement.setAttribute('data-theme', tName);
-  var label = document.getElementById('theme-label');
-  if (label) label.textContent = tName.charAt(0).toUpperCase() + tName.slice(1);
-  localStorage.setItem('benslates_theme', tName);
-}
-
-function cycleTheme() {
-  playClick();
-  currentThemeIdx = (currentThemeIdx + 1) % THEMES.length;
-  var nextTheme = THEMES[currentThemeIdx];
-  applyTheme(nextTheme);
-  showToast("Theme shifted to: " + nextTheme.toUpperCase());
-}
-
-// Read initial theme from local storage
-var savedTheme = localStorage.getItem('benslates_theme');
-if (savedTheme && THEMES.indexOf(savedTheme) !== -1) {
-  currentThemeIdx = THEMES.indexOf(savedTheme);
-  applyTheme(savedTheme);
-} else {
-  applyTheme("obsidian");
-}
+/* ── THEME INITIALIZATION ── */
+document.documentElement.setAttribute('data-theme', 'obsidian');
 
 /* ── INITIALIZATION ── */
 window.addEventListener('resize', resizeGraph);

@@ -524,7 +524,7 @@ button {
 }
 
 @media (max-width: 640px) {
-  #sound-btn, #matrix-btn, .header-cv-btn {
+  .header-cv-btn {
     display: none !important;
   }
 }
@@ -1710,32 +1710,57 @@ button {
 .channel-val.cyan { color: var(--accent-cyan); }
 .channel-val.green { color: var(--accent-emerald); }
 
-.pgp-vault-box {
+.ssh-vault-box {
   background: #090c12;
   border: 1px solid var(--border-subtle);
   border-radius: var(--radius-md);
-  padding: 20px;
+  padding: 22px;
   display: flex;
   flex-direction: column;
   gap: 12px;
   font-family: var(--font-mono);
 }
-.pgp-title-row {
+.ssh-title-row {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   font-size: 11px;
+  font-weight: 700;
   color: var(--accent-cyan);
   border-bottom: 1px solid var(--border-subtle);
   padding-bottom: 8px;
 }
-.pgp-fingerprint {
+.ssh-algo-badge {
+  background: rgba(0, 240, 255, 0.12);
+  border: 1px solid rgba(0, 240, 255, 0.3);
+  color: var(--accent-cyan);
+  padding: 1px 6px;
+  border-radius: 4px;
+  font-size: 10px;
+}
+.ssh-meta-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 11px;
+}
+.ssh-meta-label {
+  color: var(--text-muted);
+}
+.ssh-meta-val {
+  color: var(--text-primary);
+  font-weight: 600;
+}
+.ssh-key-display {
   font-size: 11px;
   line-height: 1.6;
-  color: var(--text-secondary);
-  background: rgba(255, 255, 255, 0.02);
-  padding: 10px;
+  color: var(--accent-emerald);
+  background: rgba(0, 0, 0, 0.45);
+  border: 1px solid var(--border-subtle);
+  padding: 12px;
   border-radius: var(--radius-sm);
   word-break: break-all;
+  user-select: all;
 }
 
 /* ── FOOTER ── */
@@ -1937,23 +1962,6 @@ button {
           <span>Cmd+K</span>
         </button>
 
-        <!-- Theme Switcher -->
-        <button class="tool-btn theme-switch-btn" id="theme-btn" onclick="cycleTheme()" title="Switch Visual Theme">
-          <span class="theme-dot"></span>
-          <span id="theme-btn-label">Cyan</span>
-        </button>
-
-        <!-- Audio Haptic Toggle -->
-        <button class="tool-btn" id="sound-btn" onclick="toggleSound()" title="Tactical Audio FX">
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"/></svg>
-          <span id="sound-btn-text">Audio</span>
-        </button>
-
-        <!-- Matrix Rain Toggle -->
-        <button class="tool-btn" id="matrix-btn" onclick="toggleMatrix()" title="Toggle Digital Rain">
-          <span>Matrix</span>
-        </button>
-
         <!-- Official Resume Link -->
         <a href="resume.pdf" target="_blank" rel="noopener noreferrer" class="tool-btn btn-cyan header-cv-btn">
           <span>CV (PDF)</span>
@@ -1983,13 +1991,6 @@ button {
   <a href="graph.html" class="nav-link graph-pill-link" onclick="toggleMobileMenu()"><span class="graph-pill-dot"></span>Obsidian Knowledge Graph</a>
   <div style="padding: 16px 0 0; display: flex; gap: 10px;">
     <a href="resume.pdf" target="_blank" class="btn-primary" style="flex:1; text-align:center; justify-content:center;">Download CV (PDF)</a>
-  </div>
-  <div style="padding: 10px 0 0; display: flex; gap: 8px;">
-    <button class="tool-btn" onclick="toggleSound()" style="flex:1; justify-content:center;">Audio FX</button>
-    <button class="tool-btn" onclick="toggleMatrix()" style="flex:1; justify-content:center;">Matrix Rain</button>
-    <button class="tool-btn" onclick="cycleTheme()" style="flex:1; justify-content:center;"><span class="theme-dot"></span><span id="mobile-theme-label">Theme</span></button>
-  </div>
-    <button class="tool-btn" onclick="toggleMatrix()" style="flex:1; justify-content:center;">Matrix Rain</button>
   </div>
 </div>
 
@@ -2860,21 +2861,24 @@ button {
       </div>
 
       <div class="contact-right">
-        <div class="pgp-vault-box">
-          <div class="pgp-title-row">
-            <span>PUBLIC SECURITY KEY // PGP FINGERPRINT</span>
-            <span>RSA-4096</span>
+        <div class="ssh-vault-box">
+          <div class="ssh-title-row">
+            <span>AUTHORIZED PUBLIC KEY // SSH</span>
+            <span class="ssh-algo-badge">ED25519</span>
           </div>
-          <div class="pgp-fingerprint">
-            4F8A 92BC 10E4 7D38 A1F9<br>
-            02DE 83BC 4591 D8A2 3C77
+          <div class="ssh-meta-row">
+            <span class="ssh-meta-label">IDENTITY:</span>
+            <span class="ssh-meta-val">unknwn5101@gmail.com</span>
+          </div>
+          <div class="ssh-key-display">
+            ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIM/rGDXNaWZa4n/KVGhW5JqIVjvp3dE2/FE2MawBDU6U unknwn5101@gmail.com
           </div>
           <p style="font-size: 11px; color: var(--text-muted); line-height: 1.5;">
-            Use this fingerprint to verify cryptographic signatures across all official releases and email communications.
+            Authorized ED25519 public key for authenticated communications, payload verification, and secure Git / SSH access.
           </p>
           <div style="margin-top: 8px;">
-            <button onclick="copyClone('4F8A 92BC 10E4 7D38 A1F9 02DE 83BC 4591 D8A2 3C77')" class="tool-btn" style="width: 100%; justify-content: center;">
-              <span>Copy PGP Key Fingerprint</span>
+            <button onclick="copyClone('ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIM/rGDXNaWZa4n/KVGhW5JqIVjvp3dE2/FE2MawBDU6U unknwn5101@gmail.com')" class="tool-btn btn-cyan" style="width: 100%; justify-content: center;">
+              <span>Copy SSH Public Key</span>
             </button>
           </div>
         </div>
@@ -2921,40 +2925,10 @@ button {
 
 <!-- ── INLINE SCRIPT: LOGIC & INTERACTIONS ── -->
 <script>
-/* ── AUDIO FX (WEB AUDIO API) ── */
-var audioCtx = null;
-var soundEnabled = true;
-
-function playTactileClick() {
-  if (!soundEnabled) return;
-  try {
-    if (!audioCtx) {
-      audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-    }
-    if (audioCtx.state === 'suspended') {
-      audioCtx.resume();
-    }
-    var osc = audioCtx.createOscillator();
-    var gain = audioCtx.createGain();
-    osc.type = 'sine';
-    osc.frequency.setValueAtTime(800, audioCtx.currentTime);
-    osc.frequency.exponentialRampToValueAtTime(120, audioCtx.currentTime + 0.04);
-    gain.gain.setValueAtTime(0.08, audioCtx.currentTime);
-    gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.04);
-    osc.connect(gain);
-    gain.connect(audioCtx.destination);
-    osc.start();
-    osc.stop(audioCtx.currentTime + 0.04);
-  } catch (e) {}
-}
-
-function toggleSound() {
-  soundEnabled = !soundEnabled;
-  var btn = document.getElementById('sound-btn-text');
-  if (btn) btn.textContent = soundEnabled ? 'Audio' : 'Muted';
-  showToast(soundEnabled ? 'Tactical audio FX enabled' : 'Tactical audio FX muted');
-  if (soundEnabled) playTactileClick();
-}
+/* ── THEME CONFIGURATION ── */
+// Locked to signature theme: Cyber Cyan
+document.documentElement.setAttribute('data-theme', 'cyan');
+var activeThemeMatrixColor = "#00f0ff";
 
 /* ── CUSTOM LERP CURSOR ── */
 var cursorDot = document.getElementById('cursor-dot');
@@ -2993,9 +2967,6 @@ interactives.forEach(function(el) {
   el.addEventListener('mouseleave', function() {
     document.body.classList.remove('cursor-hover');
   });
-  el.addEventListener('click', function() {
-    playTactileClick();
-  });
 });
 
 /* ── INTERACTIVE CARD SPOTLIGHT ENGINE ── */
@@ -3018,56 +2989,7 @@ function initCardSpotlights() {
 }
 initCardSpotlights();
 
-/* ── MULTI-THEME ENGINE & COLOR TRANSITIONS ── */
-var THEMES = [
-  { id: "cyan", name: "Cyan", color: "#00f0ff" },
-  { id: "matrix", name: "Matrix", color: "#00f5a0" },
-  { id: "crimson", name: "Crimson", color: "#ff2a6d" },
-  { id: "obsidian", name: "Obsidian", color: "#a78bfa" },
-  { id: "amber", name: "Amber", color: "#ffb020" }
-];
-var currentThemeIndex = 0;
-var activeThemeMatrixColor = "#00f0ff";
-
-function setTheme(themeId, announce) {
-  var theme = THEMES.find(function(t) { return t.id === themeId; });
-  if (!theme) theme = THEMES[0];
-  currentThemeIndex = THEMES.indexOf(theme);
-  activeThemeMatrixColor = theme.color;
-
-  document.documentElement.setAttribute('data-theme', theme.id);
-  localStorage.setItem('benslates_theme', theme.id);
-
-  var btnLabel = document.getElementById('theme-btn-label');
-  if (btnLabel) btnLabel.textContent = theme.name;
-  var mobLabel = document.getElementById('mobile-theme-label');
-  if (mobLabel) mobLabel.textContent = 'Theme: ' + theme.name;
-
-  if (cursorDot) cursorDot.style.background = theme.color;
-  if (cursorRing) cursorRing.style.borderColor = theme.color;
-
-  if (announce) {
-    showToast('Theme shifted: ' + theme.name.toUpperCase());
-    playTactileClick();
-  }
-}
-
-function cycleTheme() {
-  var nextIdx = (currentThemeIndex + 1) % THEMES.length;
-  setTheme(THEMES[nextIdx].id, true);
-}
-
-// Read saved theme
-(function() {
-  var saved = localStorage.getItem('benslates_theme');
-  if (saved && THEMES.some(function(t) { return t.id === saved; })) {
-    setTheme(saved, false);
-  } else {
-    setTheme("cyan", false);
-  }
-})();
-
-/* ── MATRIX CANVAS DIGITAL RAIN ── */
+/* ── MATRIX CANVAS DIGITAL RAIN (ALWAYS ACTIVE) ── */
 var canvas = document.getElementById('matrix-canvas');
 var matrixCtx = canvas ? canvas.getContext('2d') : null;
 var matrixRunning = true;
@@ -3105,16 +3027,6 @@ setInterval(drawMatrix, 45);
 window.addEventListener('resize', initMatrix);
 initMatrix();
 
-function toggleMatrix() {
-  matrixRunning = !matrixRunning;
-  if (canvas) {
-    canvas.style.opacity = matrixRunning ? "0.16" : "0";
-  }
-  var btn = document.getElementById('matrix-btn');
-  if (btn) btn.style.color = matrixRunning ? "var(--accent-cyan)" : "var(--text-secondary)";
-  showToast(matrixRunning ? 'Matrix rain active' : 'Matrix rain paused');
-}
-
 /* ── MOBILE MENU TOGGLE ── */
 function toggleMobileMenu() {
   var drawer = document.getElementById('mobile-drawer');
@@ -3138,7 +3050,6 @@ function showToast(msg) {
 
 /* ── COPY CLONE COMMAND & EMAIL ── */
 function copyClone(text) {
-  playTactileClick();
   if (navigator.clipboard && navigator.clipboard.writeText) {
     navigator.clipboard.writeText(text).then(function() {
       showToast('Copied: ' + text);
@@ -3172,7 +3083,6 @@ function fallbackCopy(text) {
 
 /* ── ARSENAL FILTERING ── */
 function filterCrates(cat, btn) {
-  playTactileClick();
   var tabs = document.querySelectorAll('.filter-tab');
   tabs.forEach(function(t) { t.classList.remove('active'); });
   if (btn) btn.classList.add('active');
@@ -3191,11 +3101,7 @@ function filterCrates(cat, btn) {
 /* ── COMMAND PALETTE (CMD+K) ── */
 var paletteItems = [
   { title: "Obsidian Knowledge Graph (Interactive Map)", cat: "Obsidian", action: "graph" },
-  { title: "Theme: Cyber Cyan", cat: "Theme", action: "theme-cyan" },
-  { title: "Theme: Matrix Emerald", cat: "Theme", action: "theme-matrix" },
-  { title: "Theme: Crimson Void", cat: "Theme", action: "theme-crimson" },
-  { title: "Theme: Obsidian Violet", cat: "Theme", action: "theme-obsidian" },
-  { title: "Theme: Tactical Amber", cat: "Theme", action: "theme-amber" },
+  { title: "Copy Authorized SSH Key (ED25519)", cat: "Security", action: "ssh" },
   { title: "About / Dossier", cat: "Navigation", target: "#hero" },
   { title: "Flagship: BEN_C2 Framework", cat: "Flagship", target: "#flagships" },
   { title: "Flagship: discord-voice-notes", cat: "Flagship", target: "#flagships" },
@@ -3216,7 +3122,6 @@ var paletteResults = document.getElementById('palette-results');
 var pSelectedIndex = 0;
 
 function openPalette() {
-  playTactileClick();
   paletteOverlay.classList.add('open');
   paletteSearch.value = '';
   renderPaletteResults('');
@@ -3298,15 +3203,13 @@ function updatePaletteSelection(items) {
 
 function executePaletteItem(item) {
   closePalette();
-  playTactileClick();
   if (item.target) {
     var el = document.querySelector(item.target);
     if (el) el.scrollIntoView({ behavior: 'smooth' });
   } else if (item.action === 'graph') {
     window.location.href = 'graph.html';
-  } else if (item.action && item.action.startsWith('theme-')) {
-    var tId = item.action.replace('theme-', '');
-    setTheme(tId, true);
+  } else if (item.action === 'ssh') {
+    copyClone('ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIM/rGDXNaWZa4n/KVGhW5JqIVjvp3dE2/FE2MawBDU6U unknwn5101@gmail.com');
   } else if (item.action === 'email') {
     copyEmail();
   } else if (item.action === 'resume') {
