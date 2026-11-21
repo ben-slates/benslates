@@ -30,10 +30,14 @@
   --border-glow: rgba(0, 240, 255, 0.28);
   
   --accent-cyan: #00f0ff;
+  --accent-cyan-rgb: 0, 240, 255;
   --accent-emerald: #00f5a0;
   --accent-purple: #8b5cf6;
   --accent-pink: #ff2a6d;
   --accent-amber: #ffb020;
+  
+  --glow-color-1: rgba(0, 240, 255, 0.06);
+  --glow-color-2: rgba(139, 92, 246, 0.05);
   
   --text-primary: #f8fafc;
   --text-secondary: #94a3b8;
@@ -52,6 +56,86 @@
   --transition-fast: 0.15s cubic-bezier(0.16, 1, 0.3, 1);
   --transition-normal: 0.25s cubic-bezier(0.16, 1, 0.3, 1);
   --transition-smooth: 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+[data-theme="cyan"] {
+  --bg-core: #07090e;
+  --bg-surface: #0c1018;
+  --bg-surface-elevated: #111722;
+  --bg-surface-hover: #161e2c;
+  --border-subtle: rgba(255, 255, 255, 0.07);
+  --border-strong: rgba(255, 255, 255, 0.14);
+  --border-active: #00f0ff;
+  --border-glow: rgba(0, 240, 255, 0.28);
+  --accent-cyan: #00f0ff;
+  --accent-cyan-rgb: 0, 240, 255;
+  --glow-color-1: rgba(0, 240, 255, 0.06);
+  --glow-color-2: rgba(139, 92, 246, 0.05);
+}
+
+[data-theme="matrix"] {
+  --bg-core: #040906;
+  --bg-surface: #08140c;
+  --bg-surface-elevated: #0d1f14;
+  --bg-surface-hover: #122b1c;
+  --border-subtle: rgba(0, 245, 160, 0.08);
+  --border-strong: rgba(0, 245, 160, 0.2);
+  --border-active: #00f5a0;
+  --border-glow: rgba(0, 245, 160, 0.32);
+  --accent-cyan: #00f5a0;
+  --accent-cyan-rgb: 0, 245, 160;
+  --glow-color-1: rgba(0, 245, 160, 0.08);
+  --glow-color-2: rgba(16, 185, 129, 0.06);
+}
+
+[data-theme="crimson"] {
+  --bg-core: #0a0407;
+  --bg-surface: #14080e;
+  --bg-surface-elevated: #1f0c16;
+  --bg-surface-hover: #2c1220;
+  --border-subtle: rgba(255, 42, 109, 0.08);
+  --border-strong: rgba(255, 42, 109, 0.2);
+  --border-active: #ff2a6d;
+  --border-glow: rgba(255, 42, 109, 0.32);
+  --accent-cyan: #ff2a6d;
+  --accent-cyan-rgb: 255, 42, 109;
+  --glow-color-1: rgba(255, 42, 109, 0.08);
+  --glow-color-2: rgba(244, 63, 94, 0.06);
+}
+
+[data-theme="obsidian"] {
+  --bg-core: #0d0b16;
+  --bg-surface: #151224;
+  --bg-surface-elevated: #1e1a33;
+  --bg-surface-hover: #292445;
+  --border-subtle: rgba(167, 139, 250, 0.08);
+  --border-strong: rgba(167, 139, 250, 0.22);
+  --border-active: #a78bfa;
+  --border-glow: rgba(167, 139, 250, 0.35);
+  --accent-cyan: #a78bfa;
+  --accent-cyan-rgb: 167, 139, 250;
+  --glow-color-1: rgba(167, 139, 250, 0.09);
+  --glow-color-2: rgba(123, 108, 217, 0.07);
+}
+
+[data-theme="amber"] {
+  --bg-core: #0a0803;
+  --bg-surface: #151006;
+  --bg-surface-elevated: #1f180a;
+  --bg-surface-hover: #2b210e;
+  --border-subtle: rgba(255, 176, 32, 0.08);
+  --border-strong: rgba(255, 176, 32, 0.22);
+  --border-active: #ffb020;
+  --border-glow: rgba(255, 176, 32, 0.32);
+  --accent-cyan: #ffb020;
+  --accent-cyan-rgb: 255, 176, 32;
+  --glow-color-1: rgba(255, 176, 32, 0.08);
+  --glow-color-2: rgba(245, 158, 11, 0.06);
+}
+
+/* Global smooth transition for theme switching */
+html, body, .header-wrap, .brand-badge, .crate-card, .matrix-card, .cert-card, .stat-pill, .tool-btn, .nav-link, .cursor-dot, .cursor-ring, .contact-card, .dossier-card, .resume-download-banner, .obsidian-feature-banner {
+  transition: background-color var(--transition-smooth), border-color var(--transition-smooth), color var(--transition-fast), box-shadow var(--transition-smooth);
 }
 
 /* ── RESET & BASE ── */
@@ -93,16 +177,17 @@ body::before {
   z-index: 0;
 }
 
-/* Ambient glow spots */
+/* Ambient glow spots with theme variable transitions */
 .ambient-glow-1 {
   position: fixed;
   top: -150px;
   left: 20%;
   width: 700px;
   height: 500px;
-  background: radial-gradient(circle, rgba(0, 240, 255, 0.05) 0%, transparent 70%);
+  background: radial-gradient(circle, var(--glow-color-1) 0%, transparent 70%);
   pointer-events: none;
   z-index: 0;
+  transition: background var(--transition-smooth);
 }
 .ambient-glow-2 {
   position: fixed;
@@ -110,9 +195,146 @@ body::before {
   right: -100px;
   width: 600px;
   height: 600px;
-  background: radial-gradient(circle, rgba(139, 92, 246, 0.04) 0%, transparent 70%);
+  background: radial-gradient(circle, var(--glow-color-2) 0%, transparent 70%);
   pointer-events: none;
   z-index: 0;
+  transition: background var(--transition-smooth);
+}
+
+/* ── CARD HOVER SPOTLIGHT ANIMATION ── */
+.crate-card, .matrix-card, .cert-card, .stat-pill, .hero-dossier-card, .c2-showcase, .voice-showcase, .obsidian-feature-banner, .contact-card, .dossier-card {
+  position: relative;
+  overflow: hidden;
+}
+.spotlight-glow {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(350px circle at var(--mouse-x, -500px) var(--mouse-y, -500px), rgba(var(--accent-cyan-rgb), 0.12), transparent 70%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: 1;
+}
+.crate-card:hover .spotlight-glow,
+.matrix-card:hover .spotlight-glow,
+.cert-card:hover .spotlight-glow,
+.stat-pill:hover .spotlight-glow,
+.hero-dossier-card:hover .spotlight-glow,
+.c2-showcase:hover .spotlight-glow,
+.voice-showcase:hover .spotlight-glow,
+.obsidian-feature-banner:hover .spotlight-glow,
+.contact-card:hover .spotlight-glow,
+.dossier-card:hover .spotlight-glow {
+  opacity: 1;
+}
+
+/* ── THEME BUTTON & OBSIDIAN GRAPH NAV STYLING ── */
+.theme-switch-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+}
+.theme-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--accent-cyan);
+  box-shadow: 0 0 8px var(--accent-cyan);
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.graph-pill-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--accent-cyan) !important;
+  font-weight: 600;
+}
+.graph-pill-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent-cyan);
+  box-shadow: 0 0 6px var(--accent-cyan);
+  animation: pulse-dot 2s infinite ease-in-out;
+}
+@keyframes pulse-dot {
+  0%, 100% { opacity: 0.6; transform: scale(0.9); }
+  50% { opacity: 1; transform: scale(1.2); }
+}
+
+/* Obsidian Feature Banner */
+.obsidian-feature-banner {
+  margin-top: 24px;
+  background: linear-gradient(135deg, rgba(var(--accent-cyan-rgb), 0.08), rgba(123, 108, 217, 0.07));
+  border: 1px solid var(--border-glow);
+  border-radius: var(--radius-lg);
+  padding: 24px 32px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  flex-wrap: wrap;
+  transition: all var(--transition-normal);
+}
+.obsidian-feature-banner:hover {
+  border-color: var(--border-active);
+  box-shadow: 0 0 24px var(--border-glow);
+}
+.obsidian-banner-content {
+  flex: 1;
+  min-width: 280px;
+}
+.obsidian-banner-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--accent-cyan);
+  letter-spacing: 0.06em;
+  margin-bottom: 6px;
+}
+.vault-gem-sm {
+  width: 10px;
+  height: 10px;
+  background: var(--accent-cyan);
+  clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+  box-shadow: 0 0 8px var(--accent-cyan);
+}
+.obsidian-banner-title {
+  font-family: var(--font-display);
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 6px;
+}
+.obsidian-banner-desc {
+  font-size: 13px;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+.obsidian-launch-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 20px;
+  border-radius: var(--radius-sm);
+  background: var(--accent-cyan);
+  color: #07090e;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 700;
+  text-decoration: none;
+  transition: all var(--transition-fast);
+  white-space: nowrap;
+}
+.obsidian-launch-btn:hover {
+  filter: brightness(1.15);
+  box-shadow: 0 0 16px var(--border-glow);
+  transform: translateY(-1px);
 }
 
 /* Canvas Matrix Rain */
@@ -1704,6 +1926,7 @@ button {
         <a href="#experience" class="nav-link">Experience</a>
         <a href="#vault" class="nav-link">Vault</a>
         <a href="#contact" class="nav-link">Contact</a>
+        <a href="graph.html" class="nav-link graph-pill-link" title="Interactive Obsidian Knowledge Graph"><span class="graph-pill-dot"></span>Graph</a>
       </nav>
 
       <!-- Nav Tools & CTAs -->
@@ -1712,6 +1935,12 @@ button {
         <button class="tool-btn" onclick="openPalette()" title="Command Palette (Cmd+K)">
           <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
           <span>Cmd+K</span>
+        </button>
+
+        <!-- Theme Switcher -->
+        <button class="tool-btn theme-switch-btn" id="theme-btn" onclick="cycleTheme()" title="Switch Visual Theme">
+          <span class="theme-dot"></span>
+          <span id="theme-btn-label">Cyan</span>
         </button>
 
         <!-- Audio Haptic Toggle -->
@@ -1751,11 +1980,15 @@ button {
   <a href="#experience" class="nav-link" onclick="toggleMobileMenu()">Experience (Rynex Security)</a>
   <a href="#vault" class="nav-link" onclick="toggleMobileMenu()">Defense Vault &amp; Certs</a>
   <a href="#contact" class="nav-link" onclick="toggleMobileMenu()">Direct Communications</a>
+  <a href="graph.html" class="nav-link graph-pill-link" onclick="toggleMobileMenu()"><span class="graph-pill-dot"></span>Obsidian Knowledge Graph</a>
   <div style="padding: 16px 0 0; display: flex; gap: 10px;">
     <a href="resume.pdf" target="_blank" class="btn-primary" style="flex:1; text-align:center; justify-content:center;">Download CV (PDF)</a>
   </div>
   <div style="padding: 10px 0 0; display: flex; gap: 8px;">
     <button class="tool-btn" onclick="toggleSound()" style="flex:1; justify-content:center;">Audio FX</button>
+    <button class="tool-btn" onclick="toggleMatrix()" style="flex:1; justify-content:center;">Matrix Rain</button>
+    <button class="tool-btn" onclick="cycleTheme()" style="flex:1; justify-content:center;"><span class="theme-dot"></span><span id="mobile-theme-label">Theme</span></button>
+  </div>
     <button class="tool-btn" onclick="toggleMatrix()" style="flex:1; justify-content:center;">Matrix Rain</button>
   </div>
 </div>
@@ -1790,6 +2023,11 @@ button {
         <a href="#flagships" class="btn-primary">
           <span>Explore Arsenal</span>
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+
+        <a href="graph.html" class="btn-secondary" style="border-color: rgba(var(--accent-cyan-rgb), 0.45); color: var(--accent-cyan);">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><circle cx="19" cy="6" r="2"/><circle cx="5" cy="6" r="2"/><circle cx="5" cy="18" r="2"/><circle cx="19" cy="18" r="2"/><line x1="12" y1="9" x2="19" y2="6"/><line x1="12" y1="9" x2="5" y2="6"/><line x1="12" y1="15" x2="5" y2="18"/><line x1="12" y1="15" x2="19" y2="18"/></svg>
+          <span>Obsidian Graph</span>
         </a>
 
         <a href="resume.pdf" target="_blank" rel="noopener noreferrer" class="btn-secondary">
@@ -2547,6 +2785,22 @@ button {
 
     </div>
 
+    <!-- Obsidian Knowledge Graph Feature Banner -->
+    <div class="obsidian-feature-banner">
+      <div class="obsidian-banner-content">
+        <div class="obsidian-banner-tag">
+          <span class="vault-gem-sm"></span>
+          <span>INTERACTIVE OBSIDIAN KNOWLEDGE GRAPH</span>
+        </div>
+        <h3 class="obsidian-banner-title">Complete Offensive Ecosystem &amp; Dossier Map</h3>
+        <p class="obsidian-banner-desc">Explore all 11 repositories, 4 attack matrix domains, 4 verified certifications, Rynex Security firm dossier, and operator notes mapped as an interactive force-directed Obsidian graph with collapsible file explorer and markdown inspector.</p>
+      </div>
+      <a href="graph.html" class="obsidian-launch-btn">
+        <span>Launch Knowledge Graph</span>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </a>
+    </div>
+
     <!-- Official Resume Download Banner -->
     <div class="resume-download-banner">
       <div class="resume-banner-text">
@@ -2731,7 +2985,7 @@ function renderCursor() {
 requestAnimationFrame(renderCursor);
 
 // Add hover scaling on interactive targets
-var interactives = document.querySelectorAll('a, button, input, .crate-card, .matrix-card, .cert-card');
+var interactives = document.querySelectorAll('a, button, input, .crate-card, .matrix-card, .cert-card, .obsidian-feature-banner');
 interactives.forEach(function(el) {
   el.addEventListener('mouseenter', function() {
     document.body.classList.add('cursor-hover');
@@ -2743,6 +2997,75 @@ interactives.forEach(function(el) {
     playTactileClick();
   });
 });
+
+/* ── INTERACTIVE CARD SPOTLIGHT ENGINE ── */
+function initCardSpotlights() {
+  var targets = document.querySelectorAll('.crate-card, .matrix-card, .cert-card, .stat-pill, .hero-dossier-card, .c2-showcase, .voice-showcase, .obsidian-feature-banner, .contact-card, .dossier-card');
+  targets.forEach(function(card) {
+    if (!card.querySelector('.spotlight-glow')) {
+      var glow = document.createElement('div');
+      glow.className = 'spotlight-glow';
+      card.appendChild(glow);
+    }
+    card.addEventListener('mousemove', function(e) {
+      var rect = card.getBoundingClientRect();
+      var x = e.clientX - rect.left;
+      var y = e.clientY - rect.top;
+      card.style.setProperty('--mouse-x', x + 'px');
+      card.style.setProperty('--mouse-y', y + 'px');
+    });
+  });
+}
+initCardSpotlights();
+
+/* ── MULTI-THEME ENGINE & COLOR TRANSITIONS ── */
+var THEMES = [
+  { id: "cyan", name: "Cyan", color: "#00f0ff" },
+  { id: "matrix", name: "Matrix", color: "#00f5a0" },
+  { id: "crimson", name: "Crimson", color: "#ff2a6d" },
+  { id: "obsidian", name: "Obsidian", color: "#a78bfa" },
+  { id: "amber", name: "Amber", color: "#ffb020" }
+];
+var currentThemeIndex = 0;
+var activeThemeMatrixColor = "#00f0ff";
+
+function setTheme(themeId, announce) {
+  var theme = THEMES.find(function(t) { return t.id === themeId; });
+  if (!theme) theme = THEMES[0];
+  currentThemeIndex = THEMES.indexOf(theme);
+  activeThemeMatrixColor = theme.color;
+
+  document.documentElement.setAttribute('data-theme', theme.id);
+  localStorage.setItem('benslates_theme', theme.id);
+
+  var btnLabel = document.getElementById('theme-btn-label');
+  if (btnLabel) btnLabel.textContent = theme.name;
+  var mobLabel = document.getElementById('mobile-theme-label');
+  if (mobLabel) mobLabel.textContent = 'Theme: ' + theme.name;
+
+  if (cursorDot) cursorDot.style.background = theme.color;
+  if (cursorRing) cursorRing.style.borderColor = theme.color;
+
+  if (announce) {
+    showToast('Theme shifted: ' + theme.name.toUpperCase());
+    playTactileClick();
+  }
+}
+
+function cycleTheme() {
+  var nextIdx = (currentThemeIndex + 1) % THEMES.length;
+  setTheme(THEMES[nextIdx].id, true);
+}
+
+// Read saved theme
+(function() {
+  var saved = localStorage.getItem('benslates_theme');
+  if (saved && THEMES.some(function(t) { return t.id === saved; })) {
+    setTheme(saved, false);
+  } else {
+    setTheme("cyan", false);
+  }
+})();
 
 /* ── MATRIX CANVAS DIGITAL RAIN ── */
 var canvas = document.getElementById('matrix-canvas');
@@ -2766,7 +3089,7 @@ function drawMatrix() {
   if (!matrixRunning || !canvas || !matrixCtx) return;
   matrixCtx.fillStyle = "rgba(7, 9, 14, 0.08)";
   matrixCtx.fillRect(0, 0, canvas.width, canvas.height);
-  matrixCtx.fillStyle = "#00f0ff";
+  matrixCtx.fillStyle = activeThemeMatrixColor || "#00f0ff";
   matrixCtx.font = "12px 'JetBrains Mono', monospace";
 
   for (var i = 0; i < matrixDrops.length; i++) {
@@ -2867,6 +3190,12 @@ function filterCrates(cat, btn) {
 
 /* ── COMMAND PALETTE (CMD+K) ── */
 var paletteItems = [
+  { title: "Obsidian Knowledge Graph (Interactive Map)", cat: "Obsidian", action: "graph" },
+  { title: "Theme: Cyber Cyan", cat: "Theme", action: "theme-cyan" },
+  { title: "Theme: Matrix Emerald", cat: "Theme", action: "theme-matrix" },
+  { title: "Theme: Crimson Void", cat: "Theme", action: "theme-crimson" },
+  { title: "Theme: Obsidian Violet", cat: "Theme", action: "theme-obsidian" },
+  { title: "Theme: Tactical Amber", cat: "Theme", action: "theme-amber" },
   { title: "About / Dossier", cat: "Navigation", target: "#hero" },
   { title: "Flagship: BEN_C2 Framework", cat: "Flagship", target: "#flagships" },
   { title: "Flagship: discord-voice-notes", cat: "Flagship", target: "#flagships" },
@@ -2973,6 +3302,11 @@ function executePaletteItem(item) {
   if (item.target) {
     var el = document.querySelector(item.target);
     if (el) el.scrollIntoView({ behavior: 'smooth' });
+  } else if (item.action === 'graph') {
+    window.location.href = 'graph.html';
+  } else if (item.action && item.action.startsWith('theme-')) {
+    var tId = item.action.replace('theme-', '');
+    setTheme(tId, true);
   } else if (item.action === 'email') {
     copyEmail();
   } else if (item.action === 'resume') {

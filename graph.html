@@ -1,0 +1,2411 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="obsidian">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+<title>benslates-vault // Obsidian Knowledge Graph &amp; Dossier Map</title>
+<meta name="description" content="Interactive force-directed Obsidian knowledge vault mapping the repositories, attack vectors, firm dossier, and offensive security research of Benjamin Andrew Slates (@benslates).">
+
+<!-- Favicon -->
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="icon.png">
+
+<!-- Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+
+<style>
+/* ── OBSIDIAN DESIGN SYSTEM ── */
+:root {
+  --obsidian-bg-core: #111116;
+  --obsidian-bg-sidebar: #16161c;
+  --obsidian-bg-pane: #1b1b23;
+  --obsidian-bg-elevated: #22222d;
+  --obsidian-bg-hover: #2a2a37;
+  
+  --border-subtle: rgba(255, 255, 255, 0.07);
+  --border-strong: rgba(255, 255, 255, 0.14);
+  --border-active: #7b6cd9;
+  
+  --accent-purple: #7b6cd9;
+  --accent-purple-glow: rgba(123, 108, 217, 0.35);
+  --accent-cyan: #00f0ff;
+  --accent-emerald: #00f5a0;
+  --accent-crimson: #ff2a6d;
+  --accent-amber: #ffb020;
+  --accent-slate: #38bdf8;
+  
+  --text-primary: #f3f4f6;
+  --text-secondary: #9ca3af;
+  --text-muted: #6b7280;
+  --text-faint: #374151;
+  
+  --font-mono: 'JetBrains Mono', monospace;
+  --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-display: 'Space Grotesk', -apple-system, BlinkMacSystemFont, sans-serif;
+  
+  --header-height: 48px;
+  --status-height: 28px;
+  --sidebar-width: 290px;
+  --inspector-width: 440px;
+  
+  --transition-fast: 0.15s ease;
+  --transition-normal: 0.25s ease;
+}
+
+[data-theme="cyan"] {
+  --obsidian-bg-core: #07090e;
+  --obsidian-bg-sidebar: #0b0f17;
+  --obsidian-bg-pane: #0f1521;
+  --obsidian-bg-elevated: #151d2d;
+  --obsidian-bg-hover: #1c273c;
+  --border-active: #00f0ff;
+  --accent-purple: #00f0ff;
+  --accent-purple-glow: rgba(0, 240, 255, 0.35);
+}
+
+[data-theme="matrix"] {
+  --obsidian-bg-core: #040805;
+  --obsidian-bg-sidebar: #07120a;
+  --obsidian-bg-pane: #0b1c10;
+  --obsidian-bg-elevated: #102717;
+  --obsidian-bg-hover: #15341f;
+  --border-active: #00f5a0;
+  --accent-purple: #00f5a0;
+  --accent-purple-glow: rgba(0, 245, 160, 0.35);
+}
+
+[data-theme="crimson"] {
+  --obsidian-bg-core: #090407;
+  --obsidian-bg-sidebar: #12070e;
+  --obsidian-bg-pane: #1a0b14;
+  --obsidian-bg-elevated: #240f1d;
+  --obsidian-bg-hover: #311527;
+  --border-active: #ff2a6d;
+  --accent-purple: #ff2a6d;
+  --accent-purple-glow: rgba(255, 42, 109, 0.35);
+}
+
+[data-theme="amber"] {
+  --obsidian-bg-core: #080602;
+  --obsidian-bg-sidebar: #110d05;
+  --obsidian-bg-pane: #1a1408;
+  --obsidian-bg-elevated: #241c0b;
+  --obsidian-bg-hover: #31260f;
+  --border-active: #ffb020;
+  --accent-purple: #ffb020;
+  --accent-purple-glow: rgba(255, 176, 32, 0.35);
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background-color: var(--obsidian-bg-core);
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  font-size: 13px;
+  line-height: 1.5;
+  user-select: none;
+}
+
+/* ── LAYOUT SHELL ── */
+.app-shell {
+  display: flex;
+  flex-direction: column;
+  width: 100vw;
+  height: 100vh;
+}
+
+/* ── TOP TITLEBAR ── */
+.top-titlebar {
+  height: var(--header-height);
+  background: var(--obsidian-bg-sidebar);
+  border-bottom: 1px solid var(--border-subtle);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 14px;
+  gap: 12px;
+  z-index: 50;
+  flex-shrink: 0;
+}
+
+.titlebar-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 240px;
+}
+
+.return-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 9px;
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-secondary);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  text-decoration: none;
+  transition: all var(--transition-fast);
+}
+.return-link:hover {
+  background: var(--obsidian-bg-hover);
+  color: var(--text-primary);
+  border-color: var(--border-strong);
+}
+
+.vault-brand {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+.vault-gem {
+  width: 14px;
+  height: 14px;
+  background: var(--accent-purple);
+  clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+  box-shadow: 0 0 10px var(--accent-purple-glow);
+}
+.vault-tag {
+  color: var(--accent-purple);
+  font-size: 10px;
+  background: rgba(123, 108, 217, 0.12);
+  padding: 1px 5px;
+  border-radius: 3px;
+  border: 1px solid rgba(123, 108, 217, 0.3);
+}
+
+.titlebar-center {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex: 1;
+  max-width: 540px;
+}
+
+.search-box-wrap {
+  position: relative;
+  width: 100%;
+}
+.search-icon {
+  position: absolute;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-muted);
+  pointer-events: none;
+}
+.vault-search-input {
+  width: 100%;
+  background: var(--obsidian-bg-pane);
+  border: 1px solid var(--border-subtle);
+  border-radius: 6px;
+  padding: 6px 12px 6px 30px;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--text-primary);
+  outline: none;
+  transition: border-color var(--transition-fast);
+}
+.vault-search-input:focus {
+  border-color: var(--border-active);
+  background: var(--obsidian-bg-core);
+}
+.vault-search-input::placeholder {
+  color: var(--text-muted);
+}
+
+.filter-pills {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+.f-pill {
+  padding: 3px 8px;
+  border-radius: 4px;
+  background: var(--obsidian-bg-pane);
+  border: 1px solid var(--border-subtle);
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--text-muted);
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all var(--transition-fast);
+}
+.f-pill:hover, .f-pill.active {
+  background: var(--obsidian-bg-hover);
+  color: var(--text-primary);
+  border-color: var(--border-active);
+}
+
+.titlebar-right {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.obs-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 9px;
+  border-radius: 4px;
+  background: var(--obsidian-bg-pane);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-secondary);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+.obs-btn:hover {
+  background: var(--obsidian-bg-hover);
+  color: var(--text-primary);
+  border-color: var(--border-strong);
+}
+.obs-btn.active {
+  border-color: var(--border-active);
+  color: var(--text-primary);
+  background: rgba(123, 108, 217, 0.15);
+}
+
+.theme-indicator-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--border-active);
+  box-shadow: 0 0 6px var(--border-active);
+}
+
+/* ── MAIN WORKSPACE ── */
+.workspace-body {
+  display: flex;
+  flex: 1;
+  position: relative;
+  overflow: hidden;
+  height: calc(100vh - var(--header-height) - var(--status-height));
+}
+
+/* ── LEFT SIDEBAR (FILE EXPLORER) ── */
+.vault-sidebar {
+  width: var(--sidebar-width);
+  background: var(--obsidian-bg-sidebar);
+  border-right: 1px solid var(--border-subtle);
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+  transition: transform var(--transition-normal);
+  z-index: 20;
+}
+.sidebar-header {
+  padding: 10px 14px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--text-muted);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--border-subtle);
+}
+.file-tree-scroll {
+  flex: 1;
+  overflow-y: auto;
+  padding: 8px 6px;
+}
+.tree-folder {
+  margin-bottom: 4px;
+}
+.folder-header {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 8px;
+  border-radius: 4px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: background var(--transition-fast);
+}
+.folder-header:hover {
+  background: var(--obsidian-bg-pane);
+  color: var(--text-primary);
+}
+.folder-arrow {
+  width: 12px;
+  height: 12px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform var(--transition-fast);
+}
+.folder-header.collapsed .folder-arrow {
+  transform: rotate(-90deg);
+}
+.folder-children {
+  padding-left: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+.folder-children.hidden {
+  display: none;
+}
+.file-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--text-secondary);
+  cursor: pointer;
+  text-decoration: none;
+  transition: all var(--transition-fast);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.file-item:hover {
+  background: var(--obsidian-bg-pane);
+  color: var(--text-primary);
+}
+.file-item.active {
+  background: rgba(123, 108, 217, 0.16);
+  color: var(--text-primary);
+  border-left: 2px solid var(--border-active);
+}
+.file-bullet {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+/* ── CENTER GRAPH PANE ── */
+.graph-pane {
+  flex: 1;
+  position: relative;
+  background: var(--obsidian-bg-core);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+#graph-canvas {
+  width: 100%;
+  height: 100%;
+  display: block;
+  cursor: grab;
+}
+#graph-canvas:active {
+  cursor: grabbing;
+}
+
+/* ── GRAPH HUD OVERLAY ── */
+.graph-hud-top {
+  position: absolute;
+  top: 14px;
+  left: 16px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  pointer-events: none;
+}
+.hud-card {
+  pointer-events: auto;
+  background: rgba(22, 22, 28, 0.85);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid var(--border-subtle);
+  border-radius: 6px;
+  padding: 6px 12px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--text-secondary);
+}
+.hud-title {
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+.graph-hud-controls {
+  position: absolute;
+  bottom: 16px;
+  right: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  pointer-events: auto;
+}
+.hud-btn {
+  width: 32px;
+  height: 32px;
+  border-radius: 6px;
+  background: rgba(27, 27, 35, 0.9);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-secondary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  transition: all var(--transition-fast);
+}
+.hud-btn:hover {
+  background: var(--obsidian-bg-hover);
+  color: var(--text-primary);
+  border-color: var(--border-strong);
+}
+
+.graph-legend {
+  position: absolute;
+  bottom: 16px;
+  left: 16px;
+  background: rgba(22, 22, 28, 0.88);
+  backdrop-filter: blur(10px);
+  border: 1px solid var(--border-subtle);
+  border-radius: 6px;
+  padding: 8px 12px;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  pointer-events: auto;
+}
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--text-secondary);
+}
+.legend-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+
+/* Floating Tooltip */
+.graph-tooltip {
+  position: absolute;
+  pointer-events: none;
+  background: rgba(17, 17, 22, 0.96);
+  border: 1px solid var(--border-active);
+  border-radius: 6px;
+  padding: 8px 12px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--text-primary);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
+  transform: translate(12px, 12px);
+  z-index: 100;
+  display: none;
+  max-width: 260px;
+}
+.tooltip-title {
+  font-weight: 700;
+  font-size: 12px;
+  margin-bottom: 2px;
+}
+.tooltip-meta {
+  font-size: 10px;
+  color: var(--text-muted);
+}
+
+/* ── RIGHT INSPECTOR (OBSIDIAN MARKDOWN VIEWER) ── */
+.vault-inspector {
+  width: var(--inspector-width);
+  background: var(--obsidian-bg-pane);
+  border-left: 1px solid var(--border-subtle);
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+  transition: transform var(--transition-normal);
+  z-index: 20;
+}
+.inspector-tab-header {
+  height: 38px;
+  background: var(--obsidian-bg-sidebar);
+  border-bottom: 1px solid var(--border-subtle);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 14px;
+}
+.active-tab-title {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-primary);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.tab-actions {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.tab-action-btn {
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 3px;
+}
+.tab-action-btn:hover {
+  color: var(--text-primary);
+  background: var(--obsidian-bg-hover);
+}
+
+.inspector-body-scroll {
+  flex: 1;
+  overflow-y: auto;
+  padding: 20px;
+  user-select: text;
+}
+
+.markdown-breadcrumbs {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--text-muted);
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* YAML Frontmatter block */
+.yaml-frontmatter {
+  background: var(--obsidian-bg-core);
+  border: 1px solid var(--border-subtle);
+  border-radius: 6px;
+  padding: 10px 14px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  line-height: 1.6;
+  margin-bottom: 18px;
+  color: var(--text-secondary);
+}
+.yaml-delim {
+  color: var(--text-muted);
+}
+.yaml-key {
+  color: var(--accent-purple);
+}
+.yaml-val {
+  color: var(--accent-cyan);
+}
+.yaml-tag {
+  color: var(--accent-amber);
+}
+
+.note-title {
+  font-family: var(--font-display);
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 8px;
+  line-height: 1.25;
+}
+
+.note-tagline {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--border-active);
+  margin-bottom: 16px;
+}
+
+.note-prose {
+  font-size: 13px;
+  line-height: 1.65;
+  color: var(--text-secondary);
+  margin-bottom: 18px;
+}
+
+.note-prose p {
+  margin-bottom: 12px;
+}
+
+.note-section-heading {
+  font-family: var(--font-display);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--text-primary);
+  margin: 18px 0 8px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.note-section-heading::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--border-subtle);
+}
+
+/* Interactive Obsidian Wikilinks */
+.wikilink {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  color: var(--border-active);
+  background: rgba(123, 108, 217, 0.12);
+  padding: 1px 6px;
+  border-radius: 4px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all var(--transition-fast);
+}
+.wikilink:hover {
+  background: rgba(123, 108, 217, 0.25);
+  box-shadow: 0 0 8px var(--accent-purple-glow);
+}
+
+/* Code Snippet in Note */
+.note-code-block {
+  background: var(--obsidian-bg-core);
+  border: 1px solid var(--border-subtle);
+  border-radius: 6px;
+  padding: 10px 12px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  line-height: 1.5;
+  margin: 10px 0;
+  overflow-x: auto;
+  color: var(--accent-emerald);
+}
+
+.note-cta-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 16px 0;
+}
+.note-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  border-radius: 4px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+.note-cta.primary {
+  background: var(--border-active);
+  color: #07090e;
+}
+.note-cta.primary:hover {
+  filter: brightness(1.15);
+}
+.note-cta.secondary {
+  background: var(--obsidian-bg-elevated);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-primary);
+}
+.note-cta.secondary:hover {
+  background: var(--obsidian-bg-hover);
+  border-color: var(--border-strong);
+}
+
+/* Backlinks Section */
+.backlinks-box {
+  margin-top: 24px;
+  padding-top: 16px;
+  border-top: 1px solid var(--border-subtle);
+}
+.backlinks-header {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-muted);
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.backlink-list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.backlink-card {
+  background: var(--obsidian-bg-core);
+  border: 1px solid var(--border-subtle);
+  border-radius: 4px;
+  padding: 6px 10px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+.backlink-card:hover {
+  border-color: var(--border-active);
+  background: var(--obsidian-bg-elevated);
+}
+.backlink-name {
+  color: var(--border-active);
+  font-weight: 600;
+  margin-bottom: 2px;
+}
+.backlink-snippet {
+  font-size: 10px;
+  color: var(--text-muted);
+}
+
+/* ── BOTTOM STATUS BAR ── */
+.vault-statusbar {
+  height: var(--status-height);
+  background: var(--obsidian-bg-sidebar);
+  border-top: 1px solid var(--border-subtle);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 12px;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--text-muted);
+  flex-shrink: 0;
+  z-index: 50;
+}
+.status-left, .status-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.status-item {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+.status-pulse {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent-emerald);
+  box-shadow: 0 0 6px var(--accent-emerald);
+}
+
+/* Responsive Modes */
+@media (max-width: 1080px) {
+  .vault-inspector {
+    position: absolute;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    width: 380px;
+    box-shadow: -8px 0 30px rgba(0, 0, 0, 0.7);
+    transform: translateX(100%);
+  }
+  .vault-inspector.open {
+    transform: translateX(0);
+  }
+}
+@media (max-width: 768px) {
+  .vault-sidebar {
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 260px;
+    box-shadow: 8px 0 30px rgba(0, 0, 0, 0.7);
+    transform: translateX(-100%);
+  }
+  .vault-sidebar.open {
+    transform: translateX(0);
+  }
+  .vault-inspector {
+    width: 100%;
+  }
+  .titlebar-center {
+    display: none;
+  }
+  .vault-tag {
+    display: none;
+  }
+  .titlebar-left {
+    min-width: auto;
+    gap: 8px;
+  }
+  .vault-brand span {
+    font-size: 11px;
+  }
+  .obs-btn {
+    padding: 4px 7px;
+    font-size: 10px;
+  }
+  .return-link span:last-child {
+    display: none;
+  }
+  .graph-legend {
+    display: none;
+  }
+}
+
+/* Toast */
+.vault-toast {
+  position: fixed;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%) translateY(20px);
+  background: var(--obsidian-bg-elevated);
+  border: 1px solid var(--border-active);
+  color: var(--text-primary);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  padding: 7px 16px;
+  border-radius: 6px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.8);
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.25s ease;
+  z-index: 999;
+}
+.vault-toast.show {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+</style>
+</head>
+<body>
+
+<div class="app-shell">
+
+  <!-- ── TOP TITLEBAR ── -->
+  <header class="top-titlebar">
+    <div class="titlebar-left">
+      <a href="index.html" class="return-link" title="Return to Main Portfolio">
+        <span>&larr;</span>
+        <span>Portfolio Home</span>
+      </a>
+      <div class="vault-brand">
+        <div class="vault-gem"></div>
+        <span>benslates-vault</span>
+        <span class="vault-tag">OBSIDIAN v1.6.8</span>
+      </div>
+    </div>
+
+    <div class="titlebar-center">
+      <div class="search-box-wrap">
+        <svg class="search-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <input type="text" id="vault-search" class="vault-search-input" placeholder="Search knowledge graph (e.g. C2, Active Directory, CVE)..." autocomplete="off">
+      </div>
+      <div class="filter-pills">
+        <button class="f-pill active" data-filter="all" onclick="filterGraph('all', this)">All</button>
+        <button class="f-pill" data-filter="Flagship" onclick="filterGraph('Flagship', this)">Flagships</button>
+        <button class="f-pill" data-filter="Arsenal" onclick="filterGraph('Arsenal', this)">Arsenal</button>
+        <button class="f-pill" data-filter="Attack Matrix" onclick="filterGraph('Attack Matrix', this)">Matrix</button>
+        <button class="f-pill" data-filter="Credentials" onclick="filterGraph('Credentials', this)">Certs</button>
+        <button class="f-pill" data-filter="Tech Stack" onclick="filterGraph('Tech Stack', this)">Stack</button>
+      </div>
+    </div>
+
+    <div class="titlebar-right">
+      <button class="obs-btn" id="sidebar-toggle" onclick="toggleSidebar()" title="Toggle Vault Explorer">
+        <span>Explorer</span>
+      </button>
+      <button class="obs-btn" id="inspector-toggle" onclick="toggleInspector()" title="Toggle Markdown Inspector">
+        <span>Note Inspector</span>
+      </button>
+      <button class="obs-btn" onclick="cycleTheme()" title="Switch Theme Palette">
+        <span class="theme-indicator-dot"></span>
+        <span id="theme-label">Obsidian</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- ── MAIN WORKSPACE ── -->
+  <div class="workspace-body">
+
+    <!-- Left File Explorer Sidebar -->
+    <aside class="vault-sidebar" id="vault-sidebar">
+      <div class="sidebar-header">
+        <span>Vault File Explorer</span>
+        <span id="file-count-badge">28 Notes</span>
+      </div>
+      <div class="file-tree-scroll" id="file-tree">
+        <!-- Rendered dynamically -->
+      </div>
+    </aside>
+
+    <!-- Center Force-Directed Graph Pane -->
+    <main class="graph-pane">
+      <canvas id="graph-canvas"></canvas>
+
+      <!-- Graph Top HUD -->
+      <div class="graph-hud-top">
+        <div class="hud-card">
+          <span class="hud-title">ACTIVE TOPOLOGY:</span>
+          <span id="hud-stats">28 Nodes // 56 Linked Edges</span>
+        </div>
+      </div>
+
+      <!-- Graph Legend -->
+      <div class="graph-legend">
+        <div class="legend-item"><span class="legend-dot" style="background:#00f0ff"></span><span>Operator / Identity</span></div>
+        <div class="legend-item"><span class="legend-dot" style="background:#ffb020"></span><span>Security Firm</span></div>
+        <div class="legend-item"><span class="legend-dot" style="background:#ff2a6d"></span><span>Flagship Systems</span></div>
+        <div class="legend-item"><span class="legend-dot" style="background:#a78bfa"></span><span>Weaponized Repos</span></div>
+        <div class="legend-item"><span class="legend-dot" style="background:#f43f5e"></span><span>Adversarial Vectors</span></div>
+        <div class="legend-item"><span class="legend-dot" style="background:#00f5a0"></span><span>Verified Credentials</span></div>
+        <div class="legend-item"><span class="legend-dot" style="background:#38bdf8"></span><span>Languages &amp; Core Stack</span></div>
+      </div>
+
+      <!-- Floating Tooltip -->
+      <div class="graph-tooltip" id="graph-tooltip">
+        <div class="tooltip-title" id="tt-title">Title</div>
+        <div class="tooltip-meta" id="tt-meta">Category // Connections</div>
+      </div>
+
+      <!-- Graph Controls (HUD) -->
+      <div class="graph-hud-controls">
+        <button class="hud-btn" onclick="zoomGraph(1.2)" title="Zoom In">+</button>
+        <button class="hud-btn" onclick="zoomGraph(0.8)" title="Zoom Out">-</button>
+        <button class="hud-btn" onclick="resetGraphView()" title="Center Graph View">o</button>
+        <button class="hud-btn" id="physics-btn" onclick="togglePhysics()" title="Pause Physics">||</button>
+      </div>
+    </main>
+
+    <!-- Right Obsidian Markdown Inspector -->
+    <aside class="vault-inspector" id="vault-inspector">
+      <div class="inspector-tab-header">
+        <div class="active-tab-title">
+          <span style="color:var(--border-active);">#</span>
+          <span id="inspector-tab-name">Benjamin Andrew Slates.md</span>
+        </div>
+        <div class="tab-actions">
+          <button class="tab-action-btn" onclick="closeInspector()" title="Close Inspector">x</button>
+        </div>
+      </div>
+      <div class="inspector-body-scroll" id="inspector-content">
+        <!-- Markdown content rendered dynamically -->
+      </div>
+    </aside>
+
+  </div>
+
+  <!-- ── BOTTOM STATUS BAR ── -->
+  <footer class="vault-statusbar">
+    <div class="status-left">
+      <div class="status-item">
+        <div class="status-pulse"></div>
+        <span>VAULT SYNCHRONIZED</span>
+      </div>
+      <div class="status-item">
+        <span>NODES: 28</span>
+      </div>
+      <div class="status-item">
+        <span>EDGES: 56</span>
+      </div>
+    </div>
+    <div class="status-right">
+      <div class="status-item">
+        <span>UTF-8</span>
+      </div>
+      <div class="status-item">
+        <span>GRAPH ENGINE: FORCE-DIRECTED D3-SIM</span>
+      </div>
+    </div>
+  </footer>
+
+</div>
+
+<!-- Vault Toast -->
+<div class="vault-toast" id="vault-toast"></div>
+
+<script>
+/* ── AUDIO TACTILE FEEDBACK ── */
+var audioCtx = null;
+function playClick() {
+  try {
+    if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    if (audioCtx.state === 'suspended') audioCtx.resume();
+    var osc = audioCtx.createOscillator();
+    var gain = audioCtx.createGain();
+    osc.type = 'sine';
+    osc.frequency.setValueAtTime(950, audioCtx.currentTime);
+    osc.frequency.exponentialRampToValueAtTime(160, audioCtx.currentTime + 0.035);
+    gain.gain.setValueAtTime(0.06, audioCtx.currentTime);
+    gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.035);
+    osc.connect(gain);
+    gain.connect(audioCtx.destination);
+    osc.start();
+    osc.stop(audioCtx.currentTime + 0.035);
+  } catch(e) {}
+}
+
+function showToast(msg) {
+  var t = document.getElementById('vault-toast');
+  if (!t) return;
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(function() { t.classList.remove('show'); }, 2200);
+}
+
+/* ── KNOWLEDGE VAULT DATA STRUCTURE ── */
+var VAULT_NODES = [
+  // 00. Operator
+  {
+    id: "operator",
+    title: "Benjamin Andrew Slates",
+    file: "Benjamin Andrew Slates.md",
+    folder: "00 - Operator Dossier",
+    cat: "Operator",
+    color: "#00f0ff",
+    radius: 18,
+    tagline: "Cybersecurity Specialist & Offensive Red Teamer",
+    yaml: {
+      title: "Benjamin Andrew Slates",
+      type: "identity-dossier",
+      handle: "@benslates",
+      role: "Offensive Security Specialist & Red Teamer",
+      firm: "Rynex Security",
+      email: "hello@benslates.xyz",
+      status: "active-operations"
+    },
+    body: `
+# Benjamin Andrew Slates
+
+Offensive security specialist, low-level systems programmer, and Red Teamer operating at [[Rynex Security]]. Specializing in adversary emulation, custom post-exploitation Command & Control architecture, and defense evasion.
+
+## Primary Operational Disciplines
+- **Adversary Emulation:** Designing realistic offensive campaigns mimicking tier-1 threat actors.
+- **C2 Engineering:** Authoring stealth in-memory implants via [[BEN_C2 Framework]] and direct syscall execution.
+- **Enterprise Domination:** Complex attack chains across [[Active Directory Domination]], Kerberos ticket manipulation, and gMSA extraction.
+- **Exploit Research:** Reverse engineering and weaponizing vulnerabilities with memory-safe tradecraft.
+
+## Core Coordinates
+- **Firm:** [[Rynex Security]] (https://rynexsecurity.com)
+- **Email:** hello@benslates.xyz
+- **GitHub:** https://github.com/ben-slates
+- **LinkedIn:** https://linkedin.com/in/ben-slates
+`,
+    linksTo: ["firm", "c2", "voice", "attack-ad", "attack-c2", "attack-exploit", "attack-stealth", "cert-mythical", "cert-puppet", "cert-cisco-pt", "cert-cisco-sec"]
+  },
+
+  // 01. Enterprise Firm
+  {
+    id: "firm",
+    title: "Rynex Security",
+    file: "Rynex Security.md",
+    folder: "01 - Security Firm",
+    cat: "Firm",
+    color: "#ffb020",
+    radius: 15,
+    tagline: "Offensive Security & Red Team Assessment Firm",
+    yaml: {
+      organization: "Rynex Security",
+      url: "https://rynexsecurity.com",
+      focus: "Offensive Security, Red Teaming, Vulnerability Research",
+      operator: "Benjamin Andrew Slates",
+      classification: "confirmed-active"
+    },
+    body: `
+# Rynex Security
+
+Premier offensive security consulting and adversary emulation firm. Providing comprehensive red team assessments, Active Directory infrastructure hardening, and specialized penetration testing for mission-critical client infrastructure.
+
+## Operational Pillars
+- **Adversary Simulation:** End-to-end multi-week stealth operations bypassing EDR/SIEM telemetry.
+- **Active Directory Assessments:** Path-of-least-resistance privilege escalation mapping from unprivileged domain user to Enterprise Admin.
+- **Custom Tooling Delivery:** Weaponizing bespoke modules using [[C / C++ Systems]] and [[Python Automation]] tailored to hardened enterprise environments.
+
+## Official Portal
+Visit official firm portal: [rynexsecurity.com](https://rynexsecurity.com)
+`,
+    linksTo: ["operator", "attack-ad", "attack-stealth", "c2", "tech-ad"]
+  },
+
+  // 02. Flagship Systems
+  {
+    id: "c2",
+    title: "BEN_C2 Framework",
+    file: "BEN_C2 Framework.md",
+    folder: "02 - Flagship Systems",
+    cat: "Flagship",
+    color: "#ff2a6d",
+    radius: 16,
+    tagline: "Custom Modular Post-Exploitation C2 Architecture",
+    yaml: {
+      repository: "ben-slates/BEN_C2",
+      type: "flagship-c2-framework",
+      languages: ["C", "Python"],
+      license: "MIT",
+      architecture: "modular-client-teamserver",
+      evasion: ["direct-syscalls", "AMSI-patch", "ETW-suppression", "sleep-obfuscation"]
+    },
+    body: `
+# BEN_C2 Framework
+
+A modern, highly modular Command and Control framework engineered for red team engagements. Designed from the ground up to operate covertly inside modern telemetry-rich enterprise networks.
+
+## Technical Architecture
+- **Stealth Implants:** Written in [[C / C++ Systems]] utilizing Direct System Calls to bypass API hooks installed by top-tier EDRs.
+- **In-Memory Execution:** Reflective DLL injection and shellcode loading with zero unencrypted disk footprint.
+- **Resilient Transport:** Encrypted asymmetric beaconing with configurable jitter and HTTP/S steganographic packet wrapping.
+- **Operational Integration:** Built for seamless multi-operator collaboration during [[Rynex Security]] engagements.
+
+## Repository
+- GitHub: [github.com/ben-slates/BEN_C2](https://github.com/ben-slates/BEN_C2)
+`,
+    linksTo: ["operator", "firm", "attack-c2", "attack-stealth", "lang-c", "lang-py", "lang-asm"]
+  },
+
+  {
+    id: "voice",
+    title: "discord-voice-notes",
+    file: "discord-voice-notes.md",
+    folder: "02 - Flagship Systems",
+    cat: "Flagship",
+    color: "#ff2a6d",
+    radius: 14,
+    tagline: "Voice Transcription & AI Productivity Pipeline",
+    yaml: {
+      repository: "ben-slates/discord-voice-notes",
+      stars: 13,
+      language: "Python",
+      stack: ["discord.py", "Whisper", "FFmpeg"],
+      status: "production"
+    },
+    body: `
+# discord-voice-notes
+
+Full-stack automated voice-note capture and transcription engine for Discord. Transforms spoken voice memos into structured, searchable text summaries in real time.
+
+## System Capabilities
+- **Audio Stream Ingestion:** Native Discord voice gateway packet capture with jitter buffering.
+- **Speech-to-Text Pipeline:** High-accuracy local speech transcription with zero third-party latency.
+- **Productivity Sync:** Exports transcripts with automatic timestamping and speaker diarization.
+
+## Repository
+- GitHub: [github.com/ben-slates/discord-voice-notes](https://github.com/ben-slates/discord-voice-notes)
+`,
+    linksTo: ["operator", "lang-py"]
+  },
+
+  // 03. Weaponized Repositories & Exploits
+  {
+    id: "cve-2026",
+    title: "CVE-2026-31431-Exploit",
+    file: "CVE-2026-31431-Exploit.md",
+    folder: "03 - Weaponized Arsenal",
+    cat: "Arsenal",
+    color: "#a78bfa",
+    radius: 12,
+    tagline: "Remote Code Execution Exploit PoC",
+    yaml: {
+      vuln_id: "CVE-2026-31431",
+      impact: "Remote Code Execution (RCE)",
+      category: "exploit-weaponization",
+      language: "Python"
+    },
+    body: `
+# CVE-2026-31431-Exploit
+
+Offensive security research and proof-of-concept weaponization targeting critical memory corruption and remote command injection vulnerabilities.
+
+## Tradecraft Focus
+- Demonstrates reliable control flow hijack with heap grooming techniques.
+- Exploit script built in [[Python Automation]] for rapid red team simulation.
+
+## Repository
+- GitHub: [github.com/ben-slates/CVE-2026-31431-Exploit](https://github.com/ben-slates/CVE-2026-31431-Exploit)
+`,
+    linksTo: ["attack-exploit", "lang-py"]
+  },
+
+  {
+    id: "cve-2024",
+    title: "CVE-2024-37054",
+    file: "CVE-2024-37054.md",
+    folder: "03 - Weaponized Arsenal",
+    cat: "Arsenal",
+    color: "#a78bfa",
+    radius: 12,
+    tagline: "Vulnerability Verification & Exploitation",
+    yaml: {
+      vuln_id: "CVE-2024-37054",
+      type: "Proof-of-Concept",
+      language: "Python"
+    },
+    body: `
+# CVE-2024-37054
+
+Vulnerability reproduction suite demonstrating unauthorized state mutation and bypass of defensive verification barriers.
+
+## Repository
+- GitHub: [github.com/ben-slates/CVE-2024-37054](https://github.com/ben-slates/CVE-2024-37054)
+`,
+    linksTo: ["attack-exploit", "lang-py"]
+  },
+
+  {
+    id: "gmsa",
+    title: "gmsa-aes-key-extractor",
+    file: "gmsa-aes-key-extractor.md",
+    folder: "03 - Weaponized Arsenal",
+    cat: "Arsenal",
+    color: "#a78bfa",
+    radius: 13,
+    tagline: "Active Directory gMSA Kerberos AES Key Recovery",
+    yaml: {
+      repository: "ben-slates/gmsa-aes-key-extractor",
+      target: "Active Directory gMSA (Group Managed Service Accounts)",
+      crypto: "Kerberos AES-256 Key Derivation",
+      language: "Python"
+    },
+    body: `
+# gmsa-aes-key-extractor
+
+Offensive Active Directory post-exploitation tool. Extracts \`msDS-ManagedPassword\` blobs from authorized domain accounts, parses the undocumented binary structure, and calculates Kerberos AES-128 and AES-256 keys.
+
+## Attack Impact
+- Enables forging Kerberos Silver Tickets for critical enterprise service accounts without triggering password changes.
+- Direct integration into [[Active Directory Domination]] workflows.
+
+## Repository
+- GitHub: [github.com/ben-slates/gmsa-aes-key-extractor](https://github.com/ben-slates/gmsa-aes-key-extractor)
+`,
+    linksTo: ["attack-ad", "tech-ad", "lang-py"]
+  },
+
+  {
+    id: "cve-finder",
+    title: "CVE-FINDER",
+    file: "CVE-FINDER.md",
+    folder: "03 - Weaponized Arsenal",
+    cat: "Arsenal",
+    color: "#a78bfa",
+    radius: 11,
+    tagline: "Automated Vulnerability Intelligence Scanner",
+    yaml: {
+      repository: "ben-slates/CVE-FINDER",
+      language: "Python",
+      output: "Advisory mapping and automated cross-referencing"
+    },
+    body: `
+# CVE-FINDER
+
+Reconnaissance and vulnerability correlation tool that cross-checks discovered software versions with authoritative NVD databases and public exploit repositories.
+
+## Repository
+- GitHub: [github.com/ben-slates/CVE-FINDER](https://github.com/ben-slates/CVE-FINDER)
+`,
+    linksTo: ["attack-exploit", "lang-py"]
+  },
+
+  {
+    id: "mdread",
+    title: "mdread",
+    file: "mdread.md",
+    folder: "03 - Weaponized Arsenal",
+    cat: "Arsenal",
+    color: "#a78bfa",
+    radius: 12,
+    tagline: "High-Performance Terminal Markdown Reader in Rust",
+    yaml: {
+      repository: "ben-slates/mdread",
+      language: "Rust",
+      focus: "CLI systems utility, memory-safe text rendering"
+    },
+    body: `
+# mdread
+
+Ultra-fast terminal markdown viewer written in [[Rust]]. Designed for terminal-only operational environments, providing instantaneous syntax highlighting, table rendering, and inline link navigation.
+
+## Repository
+- GitHub: [github.com/ben-slates/mdread](https://github.com/ben-slates/mdread)
+`,
+    linksTo: ["lang-rust", "tech-linux"]
+  },
+
+  {
+    id: "uploadserver2",
+    title: "uploadserver2",
+    file: "uploadserver2.md",
+    folder: "03 - Weaponized Arsenal",
+    cat: "Arsenal",
+    color: "#a78bfa",
+    radius: 11,
+    tagline: "Offensive Payload Staging & Exfiltration Server",
+    yaml: {
+      repository: "ben-slates/uploadserver2",
+      language: "Python",
+      use_case: "Stealth payload delivery & encrypted exfil"
+    },
+    body: `
+# uploadserver2
+
+High-speed offensive HTTP/S file transfer utility optimized for red team payload staging, memory dumps, and exfiltration over restricted network segments.
+
+## Repository
+- GitHub: [github.com/ben-slates/uploadserver2](https://github.com/ben-slates/uploadserver2)
+`,
+    linksTo: ["lang-py", "attack-stealth"]
+  },
+
+  {
+    id: "esp32",
+    title: "esp32_NAT_router",
+    file: "esp32_NAT_router.md",
+    folder: "03 - Weaponized Arsenal",
+    cat: "Arsenal",
+    color: "#a78bfa",
+    radius: 12,
+    tagline: "Hardware Penetration Testing Rogue AP Implant",
+    yaml: {
+      repository: "ben-slates/esp32_NAT_router",
+      hardware: "ESP32 SoC",
+      language: "C",
+      purpose: "Rogue Wi-Fi access point, covert NAT routing"
+    },
+    body: `
+# esp32_NAT_router
+
+Embedded hardware implant firmware creating a covert wireless bridge and rogue AP with full NAT capabilities, packet forwarding, and captive portal interception.
+
+## Repository
+- GitHub: [github.com/ben-slates/esp32_NAT_router](https://github.com/ben-slates/esp32_NAT_router)
+`,
+    linksTo: ["lang-c", "attack-stealth"]
+  },
+
+  {
+    id: "crypto-guard",
+    title: "Crypto_Guard",
+    file: "Crypto_Guard.md",
+    folder: "03 - Weaponized Arsenal",
+    cat: "Arsenal",
+    color: "#a78bfa",
+    radius: 11,
+    tagline: "Cryptographic Verification & Ransomware Heuristics",
+    yaml: {
+      repository: "ben-slates/Crypto_Guard",
+      language: "Python",
+      domain: "Cryptographic defense & behavioral anomaly detection"
+    },
+    body: `
+# Crypto_Guard
+
+Prototype tool providing file integrity monitoring and behavioral heuristics to detect mass cryptographic file operations indicative of ransomware activity.
+
+## Repository
+- GitHub: [github.com/ben-slates/Crypto_Guard](https://github.com/ben-slates/Crypto_Guard)
+`,
+    linksTo: ["lang-py", "attack-stealth"]
+  },
+
+  {
+    id: "cnn-emnist",
+    title: "CNN_EMNIST_VISUALIZATION",
+    file: "CNN_EMNIST_VISUALIZATION.md",
+    folder: "03 - Weaponized Arsenal",
+    cat: "Arsenal",
+    color: "#a78bfa",
+    radius: 11,
+    tagline: "Convolutional Neural Network Deep Learning Visualizer",
+    yaml: {
+      repository: "ben-slates/CNN_EMNIST_VISUALIZATION",
+      language: "Python",
+      libraries: ["PyTorch", "NumPy", "Matplotlib"]
+    },
+    body: `
+# CNN_EMNIST_VISUALIZATION
+
+Deep learning experiment and visualization platform for Convolutional Neural Networks trained on character classification datasets, inspecting activation feature maps.
+
+## Repository
+- GitHub: [github.com/ben-slates/CNN_EMNIST_VISUALIZATION](https://github.com/ben-slates/CNN_EMNIST_VISUALIZATION)
+`,
+    linksTo: ["lang-py"]
+  },
+
+  // 04. Adversarial Attack Matrix
+  {
+    id: "attack-ad",
+    title: "Active Directory Domination",
+    file: "Active Directory Domination.md",
+    folder: "04 - Adversarial Matrix",
+    cat: "Attack Matrix",
+    color: "#f43f5e",
+    radius: 15,
+    tagline: "Enterprise Domain Lateral Movement & Persistence",
+    yaml: {
+      domain: "Enterprise Infrastructure & Identity",
+      protocols: ["Kerberos", "LDAP", "RPC", "SMB"],
+      tactics: ["Kerberoasting", "AS-REP Roasting", "DCSync", "gMSA abuse", "BloodHound ACL analysis"]
+    },
+    body: `
+# Active Directory Domination
+
+Comprehensive offensive methodology targeting the core identity fabric of enterprise environments: Windows Active Directory Domain Services.
+
+## Primary Tactics
+- **Kerberos Abuse:** Golden/Silver Ticket generation, Kerberoasting service accounts, AS-REP roasting unconstrained accounts.
+- **Service Account Decryption:** Utilizing [[gmsa-aes-key-extractor]] for zero-credential recovery.
+- **DCSync Exploitation:** Replicating directory password hashes using \`DS-Replication-Get-Changes\` rights.
+- **Graph Attack Paths:** Identifying shortest paths to Domain Admin using BloodHound and manual LDAP queries.
+`,
+    linksTo: ["operator", "firm", "tech-ad", "gmsa"]
+  },
+
+  {
+    id: "attack-c2",
+    title: "Custom C2 Architecture",
+    file: "Custom C2 Architecture.md",
+    folder: "04 - Adversarial Matrix",
+    cat: "Attack Matrix",
+    color: "#f43f5e",
+    radius: 15,
+    tagline: "Stealth Implants & Covert Protocol Channels",
+    yaml: {
+      domain: "Post-Exploitation Systems",
+      implements: ["direct-syscalls", "sleep-obfuscation", "unhooking", "AMSI-bypass"]
+    },
+    body: `
+# Custom C2 Architecture
+
+Design philosophy behind bespoke offensive command and control frameworks like [[BEN_C2 Framework]].
+
+## Engineering Principles
+- **Direct System Calls:** Avoiding ntdll.dll user-mode hooks installed by EDR products.
+- **Sleep Masking:** Obfuscating beacon code sections in memory during sleep cycles using \`VirtualProtect\` and ROP timing gadgets.
+- **Malleable C2 Profiles:** Shaping HTTP/S beacon headers and traffic frequency to blend into normal corporate traffic.
+`,
+    linksTo: ["operator", "c2", "lang-c", "lang-asm", "attack-stealth"]
+  },
+
+  {
+    id: "attack-exploit",
+    title: "Low-Level Exploit Development",
+    file: "Low-Level Exploit Development.md",
+    folder: "04 - Adversarial Matrix",
+    cat: "Attack Matrix",
+    color: "#f43f5e",
+    radius: 14,
+    tagline: "Memory Corruption & Shellcode Engineering",
+    yaml: {
+      domain: "Vulnerability Weaponization",
+      techniques: ["stack-buffer-overflows", "ROP-chains", "shellcoding", "memory-grooming"]
+    },
+    body: `
+# Low-Level Exploit Development
+
+Offensive binary research focusing on turning vulnerabilities into dependable, weaponized exploits across Windows and Linux targets.
+
+## Methodologies
+- **Control Flow Hijack:** Constructing customized Return-Oriented Programming (ROP) chains to bypass DEP/NX.
+- **Custom Shellcoding:** Writing position-independent x86_64 assembly with zero null bytes.
+- **Vulnerability Research:** As demonstrated in [[CVE-2026-31431-Exploit]] and [[CVE-2024-37054]].
+`,
+    linksTo: ["operator", "lang-asm", "lang-c", "cve-2026", "cve-2024"]
+  },
+
+  {
+    id: "attack-stealth",
+    title: "Stealth Operational Tradecraft",
+    file: "Stealth Operational Tradecraft.md",
+    folder: "04 - Adversarial Matrix",
+    cat: "Attack Matrix",
+    color: "#f43f5e",
+    radius: 14,
+    tagline: "EDR Bypasses & Forensic Footprint Minimization",
+    yaml: {
+      domain: "Operational Security",
+      tactics: ["living-off-the-land", "process-injection", "parent-PID-spoofing", "ETW-blinding"]
+    },
+    body: `
+# Stealth Operational Tradecraft
+
+Techniques to evade security operations centers (SOC) and behavioral analysis during live adversary simulations.
+
+## Focus Areas
+- **Living off the Land (LoLBins):** Executing payloads via legitimate signed system binaries (e.g. Rundll32, Regsvr32).
+- **Process Injection:** Early Bird APC injection, Module Overwriting, and Process Ghosting.
+- **Log Evasion:** Patching ETW (Event Tracing for Windows) and manipulating process command lines in memory.
+`,
+    linksTo: ["operator", "c2", "firm", "tech-linux", "tech-ad"]
+  },
+
+  // 05. Verified Credentials & Certifications
+  {
+    id: "cert-mythical",
+    title: "HTB Mythical Machine",
+    file: "HTB Mythical Machine.md",
+    folder: "05 - Verified Credentials",
+    cat: "Credentials",
+    color: "#00f5a0",
+    radius: 13,
+    tagline: "Hack The Box Machine Pawned Credential",
+    yaml: {
+      issuer: "Hack The Box",
+      machine: "Mythical",
+      credential_id: "HTBCERT-3620BFA7E0",
+      document: "certs/Mythical.pdf"
+    },
+    body: `
+# HTB Mythical Machine
+
+Official verification of successful exploitation and root conquest of the Hack The Box target machine **Mythical**.
+
+## Document Verification
+- View Certificate: [certs/Mythical.pdf](certs/Mythical.pdf)
+`,
+    linksTo: ["operator", "attack-ad", "tech-linux"]
+  },
+
+  {
+    id: "cert-puppet",
+    title: "HTB Puppet Machine",
+    file: "HTB Puppet Machine.md",
+    folder: "05 - Verified Credentials",
+    cat: "Credentials",
+    color: "#00f5a0",
+    radius: 13,
+    tagline: "Hack The Box Machine Pawned Credential",
+    yaml: {
+      issuer: "Hack The Box",
+      machine: "Puppet",
+      credential_id: "HTBCERT-D149A5DFAD",
+      document: "certs/Puppet.pdf"
+    },
+    body: `
+# HTB Puppet Machine
+
+Official verification of complete compromise and system privileges achieved on the Hack The Box target machine **Puppet**.
+
+## Document Verification
+- View Certificate: [certs/Puppet.pdf](certs/Puppet.pdf)
+`,
+    linksTo: ["operator", "attack-ad", "tech-ad"]
+  },
+
+  {
+    id: "cert-cisco-pt",
+    title: "Cisco Packet Tracer",
+    file: "Cisco Packet Tracer.md",
+    folder: "05 - Verified Credentials",
+    cat: "Credentials",
+    color: "#00f5a0",
+    radius: 12,
+    tagline: "Cisco Networking Academy Credential",
+    yaml: {
+      issuer: "Cisco Networking Academy",
+      credential: "Getting Started with Cisco Packet Tracer",
+      document: "certs/Getting_Started_with_Cisco_Packet_Tracer.pdf"
+    },
+    body: `
+# Cisco Packet Tracer
+
+Network topology design, routing protocols, and packet analysis certification.
+
+## Document Verification
+- View Certificate: [certs/Getting_Started_with_Cisco_Packet_Tracer.pdf](certs/Getting_Started_with_Cisco_Packet_Tracer.pdf)
+`,
+    linksTo: ["operator", "attack-stealth"]
+  },
+
+  {
+    id: "cert-cisco-sec",
+    title: "Cisco Cybersecurity",
+    file: "Cisco Cybersecurity.md",
+    folder: "05 - Verified Credentials",
+    cat: "Credentials",
+    color: "#00f5a0",
+    radius: 12,
+    tagline: "Cisco Cybersecurity Credential",
+    yaml: {
+      issuer: "Cisco Networking Academy",
+      credential: "Introduction to Cybersecurity",
+      document: "certs/Introduction_to_Cybersecurity.pdf"
+    },
+    body: `
+# Cisco Cybersecurity
+
+Core network defense concepts, threat surfaces, and security governance fundamentals.
+
+## Document Verification
+- View Certificate: [certs/Introduction_to_Cybersecurity.pdf](certs/Introduction_to_Cybersecurity.pdf)
+`,
+    linksTo: ["operator"]
+  },
+
+  // 06. Core Languages & Stack
+  {
+    id: "lang-c",
+    title: "C / C++ Systems",
+    file: "C and C++ Systems.md",
+    folder: "06 - Core Languages & Stack",
+    cat: "Tech Stack",
+    color: "#38bdf8",
+    radius: 14,
+    tagline: "Low-Level Memory Management & Win32 API",
+    yaml: {
+      proficiency: "primary-offensive-language",
+      domains: ["Win32 API", "Native NTDLL Syscalls", "Process Injection", "Hardware Implants"]
+    },
+    body: `
+# C / C++ Systems
+
+Primary language for authoring high-performance, stealth offensive tooling like [[BEN_C2 Framework]] and embedded firmware on [[esp32_NAT_router]].
+`,
+    linksTo: ["c2", "esp32", "lang-asm"]
+  },
+
+  {
+    id: "lang-py",
+    title: "Python Automation",
+    file: "Python Automation.md",
+    folder: "06 - Core Languages & Stack",
+    cat: "Tech Stack",
+    color: "#38bdf8",
+    radius: 14,
+    tagline: "Rapid Exploit Weaponization & Teamservers",
+    yaml: {
+      proficiency: "expert",
+      domains: ["Exploit development", "Network sockets", "Active Directory scripts", "C2 backend"]
+    },
+    body: `
+# Python Automation
+
+Primary language for rapid weaponization, network protocols, and tooling including [[gmsa-aes-key-extractor]], [[CVE-2026-31431-Exploit]], and [[discord-voice-notes]].
+`,
+    linksTo: ["c2", "voice", "gmsa", "cve-2026", "cve-2024", "cve-finder", "uploadserver", "crypto-guard", "cnn-emnist"]
+  },
+
+  {
+    id: "lang-rust",
+    title: "Rust",
+    file: "Rust.md",
+    folder: "06 - Core Languages & Stack",
+    cat: "Tech Stack",
+    color: "#38bdf8",
+    radius: 13,
+    tagline: "Memory-Safe Systems & CLI Utilities",
+    yaml: {
+      focus: "memory-safety, CLI utilities, PE parsing",
+      projects: ["mdread"]
+    },
+    body: `
+# Rust
+
+Used for developing safe, lightning-fast command line utilities like [[mdread]].
+`,
+    linksTo: ["mdread"]
+  },
+
+  {
+    id: "lang-asm",
+    title: "x86_64 Assembly",
+    file: "x86_64 Assembly.md",
+    folder: "06 - Core Languages & Stack",
+    cat: "Tech Stack",
+    color: "#38bdf8",
+    radius: 13,
+    tagline: "Shellcoding & Binary Reverse Engineering",
+    yaml: {
+      domain: "Binary analysis, ROP chain synthesis, position-independent shellcode"
+    },
+    body: `
+# x86_64 Assembly
+
+Essential for debugging, reverse engineering, and crafting raw shellcode stubs in [[BEN_C2 Framework]] and [[Low-Level Exploit Development]].
+`,
+    linksTo: ["c2", "attack-c2", "attack-exploit", "lang-c"]
+  },
+
+  {
+    id: "lang-go",
+    title: "Go (Golang)",
+    file: "Go (Golang).md",
+    folder: "06 - Core Languages & Stack",
+    cat: "Tech Stack",
+    color: "#38bdf8",
+    radius: 12,
+    tagline: "Cross-Platform Concurrent Tools",
+    yaml: {
+      focus: "cross-compilation, concurrent scanning, multi-platform binaries"
+    },
+    body: `
+# Go (Golang)
+
+High concurrency networking and cross-platform binary development.
+`,
+    linksTo: ["attack-c2"]
+  },
+
+  {
+    id: "tech-ad",
+    title: "Active Directory & Kerberos",
+    file: "Active Directory and Kerberos.md",
+    folder: "06 - Core Languages & Stack",
+    cat: "Tech Stack",
+    color: "#38bdf8",
+    radius: 14,
+    tagline: "Enterprise Identity & Authentication Internals",
+    yaml: {
+      components: ["Kerberos V5", "LDAP / LDAPS", "GPO", "gMSA", "NTLM Relay", "BloodHound"]
+    },
+    body: `
+# Active Directory & Kerberos
+
+In-depth mastery of Active Directory directory structures and Kerberos protocol internals used during engagements at [[Rynex Security]].
+`,
+    linksTo: ["attack-ad", "gmsa", "firm", "cert-puppet"]
+  },
+
+  {
+    id: "tech-linux",
+    title: "Linux Kernel & Internals",
+    file: "Linux Kernel and Internals.md",
+    folder: "06 - Core Languages & Stack",
+    cat: "Tech Stack",
+    color: "#38bdf8",
+    radius: 13,
+    tagline: "Unix Systems Programming & Process Architecture",
+    yaml: {
+      focus: "POSIX API, eBPF, memory mapping, ELF binaries"
+    },
+    body: `
+# Linux Kernel & Internals
+
+Deep operational familiarity with Linux kernel structures and low-level process inspection.
+`,
+    linksTo: ["mdread", "c2", "cert-mythical"]
+  }
+];
+
+/* Build fast lookups */
+var nodeById = {};
+VAULT_NODES.forEach(function(n) { nodeById[n.id] = n; });
+
+/* Generate edge list from linksTo */
+var VAULT_EDGES = [];
+var edgeSet = {};
+VAULT_NODES.forEach(function(source) {
+  if (source.linksTo) {
+    source.linksTo.forEach(function(targetId) {
+      if (nodeById[targetId]) {
+        var edgeKey = [source.id, targetId].sort().join("---");
+        if (!edgeSet[edgeKey]) {
+          edgeSet[edgeKey] = true;
+          VAULT_EDGES.push({ source: source.id, target: targetId, key: edgeKey });
+        }
+      }
+    });
+  }
+});
+
+/* ── RENDER FILE TREE EXPLORER ── */
+function renderFileTree() {
+  var treeEl = document.getElementById('file-tree');
+  if (!treeEl) return;
+  treeEl.innerHTML = '';
+
+  var folders = {};
+  VAULT_NODES.forEach(function(node) {
+    var f = node.folder || "Other";
+    if (!folders[f]) folders[f] = [];
+    folders[f].push(node);
+  });
+
+  var sortedFolderNames = Object.keys(folders).sort();
+
+  sortedFolderNames.forEach(function(fName) {
+    var fWrap = document.createElement('div');
+    fWrap.className = 'tree-folder';
+
+    var fHeader = document.createElement('div');
+    fHeader.className = 'folder-header';
+    fHeader.innerHTML = `
+      <span class="folder-arrow">&blacktriangledown;</span>
+      <span style="color:var(--accent-purple);">&#9632;</span>
+      <span>${fName}</span>
+    `;
+
+    var fChildren = document.createElement('div');
+    fChildren.className = 'folder-children';
+
+    folders[fName].forEach(function(node) {
+      var item = document.createElement('a');
+      item.className = 'file-item';
+      item.id = 'file-item-' + node.id;
+      item.innerHTML = `
+        <span class="file-bullet" style="background:${node.color};"></span>
+        <span>${node.file}</span>
+      `;
+      item.addEventListener('click', function(e) {
+        e.preventDefault();
+        selectNode(node.id, true);
+      });
+      fChildren.appendChild(item);
+    });
+
+    fHeader.addEventListener('click', function() {
+      playClick();
+      fHeader.classList.toggle('collapsed');
+      fChildren.classList.toggle('hidden');
+    });
+
+    fWrap.appendChild(fHeader);
+    fWrap.appendChild(fChildren);
+    treeEl.appendChild(fWrap);
+  });
+}
+
+/* ── MARKDOWN INSPECTOR RENDERER ── */
+var selectedNodeId = "operator";
+
+function renderMarkdownInspector(nodeId, openDrawer) {
+  var node = nodeById[nodeId];
+  if (!node) return;
+  selectedNodeId = nodeId;
+
+  // Update explorer highlight
+  document.querySelectorAll('.file-item').forEach(function(el) { el.classList.remove('active'); });
+  var activeItem = document.getElementById('file-item-' + nodeId);
+  if (activeItem) activeItem.classList.add('active');
+
+  // Update tab title
+  var tabTitle = document.getElementById('inspector-tab-name');
+  if (tabTitle) tabTitle.textContent = node.file;
+
+  var container = document.getElementById('inspector-content');
+  if (!container) return;
+
+  // Build YAML frontmatter HTML
+  var yamlHtml = '<div class="yaml-frontmatter"><span class="yaml-delim">---</span><br>';
+  if (node.yaml) {
+    for (var k in node.yaml) {
+      var val = node.yaml[k];
+      if (Array.isArray(val)) {
+        yamlHtml += `<span class="yaml-key">${k}</span>: [<span class="yaml-tag">${val.join(', ')}</span>]<br>`;
+      } else {
+        yamlHtml += `<span class="yaml-key">${k}</span>: <span class="yaml-val">"${val}"</span><br>`;
+      }
+    }
+  }
+  yamlHtml += '<span class="yaml-delim">---</span></div>';
+
+  // Process Wikilinks in markdown body
+  var processedBody = node.body.trim();
+  // Replace [[Title]] with interactive links
+  processedBody = processedBody.replace(/\[\[\s*(.*?)\s*\]\]/g, function(match, title) {
+    var cleanTitle = title.trim();
+    var target = VAULT_NODES.find(function(n) { return n.title.toLowerCase() === cleanTitle.toLowerCase(); });
+    if (target) {
+      return `<a class="wikilink" onclick="selectNode('${target.id}', true)"><span>[[</span>${target.title}<span>]]</span></a>`;
+    }
+    return `<span class="wikilink">${cleanTitle}</span>`;
+  });
+
+  // Convert basic markdown headings, bold, links, and bullet points
+  var htmlLines = processedBody.split('\n').map(function(rawLine) {
+    var line = rawLine;
+    // Bold
+    line = line.replace(/\*\*(.*?)\*\*/g, '<strong style="color:var(--text-primary);">$1</strong>');
+    // Italic
+    line = line.replace(/\*(.*?)\*/g, '<em>$1</em>');
+    // Markdown external links [label](url)
+    line = line.replace(/\[(.*?)\]\((.*?)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer" style="color:var(--border-active); text-decoration:underline;">$1</a>');
+
+    if (line.startsWith('# ')) {
+      return `<h1 class="note-title">${line.substring(2)}</h1>`;
+    } else if (line.startsWith('## ')) {
+      return `<div class="note-section-heading">${line.substring(3)}</div>`;
+    } else if (line.startsWith('- ')) {
+      return `<p style="margin-bottom:6px; padding-left:14px; position:relative;"><span style="position:absolute; left:0; color:var(--border-active);">&bull;</span>${line.substring(2)}</p>`;
+    } else if (line.trim().length > 0) {
+      return `<p>${line}</p>`;
+    }
+    return '';
+  }).join('');
+
+  // Find Backlinks (who links to this note)
+  var backlinks = [];
+  VAULT_NODES.forEach(function(other) {
+    if (other.id !== node.id && other.linksTo && other.linksTo.indexOf(node.id) !== -1) {
+      backlinks.push(other);
+    }
+  });
+
+  var backlinksHtml = '';
+  if (backlinks.length > 0) {
+    backlinksHtml = `
+      <div class="backlinks-box">
+        <div class="backlinks-header">
+          <span>&curarr;</span>
+          <span>LINKED MENTIONS (${backlinks.length})</span>
+        </div>
+        <div class="backlink-list">
+          ${backlinks.map(function(b) {
+            return `
+              <div class="backlink-card" onclick="selectNode('${b.id}', true)">
+                <div class="backlink-name">[[${b.title}]]</div>
+                <div class="backlink-snippet">${b.tagline}</div>
+              </div>
+            `;
+          }).join('')}
+        </div>
+      </div>
+    `;
+  }
+
+  container.innerHTML = `
+    <div class="markdown-breadcrumbs">
+      <span>benslates-vault</span>
+      <span>/</span>
+      <span>${node.folder}</span>
+      <span>/</span>
+      <span style="color:var(--text-primary);">${node.file}</span>
+    </div>
+    ${yamlHtml}
+    <div class="note-tagline">// ${node.tagline}</div>
+    <div class="note-prose">
+      ${htmlLines}
+    </div>
+    ${backlinksHtml}
+  `;
+
+  // Slide open inspector on smaller screens when requested
+  var inspector = document.getElementById('vault-inspector');
+  if (inspector && openDrawer) {
+    inspector.classList.add('open');
+  }
+}
+
+/* ── FORCE-DIRECTED CANVAS GRAPH SIMULATION ── */
+var canvas = document.getElementById('graph-canvas');
+var ctx = canvas ? canvas.getContext('2d') : null;
+
+var graphState = {
+  width: 800,
+  height: 600,
+  scale: 1,
+  offsetX: 0,
+  offsetY: 0,
+  isDragging: false,
+  dragNode: null,
+  panStart: { x: 0, y: 0 },
+  hoverNode: null,
+  physicsEnabled: true,
+  filterQuery: "",
+  filterCategory: "all"
+};
+
+// Physics particles initialized with random circular spread
+VAULT_NODES.forEach(function(n, idx) {
+  var angle = (idx / VAULT_NODES.length) * Math.PI * 2;
+  var dist = 120 + Math.random() * 200;
+  n.x = Math.cos(angle) * dist;
+  n.y = Math.sin(angle) * dist;
+  n.vx = 0;
+  n.vy = 0;
+});
+
+function resizeGraph() {
+  if (!canvas || !canvas.parentElement) return;
+  var rect = canvas.parentElement.getBoundingClientRect();
+  canvas.width = rect.width * window.devicePixelRatio;
+  canvas.height = rect.height * window.devicePixelRatio;
+  graphState.width = rect.width;
+  graphState.height = rect.height;
+  if (ctx) ctx.scale(window.devicePixelRatio, window.devicePixelRatio);
+}
+
+function updatePhysics() {
+  if (!graphState.physicsEnabled) return;
+
+  var nodes = VAULT_NODES;
+  var len = nodes.length;
+
+  // 1. Center gravity pull
+  for (var i = 0; i < len; i++) {
+    var p = nodes[i];
+    p.vx -= p.x * 0.00045;
+    p.vy -= p.y * 0.00045;
+  }
+
+  // 2. Coulomb charge repulsion between all node pairs
+  for (var i = 0; i < len; i++) {
+    for (var j = i + 1; j < len; j++) {
+      var a = nodes[i];
+      var b = nodes[j];
+      var dx = b.x - a.x;
+      var dy = b.y - a.y;
+      var distSq = dx * dx + dy * dy;
+      if (distSq < 1) distSq = 1;
+      var dist = Math.sqrt(distSq);
+      if (dist < 500) {
+        var force = 2400 / distSq;
+        var fx = (dx / dist) * force;
+        var fy = (dy / dist) * force;
+        a.vx -= fx;
+        a.vy -= fy;
+        b.vx += fx;
+        b.vy += fy;
+      }
+    }
+  }
+
+  // 3. Spring attraction along links
+  for (var e = 0; e < VAULT_EDGES.length; e++) {
+    var edge = VAULT_EDGES[e];
+    var s = nodeById[edge.source];
+    var t = nodeById[edge.target];
+    if (!s || !t) continue;
+    var dx = t.x - s.x;
+    var dy = t.y - s.y;
+    var dist = Math.sqrt(dx * dx + dy * dy);
+    var targetDist = (s.id === 'operator' || t.id === 'operator') ? 170 : 125;
+    var displacement = dist - targetDist;
+    var springForce = displacement * 0.007;
+    var fx = (dx / (dist || 1)) * springForce;
+    var fy = (dy / (dist || 1)) * springForce;
+    s.vx += fx;
+    s.vy += fy;
+    t.vx -= fx;
+    t.vy -= fy;
+  }
+
+  // 4. Velocity integration & damping
+  for (var i = 0; i < len; i++) {
+    var n = nodes[i];
+    if (graphState.dragNode === n) continue;
+    n.vx *= 0.82;
+    n.vy *= 0.82;
+    n.x += n.vx;
+    n.y += n.vy;
+  }
+}
+
+function drawGraph() {
+  if (!canvas || !ctx) return;
+  ctx.clearRect(0, 0, graphState.width, graphState.height);
+
+  ctx.save();
+  // Apply camera translation & zoom centered
+  ctx.translate(graphState.width / 2 + graphState.offsetX, graphState.height / 2 + graphState.offsetY);
+  ctx.scale(graphState.scale, graphState.scale);
+
+  var activeHover = graphState.hoverNode;
+  var selected = nodeById[selectedNodeId];
+
+  // Draw Edges
+  for (var i = 0; i < VAULT_EDGES.length; i++) {
+    var e = VAULT_EDGES[i];
+    var s = nodeById[e.source];
+    var t = nodeById[e.target];
+    if (!s || !t) continue;
+
+    var isHighlighted = false;
+    if (activeHover && (activeHover.id === s.id || activeHover.id === t.id)) {
+      isHighlighted = true;
+    } else if (selected && (selected.id === s.id || selected.id === t.id)) {
+      isHighlighted = true;
+    }
+
+    ctx.beginPath();
+    ctx.moveTo(s.x, s.y);
+    ctx.lineTo(t.x, t.y);
+
+    if (isHighlighted) {
+      ctx.strokeStyle = activeHover ? activeHover.color : selected.color;
+      ctx.lineWidth = 1.8;
+      ctx.globalAlpha = 0.85;
+    } else {
+      ctx.strokeStyle = "rgba(255, 255, 255, 0.12)";
+      ctx.lineWidth = 0.8;
+      ctx.globalAlpha = activeHover ? 0.08 : 0.45;
+    }
+    ctx.stroke();
+  }
+
+  // Draw Nodes
+  for (var i = 0; i < VAULT_NODES.length; i++) {
+    var n = VAULT_NODES[i];
+    var isSelected = (n.id === selectedNodeId);
+    var isHover = (activeHover && activeHover.id === n.id);
+    var isConnected = activeHover && (
+      (activeHover.linksTo && activeHover.linksTo.indexOf(n.id) !== -1) ||
+      (n.linksTo && n.linksTo.indexOf(activeHover.id) !== -1)
+    );
+
+    // Filter check
+    var matchesFilter = true;
+    if (graphState.filterCategory !== 'all' && n.cat !== graphState.filterCategory) {
+      matchesFilter = false;
+    }
+    if (graphState.filterQuery) {
+      var q = graphState.filterQuery.toLowerCase();
+      if (n.title.toLowerCase().indexOf(q) === -1 && n.cat.toLowerCase().indexOf(q) === -1) {
+        matchesFilter = false;
+      }
+    }
+
+    var alpha = 1;
+    if (!matchesFilter) alpha = 0.15;
+    else if (activeHover && !isHover && !isConnected) alpha = 0.2;
+
+    ctx.globalAlpha = alpha;
+
+    // Node outer glow ring
+    if (isSelected || isHover) {
+      ctx.beginPath();
+      ctx.arc(n.x, n.y, n.radius + 8, 0, Math.PI * 2);
+      ctx.fillStyle = n.color;
+      ctx.globalAlpha = 0.2;
+      ctx.fill();
+      ctx.globalAlpha = alpha;
+    }
+
+    // Node core circle
+    ctx.beginPath();
+    ctx.arc(n.x, n.y, n.radius, 0, Math.PI * 2);
+    ctx.fillStyle = n.color;
+    ctx.fill();
+
+    // Node border
+    ctx.strokeStyle = isSelected ? "#ffffff" : "rgba(255, 255, 255, 0.3)";
+    ctx.lineWidth = isSelected ? 2.5 : 1;
+    ctx.stroke();
+
+    // Node text label
+    ctx.font = (isSelected || isHover) ? "bold 11px 'JetBrains Mono', monospace" : "10px 'JetBrains Mono', monospace";
+    ctx.fillStyle = (isSelected || isHover) ? "#ffffff" : "rgba(240, 240, 245, 0.85)";
+    ctx.textAlign = "center";
+    ctx.fillText(n.title, n.x, n.y + n.radius + 14);
+  }
+
+  ctx.restore();
+}
+
+function graphLoop() {
+  updatePhysics();
+  drawGraph();
+  requestAnimationFrame(graphLoop);
+}
+
+/* ── GRAPH INTERACTION & EVENTS ── */
+function getNodeAtScreen(sx, sy) {
+  var wx = (sx - (graphState.width / 2 + graphState.offsetX)) / graphState.scale;
+  var wy = (sy - (graphState.height / 2 + graphState.offsetY)) / graphState.scale;
+
+  for (var i = VAULT_NODES.length - 1; i >= 0; i--) {
+    var n = VAULT_NODES[i];
+    var dx = wx - n.x;
+    var dy = wy - n.y;
+    if (dx * dx + dy * dy <= (n.radius + 4) * (n.radius + 4)) {
+      return n;
+    }
+  }
+  return null;
+}
+
+if (canvas) {
+  canvas.addEventListener('mousedown', function(e) {
+    playClick();
+    var rect = canvas.getBoundingClientRect();
+    var mx = e.clientX - rect.left;
+    var my = e.clientY - rect.top;
+    var clicked = getNodeAtScreen(mx, my);
+
+    if (clicked) {
+      graphState.dragNode = clicked;
+      selectNode(clicked.id, true);
+    } else {
+      graphState.isDragging = true;
+      graphState.panStart.x = mx - graphState.offsetX;
+      graphState.panStart.y = my - graphState.offsetY;
+    }
+  });
+
+  window.addEventListener('mousemove', function(e) {
+    var rect = canvas.getBoundingClientRect();
+    var mx = e.clientX - rect.left;
+    var my = e.clientY - rect.top;
+
+    if (graphState.dragNode) {
+      var wx = (mx - (graphState.width / 2 + graphState.offsetX)) / graphState.scale;
+      var wy = (my - (graphState.height / 2 + graphState.offsetY)) / graphState.scale;
+      graphState.dragNode.x = wx;
+      graphState.dragNode.y = wy;
+      graphState.dragNode.vx = 0;
+      graphState.dragNode.vy = 0;
+    } else if (graphState.isDragging) {
+      graphState.offsetX = mx - graphState.panStart.x;
+      graphState.offsetY = my - graphState.panStart.y;
+    } else {
+      var hovered = getNodeAtScreen(mx, my);
+      graphState.hoverNode = hovered;
+      var tt = document.getElementById('graph-tooltip');
+      if (hovered && tt) {
+        var linksCount = (hovered.linksTo ? hovered.linksTo.length : 0);
+        document.getElementById('tt-title').textContent = hovered.title;
+        document.getElementById('tt-meta').textContent = `${hovered.cat} // ${linksCount} links`;
+        tt.style.left = mx + 'px';
+        tt.style.top = my + 'px';
+        tt.style.display = 'block';
+      } else if (tt) {
+        tt.style.display = 'none';
+      }
+    }
+  });
+
+  window.addEventListener('mouseup', function() {
+    graphState.dragNode = null;
+    graphState.isDragging = false;
+  });
+
+  canvas.addEventListener('wheel', function(e) {
+    e.preventDefault();
+    var zoomFactor = e.deltaY < 0 ? 1.1 : 0.9;
+    zoomGraph(zoomFactor);
+  }, { passive: false });
+}
+
+function zoomGraph(factor) {
+  var newScale = graphState.scale * factor;
+  if (newScale >= 0.35 && newScale <= 3.5) {
+    graphState.scale = newScale;
+  }
+}
+
+function resetGraphView() {
+  playClick();
+  graphState.scale = 1;
+  graphState.offsetX = 0;
+  graphState.offsetY = 0;
+  showToast("Graph camera recentered");
+}
+
+function togglePhysics() {
+  playClick();
+  graphState.physicsEnabled = !graphState.physicsEnabled;
+  var btn = document.getElementById('physics-btn');
+  if (btn) btn.textContent = graphState.physicsEnabled ? '||' : '>';
+  showToast(graphState.physicsEnabled ? "Physics simulation active" : "Physics paused");
+}
+
+function selectNode(nodeId, panTo) {
+  var node = nodeById[nodeId];
+  if (!node) return;
+  playClick();
+  renderMarkdownInspector(nodeId, true);
+
+  if (panTo) {
+    graphState.offsetX = -node.x * graphState.scale;
+    graphState.offsetY = -node.y * graphState.scale;
+  }
+}
+
+/* ── SEARCH & FILTER ENGINE ── */
+var searchInput = document.getElementById('vault-search');
+if (searchInput) {
+  searchInput.addEventListener('input', function() {
+    graphState.filterQuery = searchInput.value.trim();
+  });
+}
+
+function filterGraph(cat, btn) {
+  playClick();
+  graphState.filterCategory = cat;
+  document.querySelectorAll('.f-pill').forEach(function(p) { p.classList.remove('active'); });
+  if (btn) btn.classList.add('active');
+  showToast(`Filter: ${cat.toUpperCase()}`);
+}
+
+/* ── SIDEBAR & INSPECTOR CONTROLS ── */
+function toggleSidebar() {
+  playClick();
+  var sb = document.getElementById('vault-sidebar');
+  if (sb) sb.classList.toggle('open');
+}
+
+function toggleInspector() {
+  playClick();
+  var ins = document.getElementById('vault-inspector');
+  if (ins) ins.classList.toggle('open');
+}
+
+function closeInspector() {
+  playClick();
+  var ins = document.getElementById('vault-inspector');
+  if (ins) ins.classList.remove('open');
+}
+
+/* ── THEME ENGINE (5 OBSIDIAN PALETTES) ── */
+var THEMES = ["obsidian", "cyan", "matrix", "crimson", "amber"];
+var currentThemeIdx = 0;
+
+function applyTheme(tName) {
+  document.documentElement.setAttribute('data-theme', tName);
+  var label = document.getElementById('theme-label');
+  if (label) label.textContent = tName.charAt(0).toUpperCase() + tName.slice(1);
+  localStorage.setItem('benslates_theme', tName);
+}
+
+function cycleTheme() {
+  playClick();
+  currentThemeIdx = (currentThemeIdx + 1) % THEMES.length;
+  var nextTheme = THEMES[currentThemeIdx];
+  applyTheme(nextTheme);
+  showToast("Theme shifted to: " + nextTheme.toUpperCase());
+}
+
+// Read initial theme from local storage
+var savedTheme = localStorage.getItem('benslates_theme');
+if (savedTheme && THEMES.indexOf(savedTheme) !== -1) {
+  currentThemeIdx = THEMES.indexOf(savedTheme);
+  applyTheme(savedTheme);
+} else {
+  applyTheme("obsidian");
+}
+
+/* ── INITIALIZATION ── */
+window.addEventListener('resize', resizeGraph);
+window.addEventListener('DOMContentLoaded', function() {
+  resizeGraph();
+  renderFileTree();
+  renderMarkdownInspector("operator", false);
+  graphLoop();
+});
+</script>
+
+</body>
+</html>
